@@ -65,7 +65,7 @@ namespace Knights {
                 } else {
                     if (map.block[y][x]) {
                         attron(COLOR_PAIR(3));
-                        addch('#');
+                        addch(map.mElement[ y ][ x ]);
                     } else {
                         attron(COLOR_PAIR(4));
                         addch('.');

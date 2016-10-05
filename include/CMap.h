@@ -10,6 +10,7 @@ namespace Knights {
     public:
         std::shared_ptr<IMapElement> map[ 20 ][ 20 ];
         bool block[ 20 ][ 20 ];
+        char mElement[ 20 ][ 20 ];
         std::vector<std::shared_ptr<CActor>> actors;
 
         std::shared_ptr<CBullKnight> bull;

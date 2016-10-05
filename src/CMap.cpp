@@ -38,6 +38,7 @@ namespace Knights {
                 element = mapData[(y * 20) + x];
                 block[y][x] = false;
                 map[y][x] = nullptr;
+                mElement[ y ][ x ] = element;
 
                 switch (element) {
                     case '0':
