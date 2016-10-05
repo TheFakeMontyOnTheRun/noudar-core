@@ -31,10 +31,10 @@ namespace Knights {
     }
 
     void CGame::tick() {
+        std::shared_ptr<CActor> avatar = mMap->bull;
 
         mRenderer->drawMap(*mMap, avatar);
 
-        std::shared_ptr<CActor> avatar = map->falcon;
         if (avatar != nullptr && avatar->mHP <= 0) {
             avatar = nullptr;
         }

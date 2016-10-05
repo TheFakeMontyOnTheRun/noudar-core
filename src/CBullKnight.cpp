@@ -4,7 +4,7 @@
 #include "IMapElement.h"
 #include "CActor.h"
 #include "CBullKnight.h"
-#include "../include/CActor.h"
+#include "CActor.h"
 
 const int DEFAULT_AP = 5;
 
@@ -13,7 +13,7 @@ namespace Knights {
     CBullKnight::CBullKnight(int aId) : CActor(aId, DEFAULT_AP) {
         mView = '%';
         mTeam = ETeam::kHeroes;
-        mHP = 10;
+        mHP = 40;
         mAttack = 5;
         mDefence = 2;
     }
