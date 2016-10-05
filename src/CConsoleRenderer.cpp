@@ -50,8 +50,8 @@ namespace Knights {
                 if (map.map[y][x] != nullptr) {
                     if (map.map[y][x] == current && current != nullptr) {
                         attron(COLOR_PAIR(1));
+                        addch(directions[static_cast<int>(current->mDirection) ]);
                     } else {
-
                         auto otherActor = std::dynamic_pointer_cast<CActor>(map.map[y][x]);
 
                         if ( current != nullptr && otherActor != nullptr && otherActor->mTeam == current->mTeam ) {
@@ -59,8 +59,9 @@ namespace Knights {
                         } else {
                             attron(COLOR_PAIR(2));
                         }
+                        addch(map.map[y][x]->mView);
                     }
-                    addch(map.map[y][x]->mView);
+
                 } else {
                     if (map.block[y][x]) {
                         attron(COLOR_PAIR(3));
@@ -92,12 +93,8 @@ namespace Knights {
 
             snprintf( buffer, 6, "AP: %d", current->mRemainingAP );
             mvprintw( 26,0, buffer );
-
-            snprintf( buffer, 6, "HD: %c", directions[static_cast<int>(current->mDirection) ] );
-            mvprintw( 27,0, buffer );
-
         }
-        mvprintw( 28,0, "-//-" );
+        mvprintw( 27,0, "-//-" );
 
         refresh();
     }
