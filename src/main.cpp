@@ -52,5 +52,9 @@ int main ( int argc, char **argv ) {
     std::string mapData = readMap("res/map1.txt");
     Knights::CGame game( mapData, std::make_shared<Knights::CConsoleRenderer>() );
 
+    while ( game.isPlaying() ) {
+        game.tick();
+    }
+
   return 0;
 }

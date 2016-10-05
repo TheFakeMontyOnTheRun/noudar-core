@@ -20,7 +20,6 @@
 #include "CGame.h"
 
 int turn = 1;
-bool playing = true;
 const bool kShouldAlwaysFinishTurnOnMove = true;
 
 namespace Knights {
@@ -31,86 +30,80 @@ namespace Knights {
         ++turn;
     }
 
-    CGame::CGame( std::string mapData, std::shared_ptr<IRenderer> renderer) {
-        std::string entry;
+    void CGame::tick() {
 
-        auto map = std::make_shared<CMap>(mapData);
+        mRenderer->drawMap(*mMap, avatar);
 
         std::shared_ptr<CActor> avatar = map->falcon;
+        if (avatar != nullptr && avatar->mHP <= 0) {
+            avatar = nullptr;
+        }
 
-        while (playing) {
+        char entry = mRenderer->getInput();
 
-            renderer->drawMap(*map, avatar);
+        if ( entry == 'q') {
+            mIsPlaying = false;
+        }
 
-            if (avatar != nullptr && avatar->mHP <= 0) {
-                avatar = nullptr;
+        if (avatar != nullptr) {
+
+            if (entry == 't') {
+                endOfTurn(mMap);
             }
 
-            entry = renderer->getInput();
+            if (entry == 's') {
+                mMap->move( EDirection ::kEast, avatar);
 
-            if ( entry == "q") {
-                playing = false;
+                if ( kShouldAlwaysFinishTurnOnMove ) {
+                    endOfTurn( mMap );
+                }
             }
 
-            if (avatar != nullptr) {
+            if (entry == 'w') {
+                mMap->move( EDirection::kNorth, avatar);
 
-                if (entry == "t") {
-                    endOfTurn(map);
+                if ( kShouldAlwaysFinishTurnOnMove ) {
+                    endOfTurn( mMap );
                 }
 
-                if (entry == "s") {
-                    map->move( EDirection ::kEast, avatar);
+            }
 
-                    if ( kShouldAlwaysFinishTurnOnMove ) {
-                        endOfTurn( map );
-                    }
+            if (entry == 'a') {
+                mMap->move( EDirection::kWest, avatar);
+
+                if ( kShouldAlwaysFinishTurnOnMove ) {
+                    endOfTurn( mMap );
                 }
 
-                if (entry == "w") {
-                    map->move( EDirection::kNorth, avatar);
+            }
 
-                    if ( kShouldAlwaysFinishTurnOnMove ) {
-                        endOfTurn( map );
-                    }
+            if (entry == 'z') {
+                mMap->move( EDirection::kSouth, avatar);
 
+                if ( kShouldAlwaysFinishTurnOnMove ) {
+                    endOfTurn( mMap );
                 }
 
-                if (entry == "a") {
-                    map->move( EDirection::kWest, avatar);
+            }
 
-                    if ( kShouldAlwaysFinishTurnOnMove ) {
-                        endOfTurn( map );
-                    }
 
+            if (entry == 'i') {
+                avatar->turnLeft();
+            }
+
+            if (entry == 'o') {
+                mMap->move( avatar->mDirection, avatar);
+
+                if ( kShouldAlwaysFinishTurnOnMove ) {
+                    endOfTurn( mMap );
                 }
+            }
 
-                if (entry == "z") {
-                    map->move( EDirection::kSouth, avatar);
+            if (entry == 'p') {
+                avatar->turnRight();
+            }
 
-                    if ( kShouldAlwaysFinishTurnOnMove ) {
-                        endOfTurn( map );
-                    }
-
-                }
-
-
-                if (entry == "i") {
-                    avatar->turnLeft();
-                }
-
-                if (entry == "o") {
-                    map->move( avatar->mDirection, avatar);
-
-                    if ( kShouldAlwaysFinishTurnOnMove ) {
-                        endOfTurn( map );
-                    }
-                }
-
-                if (entry == "p") {
-                    avatar->turnRight();
-                }
-
-                if (entry == "c") {
+            if (entry == 'c') {
 
 //                    int x;
 //                    int y;
@@ -121,24 +114,32 @@ namespace Knights {
 //                    std::cin >> y;
 //
 //                    map->attack(avatar, Vec2i{ x, y }, false);
-                    if ( kShouldAlwaysFinishTurnOnMove ) {
-                        endOfTurn( map );
-                    }
+                if ( kShouldAlwaysFinishTurnOnMove ) {
+                    endOfTurn( mMap );
                 }
             }
-
-            if (entry == "1") {
-                avatar = map->falcon;
-            }
-
-            if (entry == "2") {
-                avatar = map->turtle;
-            }
-
-            if (entry == "3") {
-                avatar = map->bull;
-            }
-
         }
+
+        if (entry == '1') {
+            avatar = mMap->falcon;
+        }
+
+        if (entry == '2') {
+            avatar = mMap->turtle;
+        }
+
+        if (entry == '3') {
+            avatar = mMap->bull;
+        }
+    }
+
+    CGame::CGame( std::string mapData, std::shared_ptr<IRenderer> renderer) {
+        mMap = std::make_shared<CMap>(mapData);
+        mRenderer = renderer;
+        mIsPlaying = true;
+    }
+
+    bool CGame::isPlaying() {
+        return mIsPlaying;
     }
 }
