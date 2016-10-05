@@ -28,7 +28,7 @@
 std::string readMap(const char *mapName) {
 
     std::string entry;
-    std::ifstream mapFile("res/map1.txt");
+    std::ifstream mapFile(mapName);
 
     char line[80];
 
