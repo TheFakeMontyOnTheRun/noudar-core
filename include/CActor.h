@@ -33,9 +33,10 @@ namespace Knights {
         int mAttack;
         int mRemainingAP;
         int mDefaultAP;
+        int mId;
     public:
         void performAttack( std::shared_ptr<CActor> other);
-        CActor( int defaultAP );
+        CActor( int aId, int defaultAP );
         void onMove();
         void onAttack();
         bool canMove();

@@ -7,7 +7,7 @@
 const int DEFAULT_AP = 4;
 
 namespace Knights {
-    CTurtleKnight::CTurtleKnight() : CActor(DEFAULT_AP) {
+    CTurtleKnight::CTurtleKnight(int aId) : CActor(aId, DEFAULT_AP) {
         mView = '^';
         mTeam = ETeam::kHeroes;
         mHP = 30;

@@ -4,7 +4,7 @@
 namespace Knights {
     class CBaphomet : public CActor {
     public:
-        CBaphomet();
+        CBaphomet(int aId);
     };
 }
 #endif

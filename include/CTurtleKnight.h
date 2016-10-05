@@ -3,7 +3,7 @@
 namespace Knights {
     class CTurtleKnight : public CActor {
     public:
-        CTurtleKnight();
+        CTurtleKnight(int aId);
     };
 }
 #endif

@@ -7,7 +7,7 @@
 const int DEFAULT_AP = 7;
 namespace Knights {
 
-    CCuco::CCuco() : CActor(DEFAULT_AP) {
+    CCuco::CCuco(int aId) : CActor(aId, DEFAULT_AP) {
         mView = '@';
         mTeam = ETeam::kVillains;
         mHP = 5;

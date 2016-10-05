@@ -3,7 +3,7 @@
 namespace Knights {
     class CDemon : public CActor {
     public:
-        CDemon();
+        CDemon(int aId);
     };
 }
 #endif

@@ -3,7 +3,7 @@
 namespace Knights {
     class CMoura : public CActor {
     public:
-        CMoura();
+        CMoura(int aId);
     };
 }
 #endif

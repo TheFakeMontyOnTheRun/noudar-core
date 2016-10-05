@@ -3,7 +3,7 @@
 namespace Knights {
     class CCuco : public CActor {
     public:
-        CCuco();
+        CCuco(int aId);
     };
 }
 #endif

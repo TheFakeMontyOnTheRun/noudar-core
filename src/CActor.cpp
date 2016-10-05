@@ -6,7 +6,8 @@
 #include "../include/CActor.h"
 
 namespace Knights {
-    CActor::CActor(int defaultAP) :
+    CActor::CActor(int aId, int defaultAP) :
+            mId( aId ),
             mDefaultAP(defaultAP),
             mRemainingAP(defaultAP),
             mStance(EStance::kStanding),

@@ -31,7 +31,7 @@ namespace Knights {
 
         char element;
         std::shared_ptr<CActor> actor = nullptr;
-
+        int id = 0;
         for (int y = 0; y < 20; ++y) {
             for (int x = 0; x < 20; ++x) {
 
@@ -45,21 +45,22 @@ namespace Knights {
                         block[y][x] = (element == '1');
                         break;
 
-                    case '2':
-                        actor = bull = std::make_shared<CBullKnight>();
+                    case '4':
+                        actor = bull = std::make_shared<CBullKnight>(id++);
                         break;
                     case '3':
-                        actor = turtle = std::make_shared<CTurtleKnight>();
+                        actor = turtle = std::make_shared<CTurtleKnight>(id++);
                         break;
-                    case '4':
-                        actor = falcon = std::make_shared<CFalconKnight>();
+                    case '2':
+                        actor = falcon = std::make_shared<CFalconKnight>(id++);
                         break;
                     case '9':
                     case '*':
                         map[y][x] = std::make_shared<CDoorway>(element == '9' ? EDoorwayFunction::kExit : EDoorwayFunction::kEntry);
                         break;
                     case '5':
-                        actor = std::make_shared<CCuco>();
+                    case '6':
+                        actor = std::make_shared<CCuco>(id++);
                         break;
                 }
 

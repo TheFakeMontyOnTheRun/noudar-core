@@ -9,7 +9,7 @@ const int DEFAULT_AP = 6;
 
 namespace Knights {
 
-    CFalconKnight::CFalconKnight() : CActor(DEFAULT_AP) {
+    CFalconKnight::CFalconKnight(int aId) : CActor(aId, DEFAULT_AP) {
         mView = '&';
         mTeam = ETeam::kHeroes;
         mHP = 2;
