@@ -1,7 +1,7 @@
 #include <string>
 #include <vector>
 #include <memory>
-
+#include <algorithm>
 #include "Vec2i.h"
 #include "IMapElement.h"
 #include "CDoorway.h"
@@ -13,17 +13,20 @@
 #include "CCuco.h"
 
 #include <iostream>
-#include <typeinfo>
 
 namespace Knights {
     void CMap::endOfTurn() {
         for (int y = 0; y < 20; ++y) {
             for (int x = 0; x < 20; ++x) {
-                if (std::dynamic_pointer_cast<CActor>(map[y][x]) != nullptr) {
-                    std::dynamic_pointer_cast<CActor>(map[y][x])->endOfTurn();
+                if (mActors[y][x] != nullptr) {
+                    mActors[y][x]->endOfTurn();
                 }
             }
         }
+
+        actors.erase( std::remove_if( actors.begin(), actors.end(),
+                                           [](std::shared_ptr<CActor> actor){ return !actor->isAlive();}
+        ), actors.end() );
     }
 
 
@@ -54,13 +57,7 @@ namespace Knights {
                         break;
 
                     case '4':
-                        actor = bull = std::make_shared<CBullKnight>(id++);
-                        break;
-                    case '3':
-                        actor = turtle = std::make_shared<CTurtleKnight>(id++);
-                        break;
-                    case '2':
-                        actor = falcon = std::make_shared<CFalconKnight>(id++);
+                        actor = mAvatar = std::make_shared<CBullKnight>(id++);
                         break;
                     case '9':
                     case '*':
@@ -74,8 +71,8 @@ namespace Knights {
 
                 if (actor != nullptr) {
                     actors.push_back(actor);
-                    map[y][x] = actor;
-                    actor->mPosition = { x, y };
+                    mActors[y][x] = actor;
+                    actor->setPosition( { x, y } );
                     actor = nullptr;
                 }
             }
@@ -85,27 +82,27 @@ namespace Knights {
 
     std::shared_ptr<CActor> CMap::attack(std::shared_ptr<CActor> actor, Vec2i position, bool mutual) {
 
-        auto other = map[ position.y][ position.x];
-
-        std::shared_ptr<CActor> otherActor = std::dynamic_pointer_cast<CActor>( other );
+        std::shared_ptr<CActor> otherActor = getActorAt( position );
 
         if ( otherActor == nullptr ) {
             return nullptr;
         }
 
-        if (other != nullptr && actor->mTeam != otherActor->mTeam) {
+        if (actor->getTeam() != otherActor->getTeam()) {
             actor->performAttack(otherActor);
 
             if (mutual) {
                 otherActor->performAttack(actor);
             }
 
-            if (actor->mHP <= 0) {
-                map[actor->mPosition.y][actor->mPosition.x] = nullptr;
+            if (!actor->isAlive() ) {
+                auto position = actor->getPosition();
+                mActors[position.y][position.x] = nullptr;
             }
 
-            if (otherActor->mHP <= 0) {
-                map[other->mPosition.y][other->mPosition.x] = nullptr;
+            if (!otherActor->isAlive()) {
+                auto position = otherActor->getPosition();
+                mActors[position.y][position.x] = nullptr;
             }
         }
 
@@ -117,22 +114,24 @@ namespace Knights {
 
         std::shared_ptr<CActor> other = nullptr;
 
+        auto position = actor->getPosition();
+
         switch (d) {
 
             case EDirection::kEast:
-                other = attack(actor, Vec2i{actor->mPosition.x + 1, actor->mPosition.y}, mutual);
+                other = attack(actor, Vec2i{position.x + 1, position.y}, mutual);
                 break;
 
             case EDirection::kWest:
-                other = attack(actor, Vec2i{actor->mPosition.x - 1, actor->mPosition.y}, mutual);
+                other = attack(actor, Vec2i{position.x - 1, position.y}, mutual);
                 break;
 
             case EDirection::kSouth:
-                other = attack(actor, Vec2i{actor->mPosition.x, actor->mPosition.y + 1}, mutual);
+                other = attack(actor, Vec2i{position.x, position.y + 1}, mutual);
                 break;
 
             case EDirection::kNorth:
-                other = attack(actor, Vec2i{actor->mPosition.x, actor->mPosition.y - 1}, mutual);
+                other = attack(actor, Vec2i{position.x, position.y - 1}, mutual);
                 break;
         }
 
@@ -153,41 +152,36 @@ namespace Knights {
 
         bool moved = false;
 
+        auto position = actor->getPosition();
+
         switch (d) {
 
             case EDirection::kEast:
-                if (!block[actor->mPosition.y][actor->mPosition.x + 1]) {
+
+                if (!isBlockAt(position.x + 1, position.y ) ) {
                     moved = true;
-                    map[actor->mPosition.y][actor->mPosition.x] = nullptr;
-                    ++actor->mPosition.x;
-                    map[actor->mPosition.y][actor->mPosition.x] = actor;
+                    moveActor( position, { position.x + 1, position.y }, actor );
                 }
                 break;
 
             case EDirection::kWest:
-                if (!block[actor->mPosition.y][actor->mPosition.x - 1]) {
+                if (!isBlockAt(position.x - 1, position.y ) ) {
                     moved = true;
-                    map[actor->mPosition.y][actor->mPosition.x] = nullptr;
-                    --actor->mPosition.x;
-                    map[actor->mPosition.y][actor->mPosition.x] = actor;
+                    moveActor( position, { position.x - 1, position.y }, actor );
                 }
                 break;
 
             case EDirection::kSouth:
-                if (!block[actor->mPosition.y + 1][actor->mPosition.x]) {
+                if (!isBlockAt(position.x, position.y + 1 ) ) {
                     moved = true;
-                    map[actor->mPosition.y][actor->mPosition.x] = nullptr;
-                    ++actor->mPosition.y;
-                    map[actor->mPosition.y][actor->mPosition.x] = actor;
+                    moveActor( position, { position.x, position.y + 1 }, actor );
                 }
                 break;
 
             case EDirection::kNorth:
-                if (!block[actor->mPosition.y - 1][actor->mPosition.x]) {
+                if (!isBlockAt(position.x, position.y - 1) ) {
                     moved = true;
-                    map[actor->mPosition.y][actor->mPosition.x] = nullptr;
-                    --actor->mPosition.y;
-                    map[actor->mPosition.y][actor->mPosition.x] = actor;
+                    moveActor( position, { position.x, position.y - 1}, actor );
                 }
                 break;
 
@@ -196,5 +190,51 @@ namespace Knights {
         if (moved) {
             actor->onMove();
         }
+    }
+
+    bool CMap::isValid(int x, int y) {
+        if ( x < 0 || x > 20 || y < 0 || y > 20 ) {
+            return false;
+        }
+        return true;
+    }
+
+    bool CMap::isBlockAt(int x, int y) {
+
+        if ( !isValid( x, y ) ) {
+            return true;
+        }
+
+        if ( mActors[ y ][ x ] != nullptr ) {
+            return true;
+        }
+
+        return block[ y ][ x ];
+    }
+
+    std::shared_ptr<CActor> CMap::getActorAt( Vec2i position ) {
+        return mActors[ position.y ][ position.x ];
+    }
+
+    char CMap::getElementAt( int x, int y ) {
+        return mElement[ y ][ x ];
+    }
+
+    std::vector<std::shared_ptr<CActor>> CMap::getActors() {
+        return actors;
+    }
+
+    std::shared_ptr<CActor> CMap::getAvatar() {
+        return mAvatar;
+    }
+
+    void CMap::setActorAt(Vec2i position, std::shared_ptr<CActor> actor) {
+        mActors[position.y][position.x] = actor;
+    }
+
+    void CMap::moveActor(Vec2i from, Vec2i to, std::shared_ptr<CActor> actor) {
+        mActors[from.y][from.x] = nullptr;
+        mActors[to.y][to.x] = actor;
+        actor->setPosition( to );
     }
 }

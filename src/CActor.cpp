@@ -1,9 +1,7 @@
 #include <memory>
 #include <utility>
 #include "Vec2i.h"
-#include "IMapElement.h"
 #include "CActor.h"
-#include "../include/CActor.h"
 
 namespace Knights {
     CActor::CActor(int aId, int defaultAP) :
@@ -66,5 +64,41 @@ namespace Knights {
         if (diff > 0) {
             other->mHP -= diff;
         }
+    }
+
+    Vec2i CActor::getPosition() {
+        return mPosition;
+    }
+
+    void CActor::setPosition(Vec2i position) {
+        mPosition = position;
+    }
+
+    ETeam CActor::getTeam() {
+        return mTeam;
+    }
+
+    bool CActor::isAlive() {
+        return mHP > 0;
+    }
+
+    EDirection CActor::getDirection() {
+        return mDirection;
+    }
+
+    int CActor::getHP() {
+        return mHP;
+    }
+
+    int CActor::getAP() {
+        return mRemainingAP;
+    }
+
+    int CActor::getDefense() {
+        return mDefence;
+    }
+
+    int CActor::getAttack() {
+        return mAttack;
     }
 }

@@ -49,7 +49,7 @@ std::string readMap(const char *mapName) {
 }
 
 int main ( int argc, char **argv ) {
-    std::string mapData = readMap("res/map1.txt");
+    std::string mapData = readMap("res/map_tiles0.txt");
     Knights::CGame game( mapData, std::make_shared<Knights::CConsoleRenderer>() );
 
     while ( game.isPlaying() ) {

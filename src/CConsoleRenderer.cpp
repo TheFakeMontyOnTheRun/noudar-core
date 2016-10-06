@@ -41,31 +41,31 @@ namespace Knights {
         endwin();
     }
 
-    void CConsoleRenderer::drawMap(const CMap &map, std::shared_ptr<CActor> current) {
+    void CConsoleRenderer::drawMap(CMap &map, std::shared_ptr<CActor> current) {
 
         for (int y = 0; y < 20; ++y) {
             for (int x = 0; x < 20; ++x) {
                 move( y, x );
 
-                if (map.map[y][x] != nullptr) {
-                    if (map.map[y][x] == current && current != nullptr) {
-                        attron(COLOR_PAIR(1));
-                        addch(directions[static_cast<int>(current->mDirection) ]);
-                    } else {
-                        auto otherActor = std::dynamic_pointer_cast<CActor>(map.map[y][x]);
+                auto actor = map.getActorAt( Vec2i{ x, y } );
 
-                        if ( current != nullptr && otherActor != nullptr && otherActor->mTeam == current->mTeam ) {
+                if (actor != nullptr) {
+                    if (actor == current && current != nullptr) {
+                        attron(COLOR_PAIR(1));
+                        addch(directions[static_cast<int>(current->getDirection()) ]);
+                    } else {
+                        if ( current != nullptr && actor != nullptr && actor->getTeam() == current->getTeam() ) {
                             attron(COLOR_PAIR(5));
                         } else {
                             attron(COLOR_PAIR(2));
                         }
-                        addch(map.map[y][x]->mView);
+                        addch(directions[static_cast<int>(actor->getDirection()) ]);
                     }
 
                 } else {
-                    if (map.block[y][x]) {
+                    if (map.isBlockAt( x, y )) {
                         attron(COLOR_PAIR(3));
-                        addch(map.mElement[ y ][ x ]);
+                        addch(map.getElementAt( x, y ) );
                     } else {
                         attron(COLOR_PAIR(4));
                         addch('.');
@@ -82,16 +82,16 @@ namespace Knights {
 
         if (current != nullptr) {
 
-            snprintf( buffer, 6, "HP: %d", current->mHP );
+            snprintf( buffer, 6, "HP: %d", current->getHP() );
             mvprintw( 23,0, buffer );
 
-            snprintf( buffer, 6, "AT: %d", current->mAttack );
+            snprintf( buffer, 6, "AT: %d", current->getAttack() );
             mvprintw( 24,0, buffer );
 
-            snprintf( buffer, 6, "DF: %d", current->mDefence );
+            snprintf( buffer, 6, "DF: %d", current->getDefense() );
             mvprintw( 25,0, buffer );
 
-            snprintf( buffer, 6, "AP: %d", current->mRemainingAP );
+            snprintf( buffer, 6, "AP: %d", current->getAP() );
             mvprintw( 26,0, buffer );
         }
         mvprintw( 27,0, "-//-" );

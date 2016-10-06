@@ -4,6 +4,7 @@ namespace Knights {
     class CFalconKnight : public CActor {
     public:
         CFalconKnight(int aId);
+        void update(std::shared_ptr <CMap> map) override;
     };
 }
 #endif

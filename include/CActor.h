@@ -23,8 +23,10 @@ namespace Knights {
         kWest
     };
 
-    class CActor : public IMapElement {
-    public:
+    class CMap;
+
+    class CActor {
+    protected:
         EStance mStance;
         EDirection mDirection;
         ETeam mTeam;
@@ -34,17 +36,32 @@ namespace Knights {
         int mRemainingAP;
         int mDefaultAP;
         int mId;
+        char mView;
+        Vec2i mPosition;
     public:
         void performAttack( std::shared_ptr<CActor> other);
         CActor( int aId, int defaultAP );
+        Vec2i getPosition();
+        void setPosition( Vec2i position );
         void onMove();
         void onAttack();
         bool canMove();
         bool canAttack();
         bool hasEnoughAP();
+        bool isAlive();
         void turnLeft();
         void turnRight();
+
+        int getHP();
+        int getAP();
+        int getDefense();
+        int getAttack();
+
+        ETeam getTeam();
+        EDirection getDirection();
+        virtual void update( std::shared_ptr<CMap> map ) {}
         virtual void endOfTurn();
+        virtual ~CActor() = default;
     };
 }
 #endif

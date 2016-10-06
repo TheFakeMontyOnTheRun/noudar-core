@@ -27,15 +27,20 @@ namespace Knights {
     void CGame::endOfTurn( std::shared_ptr<CMap> map ) {
 
         map->endOfTurn();
+
+        for ( auto& actor : map->getActors() ) {
+            actor->update( map );
+        }
+
         ++turn;
     }
 
     void CGame::tick() {
-        std::shared_ptr<CActor> avatar = mMap->bull;
+        std::shared_ptr<CActor> avatar = mMap->getAvatar();
 
         mRenderer->drawMap(*mMap, avatar);
 
-        if (avatar != nullptr && avatar->mHP <= 0) {
+        if (avatar != nullptr && !avatar->isAlive()) {
             avatar = nullptr;
         }
 
@@ -92,7 +97,7 @@ namespace Knights {
             }
 
             if (entry == 'o') {
-                mMap->move( avatar->mDirection, avatar);
+                mMap->move( avatar->getDirection(), avatar);
 
                 if ( kShouldAlwaysFinishTurnOnMove ) {
                     endOfTurn( mMap );
@@ -118,18 +123,6 @@ namespace Knights {
                     endOfTurn( mMap );
                 }
             }
-        }
-
-        if (entry == '1') {
-            avatar = mMap->falcon;
-        }
-
-        if (entry == '2') {
-            avatar = mMap->turtle;
-        }
-
-        if (entry == '3') {
-            avatar = mMap->bull;
         }
     }
 

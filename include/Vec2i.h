@@ -14,6 +14,12 @@ namespace Knights {
             x = aX;
             y = aY;
         }
+
+        Vec2i() { x = y = 0; }
+
+        bool operator==( const Vec2i &other ) {
+            return this->x == other.x && this->y == other.y;
+        }
     };
 }
 #endif //KNIGHTS_IN_PORTO_VEC2I_H

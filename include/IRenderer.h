@@ -3,7 +3,7 @@
 namespace Knights {
   class IRenderer {
   public:
-    virtual void drawMap( const CMap &map, std::shared_ptr<CActor> current ) = 0;
+    virtual void drawMap( CMap &map, std::shared_ptr<CActor> current ) = 0;
     virtual char getInput() = 0;
   };
 }
