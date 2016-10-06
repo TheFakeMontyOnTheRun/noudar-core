@@ -16,7 +16,6 @@
 #include "CMoura.h"
 #include "CTurtleKnight.h"
 #include "IRenderer.h"
-#include "CConsoleRenderer.h"
 #include "CGame.h"
 
 int turn = 1;

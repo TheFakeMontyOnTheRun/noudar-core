@@ -3,41 +3,41 @@ project(noudar_core)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
-include_directories(include)
+include_directories(noudar-core/include)
 
 
 
 find_package(Curses REQUIRED)
 
 set(SOURCE_FILES
-    include/CActor.h
-    include/CBaphomet.h
-    include/CBullKnight.h
-    include/CConsoleRenderer.h
-    include/CCuco.h
-    include/CDemon.h
-    include/CDoorway.h
-    include/CFalconKnight.h
-    include/CGame.h
-    include/CMap.h
-    include/CMoura.h
-    include/CTurtleKnight.h
-    include/IRenderer.h
-    include/Vec2i.h
-    src/CActor.cpp
-    src/CBaphomet.cpp
-    src/CBullKnight.cpp
-    src/CConsoleRenderer.cpp
-    src/CCuco.cpp
-    src/CDemon.cpp
-    src/CDoorway.cpp
-    src/CFalconKnight.cpp
-    src/CGame.cpp
-    src/CMap.cpp
-    src/CMoura.cpp
-    src/CTurtleKnight.cpp
-    src/IMapElement.cpp
-    src/main.cpp)
+        noudar-core/include/CActor.h
+        noudar-core/include/CBaphomet.h
+        noudar-core/include/CBullKnight.h
+        noudar-core/include/CConsoleRenderer.h
+        noudar-core/include/CCuco.h
+        noudar-core/include/CDemon.h
+        noudar-core/include/CDoorway.h
+        noudar-core/include/CFalconKnight.h
+        noudar-core/include/CGame.h
+        noudar-core/include/CMap.h
+        noudar-core/include/CMoura.h
+        noudar-core/include/CTurtleKnight.h
+        noudar-core/include/IRenderer.h
+        noudar-core/include/Vec2i.h
+        noudar-core/src/CActor.cpp
+        noudar-core/src/CBaphomet.cpp
+        noudar-core/src/CBullKnight.cpp
+        noudar-core/src/CConsoleRenderer.cpp
+        noudar-core/src/CCuco.cpp
+        noudar-core/src/CDemon.cpp
+        noudar-core/src/CDoorway.cpp
+        noudar-core/src/CFalconKnight.cpp
+        noudar-core/src/CGame.cpp
+        noudar-core/src/CMap.cpp
+        noudar-core/src/CMoura.cpp
+        noudar-core/src/CTurtleKnight.cpp
+        noudar-core/src/IMapElement.cpp
+        ncurses-version/main.cpp)
 
 include_directories(${CURSES_INCLUDE_DIR})
 
