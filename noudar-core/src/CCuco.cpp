@@ -1,5 +1,6 @@
 #include <vector>
 #include <memory>
+#include <cmath>
 #include "Vec2i.h"
 #include "IMapElement.h"
 #include "CActor.h"
@@ -23,7 +24,7 @@ namespace Knights {
 
             std::shared_ptr<CCuco> sharedThis = shared_from_this();
 
-            if ( abs( dx ) > abs( dy ) ) {
+            if ( std::abs( (float)dx ) > std::abs( (float)dy ) ) {
 
                     if ( dx < 0 ) {
                             map->move( EDirection::kWest, sharedThis );
