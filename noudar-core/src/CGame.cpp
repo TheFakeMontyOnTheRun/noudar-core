@@ -37,8 +37,6 @@ namespace Knights {
     void CGame::tick() {
         std::shared_ptr<CActor> avatar = mMap->getAvatar();
 
-        mRenderer->drawMap(*mMap, avatar);
-
         if (avatar != nullptr && !avatar->isAlive()) {
             avatar = nullptr;
         }
@@ -123,6 +121,9 @@ namespace Knights {
                 }
             }
         }
+
+        mRenderer->drawMap(*mMap, avatar);
+
     }
 
     CGame::CGame( std::string mapData, std::shared_ptr<IRenderer> renderer) {
