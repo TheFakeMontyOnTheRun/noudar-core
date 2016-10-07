@@ -58,6 +58,7 @@ namespace Knights {
 
                     case '4':
                         actor = mAvatar = std::make_shared<CBullKnight>(id++);
+                        mElement[ y ][ x ] = '.';
                         break;
                     case '9':
                     case '*':
@@ -66,6 +67,7 @@ namespace Knights {
                     case '5':
                     case '6':
                         actor = std::make_shared<CCuco>(id++);
+                        mElement[ y ][ x ] = '.';
                         break;
                 }
 
