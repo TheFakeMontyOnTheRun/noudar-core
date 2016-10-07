@@ -52,6 +52,7 @@ namespace Knights {
         void turnLeft();
         void turnRight();
 
+        int getId();
         int getHP();
         int getAP();
         int getDefense();

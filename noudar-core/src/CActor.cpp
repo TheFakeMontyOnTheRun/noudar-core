@@ -101,4 +101,9 @@ namespace Knights {
     int CActor::getAttack() {
         return mAttack;
     }
+
+    int CActor::getId() {
+        return mId;
+    }
+
 }
