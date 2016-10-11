@@ -45,12 +45,17 @@ namespace Knights {
 
                 switch (element) {
                     case '0':
+                    case '=':
+                    case '_':
+                    case '-':
+                        block[y][x] = false;
+                        break;
                     case '1':
                     case '#':
                     case '/':
                     case '\\':
                     case '|':
-                        block[y][x] = (element != '0');
+                        block[y][x] = true;
                         break;
                     case '~':
                         block[y][x] = false;
