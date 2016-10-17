@@ -5,12 +5,14 @@ namespace Knights {
   class CGame {
       std::shared_ptr<CMap> mMap;
       std::shared_ptr<IRenderer> mRenderer;
-    bool mIsPlaying;
+      bool mIsPlaying;
+      int mTurn = 0;
   public:
     CGame( std::string mapData, std::shared_ptr<IRenderer> renderer );
       ~CGame() = default;
       void endOfTurn(std::shared_ptr<CMap> map);
       void tick();
+      int getTurn();
       bool isPlaying();
   };
 }

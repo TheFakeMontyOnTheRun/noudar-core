@@ -18,7 +18,6 @@
 #include "IRenderer.h"
 #include "CGame.h"
 
-int turn = 1;
 const bool kShouldAlwaysFinishTurnOnMove = true;
 
 namespace Knights {
@@ -31,7 +30,7 @@ namespace Knights {
             actor->update( map );
         }
 
-        ++turn;
+        ++mTurn;
     }
 
     void CGame::tick() {
@@ -134,5 +133,9 @@ namespace Knights {
 
     bool CGame::isPlaying() {
         return mIsPlaying;
+    }
+
+    int CGame::getTurn() {
+        return mTurn;
     }
 }
