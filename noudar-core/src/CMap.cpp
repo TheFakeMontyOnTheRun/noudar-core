@@ -48,13 +48,23 @@ namespace Knights {
                     case '=':
                     case '_':
                     case '-':
+                    case '(':
+                    case ')':
+                    case '2':
+                    case '7':
                         block[y][x] = false;
                         break;
                     case '1':
                     case '#':
                     case '/':
                     case '\\':
+                    case '%':
                     case '|':
+                    case 'Y':
+                    case 'Z':
+                    case 'S':
+                    case '>':
+                    case '<':
                         block[y][x] = true;
                         break;
                     case '~':
