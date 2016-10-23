@@ -1,11 +1,13 @@
 #include <string>
 #include <vector>
 #include <memory>
+#include <functional>
 #include <algorithm>
 #include "Vec2i.h"
 #include "IMapElement.h"
 #include "CDoorway.h"
 #include "CActor.h"
+#include "CGameDelegate.h"
 #include "CMap.h"
 #include "CBullKnight.h"
 #include "CFalconKnight.h"
@@ -29,11 +31,11 @@ namespace Knights {
         ), actors.end() );
     }
 
-
-    CMap::CMap(const std::string &mapData) {
+    CMap::CMap(const std::string &mapData, std::shared_ptr<CGameDelegate> aGameDelegate ) : mGameDelegate(aGameDelegate) {
 
         char element;
         std::shared_ptr<CActor> actor = nullptr;
+
         int id = 0;
         for (int y = 0; y < 20; ++y) {
             for (int x = 0; x < 20; ++x) {
@@ -51,6 +53,8 @@ namespace Knights {
                     case '(':
                     case ')':
                     case '2':
+                    case '{':
+                    case '}':
                     case '7':
                         block[y][x] = false;
                         break;
@@ -106,26 +110,54 @@ namespace Knights {
         }
 
         if (actor->getTeam() != otherActor->getTeam()) {
+
             actor->performAttack(otherActor);
 
-            if (mutual) {
+	        if (actor == mAvatar ) {
+		        mGameDelegate->onPlayerAttacked( actor->getPosition() );
+		        mGameDelegate->onMonsterDamaged(otherActor->getPosition());
+	        } else {
+		        mGameDelegate->onMonsterAttacked(actor->getPosition());
+		        mGameDelegate->onPlayerDamaged(otherActor->getPosition());
+	        }
+
+	        if (mutual) {
                 otherActor->performAttack(actor);
+
+		        if (otherActor == mAvatar) {
+			        mGameDelegate->onPlayerAttacked(otherActor->getPosition());
+			        mGameDelegate->onMonsterDamaged(otherActor->getPosition());
+		        } else {
+			        mGameDelegate->onMonsterAttacked(otherActor->getPosition());
+			        mGameDelegate->onPlayerDamaged(otherActor->getPosition());
+		        }
             }
 
             if (!actor->isAlive() ) {
                 auto position = actor->getPosition();
                 mActors[position.y][position.x] = nullptr;
+
+	            if (actor == mAvatar) {
+		            mGameDelegate->onPlayerDied(actor->getPosition());
+	            } else {
+		            mGameDelegate->onMonsterDied(actor->getPosition());
+	            }
             }
 
             if (!otherActor->isAlive()) {
                 auto position = otherActor->getPosition();
                 mActors[position.y][position.x] = nullptr;
+
+	            if (otherActor == mAvatar ) {
+		            mGameDelegate->onPlayerDied(otherActor->getPosition());
+	            } else {
+		            mGameDelegate->onMonsterDied(otherActor->getPosition());
+	            }
             }
         }
 
         return otherActor;
     }
-
 
     bool CMap::attackIfNotFriendly(EDirection d, std::shared_ptr<CActor> actor, bool mutual) {
 

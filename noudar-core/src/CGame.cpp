@@ -1,3 +1,4 @@
+#include <functional>
 #include <memory>
 #include <string>
 #include <fstream>
@@ -6,6 +7,7 @@
 #include "Vec2i.h"
 #include "IMapElement.h"
 #include "CActor.h"
+#include "CGameDelegate.h"
 #include "CMap.h"
 #include "CDoorway.h"
 #include "CBaphomet.h"
@@ -16,6 +18,7 @@
 #include "CMoura.h"
 #include "CTurtleKnight.h"
 #include "IRenderer.h"
+
 #include "CGame.h"
 
 const bool kShouldAlwaysFinishTurnOnMove = true;
@@ -125,9 +128,9 @@ namespace Knights {
 
     }
 
-    CGame::CGame( std::string mapData, std::shared_ptr<IRenderer> renderer) {
-        mMap = std::make_shared<CMap>(mapData);
-        mRenderer = renderer;
+    CGame::CGame( std::string mapData, std::shared_ptr<IRenderer> aRenderer, std::shared_ptr<CGameDelegate> aGameDelegate ) :
+    mRenderer( aRenderer ), mGameDelegate( aGameDelegate ) {
+        mMap = std::make_shared<CMap>(mapData, aGameDelegate);
         mIsPlaying = true;
     }
 

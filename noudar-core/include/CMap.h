@@ -6,15 +6,16 @@ namespace Knights {
     private:
         std::shared_ptr<IMapElement> map[ 20 ][ 20 ];
         std::shared_ptr<CActor> mActors[ 20 ][ 20 ];
+        std::shared_ptr<CGameDelegate> mGameDelegate;
         bool block[ 20 ][ 20 ];
         char mElement[ 20 ][ 20 ];
         std::vector<std::shared_ptr<CActor>> actors;
-
         std::shared_ptr<CActor> mAvatar;
+
     public:
         bool isValid( int x, int y );
         bool isBlockAt( int x, int y );
-        CMap( const std::string& data );
+        CMap( const std::string& data, std::shared_ptr<CGameDelegate> aGameDelegate );
         void move( EDirection d, std::shared_ptr<CActor> a );
         bool attackIfNotFriendly( EDirection d, std::shared_ptr<CActor> a, bool mutual );
         void endOfTurn();

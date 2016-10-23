@@ -1,10 +1,12 @@
 #include <memory>
 #include <vector>
+#include <functional>
 #include "Vec2i.h"
 #include "IMapElement.h"
 #include "CActor.h"
 #include "CBullKnight.h"
 #include "CActor.h"
+#include "CGameDelegate.h"
 #include "CMap.h"
 
 const int DEFAULT_AP = 5;
