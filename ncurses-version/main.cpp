@@ -16,6 +16,7 @@
 #include "Vec2i.h"
 #include "IMapElement.h"
 #include "CActor.h"
+#include "CGameDelegate.h"
 #include "CMap.h"
 #include "IRenderer.h"
 #include "CConsoleRenderer.h"
@@ -50,7 +51,9 @@ std::string readMap(const char *mapName) {
 
 int main ( int argc, char **argv ) {
     std::string mapData = readMap("res/map_tiles0.txt");
-    Knights::CGame game( mapData, std::make_shared<Knights::CConsoleRenderer>() );
+
+    auto delegate = std::make_shared<Knights::CGameDelegate>();
+    Knights::CGame game( mapData, std::make_shared<Knights::CConsoleRenderer>(), delegate );
 
     while ( game.isPlaying() ) {
         game.tick();

@@ -26,6 +26,7 @@ set(SOURCE_FILES
         noudar-core/include/Vec2i.h
         noudar-core/src/CActor.cpp
         noudar-core/src/CBaphomet.cpp
+        noudar-core/src/CGameDelegate.cpp
         noudar-core/src/CBullKnight.cpp
         noudar-core/src/CConsoleRenderer.cpp
         noudar-core/src/CCuco.cpp
