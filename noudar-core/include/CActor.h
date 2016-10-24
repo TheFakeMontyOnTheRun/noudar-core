@@ -60,6 +60,7 @@ namespace Knights {
 
         ETeam getTeam();
         EDirection getDirection();
+        void setDirection( EDirection d );
         virtual void update( std::shared_ptr<CMap> map ) {}
         virtual void endOfTurn();
         virtual ~CActor() = default;
