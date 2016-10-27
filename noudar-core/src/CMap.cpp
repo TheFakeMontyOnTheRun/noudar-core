@@ -242,7 +242,7 @@ namespace Knights {
     }
 
     bool CMap::isValid(int x, int y) {
-        if ( x < 0 || x > 20 || y < 0 || y > 20 ) {
+        if ( x < 0 || x >= 20 || y < 0 || y >= 20 ) {
             return false;
         }
         return true;
