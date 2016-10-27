@@ -63,6 +63,7 @@ namespace Knights {
                     case '/':
                     case '\\':
                     case '%':
+                    case 'X':
                     case '|':
                     case 'Y':
                     case 'Z':

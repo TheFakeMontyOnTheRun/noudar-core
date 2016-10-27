@@ -106,4 +106,7 @@ namespace Knights {
         return mId;
     }
 
+    void CActor::setDirection( EDirection d ) {
+        mDirection = d;
+    }
 }

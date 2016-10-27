@@ -107,6 +107,22 @@ namespace Knights {
                 avatar->turnRight();
             }
 
+            if ( entry == 'r' ) {
+                avatar->setDirection( EDirection::kNorth );
+            }
+
+	        if ( entry == 'f' ) {
+		        avatar->setDirection( EDirection::kEast );
+	        }
+
+	        if ( entry == 'c' ) {
+		        avatar->setDirection( EDirection::kSouth );
+	        }
+
+	        if ( entry == 'd' ) {
+		        avatar->setDirection( EDirection::kWest );
+	        }
+
             if (entry == 'c') {
 
 //                    int x;
