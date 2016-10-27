@@ -73,54 +73,22 @@ namespace Knights {
 
     void CCuco::update( std::shared_ptr<CMap> map ) {
 
-            Vec2i scan;
             int newX;
             int newY;
 
-            for (int x = 0; x < 10; ++x) {
+            for (int x = -10; x < 10; ++x) {
 
-                    newX =  (x + mPosition.x);
-                    newY =  (mPosition.y);
-                    scan.x = newX;
-                    scan.y = newY;
-                    if ( actOn( newX, newY, map ) ) {
-                            break;
-                    }
-            }
+                    for (int y = -10; y < 10; ++y) {
 
-            for (int x = 0; x > -10; --x) {
+                            if ( x == 0 && y == 0 ) {
+                                    continue;
+                            }
 
-                    newX =  (x + mPosition.x);
-                    newY =  (mPosition.y);
-                    scan.x = newX;
-                    scan.y = newY;
+                            newX = (x + mPosition.x);
+                            newY = (y + mPosition.y);
 
-                    if ( actOn( newX, newY, map ) ) {
-                            break;
-                    }
-            }
-
-            for (int y = 0; y < 10; ++y) {
-
-                    newX = (mPosition.x);
-                    newY = (y + mPosition.y);
-                    scan.x = newX;
-                    scan.y = newY;
-
-                    if ( actOn( newX, newY, map ) ) {
-                            break;
-                    }
-            }
-
-            for (int y = 0; y > -10; --y) {
-
-                    newX = (mPosition.x);
-                    newY = (y + mPosition.y);
-                    scan.x = newX;
-                    scan.y = newY;
-
-                    if ( actOn( newX, newY, map ) ) {
-                            break;
+                            if (actOn(newX, newY, map)) {
+                            }
                     }
             }
     }
