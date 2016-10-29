@@ -18,6 +18,7 @@ namespace Knights {
         mHP = 5;
         mAttack = 4;
         mDefence = 1;
+        mName = "Foul Beast";
     }
 
     bool CCuco::dealWith( std::shared_ptr<CMap> map, int x, int y ) {

@@ -19,6 +19,7 @@ namespace Knights {
         mHP = 40;
         mAttack = 5;
         mDefence = 2;
+        mName = "Hero";
     }
 
     void CBullKnight::update(std::shared_ptr <CMap> map) {

@@ -109,4 +109,61 @@ namespace Knights {
     void CActor::setDirection( EDirection d ) {
         mDirection = d;
     }
+
+    std::string CActor::getName() {
+        return mName;
+    }
+
+    std::ostream& operator<<(std::ostream& os, const EDirection& aDirection ) {
+        os << to_string(aDirection);
+
+        return os;
+    }
+
+    std::string to_string( const EDirection& aDirection ) {
+        switch (aDirection ) {
+            case EDirection::kNorth:
+                return "North";
+            case EDirection::kWest:
+                return "West";
+            case EDirection::kSouth:
+                return "South";
+            case EDirection::kEast:
+                return "East";
+        }
+    }
+
+    std::ostream& operator<<(std::ostream& os, const EStance& aStance ) {
+        os << to_string(aStance);
+
+        return os;
+    }
+
+    std::string to_string( const EStance& aStance) {
+        switch (aStance) {
+            case EStance::kAttacking:
+                return "Attacking";
+            case EStance::kStanding:
+                return "Standidng";
+            case EStance::kDead:
+                return "Dead";
+        }
+    }
+
+
+    std::ostream& operator<<(std::ostream& os, const ETeam& aTeam) {
+        os << to_string(aTeam);
+
+        return os;
+    }
+
+    std::string to_string( const ETeam& aTeam ) {
+        switch (aTeam) {
+            case ETeam::kHeroes:
+                return "Heroes";
+            case ETeam::kVillains:
+                return "Villains";
+        }
+    }
+
 }

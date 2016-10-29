@@ -5,16 +5,23 @@
 #define knights2_CActor_H
 
 namespace Knights {
+
     enum class EStance {
         kStanding,
         kAttacking,
         kDead
     };
 
+    std::ostream& operator<<(std::ostream& os, const EStance & aDirection );
+    std::string to_string( const EStance & aDirection );
+
     enum class ETeam {
         kHeroes,
         kVillains
     };
+
+    std::ostream& operator<<(std::ostream& os, const ETeam & aDirection );
+    std::string to_string( const ETeam & aDirection );
 
     enum class EDirection {
         kNorth,
@@ -22,6 +29,9 @@ namespace Knights {
         kSouth,
         kWest
     };
+
+    std::ostream& operator<<(std::ostream& os, const EDirection& aDirection );
+    std::string to_string( const EDirection& aDirection );
 
     class CMap;
 
@@ -37,6 +47,7 @@ namespace Knights {
         int mDefaultAP;
         int mId;
         char mView;
+        std::string mName;
         Vec2i mPosition;
     public:
         void performAttack( std::shared_ptr<CActor> other);
@@ -63,6 +74,7 @@ namespace Knights {
         void setDirection( EDirection d );
         virtual void update( std::shared_ptr<CMap> map ) {}
         virtual void endOfTurn();
+        std::string getName();
         virtual ~CActor() = default;
     };
 }
