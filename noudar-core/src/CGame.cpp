@@ -38,19 +38,19 @@ namespace Knights {
             avatar = nullptr;
         }
 
-        char entry = mRenderer->getInput();
+        auto entry = mRenderer->getInput();
 
-        if ( entry == 'q') {
+        if ( entry == kQuitGameCommand ) {
             mIsPlaying = false;
         }
 
         if (avatar != nullptr) {
 
-            if (entry == 't') {
+            if (entry == kEndTurnCommand ) {
                 endOfTurn(mMap);
             }
 
-            if (entry == 's') {
+            if (entry == kMovePlayerEastCommand ) {
                 mMap->move( EDirection ::kEast, avatar);
 
                 if ( kShouldAlwaysFinishTurnOnMove ) {
@@ -58,7 +58,7 @@ namespace Knights {
                 }
             }
 
-            if (entry == 'w') {
+            if (entry == kMovePlayerNorthCommand ) {
                 mMap->move( EDirection::kNorth, avatar);
 
                 if ( kShouldAlwaysFinishTurnOnMove ) {
@@ -67,7 +67,7 @@ namespace Knights {
 
             }
 
-            if (entry == 'a') {
+            if (entry == kMovePlayerWestCommand ) {
                 mMap->move( EDirection::kWest, avatar);
 
                 if ( kShouldAlwaysFinishTurnOnMove ) {
@@ -76,7 +76,7 @@ namespace Knights {
 
             }
 
-            if (entry == 'z') {
+            if (entry == kMovePlayerSouthCommand ) {
                 mMap->move( EDirection::kSouth, avatar);
 
                 if ( kShouldAlwaysFinishTurnOnMove ) {
@@ -86,11 +86,11 @@ namespace Knights {
             }
 
 
-            if (entry == 'i') {
+            if (entry == kTurnPlayerLeftCommand) {
                 avatar->turnLeft();
             }
 
-            if (entry == 'o') {
+            if (entry == kMovePlayerForwardCommand ) {
                 mMap->move( avatar->getDirection(), avatar);
 
                 if ( kShouldAlwaysFinishTurnOnMove ) {
@@ -98,27 +98,27 @@ namespace Knights {
                 }
             }
 
-            if (entry == 'p') {
+            if (entry == kTurnPlayerRightCommand ) {
                 avatar->turnRight();
             }
 
-            if ( entry == 'r' ) {
+            if ( entry == kTurnPlayerNorthCommand  ) {
                 avatar->setDirection( EDirection::kNorth );
             }
 
-	        if ( entry == 'f' ) {
+	        if ( entry == kTurnPlayerEastCommand ) {
 		        avatar->setDirection( EDirection::kEast );
 	        }
 
-	        if ( entry == 'c' ) {
+	        if ( entry == kTurnPlayerSouthCommand ) {
 		        avatar->setDirection( EDirection::kSouth );
 	        }
 
-	        if ( entry == 'd' ) {
+	        if ( entry ==  kTurnPlayerWestCommand ) {
 		        avatar->setDirection( EDirection::kWest );
 	        }
 
-            if (entry == 'c') {
+            if (entry == kCastMagickForwardCommand ) {
 
 //                    int x;
 //                    int y;
