@@ -9,7 +9,7 @@
 #include "CActor.h"
 #include "CGameDelegate.h"
 #include "CMap.h"
-#include "CBullKnight.h"
+#include "CKnight.h"
 #include "CCuco.h"
 
 #include <iostream>
@@ -75,7 +75,7 @@ namespace Knights {
                         break;
 
                     case '4':
-                        actor = mAvatar = std::make_shared<CBullKnight>(id++);
+                        actor = mAvatar = std::make_shared<CKnight>(id++);
                         mElement[ y ][ x ] = '.';
                         break;
                     case '9':

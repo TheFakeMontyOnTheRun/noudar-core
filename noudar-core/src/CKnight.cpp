@@ -4,7 +4,7 @@
 #include "Vec2i.h"
 #include "IMapElement.h"
 #include "CActor.h"
-#include "CBullKnight.h"
+#include "CKnight.h"
 #include "CActor.h"
 #include "CGameDelegate.h"
 #include "CMap.h"
@@ -13,7 +13,7 @@ const int DEFAULT_AP = 5;
 
 namespace Knights {
 
-    CBullKnight::CBullKnight(int aId) : CActor(aId, DEFAULT_AP) {
+    CKnight::CKnight(int aId) : CActor(aId, DEFAULT_AP) {
         mView = '%';
         mTeam = ETeam::kHeroes;
         mHP = 40;
@@ -22,7 +22,7 @@ namespace Knights {
         mName = "Hero";
     }
 
-    void CBullKnight::update(std::shared_ptr <CMap> map) {
+    void CKnight::update(std::shared_ptr <CMap> map) {
 
     }
 }

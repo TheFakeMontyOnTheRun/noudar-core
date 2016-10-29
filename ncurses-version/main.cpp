@@ -21,7 +21,7 @@
 #include "commands/IGameCommand.h"
 #include "IRenderer.h"
 #include "CConsoleRenderer.h"
-#include "CBullKnight.h"
+#include "CKnight.h"
 #include "CGame.h"
 
 

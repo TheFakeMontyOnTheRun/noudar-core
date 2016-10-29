@@ -1,9 +1,9 @@
 #ifndef knights2_CBullKnight_H
 #define knights2_CBullKnight_H
 namespace Knights {
-    class CBullKnight : public CActor {
+    class CKnight : public CActor {
     public:
-        CBullKnight(int aId);
+        CKnight(int aId);
         void update(std::shared_ptr <CMap> map) override;
     };
 }

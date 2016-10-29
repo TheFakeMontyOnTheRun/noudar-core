@@ -10,7 +10,7 @@
 #include "CGameDelegate.h"
 #include "CMap.h"
 #include "CDoorway.h"
-#include "CBullKnight.h"
+#include "CKnight.h"
 #include "CCuco.h"
 #include "IRenderer.h"
 
