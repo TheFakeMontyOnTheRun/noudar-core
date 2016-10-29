@@ -18,6 +18,7 @@
 #include "CActor.h"
 #include "CGameDelegate.h"
 #include "CMap.h"
+#include "commands/IGameCommand.h"
 #include "IRenderer.h"
 #include "CConsoleRenderer.h"
 #include "CBullKnight.h"
