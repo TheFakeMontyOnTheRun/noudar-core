@@ -10,8 +10,6 @@
 #include "CGameDelegate.h"
 #include "CMap.h"
 #include "CBullKnight.h"
-#include "CFalconKnight.h"
-#include "CTurtleKnight.h"
 #include "CCuco.h"
 
 #include <iostream>

@@ -20,9 +20,7 @@
 #include "CMap.h"
 #include "IRenderer.h"
 #include "CConsoleRenderer.h"
-#include "CFalconKnight.h"
 #include "CBullKnight.h"
-#include "CTurtleKnight.h"
 #include "CGame.h"
 
 

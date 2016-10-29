@@ -10,13 +10,8 @@
 #include "CGameDelegate.h"
 #include "CMap.h"
 #include "CDoorway.h"
-#include "CBaphomet.h"
 #include "CBullKnight.h"
 #include "CCuco.h"
-#include "CDemon.h"
-#include "CFalconKnight.h"
-#include "CMoura.h"
-#include "CTurtleKnight.h"
 #include "IRenderer.h"
 
 #include "CGame.h"
