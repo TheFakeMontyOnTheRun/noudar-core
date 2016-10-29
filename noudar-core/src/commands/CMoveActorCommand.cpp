@@ -18,7 +18,7 @@
 
 namespace Knights {
 
-    CMoveActorCommand::CMoveActorCommand( EDirection aDirection ) : mDirection( aDirection ) {
+    CMoveActorCommand::CMoveActorCommand( std::shared_ptr<CGame> aGame, EDirection aDirection ) : mDirection( aDirection ), IGameCommand( aGame ) {
     }
 
     std::string CMoveActorCommand::to_string() const {

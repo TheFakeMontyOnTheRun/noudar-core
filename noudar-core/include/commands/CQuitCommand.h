@@ -8,6 +8,7 @@
 namespace Knights {
     class CQuitCommand : public IGameCommand {
     public:
+        CQuitCommand( std::shared_ptr<CGame> aGame );
         virtual std::string to_string() const override;
         virtual bool shouldEndTurn() override;
         virtual void execute() override;

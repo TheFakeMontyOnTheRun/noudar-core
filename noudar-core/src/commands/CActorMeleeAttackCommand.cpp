@@ -6,12 +6,15 @@
 #include <memory>
 #include "Vec2i.h"
 #include "CActor.h"
+#include "IRenderer.h"
+#include "CGameDelegate.h"
+#include "CGame.h"
 #include "commands/IGameCommand.h"
 #include "commands/CActorMeleeAttackCommand.h"
 
 namespace Knights {
 
-    CActorMeleeAttackCommand::CActorMeleeAttackCommand( float aStrength, std::shared_ptr<CActor> aTarget  ) : mStrength( aStrength ), mTarget( aTarget ) {
+    CActorMeleeAttackCommand::CActorMeleeAttackCommand( std::shared_ptr<CGame> aGame, float aStrength, std::shared_ptr<CActor> aTarget  ) : mStrength( aStrength ), mTarget( aTarget ), IGameCommand( aGame ) {
     }
 
     std::string CActorMeleeAttackCommand::to_string() const {

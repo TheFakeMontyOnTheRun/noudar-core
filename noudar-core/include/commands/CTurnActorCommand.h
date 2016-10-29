@@ -9,7 +9,7 @@ namespace Knights {
     class CTurnActorCommand : public IGameCommand {
         int mDegrees = 0;
     public:
-        CTurnActorCommand( int aDegrees );
+        CTurnActorCommand( std::shared_ptr<CGame> aGame, int aDegrees );
         virtual std::string to_string() const override;
         virtual bool shouldEndTurn() override;
         virtual void execute() override;

@@ -18,7 +18,7 @@
 
 namespace Knights {
 
-    CTurnActorCommand::CTurnActorCommand( int aDegress ) : mDegrees( aDegress ) {
+    CTurnActorCommand::CTurnActorCommand( std::shared_ptr<CGame> aGame , int aDegress ) : mDegrees( aDegress ), IGameCommand( aGame ) {
     }
 
     std::string CTurnActorCommand::to_string() const {

@@ -10,7 +10,7 @@ namespace Knights {
         float mStrength = 0.0f;
         std::shared_ptr<CActor> mTarget;
     public:
-        CActorMeleeAttackCommand( float strength, std::shared_ptr<CActor> target );
+        CActorMeleeAttackCommand( std::shared_ptr<CGame> aGame, float strength, std::shared_ptr<CActor> target );
         virtual std::string to_string() const override;
         virtual bool shouldEndTurn() override;
         virtual void execute() override;

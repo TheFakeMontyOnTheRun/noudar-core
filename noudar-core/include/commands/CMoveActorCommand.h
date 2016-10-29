@@ -9,7 +9,7 @@ namespace Knights {
     class CMoveActorCommand : public IGameCommand {
         EDirection mDirection;
     public:
-        CMoveActorCommand( EDirection direction  );
+        CMoveActorCommand( std::shared_ptr<CGame> aGame, EDirection direction  );
         virtual std::string to_string() const override;
         virtual bool shouldEndTurn() override;
         virtual void execute() override;

@@ -6,7 +6,9 @@
 #define NOUDAR_CORE_COMMANDS_IGAMECOMMAND_H
 namespace Knights {
     class IGameCommand {
+        std::shared_ptr<CGame> mGame;
     public:
+        IGameCommand( std::shared_ptr<CGame> aGame );
         virtual bool shouldEndTurn() = 0;
         virtual void execute() = 0;
         virtual std::string to_string() const = 0;
