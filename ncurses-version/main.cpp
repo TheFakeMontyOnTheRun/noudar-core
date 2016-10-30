@@ -53,10 +53,10 @@ int main ( int argc, char **argv ) {
     std::string mapData = readMap("res/map_tiles0.txt");
 
     auto delegate = std::make_shared<Knights::CGameDelegate>();
-    Knights::CGame game( mapData, std::make_shared<Knights::CConsoleRenderer>(), delegate );
+    auto game = std::make_shared<Knights::CGame>( mapData, std::make_shared<Knights::CConsoleRenderer>(), delegate );
 
-    while ( game.isPlaying() ) {
-        game.tick();
+    while ( game->isPlaying() ) {
+        game->tick();
     }
 
   return 0;

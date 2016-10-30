@@ -9,6 +9,7 @@ namespace Knights {
         std::shared_ptr<CGame> mGame;
     public:
         IGameCommand( std::shared_ptr<CGame> aGame );
+        std::shared_ptr<CGame> getGame();
         virtual bool shouldEndTurn() = 0;
         virtual void execute() = 0;
         virtual std::string to_string() const = 0;

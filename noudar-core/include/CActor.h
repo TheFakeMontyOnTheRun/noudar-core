@@ -32,6 +32,7 @@ namespace Knights {
 
     std::ostream& operator<<(std::ostream& os, const EDirection& aDirection );
     std::string to_string( const EDirection& aDirection );
+    EDirection wrapDirection( EDirection direction, int offset );
 
     class CMap;
 

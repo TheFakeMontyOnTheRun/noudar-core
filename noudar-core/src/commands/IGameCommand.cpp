@@ -26,6 +26,9 @@ namespace Knights {
         return os;
     }
 
+    std::shared_ptr<CGame> IGameCommand::getGame() {
+        return mGame;
+    }
 
     std::string to_string( const IGameCommand& action ) {
         return action.to_string();

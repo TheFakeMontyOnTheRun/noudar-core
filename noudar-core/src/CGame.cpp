@@ -16,110 +16,93 @@
 
 #include "CGame.h"
 
+#include "commands/IGameCommand.h"
+#include "commands/CMoveActorCommand.h"
+#include "commands/CTurnActorCommand.h"
+
 const bool kShouldAlwaysFinishTurnOnMove = true;
 
 namespace Knights {
 
-    void CGame::endOfTurn( std::shared_ptr<CMap> map ) {
+    void CGame::endOfTurn(std::shared_ptr <CMap> map) {
 
         map->endOfTurn();
 
-        for ( auto& actor : map->getActors() ) {
-            actor->update( map );
+        for (auto &actor : map->getActors()) {
+            actor->update(map);
         }
 
         ++mTurn;
     }
 
+    std::shared_ptr <CMap> CGame::getMap() {
+        return mMap;
+    }
+
     void CGame::tick() {
-        std::shared_ptr<CActor> avatar = mMap->getAvatar();
-
-        if (avatar != nullptr && !avatar->isAlive()) {
-            avatar = nullptr;
-        }
-
+        std::shared_ptr<IGameCommand> command;
         auto entry = mRenderer->getInput();
 
-        if ( entry == kQuitGameCommand ) {
+        if (entry == kQuitGameCommand) {
             mIsPlaying = false;
         }
 
-        if (avatar != nullptr) {
+        if (entry == kEndTurnCommand) {
+            endOfTurn(mMap);
+        }
 
-            if (entry == kEndTurnCommand ) {
-                endOfTurn(mMap);
-            }
+        if (entry == kMovePlayerEastCommand) {
+            command = std::make_shared<CMoveActorCommand>( shared_from_this(), EDirection::kEast, mMap->getAvatar() );
+        }
 
-            if (entry == kMovePlayerEastCommand ) {
-                mMap->move( EDirection ::kEast, avatar);
+        if (entry == kMovePlayerNorthCommand) {
+            command = std::make_shared<CMoveActorCommand>( shared_from_this(), EDirection::kNorth, mMap->getAvatar() );
+        }
 
-                if ( kShouldAlwaysFinishTurnOnMove ) {
-                    endOfTurn( mMap );
-                }
-            }
+        if (entry == kMovePlayerWestCommand) {
+            command = std::make_shared<CMoveActorCommand>( shared_from_this(), EDirection::kWest, mMap->getAvatar() );
+        }
 
-            if (entry == kMovePlayerNorthCommand ) {
-                mMap->move( EDirection::kNorth, avatar);
+        if (entry == kMovePlayerSouthCommand) {
+            command = std::make_shared<CMoveActorCommand>( shared_from_this(), EDirection::kSouth, mMap->getAvatar() );
+        }
 
-                if ( kShouldAlwaysFinishTurnOnMove ) {
-                    endOfTurn( mMap );
-                }
+        if (entry == kTurnPlayerLeftCommand) {
+            std::shared_ptr <CActor> avatar = mMap->getAvatar();
+            command = std::make_shared<CTurnActorCommand>( shared_from_this(), wrapDirection( mMap->getAvatar()->getDirection(), -1 ), mMap->getAvatar() );
+        }
 
-            }
+        if (entry == kMovePlayerForwardCommand) {
+            std::shared_ptr <CActor> avatar = mMap->getAvatar();
+            command = std::make_shared<CMoveActorCommand>( shared_from_this(), avatar->getDirection(), avatar );
+        }
 
-            if (entry == kMovePlayerWestCommand ) {
-                mMap->move( EDirection::kWest, avatar);
+        if (entry == kTurnPlayerRightCommand) {
+            std::shared_ptr <CActor> avatar = mMap->getAvatar();
+            command = std::make_shared<CTurnActorCommand>( shared_from_this(), wrapDirection( mMap->getAvatar()->getDirection(), +1 ), mMap->getAvatar() );
+        }
 
-                if ( kShouldAlwaysFinishTurnOnMove ) {
-                    endOfTurn( mMap );
-                }
+        if (entry == kTurnPlayerNorthCommand) {
+            command = std::make_shared<CTurnActorCommand>( shared_from_this(), EDirection::kNorth, mMap->getAvatar() );
+        }
 
-            }
+        if (entry == kTurnPlayerEastCommand) {
+            command = std::make_shared<CTurnActorCommand>( shared_from_this(), EDirection::kEast, mMap->getAvatar() );
+        }
 
-            if (entry == kMovePlayerSouthCommand ) {
-                mMap->move( EDirection::kSouth, avatar);
+        if (entry == kTurnPlayerSouthCommand) {
+            std::shared_ptr <CActor> avatar = mMap->getAvatar();
 
-                if ( kShouldAlwaysFinishTurnOnMove ) {
-                    endOfTurn( mMap );
-                }
+            command = std::make_shared<CTurnActorCommand>( shared_from_this(), EDirection::kSouth, mMap->getAvatar() );
+        }
 
-            }
+        if (entry == kTurnPlayerWestCommand) {
+            command = std::make_shared<CTurnActorCommand>( shared_from_this(), EDirection::kWest, mMap->getAvatar() );
+        }
 
-
-            if (entry == kTurnPlayerLeftCommand) {
-                avatar->turnLeft();
-            }
-
-            if (entry == kMovePlayerForwardCommand ) {
-                mMap->move( avatar->getDirection(), avatar);
-
-                if ( kShouldAlwaysFinishTurnOnMove ) {
-                    endOfTurn( mMap );
-                }
-            }
-
-            if (entry == kTurnPlayerRightCommand ) {
-                avatar->turnRight();
-            }
-
-            if ( entry == kTurnPlayerNorthCommand  ) {
-                avatar->setDirection( EDirection::kNorth );
-            }
-
-	        if ( entry == kTurnPlayerEastCommand ) {
-		        avatar->setDirection( EDirection::kEast );
-	        }
-
-	        if ( entry == kTurnPlayerSouthCommand ) {
-		        avatar->setDirection( EDirection::kSouth );
-	        }
-
-	        if ( entry ==  kTurnPlayerWestCommand ) {
-		        avatar->setDirection( EDirection::kWest );
-	        }
-
-            if (entry == kCastMagickForwardCommand ) {
-
+        if (entry == kCastMagickForwardCommand) {
+//            std::shared_ptr <CActor> avatar = mMap->getAvatar();
+//
 //                    int x;
 //                    int y;
 //
@@ -129,18 +112,30 @@ namespace Knights {
 //                    std::cin >> y;
 //
 //                    map->attack(avatar, Vec2i{ x, y }, false);
-                if ( kShouldAlwaysFinishTurnOnMove ) {
-                    endOfTurn( mMap );
-                }
+//            if (kShouldAlwaysFinishTurnOnMove) {
+//                endOfTurn(mMap);
+//            }
+        }
+
+
+        if ( command != nullptr ) {
+            command->execute();
+
+            if ( command->shouldEndTurn() ) {
+                endOfTurn(mMap);
             }
         }
 
-        mRenderer->drawMap(*mMap, avatar);
+        {
+            std::shared_ptr <CActor> avatar = mMap->getAvatar();
+            mRenderer->drawMap(*mMap, avatar);
+        }
 
     }
 
-    CGame::CGame( std::string mapData, std::shared_ptr<IRenderer> aRenderer, std::shared_ptr<CGameDelegate> aGameDelegate ) :
-    mRenderer( aRenderer ), mGameDelegate( aGameDelegate ) {
+    CGame::CGame(std::string mapData, std::shared_ptr <IRenderer> aRenderer,
+                 std::shared_ptr <CGameDelegate> aGameDelegate) :
+            mRenderer(aRenderer), mGameDelegate(aGameDelegate) {
         mMap = std::make_shared<CMap>(mapData, aGameDelegate);
         mIsPlaying = true;
     }

@@ -18,14 +18,14 @@
 
 namespace Knights {
 
-    CTurnActorCommand::CTurnActorCommand( std::shared_ptr<CGame> aGame , int aDegress ) : mDegrees( aDegress ), IGameCommand( aGame ) {
+    CTurnActorCommand::CTurnActorCommand( std::shared_ptr<CGame> aGame , EDirection aDirection, std::shared_ptr<CActor> aActor ) : mDirection( aDirection ), IGameCommand( aGame ), mActor(aActor) {
     }
 
     std::string CTurnActorCommand::to_string() const {
 
         std::stringstream ss;
-        ss << "Turn actor by ";
-        ss << mDegrees << " degrees";
+        ss << "Turn actor to ";
+        ss << mDirection;
         return ss.str();
     }
 
@@ -35,5 +35,6 @@ namespace Knights {
 
     void CTurnActorCommand::execute() {
 
+        mActor->setDirection( mDirection );
     }
 }

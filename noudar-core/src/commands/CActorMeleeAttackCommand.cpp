@@ -4,10 +4,15 @@
 #include <string>
 #include <sstream>
 #include <memory>
+#include <vector>
+#include <functional>
 #include "Vec2i.h"
 #include "CActor.h"
 #include "IRenderer.h"
 #include "CGameDelegate.h"
+#include "IMapElement.h"
+#include "CMap.h"
+#include "IRenderer.h"
 #include "CGame.h"
 #include "commands/IGameCommand.h"
 #include "commands/CActorMeleeAttackCommand.h"
@@ -33,5 +38,15 @@ namespace Knights {
 
     void CActorMeleeAttackCommand::execute() {
 
+        auto map = getGame()->getMap();
+        std::shared_ptr<CActor> actor = map->getAvatar();
+
+        if ( nullptr == mTarget ) {
+            return;
+        }
+
+        if (actor->getTeam() != mTarget->getTeam()) {
+            actor->performAttack(mTarget);
+        }
     }
 }

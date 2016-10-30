@@ -133,6 +133,20 @@ namespace Knights {
         }
     }
 
+    EDirection wrapDirection( EDirection direction, int offset ) {
+        int index = static_cast<int>(direction) + offset;
+
+        while ( index < 0 ) {
+            index += 4;
+        }
+
+        while ( index >= 4 ) {
+            index -= 4;
+        }
+
+        return static_cast<EDirection>( index );
+    }
+
     std::ostream& operator<<(std::ostream& os, const EStance& aStance ) {
         os << to_string(aStance);
 

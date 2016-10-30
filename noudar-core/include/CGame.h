@@ -23,7 +23,7 @@ namespace Knights {
     const static char kQuitGameCommand = 'q';
 
 
-  class CGame {
+  class CGame : public std::enable_shared_from_this<CGame> {
       std::shared_ptr<CMap> mMap;
       std::shared_ptr<IRenderer> mRenderer;
       std::shared_ptr<CGameDelegate> mGameDelegate;
@@ -34,6 +34,7 @@ namespace Knights {
     CGame( std::string mapData, std::shared_ptr<IRenderer> aRenderer, std::shared_ptr<CGameDelegate> aGameDelegate );
       ~CGame() = default;
       void endOfTurn(std::shared_ptr<CMap> map);
+      std::shared_ptr<CMap> getMap();
       void tick();
       int getTurn();
       bool isPlaying();
