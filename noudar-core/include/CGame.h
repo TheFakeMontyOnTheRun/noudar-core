@@ -18,6 +18,7 @@ namespace Knights {
     const static char kTurnPlayerWestCommand = 'd';
 
     const static char kCastMagickForwardCommand = 'k';
+    const static char kActorMeleeAttackCommand = 'e';
 
     const static char kEndTurnCommand = 't';
     const static char kQuitGameCommand = 'q';

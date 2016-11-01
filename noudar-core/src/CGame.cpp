@@ -19,6 +19,7 @@
 #include "commands/IGameCommand.h"
 #include "commands/CMoveActorCommand.h"
 #include "commands/CTurnActorCommand.h"
+#include "commands/CActorMeleeAttackCommand.h"
 
 const bool kShouldAlwaysFinishTurnOnMove = true;
 
@@ -54,6 +55,18 @@ namespace Knights {
         if (entry == kMovePlayerEastCommand) {
             command = std::make_shared<CMoveActorCommand>( shared_from_this(), EDirection::kEast, mMap->getAvatar() );
         }
+
+        if (entry == kActorMeleeAttackCommand) {
+
+            auto actor = mMap->getAvatar();
+            auto pos = mMap->getActorTargetPosition(actor);
+            auto otherActor = mMap->getActorAt( pos );
+
+            if ( otherActor != nullptr && actor->getTeam() != otherActor->getTeam()) {
+                command = std::make_shared<CActorMeleeAttackCommand>( shared_from_this(), actor, otherActor );
+            }
+        }
+
 
         if (entry == kMovePlayerNorthCommand) {
             command = std::make_shared<CMoveActorCommand>( shared_from_this(), EDirection::kNorth, mMap->getAvatar() );

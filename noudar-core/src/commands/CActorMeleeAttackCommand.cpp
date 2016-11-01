@@ -19,14 +19,14 @@
 
 namespace Knights {
 
-    CActorMeleeAttackCommand::CActorMeleeAttackCommand( std::shared_ptr<CGame> aGame, float aStrength, std::shared_ptr<CActor> aTarget  ) : mStrength( aStrength ), mTarget( aTarget ), IGameCommand( aGame ) {
+    CActorMeleeAttackCommand::CActorMeleeAttackCommand( std::shared_ptr<CGame> aGame, std::shared_ptr<CActor> aAttacker, std::shared_ptr<CActor> aTarget  ) : mAttacker( aAttacker), mTarget( aTarget ), IGameCommand( aGame ) {
     }
 
     std::string CActorMeleeAttackCommand::to_string() const {
 
         std::stringstream ss;
-        ss << "melee attack with strength of ";
-        ss << mStrength;
+        ss << "melee attack from ";
+        ss << mAttacker->getName();
         ss << " to ";
         ss << mTarget->getName();
         return ss.str();
@@ -37,16 +37,6 @@ namespace Knights {
     }
 
     void CActorMeleeAttackCommand::execute() {
-
-        auto map = getGame()->getMap();
-        std::shared_ptr<CActor> actor = map->getAvatar();
-
-        if ( nullptr == mTarget ) {
-            return;
-        }
-
-        if (actor->getTeam() != mTarget->getTeam()) {
-            actor->performAttack(mTarget);
-        }
+        mAttacker->performAttack(mTarget);
     }
 }
