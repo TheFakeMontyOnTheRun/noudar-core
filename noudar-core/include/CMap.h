@@ -19,6 +19,7 @@ namespace Knights {
         void move( EDirection d, std::shared_ptr<CActor> a );
         bool attackIfNotFriendly( EDirection d, std::shared_ptr<CActor> a, bool mutual );
         void endOfTurn();
+        Vec2i getActorTargetPosition( std::shared_ptr<CActor> a );
         std::shared_ptr<IMapElement> getMapElement( Vec2i position );
         char getElementAt( int x, int y );
         std::shared_ptr<CActor> getAvatar();

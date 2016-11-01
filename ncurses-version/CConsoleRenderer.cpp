@@ -36,6 +36,7 @@ namespace Knights {
         init_pair(3, COLOR_CYAN, COLOR_BLACK);
         init_pair(4, COLOR_GREEN, COLOR_BLACK);
         init_pair(5, COLOR_WHITE, COLOR_BLACK);
+        init_pair(6, COLOR_MAGENTA, COLOR_BLACK);
 
         printw( "Dungeons Of Noudar\nCore edition.\nPress any key");
     }
@@ -45,6 +46,8 @@ namespace Knights {
     }
 
     void CConsoleRenderer::drawMap(CMap &map, std::shared_ptr<CActor> current) {
+
+        auto targetPosition = map.getActorTargetPosition(current);
 
         for (int y = 0; y < 20; ++y) {
             for (int x = 0; x < 20; ++x) {
@@ -57,10 +60,16 @@ namespace Knights {
                         attron(COLOR_PAIR(1));
                         addch(directions[static_cast<int>(current->getDirection()) ]);
                     } else {
-                        if ( current != nullptr && actor != nullptr && actor->getTeam() == current->getTeam() ) {
-                            attron(COLOR_PAIR(5));
+                        if ( current != nullptr && actor != nullptr && actor->getTeam() != current->getTeam() && actor->isAlive() ) {
+
+                            if ( targetPosition.x == x && targetPosition.y == y ) {
+                                attron(COLOR_PAIR(6));
+                            } else {
+                                attron(COLOR_PAIR(2));
+                            }
+
                         } else {
-                            attron(COLOR_PAIR(2));
+                            attron(COLOR_PAIR(5));
                         }
                         addch(directions[static_cast<int>(actor->getDirection()) ]);
                     }
@@ -70,7 +79,12 @@ namespace Knights {
                         attron(COLOR_PAIR(3));
                         addch(map.getElementAt( x, y ) );
                     } else {
-                        attron(COLOR_PAIR(4));
+                        if ( targetPosition.x == x && targetPosition.y == y ) {
+                            attron(COLOR_PAIR(6));
+                        } else {
+                            attron(COLOR_PAIR(4));
+                        }
+
                         addch('.');
                     }
                 }

@@ -158,6 +158,27 @@ namespace Knights {
         return otherActor;
     }
 
+    Vec2i CMap::getActorTargetPosition( std::shared_ptr<CActor> actor ) {
+
+        auto position = actor->getPosition();
+
+        switch ( actor->getDirection()) {
+
+            case EDirection::kEast:
+                return Vec2i{position.x + 1, position.y};
+
+            case EDirection::kWest:
+                return Vec2i{position.x - 1, position.y};
+
+            case EDirection::kSouth:
+                return Vec2i{position.x, position.y + 1};
+
+            default:
+            case EDirection::kNorth:
+                return Vec2i{position.x, position.y - 1};
+        }
+    }
+
     bool CMap::attackIfNotFriendly(EDirection d, std::shared_ptr<CActor> actor, bool mutual) {
 
         std::shared_ptr<CActor> other = nullptr;
