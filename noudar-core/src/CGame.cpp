@@ -160,4 +160,8 @@ namespace Knights {
     int CGame::getTurn() {
         return mTurn;
     }
+
+	Vec2i CGame::getCursorPosition() {
+		return mMap->getActorTargetPosition( mMap->getAvatar() );
+	}
 }

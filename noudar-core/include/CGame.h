@@ -39,6 +39,7 @@ namespace Knights {
       void tick();
       int getTurn();
       bool isPlaying();
+      Vec2i getCursorPosition();
   };
 }
 #endif
