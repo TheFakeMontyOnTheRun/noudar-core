@@ -5,6 +5,7 @@
 #include <vector>
 #include <memory>
 #include <functional>
+#include <iostream>
 
 #include "Vec2i.h"
 #include "IMapElement.h"
