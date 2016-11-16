@@ -1,6 +1,7 @@
 CXXFLAGS = -Inoudar-core/include -Incurses-version -O2 -g -c -std=c++0x  -ferror-limit=1
 CXX = clang++
-OBJS = ncurses-version/main.o ncurses-version/CConsoleRenderer.o \
+OBJS = ncurses-version/main.o \
+    ncurses-version/CConsoleRenderer.o \
     noudar-core/src/CActor.o \
     noudar-core/src/CKnight.o \
     noudar-core/src/CCuco.o \
