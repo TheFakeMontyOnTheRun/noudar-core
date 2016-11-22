@@ -75,6 +75,7 @@ namespace Knights {
                         break;
 
                     case '4':
+                    case '5':
                         actor = mAvatar = std::make_shared<CKnight>(id++);
                         mElement[ y ][ x ] = '.';
                         break;
@@ -82,7 +83,6 @@ namespace Knights {
                     case '*':
                         map[y][x] = std::make_shared<CDoorway>(element == '9' ? EDoorwayFunction::kExit : EDoorwayFunction::kEntry);
                         break;
-                    case '5':
                     case '6':
                         actor = std::make_shared<CCuco>(id++);
                         mElement[ y ][ x ] = '.';
