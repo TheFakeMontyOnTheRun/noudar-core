@@ -31,7 +31,7 @@ std::string readMap(const char *mapName) {
     std::string entry;
     std::ifstream mapFile(mapName);
 
-    char line[80];
+    char line[128];
 
     while (!mapFile.eof()) {
         mapFile >> line;

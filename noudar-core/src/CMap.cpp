@@ -15,9 +15,10 @@
 #include <iostream>
 
 namespace Knights {
+
     void CMap::endOfTurn() {
-        for (int y = 0; y < 20; ++y) {
-            for (int x = 0; x < 20; ++x) {
+        for (int y = 0; y < kMapSize; ++y) {
+            for (int x = 0; x < kMapSize; ++x) {
                 if (mActors[y][x] != nullptr) {
                     mActors[y][x]->endOfTurn();
                 }
@@ -35,10 +36,10 @@ namespace Knights {
         std::shared_ptr<CActor> actor = nullptr;
 
         int id = 0;
-        for (int y = 0; y < 20; ++y) {
-            for (int x = 0; x < 20; ++x) {
+        for (int y = 0; y < kMapSize; ++y) {
+            for (int x = 0; x < kMapSize; ++x) {
 
-                element = mapData[(y * 20) + x];
+                element = mapData[(y * kMapSize) + x];
                 block[y][x] = false;
                 map[y][x] = nullptr;
                 mElement[ y ][ x ] = element;
@@ -75,7 +76,6 @@ namespace Knights {
                         break;
 
                     case '4':
-                    case '5':
                         actor = mAvatar = std::make_shared<CKnight>(id++);
                         mElement[ y ][ x ] = '.';
                         break;
@@ -84,6 +84,7 @@ namespace Knights {
                         map[y][x] = std::make_shared<CDoorway>(element == '9' ? EDoorwayFunction::kExit : EDoorwayFunction::kEntry);
                         break;
                     case '6':
+                    case '5':
                         actor = std::make_shared<CCuco>(id++);
                         mElement[ y ][ x ] = '.';
                         break;
@@ -262,7 +263,7 @@ namespace Knights {
     }
 
     bool CMap::isValid(int x, int y) {
-        if ( x < 0 || x >= 20 || y < 0 || y >= 20 ) {
+        if ( x < 0 || x >= kMapSize || y < 0 || y >= kMapSize ) {
             return false;
         }
         return true;

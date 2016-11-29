@@ -11,6 +11,7 @@
 #include <vector>
 #include <memory>
 #include <ncurses.h>
+#include <cstdlib>
 
 #include "Vec2i.h"
 #include "IMapElement.h"
@@ -48,10 +49,20 @@ namespace Knights {
     void CConsoleRenderer::drawMap(CMap &map, std::shared_ptr<CActor> current) {
 
         auto targetPosition = map.getActorTargetPosition(current);
+		auto actorPosition = current->getPosition();
 
-        for (int y = 0; y < 20; ++y) {
-            for (int x = 0; x < 20; ++x) {
-                move( y, x );
+	    for (int y = 0; y < 20; ++y ) {
+		    for (int x = 0; x < 20; ++x) {
+			    move(y, x);
+			    attron(COLOR_PAIR(3));
+			    addch('.');
+		    }
+	    }
+
+
+	    for (int y = std::max<int>(0, actorPosition.y - 10); y < std::min<int>( kMapSize, actorPosition.y + 10); ++y) {
+            for (int x = std::max<int>(0, actorPosition.x - 10); x < std::min<int>( kMapSize, actorPosition.x + 10); ++x) {
+                move( y - actorPosition.y + 10, x - actorPosition.x + 10);
 
                 auto actor = map.getActorAt( Vec2i{ x, y } );
 

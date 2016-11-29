@@ -2,17 +2,24 @@
 #define knights2_CMap_H
 
 namespace Knights {
+
+	const static int kMapSize = 120;
+
     class CMap {
+    public:
+
     private:
-        std::shared_ptr<IMapElement> map[ 20 ][ 20 ];
-        std::shared_ptr<CActor> mActors[ 20 ][ 20 ];
+
+        std::shared_ptr<IMapElement> map[ kMapSize ][ kMapSize ];
+        std::shared_ptr<CActor> mActors[ kMapSize ][ kMapSize ];
         std::shared_ptr<CGameDelegate> mGameDelegate;
-        bool block[ 20 ][ 20 ];
-        char mElement[ 20 ][ 20 ];
+        bool block[ kMapSize ][ kMapSize ];
+        char mElement[ kMapSize ][ kMapSize ];
         std::vector<std::shared_ptr<CActor>> actors;
         std::shared_ptr<CActor> mAvatar;
 
     public:
+
         bool isValid( int x, int y );
         bool isBlockAt( int x, int y );
         CMap( const std::string& data, std::shared_ptr<CGameDelegate> aGameDelegate );
