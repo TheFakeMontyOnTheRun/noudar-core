@@ -1,5 +1,6 @@
 #include <string>
 #include <vector>
+#include <cstdlib>
 #include <memory>
 #include <cmath>
 #include <functional>
@@ -86,8 +87,8 @@ namespace Knights {
                                     continue;
                             }
 
-                            newX = (x + mPosition.x);
-                            newY = (y + mPosition.y);
+                            newX = std::min<int>( kMapSize, std::max<int>( 0, (x + mPosition.x) ));
+                            newY = std::min<int>( kMapSize, std::max<int>( 0, (y + mPosition.y) ));
 
                             if (actOn(newX, newY, map)) {
 	                            return;
