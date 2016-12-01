@@ -58,7 +58,7 @@ namespace Knights {
                     auto otherActor = map->getActorAt( Vec2i{ newX, newY } );
 
                     if (otherActor != nullptr
-                        && otherActor->getTeam() == ETeam::kHeroes) {
+                        && otherActor->getTeam() != getTeam()) {
 
                             if (dealWith( map, newX, newY ) ) {
                                     return true;
