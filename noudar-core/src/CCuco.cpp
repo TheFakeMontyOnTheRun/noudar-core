@@ -66,7 +66,7 @@ namespace Knights {
                     }
 
                     if ( map->isBlockAt( newX, newY ) ) {
-                            return true;
+                            return false;
                     }
 
             }
@@ -90,6 +90,7 @@ namespace Knights {
                             newY = (y + mPosition.y);
 
                             if (actOn(newX, newY, map)) {
+	                            return;
                             }
                     }
             }
