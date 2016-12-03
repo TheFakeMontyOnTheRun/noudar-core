@@ -3,7 +3,7 @@
 
 namespace Knights {
 
-	const static int kMapSize = 120;
+	const static int kMapSize = 20;
 
     class CMap {
     public:

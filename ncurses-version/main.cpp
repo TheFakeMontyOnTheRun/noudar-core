@@ -31,7 +31,7 @@ std::string readMap(const char *mapName) {
     std::string entry;
     std::ifstream mapFile(mapName);
 
-    char line[128];
+    char line[ Knights::kMapSize + 1];
 
     while (!mapFile.eof()) {
         mapFile >> line;
