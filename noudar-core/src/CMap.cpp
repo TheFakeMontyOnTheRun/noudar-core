@@ -35,7 +35,7 @@ namespace Knights {
         char element;
         std::shared_ptr<CActor> actor = nullptr;
 
-        int id = 0;
+        int id = 1;
         for (int y = 0; y < kMapSize; ++y) {
             for (int x = 0; x < kMapSize; ++x) {
 
