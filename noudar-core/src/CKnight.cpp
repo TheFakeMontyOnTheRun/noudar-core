@@ -17,7 +17,7 @@ namespace Knights {
     CKnight::CKnight(int aId) : CActor(aId, DEFAULT_AP) {
         mView = '%';
         mTeam = ETeam::kHeroes;
-        mHP = 40;
+        mHP = 20;
         mAttack = 5;
         mDefence = 2;
         mName = "Hero";
