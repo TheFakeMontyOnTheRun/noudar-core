@@ -13,6 +13,9 @@
 #include "IMapElement.h"
 #include "CMap.h"
 #include "IRenderer.h"
+#include "IFileLoaderDelegate.h"
+#include "CPlainFileLoader.h"
+
 #include "CGame.h"
 #include "commands/IGameCommand.h"
 #include "commands/CActorMeleeAttackCommand.h"

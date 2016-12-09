@@ -2,6 +2,7 @@
 #include <memory>
 #include <string>
 #include <fstream>
+#include <sstream>
 #include <vector>
 
 #include "Vec2i.h"
@@ -14,12 +15,16 @@
 #include "CCuco.h"
 #include "IRenderer.h"
 
+#include "IFileLoaderDelegate.h"
+#include "CPlainFileLoader.h"
+
 #include "CGame.h"
 
 #include "commands/IGameCommand.h"
 #include "commands/CMoveActorCommand.h"
 #include "commands/CTurnActorCommand.h"
 #include "commands/CActorMeleeAttackCommand.h"
+#include "commands/CLoadNewLevelCommand.h"
 
 const bool kShouldAlwaysFinishTurnOnMove = true;
 
@@ -113,6 +118,15 @@ namespace Knights {
             command = std::make_shared<CTurnActorCommand>( shared_from_this(), EDirection::kWest, mMap->getAvatar() );
         }
 
+	    if ( entry == kGoToFirstLevelCommand ) {
+		    command = std::make_shared<CLoadNewLevelCommand>( shared_from_this(), 1 );
+	    }
+
+	    if ( entry == kGoToTitleLevelCommand ) {
+		    command = std::make_shared<CLoadNewLevelCommand>( shared_from_this(), 0 );
+	    }
+
+
         if (entry == kCastMagickForwardCommand) {
 //            std::shared_ptr <CActor> avatar = mMap->getAvatar();
 //
@@ -146,11 +160,11 @@ namespace Knights {
 
     }
 
-    CGame::CGame(std::string mapData, std::shared_ptr <IRenderer> aRenderer,
+    CGame::CGame(std::shared_ptr<IFileLoaderDelegate> fileLoaderDelegate, std::shared_ptr <IRenderer> aRenderer,
                  std::shared_ptr <CGameDelegate> aGameDelegate) :
-            mRenderer(aRenderer), mGameDelegate(aGameDelegate) {
-        mMap = std::make_shared<CMap>(mapData, aGameDelegate);
+            mRenderer(aRenderer), mGameDelegate(aGameDelegate), mFileLoaderDelegate(fileLoaderDelegate) {
         mIsPlaying = true;
+		playLevel( 0 );
     }
 
     bool CGame::isPlaying() {
@@ -163,5 +177,21 @@ namespace Knights {
 
 	Vec2i CGame::getCursorPosition() {
 		return mMap->getActorTargetPosition( mMap->getAvatar() );
+	}
+
+	void CGame::playLevel( int levelNumber ){
+		std::stringstream ss;
+		ss << "res/map_tiles";
+		ss << levelNumber;
+		ss << ".txt";
+
+		mLevel = levelNumber;
+		mTurn = 0;
+		auto mapData = mFileLoaderDelegate->loadFileFromPath( ss.str() );
+		mMap = std::make_shared<CMap>(mapData, mGameDelegate);
+	}
+
+	void CGame::proceedToNextLevel() {
+		playLevel( mLevel + 1);
 	}
 }

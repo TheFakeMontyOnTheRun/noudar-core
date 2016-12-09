@@ -7,18 +7,21 @@ OBJS = ncurses-version/main.o \
     noudar-core/src/CCuco.o \
     noudar-core/src/CMap.o \
     noudar-core/src/CDoorway.o \
+    noudar-core/src/IFileLoaderDelegate.o \
     noudar-core/src/IMapElement.o \
     noudar-core/src/CGame.o \
+    noudar-core/src/CPlainFileLoader.o \
     noudar-core/src/CGameDelegate.o \
     noudar-core/src/commands/CActorMeleeAttackCommand.o \
     noudar-core/src/commands/IGameCommand.o \
     noudar-core/src/commands/CMoveActorCommand.o \
+    noudar-core/src/commands/CLoadNewLevelCommand.o \
     noudar-core/src/commands/CTurnActorCommand.o \
     noudar-core/src/commands/CQuitCommand.o \
     noudar-core/src/commands/CNullCommand.o \
     noudar-core/src/commands/CEndTurnCommand.o
 LDFLAGS = -lncurses
-TARGET = knights2
+TARGET = noudar
 
 $(TARGET):	$(OBJS)
 	$(CXX) -o $(TARGET) $(OBJS) $(LDFLAGS)

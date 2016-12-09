@@ -13,6 +13,9 @@
 #include <fstream>
 #include <vector>
 
+#include "IFileLoaderDelegate.h"
+#include "CPlainFileLoader.h"
+
 #include "Vec2i.h"
 #include "IMapElement.h"
 #include "CActor.h"
@@ -25,35 +28,12 @@
 #include "commands/IGameCommand.h"
 
 
-
-std::string readMap(const char *mapName) {
-
-    std::string entry;
-    std::ifstream mapFile(mapName);
-
-    char line[ Knights::kMapSize + 1];
-
-    while (!mapFile.eof()) {
-        mapFile >> line;
-        entry += line;
-    }
-
-
-    auto position = entry.find('\n');
-
-    while (position != std::string::npos) {
-        entry.replace(position, 1, "");
-        position = entry.find('\n', position + 1);
-    }
-
-    return entry;
-}
-
 int main ( int argc, char **argv ) {
-    std::string mapData = readMap("res/map_tiles0.txt");
+
 
     auto delegate = std::make_shared<Knights::CGameDelegate>();
-    auto game = std::make_shared<Knights::CGame>( mapData, std::make_shared<Knights::CConsoleRenderer>(), delegate );
+	auto fileLoader = std::make_shared<Knights::CPlainFileLoader>();
+    auto game = std::make_shared<Knights::CGame>( fileLoader, std::make_shared<Knights::CConsoleRenderer>(), delegate );
 
     while ( game->isPlaying() ) {
         game->tick();
