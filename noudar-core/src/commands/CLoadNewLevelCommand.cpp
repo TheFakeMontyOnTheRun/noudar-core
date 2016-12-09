@@ -14,7 +14,7 @@
 #include "CActor.h"
 #include "CGameDelegate.h"
 #include "CMap.h"
-#include "IRenderer.h"
+#include "IRenderer.h
 #include "IFileLoaderDelegate.h"
 #include "CPlainFileLoader.h"
 

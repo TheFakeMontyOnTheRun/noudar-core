@@ -15,11 +15,15 @@ namespace Knights {
 
 		char buffer;
 
-		while (!fileToLoad.eof()) {
+		whi le (!fileToLoad.eof()) {
 			fileToLoad >> buffer;
 			entry += buffer;
 		}
 
 		return entry;
+	}
+
+	std::string CPlainFileLoader::getFilePathPrefix() {
+		return "res/";
 	}
 }

@@ -8,6 +8,7 @@ namespace Knights {
 	class IFileLoaderDelegate {
 	public:
 		virtual std::string loadFileFromPath( const std::string& path ) = 0;
+		virtual std::string getFilePathPrefix() = 0;
 		std::string filterLineBreaks( std::string input );
 	};
 }

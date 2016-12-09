@@ -181,7 +181,8 @@ namespace Knights {
 
 	void CGame::playLevel( int levelNumber ){
 		std::stringstream ss;
-		ss << "res/map_tiles";
+		ss << mFileLoaderDelegate->getFilePathPrefix();
+		ss << "map_tiles";
 		ss << levelNumber;
 		ss << ".txt";
 
