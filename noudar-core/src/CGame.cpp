@@ -46,88 +46,102 @@ namespace Knights {
     }
 
     void CGame::tick() {
-        std::shared_ptr<IGameCommand> command;
-        auto entry = mRenderer->getInput();
 
-        if (entry == kQuitGameCommand) {
-            mIsPlaying = false;
-        }
+	    if ( !mMap->getAvatar()->isAlive() ) {
+		    playLevel( 0 );
+	    } else {
 
-        if (entry == kEndTurnCommand) {
-            endOfTurn(mMap);
-        }
+		    std::shared_ptr <IGameCommand> command;
 
-        if (entry == kMovePlayerEastCommand) {
-            command = std::make_shared<CMoveActorCommand>( shared_from_this(), EDirection::kEast, mMap->getAvatar() );
-        }
+		    auto entry = mRenderer->getInput();
 
-        if (entry == kActorMeleeAttackCommand) {
+		    if (entry == kQuitGameCommand) {
+			    mIsPlaying = false;
+		    }
 
-            auto actor = mMap->getAvatar();
-            auto pos = mMap->getActorTargetPosition(actor);
-            auto otherActor = mMap->getActorAt( pos );
+		    if (entry == kEndTurnCommand) {
+			    endOfTurn(mMap);
+		    }
 
-            if ( otherActor != nullptr && actor->getTeam() != otherActor->getTeam()) {
-                command = std::make_shared<CActorMeleeAttackCommand>( shared_from_this(), actor, otherActor );
-            }
-        }
+		    if (entry == kMovePlayerEastCommand) {
+			    command = std::make_shared<CMoveActorCommand>(shared_from_this(), EDirection::kEast, mMap->getAvatar());
+		    }
 
+		    if (entry == kActorMeleeAttackCommand) {
 
-        if (entry == kMovePlayerNorthCommand) {
-            command = std::make_shared<CMoveActorCommand>( shared_from_this(), EDirection::kNorth, mMap->getAvatar() );
-        }
+			    auto actor = mMap->getAvatar();
+			    auto pos = mMap->getActorTargetPosition(actor);
+			    auto otherActor = mMap->getActorAt(pos);
 
-        if (entry == kMovePlayerWestCommand) {
-            command = std::make_shared<CMoveActorCommand>( shared_from_this(), EDirection::kWest, mMap->getAvatar() );
-        }
-
-        if (entry == kMovePlayerSouthCommand) {
-            command = std::make_shared<CMoveActorCommand>( shared_from_this(), EDirection::kSouth, mMap->getAvatar() );
-        }
-
-        if (entry == kTurnPlayerLeftCommand) {
-            std::shared_ptr <CActor> avatar = mMap->getAvatar();
-            command = std::make_shared<CTurnActorCommand>( shared_from_this(), wrapDirection( mMap->getAvatar()->getDirection(), -1 ), mMap->getAvatar() );
-        }
-
-        if (entry == kMovePlayerForwardCommand) {
-            std::shared_ptr <CActor> avatar = mMap->getAvatar();
-            command = std::make_shared<CMoveActorCommand>( shared_from_this(), avatar->getDirection(), avatar );
-        }
-
-        if (entry == kTurnPlayerRightCommand) {
-            std::shared_ptr <CActor> avatar = mMap->getAvatar();
-            command = std::make_shared<CTurnActorCommand>( shared_from_this(), wrapDirection( mMap->getAvatar()->getDirection(), +1 ), mMap->getAvatar() );
-        }
-
-        if (entry == kTurnPlayerNorthCommand) {
-            command = std::make_shared<CTurnActorCommand>( shared_from_this(), EDirection::kNorth, mMap->getAvatar() );
-        }
-
-        if (entry == kTurnPlayerEastCommand) {
-            command = std::make_shared<CTurnActorCommand>( shared_from_this(), EDirection::kEast, mMap->getAvatar() );
-        }
-
-        if (entry == kTurnPlayerSouthCommand) {
-            std::shared_ptr <CActor> avatar = mMap->getAvatar();
-
-            command = std::make_shared<CTurnActorCommand>( shared_from_this(), EDirection::kSouth, mMap->getAvatar() );
-        }
-
-        if (entry == kTurnPlayerWestCommand) {
-            command = std::make_shared<CTurnActorCommand>( shared_from_this(), EDirection::kWest, mMap->getAvatar() );
-        }
-
-	    if ( entry == kGoToFirstLevelCommand ) {
-		    command = std::make_shared<CLoadNewLevelCommand>( shared_from_this(), 1 );
-	    }
-
-	    if ( entry == kGoToTitleLevelCommand ) {
-		    command = std::make_shared<CLoadNewLevelCommand>( shared_from_this(), 0 );
-	    }
+			    if (otherActor != nullptr && actor->getTeam() != otherActor->getTeam()) {
+				    command = std::make_shared<CActorMeleeAttackCommand>(shared_from_this(), actor, otherActor);
+			    }
+		    }
 
 
-        if (entry == kCastMagickForwardCommand) {
+		    if (entry == kMovePlayerNorthCommand) {
+			    command = std::make_shared<CMoveActorCommand>(shared_from_this(), EDirection::kNorth,
+			                                                  mMap->getAvatar());
+		    }
+
+		    if (entry == kMovePlayerWestCommand) {
+			    command = std::make_shared<CMoveActorCommand>(shared_from_this(), EDirection::kWest, mMap->getAvatar());
+		    }
+
+		    if (entry == kMovePlayerSouthCommand) {
+			    command = std::make_shared<CMoveActorCommand>(shared_from_this(), EDirection::kSouth,
+			                                                  mMap->getAvatar());
+		    }
+
+		    if (entry == kTurnPlayerLeftCommand) {
+			    std::shared_ptr <CActor> avatar = mMap->getAvatar();
+			    command = std::make_shared<CTurnActorCommand>(shared_from_this(),
+			                                                  wrapDirection(mMap->getAvatar()->getDirection(), -1),
+			                                                  mMap->getAvatar());
+		    }
+
+		    if (entry == kMovePlayerForwardCommand) {
+			    std::shared_ptr <CActor> avatar = mMap->getAvatar();
+			    command = std::make_shared<CMoveActorCommand>(shared_from_this(), avatar->getDirection(), avatar);
+		    }
+
+		    if (entry == kTurnPlayerRightCommand) {
+			    std::shared_ptr <CActor> avatar = mMap->getAvatar();
+			    command = std::make_shared<CTurnActorCommand>(shared_from_this(),
+			                                                  wrapDirection(mMap->getAvatar()->getDirection(), +1),
+			                                                  mMap->getAvatar());
+		    }
+
+		    if (entry == kTurnPlayerNorthCommand) {
+			    command = std::make_shared<CTurnActorCommand>(shared_from_this(), EDirection::kNorth,
+			                                                  mMap->getAvatar());
+		    }
+
+		    if (entry == kTurnPlayerEastCommand) {
+			    command = std::make_shared<CTurnActorCommand>(shared_from_this(), EDirection::kEast, mMap->getAvatar());
+		    }
+
+		    if (entry == kTurnPlayerSouthCommand) {
+			    std::shared_ptr <CActor> avatar = mMap->getAvatar();
+
+			    command = std::make_shared<CTurnActorCommand>(shared_from_this(), EDirection::kSouth,
+			                                                  mMap->getAvatar());
+		    }
+
+		    if (entry == kTurnPlayerWestCommand) {
+			    command = std::make_shared<CTurnActorCommand>(shared_from_this(), EDirection::kWest, mMap->getAvatar());
+		    }
+
+		    if (entry == kGoToFirstLevelCommand) {
+			    command = std::make_shared<CLoadNewLevelCommand>(shared_from_this(), 1);
+		    }
+
+		    if (entry == kGoToTitleLevelCommand) {
+			    command = std::make_shared<CLoadNewLevelCommand>(shared_from_this(), 0);
+		    }
+
+
+		    if (entry == kCastMagickForwardCommand) {
 //            std::shared_ptr <CActor> avatar = mMap->getAvatar();
 //
 //                    int x;
@@ -142,16 +156,17 @@ namespace Knights {
 //            if (kShouldAlwaysFinishTurnOnMove) {
 //                endOfTurn(mMap);
 //            }
-        }
+		    }
 
 
-        if ( command != nullptr ) {
-            command->execute();
+		    if (command != nullptr) {
+			    command->execute();
 
-            if ( command->shouldEndTurn() ) {
-                endOfTurn(mMap);
-            }
-        }
+			    if (command->shouldEndTurn()) {
+				    endOfTurn(mMap);
+			    }
+		    }
+	    }
 
         {
             std::shared_ptr <CActor> avatar = mMap->getAvatar();
