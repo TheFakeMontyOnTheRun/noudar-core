@@ -17,7 +17,7 @@ namespace Knights {
 
 		while (!fileToLoad.eof()) {
 			fileToLoad >> buffer;
-			entry += buffer;
+			entry.push_back(buffer);
 		}
 
 		return entry;
