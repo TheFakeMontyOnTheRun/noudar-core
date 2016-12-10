@@ -15,7 +15,7 @@ namespace Knights {
 
 		char buffer;
 
-		whi le (!fileToLoad.eof()) {
+		while (!fileToLoad.eof()) {
 			fileToLoad >> buffer;
 			entry += buffer;
 		}
