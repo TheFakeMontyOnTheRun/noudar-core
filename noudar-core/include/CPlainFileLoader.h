@@ -7,7 +7,10 @@
 
 namespace Knights {
 	class CPlainFileLoader : public IFileLoaderDelegate {
+        std::string mPrefix = "res/";
 	public:
+        explicit CPlainFileLoader();
+        explicit CPlainFileLoader( std::string prefix );
 		std::string loadFileFromPath( const std::string& path ) override ;
 		std::string getFilePathPrefix() override;
 	};
