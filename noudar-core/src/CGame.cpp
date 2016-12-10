@@ -205,6 +205,7 @@ namespace Knights {
 		mTurn = 0;
 		auto mapData = mFileLoaderDelegate->loadFileFromPath( ss.str() );
 		mMap = std::make_shared<CMap>(mapData, mGameDelegate);
+		mGameDelegate->onLevelLoaded();
 	}
 
 	void CGame::proceedToNextLevel() {

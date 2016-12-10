@@ -24,6 +24,8 @@ namespace Knights {
 
 		void setMonsterDamagedCallback(std::function<void(Knights::Vec2i)> aCallback);
 
+		void setOnLevelLoadedCallback( std::function<void(void)> aCallback);
+
 		void onPlayerAttacked(Knights::Vec2i);
 
 		void onMonsterAttacked(Knights::Vec2i);
@@ -35,6 +37,8 @@ namespace Knights {
 		void onMonsterDamaged(Knights::Vec2i);
 
 		void onPlayerDamaged(Knights::Vec2i);
+
+		void onLevelLoaded();
 
 	private:
 		std::function<void(Knights::Vec2i)> mOnMonsterDead;
@@ -48,6 +52,8 @@ namespace Knights {
 		std::function<void(Knights::Vec2i)> mOnMonsterDamaged;
 
 		std::function<void(Knights::Vec2i)> mOnPlayerDamaged;
+
+		std::function<void(void)> mOnLevelLoaded;
 	};
 }
 
