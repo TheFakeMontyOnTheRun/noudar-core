@@ -9,6 +9,14 @@
 #include "CPlainFileLoader.h"
 
 namespace Knights {
+    
+    CPlainFileLoader::CPlainFileLoader() {
+    }
+    
+    CPlainFileLoader::CPlainFileLoader( std::string prefix ) : mPrefix( prefix ) {
+    }
+
+    
 	std::string CPlainFileLoader::loadFileFromPath( const std::string& path ) {
 		std::string entry;
 		std::ifstream fileToLoad(path);
@@ -24,6 +32,6 @@ namespace Knights {
 	}
 
 	std::string CPlainFileLoader::getFilePathPrefix() {
-		return "res/";
+        return mPrefix;
 	}
 }
