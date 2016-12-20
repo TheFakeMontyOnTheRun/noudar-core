@@ -12,6 +12,8 @@
 #include "CKnight.h"
 #include "CCuco.h"
 
+#include "CDoorway.h"
+
 #include <iostream>
 
 namespace Knights {
@@ -300,6 +302,13 @@ namespace Knights {
 
     void CMap::setActorAt(Vec2i position, std::shared_ptr<CActor> actor) {
         mActors[position.y][position.x] = actor;
+    }
+
+    bool CMap::isLevelFinished() {
+
+        auto position = this->getAvatar()->getPosition();
+        auto mapElement = std::dynamic_pointer_cast<CDoorway>(map[position.y][position.x]);
+        return ( mapElement != nullptr ) &&  (mapElement->getDoorFunction() == EDoorwayFunction::kExit );
     }
 
     void CMap::moveActor(Vec2i from, Vec2i to, std::shared_ptr<CActor> actor) {

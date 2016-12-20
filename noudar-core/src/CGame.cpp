@@ -38,6 +38,11 @@ namespace Knights {
             actor->update(map);
         }
 
+	    if ( map->isLevelFinished() ) {
+		    proceedToNextLevel();
+		    return;
+	    }
+
         ++mTurn;
     }
 

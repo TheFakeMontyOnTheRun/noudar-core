@@ -11,4 +11,8 @@ namespace Knights {
             mView = 'B';
         }
     }
+
+    const EDoorwayFunction CDoorway::getDoorFunction() {
+        return doorFunction;
+    }
 }

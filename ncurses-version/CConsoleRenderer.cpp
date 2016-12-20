@@ -96,7 +96,7 @@ namespace Knights {
                             attron(COLOR_PAIR(4));
                         }
 
-                        addch('.');
+                        addch(map.getElementAt( x, y));
                     }
                 }
 
