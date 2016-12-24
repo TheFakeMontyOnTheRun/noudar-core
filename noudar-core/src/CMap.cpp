@@ -307,8 +307,13 @@ namespace Knights {
     bool CMap::isLevelFinished() {
 
         auto position = this->getAvatar()->getPosition();
-        auto mapElement = std::dynamic_pointer_cast<CDoorway>(map[position.y][position.x]);
-        return ( mapElement != nullptr ) &&  (mapElement->getDoorFunction() == EDoorwayFunction::kExit );
+        auto mapElement =(map[position.y][position.x]);
+
+        if ( mapElement != nullptr && ( mapElement->getView() == 'E' || mapElement->getView() == 'B' ) ) {
+            return (static_cast<Knights::CDoorway*>(&(*mapElement))->getDoorFunction() == EDoorwayFunction::kExit );
+        }
+
+        return false;
     }
 
     void CMap::moveActor(Vec2i from, Vec2i to, std::shared_ptr<CActor> actor) {
