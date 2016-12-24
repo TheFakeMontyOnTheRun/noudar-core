@@ -16,6 +16,15 @@ namespace Knights {
     CPlainFileLoader::CPlainFileLoader( std::string prefix ) : mPrefix( prefix ) {
     }
 
+	std::vector<char> CPlainFileLoader::loadBinaryFileFromPath( const std::string& path ) {
+		std::ifstream fontFile( path, std::ios::binary );
+
+		std::vector<char> buffer((
+				                         std::istreambuf_iterator<char>(fontFile)),
+		                         (std::istreambuf_iterator<char>()));
+
+		return buffer;
+	}
     
 	std::string CPlainFileLoader::loadFileFromPath( const std::string& path ) {
 		std::string entry;
