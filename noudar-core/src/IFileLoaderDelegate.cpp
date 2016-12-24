@@ -1,6 +1,7 @@
 //
 // Created by monty on 09/12/16.
 //
+#include <vector>
 #include <string>
 #include "IFileLoaderDelegate.h"
 

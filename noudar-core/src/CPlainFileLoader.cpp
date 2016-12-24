@@ -4,6 +4,7 @@
 #include <string>
 #include <iostream>
 #include <fstream>
+#include <vector>
 
 #include "IFileLoaderDelegate.h"
 #include "CPlainFileLoader.h"
