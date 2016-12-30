@@ -22,7 +22,7 @@
 
 namespace Knights {
 
-    CNullCommand::CNullCommand( std::shared_ptr<CGame> aGame ) : IGameCommand( aGame ) {
+    CNullCommand::CNullCommand(std::shared_ptr<CGame> aGame) : IGameCommand(aGame) {
     }
 
     std::string CNullCommand::to_string() const {

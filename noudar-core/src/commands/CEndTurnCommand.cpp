@@ -22,7 +22,7 @@
 
 namespace Knights {
 
-    CEndTurnCommand::CEndTurnCommand( std::shared_ptr<CGame> aGame ) : IGameCommand( aGame ) {
+    CEndTurnCommand::CEndTurnCommand(std::shared_ptr<CGame> aGame) : IGameCommand(aGame) {
     }
 
     std::string CEndTurnCommand::to_string() const {

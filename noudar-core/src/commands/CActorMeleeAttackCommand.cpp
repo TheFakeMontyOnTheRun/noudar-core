@@ -22,9 +22,11 @@
 
 namespace Knights {
 
-    CActorMeleeAttackCommand::CActorMeleeAttackCommand( std::shared_ptr<CGame> aGame, std::shared_ptr<CActor> aAttacker, std::shared_ptr<CActor> aTarget  ) : 
-      IGameCommand( aGame ),
-      mAttacker( aAttacker), mTarget( aTarget ) {
+    CActorMeleeAttackCommand::CActorMeleeAttackCommand(std::shared_ptr<CGame> aGame,
+                                                       std::shared_ptr<CActor> aAttacker,
+                                                       std::shared_ptr<CActor> aTarget) :
+            IGameCommand(aGame),
+            mAttacker(aAttacker), mTarget(aTarget) {
     }
 
     std::string CActorMeleeAttackCommand::to_string() const {

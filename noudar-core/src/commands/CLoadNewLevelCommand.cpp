@@ -25,18 +25,19 @@
 
 namespace Knights {
 
-	CLoadNewLevelCommand::CLoadNewLevelCommand( std::shared_ptr<CGame> aGame, int mapSlot ) : IGameCommand( aGame ), mMapSlot( mapSlot ) {
-	}
+    CLoadNewLevelCommand::CLoadNewLevelCommand(std::shared_ptr<CGame> aGame, int mapSlot)
+            : IGameCommand(aGame), mMapSlot(mapSlot) {
+    }
 
-	std::string CLoadNewLevelCommand::to_string() const {
-		return "Load new map";
-	}
+    std::string CLoadNewLevelCommand::to_string() const {
+        return "Load new map";
+    }
 
-	bool CLoadNewLevelCommand::shouldEndTurn() {
-		return true;
-	}
+    bool CLoadNewLevelCommand::shouldEndTurn() {
+        return true;
+    }
 
-	void CLoadNewLevelCommand::execute() {
-		getGame()->playLevel( mMapSlot );
-	}
+    void CLoadNewLevelCommand::execute() {
+        getGame()->playLevel(mMapSlot);
+    }
 }

@@ -21,12 +21,12 @@
 
 namespace Knights {
 
-    IGameCommand::IGameCommand( std::shared_ptr<CGame> aGame ) : mGame( aGame ) {
+    IGameCommand::IGameCommand(std::shared_ptr<CGame> aGame) : mGame(aGame) {
     }
 
-    std::ostream& operator<<(std::ostream& os, const IGameCommand& action) {
+    std::ostream &operator<<(std::ostream &os, const IGameCommand &action) {
 
-        os << to_string( action );
+        os << to_string(action);
         return os;
     }
 
@@ -34,7 +34,7 @@ namespace Knights {
         return mGame;
     }
 
-    std::string to_string( const IGameCommand& action ) {
+    std::string to_string(const IGameCommand &action) {
         return action.to_string();
     }
 }

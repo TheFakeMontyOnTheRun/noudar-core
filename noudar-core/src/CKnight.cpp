@@ -23,7 +23,7 @@ namespace Knights {
         mName = "Hero";
     }
 
-    void CKnight::update(std::shared_ptr <CMap> map) {
+    void CKnight::update(std::shared_ptr<CMap> map) {
 
     }
 }

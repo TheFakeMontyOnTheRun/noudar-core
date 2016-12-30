@@ -22,7 +22,7 @@
 
 namespace Knights {
 
-    CQuitCommand::CQuitCommand( std::shared_ptr<CGame> aGame ) : IGameCommand( aGame ) {
+    CQuitCommand::CQuitCommand(std::shared_ptr<CGame> aGame) : IGameCommand(aGame) {
     }
 
     std::string CQuitCommand::to_string() const {
