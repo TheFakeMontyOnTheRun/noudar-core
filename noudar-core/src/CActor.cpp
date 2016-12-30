@@ -8,14 +8,14 @@
 
 namespace Knights {
     CActor::CActor(int aId, int defaultAP) :
+            mStance(EStance::kStanding),
+            mDirection(EDirection::kNorth),
             mId( aId ),
             mDefaultAP(defaultAP),
             mRemainingAP(defaultAP),
-            mStance(EStance::kStanding),
             mAttack(0),
             mDefence(0),
-            mHP(0),
-            mDirection(EDirection::kNorth) {
+            mHP(0) {
     }
 
     bool CActor::canMove() {

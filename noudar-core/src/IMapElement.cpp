@@ -2,8 +2,10 @@
 #include "IMapElement.h"
 
 namespace Knights {
-    IMapElement::IMapElement() : mPosition(0,0), 
-    mView( kEmptySpace ), mIsBlocker( false ) {
+    IMapElement::IMapElement() : 
+      mIsBlocker( false ),
+      mView( kEmptySpace ), 
+      mPosition(0,0) {
     }
 
     Vec2i IMapElement::getPosition() {

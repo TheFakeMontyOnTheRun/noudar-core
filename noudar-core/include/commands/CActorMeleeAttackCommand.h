@@ -7,8 +7,8 @@
 
 namespace Knights {
     class CActorMeleeAttackCommand : public IGameCommand {
-        std::shared_ptr<CActor> mTarget;
         std::shared_ptr<CActor> mAttacker;
+        std::shared_ptr<CActor> mTarget;
     public:
         CActorMeleeAttackCommand( std::shared_ptr<CGame> aGame, std::shared_ptr<CActor> aAttacker, std::shared_ptr<CActor> aTarget );
         virtual std::string to_string() const override;

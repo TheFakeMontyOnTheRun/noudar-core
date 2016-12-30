@@ -21,7 +21,10 @@
 
 namespace Knights {
 
-    CTurnActorCommand::CTurnActorCommand( std::shared_ptr<CGame> aGame , EDirection aDirection, std::shared_ptr<CActor> aActor ) : mDirection( aDirection ), IGameCommand( aGame ), mActor(aActor) {
+    CTurnActorCommand::CTurnActorCommand( std::shared_ptr<CGame> aGame , EDirection aDirection, std::shared_ptr<CActor> aActor ) : 
+      IGameCommand( aGame ),     
+      mDirection( aDirection ), 
+      mActor(aActor) {
     }
 
     std::string CTurnActorCommand::to_string() const {

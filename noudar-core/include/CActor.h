@@ -40,16 +40,16 @@ namespace Knights {
     protected:
         EStance mStance;
         EDirection mDirection;
-        ETeam mTeam;
-        int mHP;
-        int mDefence;
-        int mAttack;
-        int mRemainingAP;
-        int mDefaultAP;
         int mId;
-        char mView;
-        std::string mName;
+        int mDefaultAP;
+        int mRemainingAP;
+        int mAttack;
+        int mDefence;
+        int mHP;
         Vec2i mPosition;
+	char mView;        
+	std::string mName;
+	ETeam mTeam;
     public:
         void performAttack( std::shared_ptr<CActor> other);
         CActor( int aId, int defaultAP );

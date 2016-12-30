@@ -26,8 +26,6 @@
 #include "commands/CActorMeleeAttackCommand.h"
 #include "commands/CLoadNewLevelCommand.h"
 
-const bool kShouldAlwaysFinishTurnOnMove = true;
-
 namespace Knights {
 
     void CGame::endOfTurn(std::shared_ptr <CMap> map) {
