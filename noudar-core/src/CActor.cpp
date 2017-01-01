@@ -150,7 +150,11 @@ namespace Knights {
         return static_cast<EDirection>( index );
     }
 
-    std::ostream &operator<<(std::ostream &os, const EStance &aStance) {
+    char CActor::getView() {
+        return mView;
+    }
+
+    std::ostream& operator<<(std::ostream& os, const EStance& aStance ) {
         os << to_string(aStance);
 
         return os;
