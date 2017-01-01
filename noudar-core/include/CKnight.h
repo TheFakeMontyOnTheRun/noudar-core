@@ -5,6 +5,7 @@ namespace Knights {
     public:
         CKnight(int aId);
         void update(std::shared_ptr <CMap> map) override;
+	    void performAttack( std::shared_ptr<CActor> other) override;
     };
 }
 #endif

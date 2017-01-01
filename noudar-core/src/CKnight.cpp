@@ -8,6 +8,7 @@
 #include "CKnight.h"
 #include "CActor.h"
 #include "CGameDelegate.h"
+#include "CElixirFountain.h"
 #include "CMap.h"
 
 const int DEFAULT_AP = 5;
@@ -26,4 +27,12 @@ namespace Knights {
     void CKnight::update(std::shared_ptr<CMap> map) {
 
     }
+
+	void CKnight::performAttack( std::shared_ptr<CActor> other) {
+		if ( other != nullptr && other->getView() == 'J' ) {
+			mHP += 10;
+		}
+
+		CActor::performAttack( other );
+	}
 }

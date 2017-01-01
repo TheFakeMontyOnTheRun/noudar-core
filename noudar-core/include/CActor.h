@@ -47,11 +47,11 @@ namespace Knights {
         int mDefence;
         int mHP;
         Vec2i mPosition;
-	char mView;        
-	std::string mName;
-	ETeam mTeam;
+		char mView;
+		std::string mName;
+		ETeam mTeam;
     public:
-        void performAttack( std::shared_ptr<CActor> other);
+        virtual void performAttack( std::shared_ptr<CActor> other);
         CActor( int aId, int defaultAP );
         Vec2i getPosition();
         void setPosition( Vec2i position );
@@ -63,7 +63,7 @@ namespace Knights {
         bool isAlive();
         void turnLeft();
         void turnRight();
-
+		char getView();
         int getId();
         int getHP();
         int getAP();

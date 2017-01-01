@@ -106,20 +106,20 @@ namespace Knights {
         attron(COLOR_PAIR(4));
         mvprintw( 22, 0, "-=-=-=-=-=-=-" );
 
-        char buffer[ 7 ];
+        char buffer[ 10 ];
 
         if (current != nullptr) {
 
-            snprintf( buffer, 6, "HP: %d", current->getHP() );
+            snprintf( buffer, 9, "HP: %d", current->getHP() );
             mvprintw( 23,0, buffer );
 
-            snprintf( buffer, 6, "AT: %d", current->getAttack() );
+            snprintf( buffer, 9, "AT: %d", current->getAttack() );
             mvprintw( 24,0, buffer );
 
-            snprintf( buffer, 6, "DF: %d", current->getDefense() );
+            snprintf( buffer, 9, "DF: %d", current->getDefense() );
             mvprintw( 25,0, buffer );
 
-            snprintf( buffer, 6, "AP: %d", current->getAP() );
+            snprintf( buffer, 9, "AP: %d", current->getAP() );
             mvprintw( 26,0, buffer );
         }
         mvprintw( 27,0, "-//-" );

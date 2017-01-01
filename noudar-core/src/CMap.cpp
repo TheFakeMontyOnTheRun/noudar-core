@@ -11,7 +11,7 @@
 #include "CMap.h"
 #include "CKnight.h"
 #include "CCuco.h"
-
+#include "CElixirFountain.h"
 #include "CDoorway.h"
 
 #include <iostream>
@@ -77,7 +77,10 @@ namespace Knights {
                     case '~':
                         block[y][x] = false;
                         break;
-
+	                case 'J':
+		                actor = std::make_shared<CElixirFountain>(id++);
+		                mElement[ y ][ x ] = '.';
+		                break;
                     case '4':
                         actor = mAvatar = std::make_shared<CKnight>(id++);
                         mElement[y][x] = '.';
