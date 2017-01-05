@@ -4,9 +4,9 @@ namespace Knights {
 
     class CMap;
 
-    class CCuco : public CActor, public std::enable_shared_from_this<CCuco>  {
+    class CMonster : public CCharacter, public std::enable_shared_from_this<CMonster>  {
     public:
-        CCuco(int aId);
+        CMonster( std::shared_ptr<CCharacterArchetype> aArchetype, std::shared_ptr<CTeam> aTeam, int aId);
 
         void endOfTurn() override;
 

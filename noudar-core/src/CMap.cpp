@@ -6,11 +6,15 @@
 #include "Vec2i.h"
 #include "IMapElement.h"
 #include "CDoorway.h"
+#include "CTeam.h"
 #include "CActor.h"
 #include "CGameDelegate.h"
 #include "CMap.h"
 #include "CKnight.h"
-#include "CCuco.h"
+#include "CCharacterArchetype.h"
+#include "CCharacter.h"
+
+#include "CMonster.h"
 #include "CElixirFountain.h"
 #include "CDoorway.h"
 
@@ -37,6 +41,10 @@ namespace Knights {
         char element;
         std::shared_ptr<CActor> actor = nullptr;
 
+	    auto heroArchetype = std::make_shared<CCharacterArchetype>( 5, 2, 20, 7, '^', "Hero");
+	    auto monsterArchetype = std::make_shared<CCharacterArchetype>( 4, 1, 5, 3, '@', "Monster");
+	    auto friends = std::make_shared<CTeam>("Heroes");
+	    auto foes = std::make_shared<CTeam>("Enemies");
         int id = 1;
         for (int y = 0; y < kMapSize; ++y) {
             for (int x = 0; x < kMapSize; ++x) {
@@ -81,7 +89,7 @@ namespace Knights {
 		                mElement[ y ][ x ] = '.';
 		                break;
                     case '4':
-                        actor = mAvatar = std::make_shared<CKnight>(id++);
+                        actor = mAvatar = std::make_shared<CCharacter>( heroArchetype, friends, id++);
                         mElement[ y ][ x ] = '.';
                         break;
                     case '9':
@@ -90,7 +98,7 @@ namespace Knights {
                         break;
                     case '6':
                     case '5':
-                        actor = std::make_shared<CCuco>(id++);
+                        actor = std::make_shared<CMonster>( monsterArchetype, foes, id++);
                         mElement[ y ][ x ] = '.';
                         break;
                 }

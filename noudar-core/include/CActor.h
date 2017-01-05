@@ -15,14 +15,6 @@ namespace Knights {
     std::ostream& operator<<(std::ostream& os, const EStance & aDirection );
     std::string to_string( const EStance & aDirection );
 
-    enum class ETeam {
-        kHeroes,
-        kVillains
-    };
-
-    std::ostream& operator<<(std::ostream& os, const ETeam & aDirection );
-    std::string to_string( const ETeam & aDirection );
-
     enum class EDirection {
         kNorth,
         kEast,
@@ -49,7 +41,7 @@ namespace Knights {
         Vec2i mPosition;
 		char mView;
 		std::string mName;
-		ETeam mTeam;
+		std::shared_ptr<CTeam> mTeam;
     public:
         virtual void performAttack( std::shared_ptr<CActor> other);
         CActor( int aId, int defaultAP );
@@ -70,7 +62,7 @@ namespace Knights {
         int getDefense();
         int getAttack();
 
-        ETeam getTeam();
+        std::shared_ptr<CTeam> getTeam();
         EDirection getDirection();
         void setDirection( EDirection d );
         virtual void update( std::shared_ptr<CMap> map ) {}

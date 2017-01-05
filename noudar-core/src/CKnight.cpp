@@ -4,6 +4,7 @@
 #include <functional>
 #include "Vec2i.h"
 #include "IMapElement.h"
+#include "CTeam.h"
 #include "CActor.h"
 #include "CKnight.h"
 #include "CActor.h"
@@ -17,8 +18,8 @@ namespace Knights {
 
     CKnight::CKnight(int aId) : CActor(aId, DEFAULT_AP) {
         mView = '%';
-        mTeam = ETeam::kHeroes;
         mHP = 20;
+        mTeam = std::make_shared<CTeam>("Heroes");
         mAttack = 5;
         mDefence = 2;
         mName = "Hero";

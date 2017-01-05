@@ -7,6 +7,7 @@
 #include <vector>
 #include <functional>
 #include "Vec2i.h"
+#include "CTeam.h"
 #include "CActor.h"
 #include "IRenderer.h"
 #include "CGameDelegate.h"

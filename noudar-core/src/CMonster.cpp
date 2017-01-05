@@ -6,28 +6,24 @@
 #include <functional>
 #include "Vec2i.h"
 #include "IMapElement.h"
+#include "CTeam.h"
 #include "CActor.h"
-#include "CCuco.h"
+#include "CCharacterArchetype.h"
+#include "CCharacter.h"
+#include "CMonster.h"
 #include "CGameDelegate.h"
 #include "CMap.h"
 
-const int DEFAULT_AP = 7;
 namespace Knights {
 
-    CCuco::CCuco(int aId) : CActor(aId, DEFAULT_AP) {
-        mView = '@';
-        mTeam = ETeam::kVillains;
-        mHP = 5;
-        mAttack = 4;
-        mDefence = 1;
-        mName = "Foul Beast";
+    CMonster::CMonster(std::shared_ptr<CCharacterArchetype> aArchetype, std::shared_ptr<CTeam> aTeam, int aId) : CCharacter( aArchetype, aTeam, aId ) {
     }
 
-    bool CCuco::dealWith( std::shared_ptr<CMap> map, int x, int y ) {
+    bool CMonster::dealWith( std::shared_ptr<CMap> map, int x, int y ) {
             int dx = x - mPosition.x;
             int dy = y - mPosition.y;
 
-            std::shared_ptr<CCuco> sharedThis = shared_from_this();
+            std::shared_ptr<CMonster> sharedThis = shared_from_this();
 
             if ( std::abs( (float)dx ) > std::abs( (float)dy ) ) {
 
@@ -52,7 +48,7 @@ namespace Knights {
             return false;
     }
 
-    bool CCuco::actOn( int newX, int newY,  std::shared_ptr<CMap> map ) {
+    bool CMonster::actOn( int newX, int newY,  std::shared_ptr<CMap> map ) {
 
             if (map->isValid( newX, newY ) ) {
 
@@ -74,7 +70,7 @@ namespace Knights {
             return false;
     }
 
-    void CCuco::update( std::shared_ptr<CMap> map ) {
+    void CMonster::update( std::shared_ptr<CMap> map ) {
 
             int newX;
             int newY;
@@ -97,7 +93,7 @@ namespace Knights {
             }
     }
 
-    void CCuco::endOfTurn() {
+    void CMonster::endOfTurn() {
 
     }
 }

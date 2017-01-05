@@ -7,6 +7,7 @@
 #include <functional>
 #include "Vec2i.h"
 #include "IMapElement.h"
+#include "CTeam.h"
 #include "CActor.h"
 #include "CElixirFountain.h"
 #include "CGameDelegate.h"
@@ -16,7 +17,7 @@
 namespace Knights {
 	CElixirFountain::CElixirFountain(int aId) : CActor(aId, 1) {
 		mView = 'J';
-		mTeam = ETeam::kVillains;
+		mTeam = std::make_shared<CTeam>( "Objects" );
 		mHP = 1;
 		mAttack = 0;
 		mDefence = 0;

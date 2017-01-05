@@ -4,6 +4,7 @@
 #include <iostream>
 
 #include "Vec2i.h"
+#include "CTeam.h"
 #include "CActor.h"
 
 namespace Knights {
@@ -77,7 +78,7 @@ namespace Knights {
         mPosition = position;
     }
 
-    ETeam CActor::getTeam() {
+    std::shared_ptr<CTeam> CActor::getTeam() {
         return mTeam;
     }
 
@@ -170,21 +171,4 @@ namespace Knights {
                 return "Dead";
         }
     }
-
-
-    std::ostream& operator<<(std::ostream& os, const ETeam& aTeam) {
-        os << to_string(aTeam);
-
-        return os;
-    }
-
-    std::string to_string( const ETeam& aTeam ) {
-        switch (aTeam) {
-            case ETeam::kHeroes:
-                return "Heroes";
-            case ETeam::kVillains:
-                return "Villains";
-        }
-    }
-
 }
