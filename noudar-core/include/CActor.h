@@ -61,7 +61,7 @@ namespace Knights {
         int getAP();
         int getDefense();
         int getAttack();
-
+		void addHP( int aHP );
         std::shared_ptr<CTeam> getTeam();
         EDirection getDirection();
         void setDirection( EDirection d );

@@ -155,7 +155,11 @@ namespace Knights {
         return mView;
     }
 
-    std::ostream& operator<<(std::ostream& os, const EStance& aStance ) {
+	void CActor::addHP(int aHP ) {
+		mHP += aHP;
+	}
+
+	std::ostream& operator<<(std::ostream& os, const EStance& aStance ) {
         os << to_string(aStance);
 
         return os;

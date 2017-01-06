@@ -23,4 +23,9 @@ namespace Knights {
 		mDefence = 0;
 		mName = "Elixir fountain";
 	}
+
+	void CElixirFountain::performAttack( std::shared_ptr<CActor> other) {
+		other->addHP( 20 );
+		mHP = -1;
+	}
 }
