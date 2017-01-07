@@ -1,8 +1,8 @@
 // CActor - a generic abstract Actor
 // 2016 - Daniel Monteiro
 //
-#ifndef knights2_CActor_H
-#define knights2_CActor_H
+#ifndef NOUDAR_CORE_CACTOR_H
+#define NOUDAR_CORE_CACTOR_H
 
 namespace Knights {
 
@@ -14,14 +14,6 @@ namespace Knights {
 
     std::ostream& operator<<(std::ostream& os, const EStance & aDirection );
     std::string to_string( const EStance & aDirection );
-
-    enum class ETeam {
-        kHeroes,
-        kVillains
-    };
-
-    std::ostream& operator<<(std::ostream& os, const ETeam & aDirection );
-    std::string to_string( const ETeam & aDirection );
 
     enum class EDirection {
         kNorth,
@@ -49,7 +41,7 @@ namespace Knights {
         Vec2i mPosition;
 		char mView;
 		std::string mName;
-		ETeam mTeam;
+		std::shared_ptr<CTeam> mTeam;
     public:
         virtual void performAttack( std::shared_ptr<CActor> other);
         CActor( int aId, int defaultAP );
@@ -69,8 +61,8 @@ namespace Knights {
         int getAP();
         int getDefense();
         int getAttack();
-
-        ETeam getTeam();
+		void addHP( int aHP );
+        std::shared_ptr<CTeam> getTeam();
         EDirection getDirection();
         void setDirection( EDirection d );
         virtual void update( std::shared_ptr<CMap> map ) {}

@@ -9,6 +9,7 @@ namespace Knights {
 	class CElixirFountain: public CActor {
 	public:
 		explicit CElixirFountain(int aId);
+		void performAttack( std::shared_ptr<CActor> other) override;
 	};
 }
 

@@ -1,12 +1,12 @@
-#ifndef knights2_CCuco_H
-#define knights2_CCuco_H
+#ifndef NOUDAR_CORE_CMONSTER_H
+#define NOUDAR_CORE_CMONSTER_H
 namespace Knights {
 
     class CMap;
 
-    class CCuco : public CActor, public std::enable_shared_from_this<CCuco>  {
+    class CMonster : public CCharacter, public std::enable_shared_from_this<CMonster>  {
     public:
-        CCuco(int aId);
+        CMonster( std::shared_ptr<CCharacterArchetype> aArchetype, std::shared_ptr<CTeam> aTeam, int aId);
 
         void endOfTurn() override;
 

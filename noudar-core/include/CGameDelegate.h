@@ -2,8 +2,8 @@
 // Created by monty on 22/10/16.
 //
 
-#ifndef DUNGEONSOFNOUDAR_NDK_CGAMEDELEGATE_H
-#define DUNGEONSOFNOUDAR_NDK_CGAMEDELEGATE_H
+#ifndef NOUDAR_CORE_CGAMEDELEGATE_H
+#define NOUDAR_CORE_CGAMEDELEGATE_H
 
 namespace Knights {
 	class CGameDelegate {

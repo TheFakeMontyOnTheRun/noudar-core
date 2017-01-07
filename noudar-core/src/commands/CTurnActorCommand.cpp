@@ -9,6 +9,7 @@
 #include "Vec2i.h"
 #include "IMapElement.h"
 #include "CGameDelegate.h"
+#include "CTeam.h"
 #include "CActor.h"
 #include "CMap.h"
 #include "IRenderer.h"

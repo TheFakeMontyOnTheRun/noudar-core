@@ -1,5 +1,5 @@
-#ifndef knights2_CMap_H
-#define knights2_CMap_H
+#ifndef NOUDAR_CORE_CMAP_H
+#define NOUDAR_CORE_CMAP_H
 
 namespace Knights {
 

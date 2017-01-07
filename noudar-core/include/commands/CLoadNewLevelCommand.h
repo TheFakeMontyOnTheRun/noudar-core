@@ -2,8 +2,8 @@
 // Created by monty on 08/12/16.
 //
 
-#ifndef NOUDAR_CORE_CLOADNEWLEVELCOMMAND_H
-#define NOUDAR_CORE_CLOADNEWLEVELCOMMAND_H
+#ifndef NOUDAR_CORE_COMMANDS_CLOADNEWLEVELCOMMAND_H
+#define NOUDAR_CORE_COMMANDS_CLOADNEWLEVELCOMMAND_H
 
 namespace Knights {
 	class CLoadNewLevelCommand : public IGameCommand {

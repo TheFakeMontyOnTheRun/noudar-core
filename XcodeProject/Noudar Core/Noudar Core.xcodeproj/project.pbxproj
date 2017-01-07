@@ -10,7 +10,7 @@
 		F1232FE11DDD08C200C81076 /* CConsoleRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F1232FDC1DDD08C200C81076 /* CConsoleRenderer.cpp */; };
 		F1232FE31DDD08C200C81076 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F1232FDF1DDD08C200C81076 /* main.cpp */; };
 		F123301A1DDD08D000C81076 /* CActor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F1232FFB1DDD08CF00C81076 /* CActor.cpp */; };
-		F123301C1DDD08D000C81076 /* CCuco.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F1232FFD1DDD08CF00C81076 /* CCuco.cpp */; };
+		F123301C1DDD08D000C81076 /* CMonster.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F1232FFD1DDD08CF00C81076 /* CMonster.cpp */; };
 		F123301E1DDD08D000C81076 /* CDoorway.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F1232FFF1DDD08CF00C81076 /* CDoorway.cpp */; };
 		F12330201DDD08D000C81076 /* CGame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F12330011DDD08CF00C81076 /* CGame.cpp */; };
 		F12330221DDD08D000C81076 /* CGameDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F12330031DDD08CF00C81076 /* CGameDelegate.cpp */; };
@@ -47,7 +47,7 @@
 		F1232FDD1DDD08C200C81076 /* CConsoleRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CConsoleRenderer.h; sourceTree = "<group>"; };
 		F1232FDF1DDD08C200C81076 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		F1232FE71DDD08CF00C81076 /* CActor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CActor.h; sourceTree = "<group>"; };
-		F1232FE81DDD08CF00C81076 /* CCuco.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCuco.h; sourceTree = "<group>"; };
+		F1232FE81DDD08CF00C81076 /* CMonster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMonster.h; sourceTree = "<group>"; };
 		F1232FE91DDD08CF00C81076 /* CDoorway.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDoorway.h; sourceTree = "<group>"; };
 		F1232FEA1DDD08CF00C81076 /* CGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGame.h; sourceTree = "<group>"; };
 		F1232FEB1DDD08CF00C81076 /* CGameDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGameDelegate.h; sourceTree = "<group>"; };
@@ -65,7 +65,7 @@
 		F1232FF81DDD08CF00C81076 /* IRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRenderer.h; sourceTree = "<group>"; };
 		F1232FF91DDD08CF00C81076 /* Vec2i.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vec2i.h; sourceTree = "<group>"; };
 		F1232FFB1DDD08CF00C81076 /* CActor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CActor.cpp; sourceTree = "<group>"; };
-		F1232FFD1DDD08CF00C81076 /* CCuco.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCuco.cpp; sourceTree = "<group>"; };
+		F1232FFD1DDD08CF00C81076 /* CMonster.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CMonster.cpp; sourceTree = "<group>"; };
 		F1232FFF1DDD08CF00C81076 /* CDoorway.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CDoorway.cpp; sourceTree = "<group>"; };
 		F12330011DDD08CF00C81076 /* CGame.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CGame.cpp; sourceTree = "<group>"; };
 		F12330031DDD08CF00C81076 /* CGameDelegate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CGameDelegate.cpp; sourceTree = "<group>"; };
@@ -149,7 +149,7 @@
 			isa = PBXGroup;
 			children = (
 				F1232FE71DDD08CF00C81076 /* CActor.h */,
-				F1232FE81DDD08CF00C81076 /* CCuco.h */,
+				F1232FE81DDD08CF00C81076 /* CMonster.h */,
 				F1232FE91DDD08CF00C81076 /* CDoorway.h */,
 				F1232FEA1DDD08CF00C81076 /* CGame.h */,
 				F1232FEB1DDD08CF00C81076 /* CGameDelegate.h */,
@@ -182,7 +182,7 @@
 			isa = PBXGroup;
 			children = (
 				F1232FFB1DDD08CF00C81076 /* CActor.cpp */,
-				F1232FFD1DDD08CF00C81076 /* CCuco.cpp */,
+				F1232FFD1DDD08CF00C81076 /* CMonster.cpp */,
 				F1232FFF1DDD08CF00C81076 /* CDoorway.cpp */,
 				F12330011DDD08CF00C81076 /* CGame.cpp */,
 				F12330031DDD08CF00C81076 /* CGameDelegate.cpp */,
@@ -277,7 +277,7 @@
 			files = (
 				F12330281DDD08D000C81076 /* CActorMeleeAttackCommand.cpp in Sources */,
 				F12330341DDD08D000C81076 /* IGameCommand.cpp in Sources */,
-				F123301C1DDD08D000C81076 /* CCuco.cpp in Sources */,
+				F123301C1DDD08D000C81076 /* CMonster.cpp in Sources */,
 				F123302A1DDD08D000C81076 /* CEndTurnCommand.cpp in Sources */,
 				F123301E1DDD08D000C81076 /* CDoorway.cpp in Sources */,
 				F123302C1DDD08D000C81076 /* CMoveActorCommand.cpp in Sources */,

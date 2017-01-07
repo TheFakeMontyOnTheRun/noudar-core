@@ -7,12 +7,16 @@
 
 #include "Vec2i.h"
 #include "IMapElement.h"
+#include "CTeam.h"
 #include "CActor.h"
 #include "CGameDelegate.h"
 #include "CMap.h"
 #include "CDoorway.h"
-#include "CKnight.h"
-#include "CCuco.h"
+
+#include "CCharacterArchetype.h"
+#include "CCharacter.h"
+
+#include "CMonster.h"
 #include "IRenderer.h"
 
 #include "IFileLoaderDelegate.h"

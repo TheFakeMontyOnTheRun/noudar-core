@@ -1,5 +1,5 @@
-#ifndef IRENDERER_H
-#define IRENDERER_H
+#ifndef NOUDAR_CORE_IRENDERER_H
+#define NOUDAR_CORE_IRENDERER_H
 namespace Knights {
   class IRenderer {
   public:
