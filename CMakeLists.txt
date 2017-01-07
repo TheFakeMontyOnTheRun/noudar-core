@@ -20,7 +20,6 @@ set(SOURCE_FILES
         noudar-core/include/CActor.h
         noudar-core/include/CElixirFountain.h
         noudar-core/include/CMonsterGenerator.h
-        noudar-core/include/CKnight.h
         ncurses-version/CConsoleRenderer.h
         noudar-core/include/CMonster.h
         noudar-core/include/CDoorway.h
@@ -47,9 +46,9 @@ set(SOURCE_FILES
         noudar-core/src/CHuntApproach.cpp
         noudar-core/src/CElixirFountain.cpp
         noudar-core/src/CGameDelegate.cpp
-        noudar-core/src/CKnight.cpp
         ncurses-version/CConsoleRenderer.cpp
         noudar-core/src/CMonster.cpp
+        noudar-core/src/IFileLoaderDelegate.cpp
         noudar-core/src/CTeam.cpp
         noudar-core/src/CDoorway.cpp
         noudar-core/src/CGame.cpp
