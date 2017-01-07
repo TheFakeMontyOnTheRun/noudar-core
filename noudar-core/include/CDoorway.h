@@ -1,5 +1,5 @@
-#ifndef knights2_CDoorway_H
-#define knights2_CDoorway_H
+#ifndef NOUDAR_CORE_CDOORWAY_H
+#define NOUDAR_CORE_CDOORWAY_H
 namespace Knights {
     enum EDoorwayFunction {
         kEntry,

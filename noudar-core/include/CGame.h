@@ -1,5 +1,5 @@
-#ifndef CGAME_H
-#define CGAME_H
+#ifndef NOUDAR_CORE_CGAME_H
+#define NOUDAR_CORE_CGAME_H
 
 namespace Knights {
 

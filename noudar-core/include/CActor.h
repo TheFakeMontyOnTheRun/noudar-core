@@ -1,8 +1,8 @@
 // CActor - a generic abstract Actor
 // 2016 - Daniel Monteiro
 //
-#ifndef knights2_CActor_H
-#define knights2_CActor_H
+#ifndef NOUDAR_CORE_CACTOR_H
+#define NOUDAR_CORE_CACTOR_H
 
 namespace Knights {
 

@@ -1,5 +1,5 @@
-#ifndef knights2_CCuco_H
-#define knights2_CCuco_H
+#ifndef NOUDAR_CORE_CMONSTER_H
+#define NOUDAR_CORE_CMONSTER_H
 namespace Knights {
 
     class CMap;

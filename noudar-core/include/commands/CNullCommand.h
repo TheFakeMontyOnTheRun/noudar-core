@@ -2,8 +2,8 @@
 // Created by monty on 29/10/16.
 //
 
-#ifndef NOUDAR_CORE_CNULLCOMMAND_H
-#define NOUDAR_CORE_CNULLCOMMAND_H
+#ifndef NOUDAR_CORE_COMMANDS_CNULLCOMMAND_H
+#define NOUDAR_CORE_COMMANDS_CNULLCOMMAND_H
 
 namespace Knights {
     class CNullCommand : public IGameCommand {

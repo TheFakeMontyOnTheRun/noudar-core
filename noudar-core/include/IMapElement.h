@@ -1,5 +1,5 @@
-#ifndef knights2_IMapElement_H
-#define knights2_IMapElement_H
+#ifndef NOUDAR_CORE_IMAPELEMENT_H
+#define NOUDAR_CORE_IMAPELEMENT_H
 namespace Knights {
     const char kEmptySpace = '.';
     class IMapElement {

@@ -2,8 +2,8 @@
 // Created by monty on 05/10/16.
 //
 
-#ifndef KNIGHTS_IN_PORTO_VEC2I_H
-#define KNIGHTS_IN_PORTO_VEC2I_H
+#ifndef NOUDAR_CORE_VEC2I_H
+#define NOUDAR_CORE_VEC2I_H
 namespace Knights {
     class Vec2i {
     public:
