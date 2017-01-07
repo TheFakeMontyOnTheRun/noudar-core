@@ -24,7 +24,6 @@
 #include "CMap.h"
 #include "IRenderer.h"
 #include "CConsoleRenderer.h"
-#include "CKnight.h"
 #include "CGame.h"
 #include "commands/IGameCommand.h"
 

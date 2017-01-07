@@ -10,7 +10,6 @@
 #include "CActor.h"
 #include "CGameDelegate.h"
 #include "CMap.h"
-#include "CKnight.h"
 #include "CCharacterArchetype.h"
 #include "CCharacter.h"
 

@@ -4,7 +4,6 @@ CXX = clang++
 OBJS = ncurses-version/main.o \
     ncurses-version/CConsoleRenderer.o \
     noudar-core/src/CActor.o \
-    noudar-core/src/CKnight.o \
     noudar-core/src/CMonster.o \
     noudar-core/src/CTeam.o \
     noudar-core/src/CMap.o \

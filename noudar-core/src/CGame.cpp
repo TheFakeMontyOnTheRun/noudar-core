@@ -12,7 +12,6 @@
 #include "CGameDelegate.h"
 #include "CMap.h"
 #include "CDoorway.h"
-#include "CKnight.h"
 
 #include "CCharacterArchetype.h"
 #include "CCharacter.h"
