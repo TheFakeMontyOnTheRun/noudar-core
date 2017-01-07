@@ -6,15 +6,15 @@
 #include "IFileLoaderDelegate.h"
 
 namespace Knights {
-	std::string filterLineBreaks(std::string input) {
-		auto position = input.find('\n');
+    std::string filterLineBreaks(std::string input) {
+        auto position = input.find('\n');
 
-		while (position != std::string::npos) {
-			input.replace(position, 1, "");
-			position = input.find('\n', position + 1);
-		}
+        while (position != std::string::npos) {
+            input.replace(position, 1, "");
+            position = input.find('\n', position + 1);
+        }
 
-		return input;
-	}
+        return input;
+    }
 }
 

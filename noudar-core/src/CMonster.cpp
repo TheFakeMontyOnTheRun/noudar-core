@@ -45,55 +45,53 @@ namespace Knights {
                     }
             }
 
-            return false;
+        return false;
     }
 
     bool CMonster::actOn( int newX, int newY,  std::shared_ptr<CMap> map ) {
+        if (map->isValid(newX, newY)) {
 
-            if (map->isValid( newX, newY ) ) {
+            auto otherActor = map->getActorAt(Vec2i{newX, newY});
 
-                    auto otherActor = map->getActorAt( Vec2i{ newX, newY } );
+            if (otherActor != nullptr
+                && otherActor->getTeam() != getTeam()) {
 
-                    if (otherActor != nullptr
-                        && otherActor->getTeam() != getTeam()) {
-
-                            if (dealWith( map, newX, newY ) ) {
-                                    return true;
-                            }
-                    }
-
-                    if ( map->isBlockAt( newX, newY ) ) {
-                            return false;
-                    }
-
+                if (dealWith(map, newX, newY)) {
+                    return true;
+                }
             }
-            return false;
+
+            if (map->isBlockAt(newX, newY)) {
+                return false;
+            }
+
+        }
+        return false;
     }
 
     void CMonster::update( std::shared_ptr<CMap> map ) {
 
-            int newX;
-            int newY;
+        int newX;
+        int newY;
 
-            for (int x = -10; x < 10; ++x) {
+        for (int x = -10; x < 10; ++x) {
 
-                    for (int y = -10; y < 10; ++y) {
+            for (int y = -10; y < 10; ++y) {
 
-                            if ( x == 0 && y == 0 ) {
-                                    continue;
-                            }
+                if (x == 0 && y == 0) {
+                    continue;
+                }
 
-                            newX = std::min<int>( kMapSize, std::max<int>( 0, (x + mPosition.x) ));
-                            newY = std::min<int>( kMapSize, std::max<int>( 0, (y + mPosition.y) ));
+                newX = std::min<int>(kMapSize, std::max<int>(0, (x + mPosition.x)));
+                newY = std::min<int>(kMapSize, std::max<int>(0, (y + mPosition.y)));
 
-                            if (actOn(newX, newY, map)) {
-	                            return;
-                            }
-                    }
+                if (actOn(newX, newY, map)) {
+                    return;
+                }
             }
+        }
     }
 
     void CMonster::endOfTurn() {
-
     }
 }

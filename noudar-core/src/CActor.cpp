@@ -11,7 +11,7 @@ namespace Knights {
     CActor::CActor(int aId, int defaultAP) :
             mStance(EStance::kStanding),
             mDirection(EDirection::kNorth),
-            mId( aId ),
+            mId(aId),
             mDefaultAP(defaultAP),
             mRemainingAP(defaultAP),
             mAttack(0),
@@ -41,7 +41,7 @@ namespace Knights {
 
     void CActor::turnLeft() {
 
-        if ( mDirection == EDirection::kNorth ) {
+        if (mDirection == EDirection::kNorth) {
             mDirection = EDirection::kWest;
         } else {
             mDirection = static_cast<EDirection>( static_cast<int>(mDirection) - 1);
@@ -49,7 +49,7 @@ namespace Knights {
     }
 
     void CActor::turnRight() {
-        if ( mDirection == EDirection::kWest ) {
+        if (mDirection == EDirection::kWest) {
             mDirection = EDirection::kNorth;
         } else {
             mDirection = static_cast<EDirection>( static_cast<int>(mDirection) + 1);
@@ -110,7 +110,7 @@ namespace Knights {
         return mId;
     }
 
-    void CActor::setDirection( EDirection d ) {
+    void CActor::setDirection(EDirection d) {
         mDirection = d;
     }
 
@@ -118,14 +118,14 @@ namespace Knights {
         return mName;
     }
 
-    std::ostream& operator<<(std::ostream& os, const EDirection& aDirection ) {
+    std::ostream &operator<<(std::ostream &os, const EDirection &aDirection) {
         os << to_string(aDirection);
 
         return os;
     }
 
-    std::string to_string( const EDirection& aDirection ) {
-        switch (aDirection ) {
+    std::string to_string(const EDirection &aDirection) {
+        switch (aDirection) {
             case EDirection::kNorth:
                 return "North";
             case EDirection::kWest:
@@ -137,14 +137,14 @@ namespace Knights {
         }
     }
 
-    EDirection wrapDirection( EDirection direction, int offset ) {
+    EDirection wrapDirection(EDirection direction, int offset) {
         int index = static_cast<int>(direction) + offset;
 
-        while ( index < 0 ) {
+        while (index < 0) {
             index += 4;
         }
 
-        while ( index >= 4 ) {
+        while (index >= 4) {
             index -= 4;
         }
 
@@ -165,7 +165,7 @@ namespace Knights {
         return os;
     }
 
-    std::string to_string( const EStance& aStance) {
+    std::string to_string(const EStance &aStance) {
         switch (aStance) {
             case EStance::kAttacking:
                 return "Attacking";
