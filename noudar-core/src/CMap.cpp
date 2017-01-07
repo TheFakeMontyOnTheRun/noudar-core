@@ -58,6 +58,8 @@ namespace Knights {
                     case '{':
                     case '}':
                     case '7':
+                    case '!':
+                    case 'H':
                         block[y][x] = false;
                         break;
                     case '1':
@@ -72,6 +74,7 @@ namespace Knights {
                     case 'S':
                     case '>':
                     case '<':
+                    case '\'':
                         block[y][x] = true;
                         break;
                     case '~':
