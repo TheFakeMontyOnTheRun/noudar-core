@@ -25,7 +25,12 @@ namespace Knights {
 
             std::shared_ptr<CMonster> sharedThis = shared_from_this();
 
-            if ( std::abs( (float)dx ) > std::abs( (float)dy ) ) {
+
+	    if ( (std::abs( dx ) + std::abs( dy ) ) > 4 ) {
+            return false;
+        }
+
+        if ( std::abs( (float)dx ) > std::abs( (float)dy ) ) {
 
                     if ( dx < 0 ) {
                             map->move( EDirection::kWest, sharedThis );
