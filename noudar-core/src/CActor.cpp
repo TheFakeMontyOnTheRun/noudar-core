@@ -33,6 +33,7 @@ namespace Knights {
 
     void CActor::onMove() {
         --mRemainingAP;
+	    mStance = EStance::kAttacking;
     }
 
     void CActor::onAttack() {
@@ -58,6 +59,8 @@ namespace Knights {
 
     void CActor::endOfTurn() {
         mRemainingAP = mDefaultAP;
+	    mStance = EStance::kStanding;
+
     }
 
     void CActor::performAttack(std::shared_ptr<CActor> other) {
@@ -159,7 +162,11 @@ namespace Knights {
 		mHP += aHP;
 	}
 
-	std::ostream& operator<<(std::ostream& os, const EStance& aStance ) {
+    EStance CActor::getStance() {
+        return mStance;
+    }
+
+    std::ostream& operator<<(std::ostream& os, const EStance& aStance ) {
         os << to_string(aStance);
 
         return os;

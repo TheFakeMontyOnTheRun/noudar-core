@@ -64,6 +64,7 @@ namespace Knights {
 		void addHP( int aHP );
         std::shared_ptr<CTeam> getTeam();
         EDirection getDirection();
+	    EStance getStance();
         void setDirection( EDirection d );
         virtual void update( std::shared_ptr<CMap> map ) {}
         virtual void endOfTurn();

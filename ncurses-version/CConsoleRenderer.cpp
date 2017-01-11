@@ -74,10 +74,11 @@ namespace Knights {
                     } else {
                         if ( current != nullptr && actor != nullptr && actor->getTeam() != current->getTeam() && actor->isAlive() ) {
 
-                            if ( targetPosition.x == x && targetPosition.y == y ) {
-                                attron(COLOR_PAIR(6));
-                            } else {
-                                attron(COLOR_PAIR(2));
+	                        auto stance = actor->getStance();
+                            if ( stance == EStance::kAttacking ) {
+	                            attron(COLOR_PAIR(2));
+                            } else if ( stance == EStance::kStanding ) {
+	                            attron(COLOR_PAIR(6));
                             }
 
                         } else {
