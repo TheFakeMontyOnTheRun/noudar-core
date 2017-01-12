@@ -20,19 +20,14 @@ namespace Knights {
     }
 
     bool CMonster::dealWith( std::shared_ptr<CMap> map, int x, int y ) {
-            int dx = x - mPosition.x;
-            int dy = y - mPosition.y;
+        int dx = x - mPosition.x;
+        int dy = y - mPosition.y;
 
-            std::shared_ptr<CMonster> sharedThis = shared_from_this();
+        std::shared_ptr<CMonster> sharedThis = shared_from_this();
 
+        if ( std::abs( (float)dx ) >= std::abs( (float)dy ) ) {
 
-	    if ( (std::abs( dx ) + std::abs( dy ) ) > 4 ) {
-            return false;
-        }
-
-        if ( std::abs( (float)dx ) > std::abs( (float)dy ) ) {
-
-                    if ( dx < 0 ) {
+                    if ( dx <= 0 ) {
                             map->move( EDirection::kWest, sharedThis );
                             return true;
                     } else if ( dx > 0 ) {
@@ -41,7 +36,7 @@ namespace Knights {
                     }
             } else {
 
-                    if ( dy < 0 ) {
+                    if ( dy <= 0 ) {
                             map->move( EDirection::kNorth, sharedThis );
                             return true;
                     } else if (dy > 0 ){
@@ -76,12 +71,14 @@ namespace Knights {
 
     void CMonster::update( std::shared_ptr<CMap> map ) {
 
+        CCharacter::update(map);
+
         int newX;
         int newY;
+        
+        for (int x = -4; x < 4; ++x) {
 
-        for (int x = -10; x < 10; ++x) {
-
-            for (int y = -10; y < 10; ++y) {
+            for (int y = -4; y < 4; ++y) {
 
                 if (x == 0 && y == 0) {
                     continue;
@@ -95,8 +92,5 @@ namespace Knights {
                 }
             }
         }
-    }
-
-    void CMonster::endOfTurn() {
     }
 }
