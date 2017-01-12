@@ -33,6 +33,7 @@ namespace Knights {
         EStance mStance;
         EDirection mDirection;
         int mId;
+		int mMoves;
         int mDefaultAP;
         int mRemainingAP;
         int mAttack;
@@ -57,6 +58,7 @@ namespace Knights {
         void turnRight();
 		char getView();
         int getId();
+		int getMoves();
         int getHP();
         int getAP();
         int getDefense();

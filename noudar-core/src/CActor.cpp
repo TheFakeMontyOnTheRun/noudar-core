@@ -12,6 +12,7 @@ namespace Knights {
             mStance(EStance::kStanding),
             mDirection(EDirection::kNorth),
             mId(aId),
+            mMoves(0),
             mDefaultAP(defaultAP),
             mRemainingAP(defaultAP),
             mAttack(0),
@@ -33,6 +34,7 @@ namespace Knights {
 
     void CActor::onMove() {
         --mRemainingAP;
+        ++mMoves;
 	    mStance = EStance::kAttacking;
     }
 
@@ -60,7 +62,6 @@ namespace Knights {
     void CActor::endOfTurn() {
         mRemainingAP = mDefaultAP;
 	    mStance = EStance::kStanding;
-
     }
 
     void CActor::performAttack(std::shared_ptr<CActor> other) {
@@ -157,6 +158,11 @@ namespace Knights {
     char CActor::getView() {
         return mView;
     }
+
+    int CActor::getMoves() {
+        return mMoves;
+    }
+
 
 	void CActor::addHP(int aHP ) {
 		mHP += aHP;

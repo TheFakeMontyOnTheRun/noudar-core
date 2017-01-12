@@ -8,8 +8,6 @@ namespace Knights {
     public:
         CMonster( std::shared_ptr<CCharacterArchetype> aArchetype, std::shared_ptr<CTeam> aTeam, int aId);
 
-        void endOfTurn() override;
-
         void update(std::shared_ptr <CMap> map) override;
 
         bool actOn(int newX, int newY, std::shared_ptr <CMap> map);
