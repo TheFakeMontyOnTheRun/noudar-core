@@ -34,7 +34,7 @@ namespace Knights {
         char buffer;
 
         while (!fileToLoad.eof()) {
-            fileToLoad >> buffer;
+            fileToLoad >>  std::noskipws >> buffer;
             entry.push_back(buffer);
         }
 

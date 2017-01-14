@@ -46,10 +46,11 @@ namespace Knights {
 	    auto friends = std::make_shared<CTeam>("Heroes");
 	    auto foes = std::make_shared<CTeam>("Enemies");
         int id = 1;
+        int pos = 0;
         for (int y = 0; y < kMapSize; ++y) {
             for (int x = 0; x < kMapSize; ++x) {
 
-                element = mapData[(y * kMapSize) + x];
+                element = mapData[ pos ];
                 block[y][x] = false;
                 map[y][x] = nullptr;
                 mElement[y][x] = element;
@@ -114,7 +115,11 @@ namespace Knights {
                     actor->setPosition({x, y});
                     actor = nullptr;
                 }
+
+                ++pos;
             }
+            //skip \n
+            ++pos;
         }
     }
 
