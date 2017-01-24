@@ -9,6 +9,7 @@ namespace Knights {
 	public:
 		virtual std::string loadFileFromPath( const std::string& path ) = 0;
 		virtual std::vector<char> loadBinaryFileFromPath( const std::string& path ) = 0;
+	private:
 		virtual std::string getFilePathPrefix() = 0;
 	};
 
