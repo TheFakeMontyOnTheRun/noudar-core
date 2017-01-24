@@ -5,6 +5,7 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include <Common.h>
 
 #include "IFileLoaderDelegate.h"
 #include "CPlainFileLoader.h"
@@ -18,27 +19,23 @@ namespace Knights {
     }
 
     std::vector<char> CPlainFileLoader::loadBinaryFileFromPath(const std::string &path) {
-        std::ifstream fontFile(path, std::ios::binary);
+        FILE *fd;
 
-        std::vector<char> buffer((
-                                         std::istreambuf_iterator<char>(fontFile)),
-                                 (std::istreambuf_iterator<char>()));
+        fd = fopen(( getFilePathPrefix() + path).c_str(), "rb");
+        std::vector<char> toReturn = readToBuffer(fd);
+        fclose(fd);
 
-        return buffer;
+        return toReturn;
     }
 
     std::string CPlainFileLoader::loadFileFromPath(const std::string &path) {
-        std::string entry;
-        std::ifstream fileToLoad(path);
+        FILE *fd;
 
-        char buffer;
+        fd = fopen(( getFilePathPrefix() + path).c_str(), "r");
+        auto toReturn = readToString(fd);
+        fclose(fd);
 
-        while (!fileToLoad.eof()) {
-            fileToLoad >>  std::noskipws >> buffer;
-            entry.push_back(buffer);
-        }
-
-        return entry;
+        return toReturn;
     }
 
     std::string CPlainFileLoader::getFilePathPrefix() {
