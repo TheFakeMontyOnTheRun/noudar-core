@@ -32,7 +32,7 @@ int main ( int argc, char **argv ) {
 
 
     auto delegate = std::make_shared<Knights::CGameDelegate>();
-	auto fileLoader = std::make_shared<Knights::CPlainFileLoader>();
+    auto fileLoader = std::make_shared<Knights::CPlainFileLoader>();
     auto game = std::make_shared<Knights::CGame>( fileLoader, std::make_shared<Knights::CConsoleRenderer>(), delegate );
 
     while ( game->isPlaying() ) {

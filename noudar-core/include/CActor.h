@@ -33,16 +33,16 @@ namespace Knights {
         EStance mStance;
         EDirection mDirection;
         int mId;
-		int mMoves;
+	int mMoves;
         int mDefaultAP;
         int mRemainingAP;
         int mAttack;
         int mDefence;
         int mHP;
         Vec2i mPosition;
-		char mView;
-		std::string mName;
-		std::shared_ptr<CTeam> mTeam;
+	char mView;
+	std::string mName;
+	std::shared_ptr<CTeam> mTeam;
     public:
         virtual void performAttack( std::shared_ptr<CActor> other);
         CActor( int aId, int defaultAP );
@@ -56,17 +56,17 @@ namespace Knights {
         bool isAlive();
         void turnLeft();
         void turnRight();
-		char getView();
+	char getView();
         int getId();
-		int getMoves();
+	int getMoves();
         int getHP();
         int getAP();
         int getDefense();
         int getAttack();
-		void addHP( int aHP );
+	void addHP( int aHP );
         std::shared_ptr<CTeam> getTeam();
         EDirection getDirection();
-	    EStance getStance();
+	EStance getStance();
         void setDirection( EDirection d );
         virtual void update( std::shared_ptr<CMap> map ) {}
         virtual void endOfTurn();
