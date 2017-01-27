@@ -12,6 +12,7 @@ OBJS = ncurses-version/main.o \
     noudar-core/src/CCharacterArchetype.o \
     noudar-core/src/CElixirFountain.o \
     noudar-core/src/CDoorway.o \
+    noudar-core/src/Common.o \
     noudar-core/src/IFileLoaderDelegate.o \
     noudar-core/src/IMapElement.o \
     noudar-core/src/CGame.o \
