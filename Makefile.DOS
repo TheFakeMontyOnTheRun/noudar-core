@@ -29,7 +29,7 @@ OBJS = ncurses-version/main.o \
 
 
 
-TARGET = NOUDAR
+TARGET = NOUDAR.exe
 
 $(TARGET):	$(OBJS)
 	$(CXX) -o $(TARGET) $(OBJS) $(LDFLAGS)
