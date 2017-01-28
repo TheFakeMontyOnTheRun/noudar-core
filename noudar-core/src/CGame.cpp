@@ -233,4 +233,8 @@ namespace Knights {
     void CGame::proceedToNextLevel() {
         playLevel(mLevel + 1);
     }
+
+    int CGame::getCurrentActorId() {
+        return mMap->getAvatar()->getId();
+    }
 }
