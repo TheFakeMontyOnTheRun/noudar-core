@@ -307,7 +307,11 @@ namespace Knights {
     }
 
     std::shared_ptr<CActor> CMap::getActorAt(Vec2i position) {
-        return mActors[position.y][position.x];
+	    if ( isValid( position.x, position.y ) ) {
+		    return mActors[position.y][position.x];
+	    } else {
+		    return nullptr;
+	    }
     }
 
     char CMap::getElementAt(int x, int y) {
@@ -345,4 +349,18 @@ namespace Knights {
         mActors[to.y][to.x] = actor;
         actor->setPosition(to);
     }
+
+	std::shared_ptr<CActor> CMap::projectLineOfSight(Vec2i aPosition, EDirection aDirection) {
+
+		auto offset = mapOffsetForDirerction( aDirection );
+		auto position = aPosition;
+		std::shared_ptr<CActor> toReturn = nullptr;
+
+		while ( isValid( position.x, position.y ) && ( !isBlockAt( position.x, position.y ) || toReturn == nullptr ) ) {
+			position = {offset.x + position.x, offset.y + position.y };
+			toReturn = getActorAt( position );
+		}
+
+        return toReturn;
+	}
 }

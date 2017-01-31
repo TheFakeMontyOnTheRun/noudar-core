@@ -36,6 +36,7 @@ namespace Knights {
         void setActorAt( Vec2i position, std::shared_ptr<CActor> actor );
         void moveActor( Vec2i from, Vec2i to, std::shared_ptr<CActor> actor );
         std::shared_ptr<CActor> attack( std::shared_ptr<CActor> a, Vec2i position , bool mutual );
+	    std::shared_ptr<CActor> projectLineOfSight( Vec2i position, EDirection dir );
     };
 }
 #endif

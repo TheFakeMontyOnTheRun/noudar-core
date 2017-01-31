@@ -20,6 +20,8 @@ namespace Knights {
     const static char kCastMagickForwardCommand = 'k';
     const static char kActorMeleeAttackCommand = 'e';
 
+    const static char kInflictHitscanCommand = 'h';
+
     const static char kGoToFirstLevelCommand = '1';
     const static char kGoToTitleLevelCommand = '0';
 

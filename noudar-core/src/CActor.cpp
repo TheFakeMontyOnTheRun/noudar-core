@@ -141,6 +141,21 @@ namespace Knights {
         }
     }
 
+    Vec2i mapOffsetForDirerction( EDirection aDirection ) {
+	    switch (aDirection) {
+		    case EDirection::kNorth:
+			    return { 0 , -1 };
+		    case EDirection::kWest:
+			    return { -1, 0 };
+		    case EDirection::kSouth:
+			    return { 0, 1 };
+		    case EDirection::kEast:
+			    return { 1, 0 };
+	    }
+
+	    return { 0, 0 };
+    }
+
     EDirection wrapDirection(EDirection direction, int offset) {
         int index = static_cast<int>(direction) + offset;
 

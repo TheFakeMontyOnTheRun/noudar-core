@@ -5,6 +5,7 @@
 #include <sstream>
 #include <vector>
 
+
 #include "Vec2i.h"
 #include "IMapElement.h"
 #include "CTeam.h"
@@ -29,6 +30,7 @@
 #include "commands/CTurnActorCommand.h"
 #include "commands/CActorMeleeAttackCommand.h"
 #include "commands/CLoadNewLevelCommand.h"
+#include "commands/CHitscanAttackCommand.h"
 
 namespace Knights {
 
@@ -162,21 +164,9 @@ namespace Knights {
             }
 
 
-            if (entry == kCastMagickForwardCommand) {
-//            std::shared_ptr <CActor> avatar = mMap->getAvatar();
-//
-//                    int x;
-//                    int y;
-//
-//                    std::cout << "target x?" << std::endl;
-//                    std::cin >> x;
-//                    std::cout << "target y?" << std::endl;
-//                    std::cin >> y;
-//
-//                    map->attack(avatar, Vec2i{ x, y }, false);
-//            if (kShouldAlwaysFinishTurnOnMove) {
-//                endOfTurn(mMap);
-//            }
+            if (entry == kInflictHitscanCommand) {
+	            std::shared_ptr <CActor> avatar = mMap->getAvatar();
+				command = std::make_shared<CHitscanAttackCommand>(shared_from_this(), avatar);
             }
 
 
