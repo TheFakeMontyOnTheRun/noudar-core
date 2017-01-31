@@ -49,6 +49,7 @@ namespace Knights {
       void playLevel( int level );
       bool isPlaying();
       Vec2i getCursorPosition();
+      int getCurrentActorId();
   };
 }
 #endif
