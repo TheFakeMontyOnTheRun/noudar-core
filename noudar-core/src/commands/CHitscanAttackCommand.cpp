@@ -41,6 +41,6 @@ void Knights::CHitscanAttackCommand::execute() {
 	auto target = getGame()->getMap()->projectLineOfSight( mAttacker->getPosition(), mAttacker->getDirection() );
 
 	if ( target != nullptr ) {
-		mAttacker->performAttack(target);
+	  getGame()->getMap()->attack( mAttacker, target->getPosition(), false );
 	}
 }
