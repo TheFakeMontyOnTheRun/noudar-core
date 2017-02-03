@@ -12,20 +12,8 @@ namespace Knights {
         kDead
     };
 
-    std::ostream& operator<<(std::ostream& os, const EStance & aDirection );
-    std::string to_string( const EStance & aDirection );
-
-    enum class EDirection {
-        kNorth,
-        kEast,
-        kSouth,
-        kWest
-    };
-
-    std::ostream& operator<<(std::ostream& os, const EDirection& aDirection );
-    std::string to_string( const EDirection& aDirection );
-    EDirection wrapDirection( EDirection direction, int offset );
-	Vec2i mapOffsetForDirerction( EDirection direction );
+    std::ostream& operator<<(std::ostream& os, const EStance & aStance );
+    std::string to_string( const EStance & aStance);
 
     class CMap;
 

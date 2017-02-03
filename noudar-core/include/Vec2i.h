@@ -5,6 +5,7 @@
 #ifndef NOUDAR_CORE_VEC2I_H
 #define NOUDAR_CORE_VEC2I_H
 namespace Knights {
+
     class Vec2i {
     public:
         int x = 0;
@@ -21,5 +22,18 @@ namespace Knights {
             return this->x == other.x && this->y == other.y;
         }
     };
+
+    enum class EDirection {
+        kNorth,
+        kEast,
+        kSouth,
+        kWest
+    };
+
+    std::ostream& operator<<(std::ostream& os, const EDirection& aDirection );
+    std::string to_string( const EDirection& aDirection );
+    EDirection wrapDirection( EDirection direction, int offset );
+    Vec2i mapOffsetForDirerction( EDirection direction );
+
 }
 #endif //KNIGHTS_IN_PORTO_VEC2I_H
