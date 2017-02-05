@@ -2,6 +2,7 @@
 #include <memory>
 #include <utility>
 #include <iostream>
+#include <sstream>
 
 #include "Vec2i.h"
 
@@ -12,7 +13,7 @@ namespace Knights {
 		return os;
 	}
 
-	std::string to_string(const EDirection &aDirection) {
+	std::string to_string(const EDirection &aDirection) {;
 		switch (aDirection) {
 			case EDirection::kNorth:
 				return "North";
@@ -24,6 +25,19 @@ namespace Knights {
 				return "East";
 		}
 	}
+
+	std::ostream &operator<<(std::ostream &os, const Vec2i &aVec) {
+		os << to_string(aVec);
+
+		return os;
+	}
+
+	std::string to_string(const Vec2i &aVec) {
+		std::stringstream ss;
+		ss << aVec.x << ", " << aVec.y;
+		return ss.str();
+	}
+
 
 	Vec2i mapOffsetForDirerction( EDirection aDirection ) {
 		switch (aDirection) {

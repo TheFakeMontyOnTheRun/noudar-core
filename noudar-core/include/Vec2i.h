@@ -32,6 +32,10 @@ namespace Knights {
 
     std::ostream& operator<<(std::ostream& os, const EDirection& aDirection );
     std::string to_string( const EDirection& aDirection );
+
+    std::ostream& operator<<(std::ostream& os, const Vec2i& aVec );
+    std::string to_string( const Vec2i& aVec );
+
     EDirection wrapDirection( EDirection direction, int offset );
     Vec2i mapOffsetForDirerction( EDirection direction );
 
