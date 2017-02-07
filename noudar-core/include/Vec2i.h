@@ -38,6 +38,7 @@ namespace Knights {
 
     EDirection wrapDirection( EDirection direction, int offset );
     Vec2i mapOffsetForDirerction( EDirection direction );
-
+    EDirection leftOf(Knights::EDirection d);
+    EDirection rightOf(Knights::EDirection d);
 }
 #endif //KNIGHTS_IN_PORTO_VEC2I_H

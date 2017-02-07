@@ -67,4 +67,32 @@ namespace Knights {
 
 		return static_cast<EDirection>( index );
 	}
+
+
+	EDirection leftOf(Knights::EDirection d) {
+		switch (d) {
+			case Knights::EDirection::kNorth:
+				return Knights::EDirection::kWest;
+			case Knights::EDirection::kSouth:
+				return Knights::EDirection::kEast;
+			case Knights::EDirection::kEast:
+				return Knights::EDirection::kNorth;
+			case Knights::EDirection::kWest:
+				return Knights::EDirection::kSouth;
+		}
+	}
+
+	EDirection rightOf(Knights::EDirection d) {
+		switch (d) {
+			case Knights::EDirection::kNorth:
+				return Knights::EDirection::kEast;
+			case Knights::EDirection::kSouth:
+				return Knights::EDirection::kWest;
+			case Knights::EDirection::kEast:
+				return Knights::EDirection::kSouth;
+			case Knights::EDirection::kWest:
+				return Knights::EDirection::kNorth;
+		}
+	}
+
 }
