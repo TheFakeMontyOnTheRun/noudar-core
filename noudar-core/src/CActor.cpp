@@ -2,6 +2,7 @@
 #include <memory>
 #include <utility>
 #include <iostream>
+#include <vector>
 
 #include "Vec2i.h"
 #include "CTeam.h"
@@ -17,7 +18,9 @@ namespace Knights {
             mRemainingAP(defaultAP),
             mAttack(0),
             mDefence(0),
-            mHP(0) {
+            mHP(0),
+            mInventory({ "ababa", "acacaba"}),
+            mCurrentItem( std::begin(mInventory) ){
     }
 
     bool CActor::canMove() {
@@ -154,5 +157,25 @@ namespace Knights {
             case EStance::kDead:
                 return "Dead";
         }
+    }
+
+	void CActor::selectNextItem() {
+		if ( mCurrentItem != std::prev(std::end( mInventory ) ) ) {
+			mCurrentItem = std::next( mCurrentItem );
+		} else {
+			mCurrentItem = std::begin( mInventory );
+		}
+	}
+
+	void CActor::selectPreviousItem() {
+		if ( mCurrentItem != std::begin( mInventory ) ) {
+			mCurrentItem = std::prev( mCurrentItem );
+		} else {
+			mCurrentItem = std::prev(std::end( mInventory ));
+		}
+	}
+
+    std::string CActor::getSelectedItem() {
+		return *mCurrentItem;
     }
 }

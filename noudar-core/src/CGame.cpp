@@ -32,6 +32,9 @@
 #include "commands/CLoadNewLevelCommand.h"
 #include "commands/CHitscanAttackCommand.h"
 
+#include "commands/CCycleNextItemCommand.h"
+#include "commands/CCyclePreviousItemCommand.h"
+
 namespace Knights {
 
     void CGame::endOfTurn(std::shared_ptr<CMap> map) {
@@ -176,8 +179,17 @@ namespace Knights {
                 command = std::make_shared<CLoadNewLevelCommand>(shared_from_this(), 0);
             }
 
+	        if (entry == kCycleLeftInventoryCommand) {
+		        std::shared_ptr <CActor> avatar = mMap->getAvatar();
+		        command = std::make_shared<CCyclePreviousItemCommand>(shared_from_this(), avatar);
+	        }
 
-            if (entry == kInflictHitscanCommand) {
+	        if (entry == kCycleRightInventoryCommand) {
+		        std::shared_ptr <CActor> avatar = mMap->getAvatar();
+		        command = std::make_shared<CCycleNextItemCommand>(shared_from_this(), avatar);
+	        }
+
+	        if (entry == kInflictHitscanCommand) {
 	            std::shared_ptr <CActor> avatar = mMap->getAvatar();
 				command = std::make_shared<CHitscanAttackCommand>(shared_from_this(), avatar);
             }

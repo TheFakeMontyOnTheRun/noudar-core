@@ -30,8 +30,12 @@ namespace Knights {
     const static char kEndTurnCommand = 't';
     const static char kQuitGameCommand = 'q';
 
+	const static char kCycleLeftInventoryCommand = '-';
+	const static char kCycleRightInventoryCommand = '=';
 
-  class CGame : public std::enable_shared_from_this<CGame> {
+
+
+	class CGame : public std::enable_shared_from_this<CGame> {
       std::shared_ptr<CMap> mMap;
       std::shared_ptr<IRenderer> mRenderer;
       std::shared_ptr<CGameDelegate> mGameDelegate;
