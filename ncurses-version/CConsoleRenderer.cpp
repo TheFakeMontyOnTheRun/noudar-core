@@ -16,6 +16,7 @@
 #include "Vec2i.h"
 #include "IMapElement.h"
 #include "CTeam.h"
+#include "CItem.h"
 #include "CActor.h"
 #include "CGameDelegate.h"
 #include "CMap.h"
@@ -123,8 +124,10 @@ namespace Knights {
 
             snprintf( buffer, 9, "AP: %d", current->getAP() );
             mvprintw( 26,0, buffer );
+
+            mvprintw( 27,0, current->getSelectedItem()->to_string().c_str() );
         }
-        mvprintw( 27,0, "-//-" );
+        mvprintw( 28,0, "-//-" );
 
         refresh();
     }

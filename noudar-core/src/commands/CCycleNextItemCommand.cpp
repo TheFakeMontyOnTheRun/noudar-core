@@ -17,6 +17,7 @@
 
 #include "Vec2i.h"
 #include "CTeam.h"
+#include "CItem.h"
 #include "CActor.h"
 
 

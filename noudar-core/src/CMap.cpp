@@ -7,6 +7,7 @@
 #include "IMapElement.h"
 #include "CDoorway.h"
 #include "CTeam.h"
+#include "CItem.h"
 #include "CActor.h"
 #include "CGameDelegate.h"
 #include "CMap.h"

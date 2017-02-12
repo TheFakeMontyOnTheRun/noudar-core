@@ -10,6 +10,7 @@
 #include "IMapElement.h"
 #include "CGameDelegate.h"
 #include "CTeam.h"
+#include "CItem.h"
 #include "CActor.h"
 #include "CMap.h"
 #include "IRenderer.h"

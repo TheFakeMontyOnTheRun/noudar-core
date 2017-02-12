@@ -7,6 +7,7 @@
 #include "Vec2i.h"
 #include "CTeam.h"
 #include "IMapElement.h"
+#include "CItem.h"
 #include "CActor.h"
 #include "CCharacterArchetype.h"
 #include "CCharacter.h"

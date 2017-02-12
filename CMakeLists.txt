@@ -40,10 +40,15 @@ set(SOURCE_FILES
         noudar-core/src/commands/CNullCommand.cpp
         noudar-core/src/commands/CQuitCommand.cpp
         noudar-core/src/commands/CTurnActorCommand.cpp
+        noudar-core/src/commands/CCycleNextItemCommand.cpp
+        noudar-core/src/commands/CCyclePreviousItemCommand.cpp
         noudar-core/src/commands/IGameCommand.cpp
         noudar-core/src/CPlainFileLoader.cpp
         noudar-core/src/Vec2i.cpp
+        noudar-core/src/Common.cpp
         noudar-core/src/CActor.cpp
+        noudar-core/src/CItem.cpp
+        noudar-core/include/CItem.h
         noudar-core/src/CCharacter.cpp
         noudar-core/src/CCharacterArchetype.cpp
         noudar-core/src/CHuntApproach.cpp

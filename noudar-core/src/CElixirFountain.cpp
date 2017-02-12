@@ -8,6 +8,7 @@
 #include "Vec2i.h"
 #include "IMapElement.h"
 #include "CTeam.h"
+#include "CItem.h"
 #include "CActor.h"
 #include "CElixirFountain.h"
 #include "CGameDelegate.h"

@@ -33,8 +33,8 @@ namespace Knights {
 		char mView;
 		std::string mName;
 		std::shared_ptr<CTeam> mTeam;
-		std::vector<std::string> mInventory;
-		std::vector<std::string>::iterator mCurrentItem;
+		std::vector<std::shared_ptr<CItem>> mInventory;
+		std::vector<std::shared_ptr<CItem>>::iterator mCurrentItem;
 
 	public:
 		virtual void performAttack(std::shared_ptr<CActor> other);
@@ -97,7 +97,7 @@ namespace Knights {
 
 		void selectPreviousItem();
 
-		std::string getSelectedItem();
+		std::shared_ptr<CItem> getSelectedItem();
 	};
 }
 #endif

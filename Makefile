@@ -17,9 +17,12 @@ OBJS = ncurses-version/main.o \
     noudar-core/src/IFileLoaderDelegate.o \
     noudar-core/src/IMapElement.o \
     noudar-core/src/CGame.o \
+    noudar-core/src/CItem.o \
     noudar-core/src/CPlainFileLoader.o \
     noudar-core/src/CGameDelegate.o \
     noudar-core/src/commands/CActorMeleeAttackCommand.o \
+    noudar-core/src/commands/CCycleNextItemCommand.o \
+    noudar-core/src/commands/CCyclePreviousItemCommand.o \
     noudar-core/src/commands/IGameCommand.o \
     noudar-core/src/commands/CHitscanAttackCommand.o \
     noudar-core/src/commands/CMoveActorCommand.o \

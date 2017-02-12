@@ -6,6 +6,7 @@
 
 #include "Vec2i.h"
 #include "CTeam.h"
+#include "CItem.h"
 #include "CActor.h"
 
 namespace Knights {
@@ -19,7 +20,7 @@ namespace Knights {
             mAttack(0),
             mDefence(0),
             mHP(0),
-            mInventory({ "ababa", "acacaba"}),
+            mInventory({ std::make_shared<CItem>("sword"), std::make_shared<CItem>("wand")}),
             mCurrentItem( std::begin(mInventory) ){
     }
 
@@ -175,7 +176,7 @@ namespace Knights {
 		}
 	}
 
-    std::string CActor::getSelectedItem() {
+    std::shared_ptr<CItem> CActor::getSelectedItem() {
 		return *mCurrentItem;
     }
 }
