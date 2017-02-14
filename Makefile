@@ -29,7 +29,10 @@ OBJS = ncurses-version/main.o \
     noudar-core/src/commands/CLoadNewLevelCommand.o \
     noudar-core/src/commands/CTurnActorCommand.o \
     noudar-core/src/commands/CQuitCommand.o \
+    noudar-core/src/commands/CDropItemCommand.o \
+    noudar-core/src/commands/CPickItemCommand.o \
     noudar-core/src/commands/CNullCommand.o \
+    noudar-core/src/commands/CUseCurrentItemCommand.o \
     noudar-core/src/commands/CEndTurnCommand.o
 
 LDFLAGS = -lncurses

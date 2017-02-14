@@ -14,8 +14,11 @@ set(SOURCE_FILES
         noudar-core/include/commands/CEndTurnCommand.h
         noudar-core/include/commands/CLoadNewLevelCommand.h
         noudar-core/include/commands/CNullCommand.h
+        noudar-core/include/commands/CUseCurrentItemCommand.h
         noudar-core/include/commands/CQuitCommand.h
         noudar-core/include/commands/CTurnActorCommand.h
+        noudar-core/include/commands/CDropItemCommand.h
+        noudar-core/include/commands/CPickItemCommand.h
         noudar-core/include/commands/IGameCommand.h
         noudar-core/include/CPlainFileLoader.h
         noudar-core/include/CActor.h
@@ -41,7 +44,10 @@ set(SOURCE_FILES
         noudar-core/src/commands/CQuitCommand.cpp
         noudar-core/src/commands/CTurnActorCommand.cpp
         noudar-core/src/commands/CCycleNextItemCommand.cpp
+        noudar-core/src/commands/CPickItemCommand.cpp
+        noudar-core/src/commands/CDropItemCommand.cpp
         noudar-core/src/commands/CCyclePreviousItemCommand.cpp
+        noudar-core/src/commands/CUseCurrentItemCommand.cpp
         noudar-core/src/commands/IGameCommand.cpp
         noudar-core/src/CPlainFileLoader.cpp
         noudar-core/src/Vec2i.cpp
