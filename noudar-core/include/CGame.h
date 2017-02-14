@@ -32,7 +32,10 @@ namespace Knights {
 
 	const static char kCycleLeftInventoryCommand = '-';
 	const static char kCycleRightInventoryCommand = '=';
+	const static char kUseCurrentItemInInventoryCommand = '\t';
 
+	const static char kPickItemCommand = '[';
+	const static char kDropItemCommand = ']';
 
 
 	class CGame : public std::enable_shared_from_this<CGame> {

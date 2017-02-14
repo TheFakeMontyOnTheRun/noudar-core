@@ -34,7 +34,7 @@ namespace Knights {
 		std::string mName;
 		std::shared_ptr<CTeam> mTeam;
 		std::vector<std::shared_ptr<CItem>> mInventory;
-		std::vector<std::shared_ptr<CItem>>::iterator mCurrentItem;
+		std::shared_ptr<CItem> mCurrentItem;
 
 	public:
 		virtual void performAttack(std::shared_ptr<CActor> other);
@@ -77,6 +77,8 @@ namespace Knights {
 
 		void addHP(int aHP);
 
+		void useCurrentItem();
+
 		std::shared_ptr<CTeam> getTeam();
 
 		EDirection getDirection();
@@ -98,6 +100,10 @@ namespace Knights {
 		void selectPreviousItem();
 
 		std::shared_ptr<CItem> getSelectedItem();
+
+		void giveItem( std::shared_ptr<CItem> aItem );
+
+		std::shared_ptr<CItem> removeItemFromInventory( std::shared_ptr<CItem> itemToRemove );
 	};
 }
 #endif

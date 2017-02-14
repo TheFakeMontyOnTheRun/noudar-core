@@ -1,4 +1,5 @@
 #include <string>
+#include <array>
 #include <vector>
 #include <memory>
 #include <functional>
@@ -55,6 +56,7 @@ namespace Knights {
                 block[y][x] = false;
                 map[y][x] = nullptr;
                 mElement[y][x] = element;
+				mItems[ y ][ x ] = nullptr;
 
                 switch (element) {
                     case '0':
@@ -316,6 +318,11 @@ namespace Knights {
     }
 
     char CMap::getElementAt(int x, int y) {
+
+	    if ( mItems[ y ][ x ] != nullptr ) {
+		    return mItems[ y ][ x ]->getView();
+	    }
+
         return mElement[y][x];
     }
 
@@ -363,5 +370,19 @@ namespace Knights {
 		}
 
         return toReturn;
+	}
+
+	void CMap::giveItemAt(Vec2i from, std::shared_ptr<CActor> actor) {
+        if ( mItems[ from.y ][ from.x ] != nullptr ) {
+            auto item = mItems[ from.y ][ from.x ];
+	        mItems[ from.y ][ from.x ] = nullptr;
+	        actor->giveItem( item );
+        }
+	}
+
+	void CMap::putItemAt(std::shared_ptr<CItem> aItem, Vec2i aDestination) {
+		if ( mItems[ aDestination.y ][ aDestination.x ] == nullptr ) {
+			mItems[ aDestination.y ][ aDestination.x ] = aItem;
+		}
 	}
 }

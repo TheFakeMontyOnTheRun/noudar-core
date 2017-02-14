@@ -125,7 +125,11 @@ namespace Knights {
             snprintf( buffer, 9, "AP: %d", current->getAP() );
             mvprintw( 26,0, buffer );
 
-            mvprintw( 27,0, current->getSelectedItem()->to_string().c_str() );
+	        mvprintw(27, 0, "                          ");
+
+			if ( current->getSelectedItem() != nullptr ) {
+				mvprintw(27, 0, current->getSelectedItem()->to_string().c_str());
+			}
         }
         mvprintw( 28,0, "-//-" );
 

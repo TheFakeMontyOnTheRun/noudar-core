@@ -35,6 +35,9 @@
 
 #include "commands/CCycleNextItemCommand.h"
 #include "commands/CCyclePreviousItemCommand.h"
+#include "commands/CUseCurrentItemCommand.h"
+#include "commands/CPickItemCommand.h"
+#include "commands/CDropItemCommand.h"
 
 namespace Knights {
 
@@ -188,6 +191,21 @@ namespace Knights {
 	        if (entry == kCycleRightInventoryCommand) {
 		        std::shared_ptr <CActor> avatar = mMap->getAvatar();
 		        command = std::make_shared<CCycleNextItemCommand>(shared_from_this(), avatar);
+	        }
+
+	        if (entry == kUseCurrentItemInInventoryCommand ) {
+		        std::shared_ptr <CActor> avatar = mMap->getAvatar();
+		        command = std::make_shared<CUseCurrentItemCommand>(shared_from_this(), avatar);
+	        }
+
+	        if (entry == kPickItemCommand ) {
+		        std::shared_ptr <CActor> avatar = mMap->getAvatar();
+		        command = std::make_shared<CPickItemCommand>(shared_from_this(), avatar);
+	        }
+
+	        if (entry == kDropItemCommand ) {
+		        std::shared_ptr <CActor> avatar = mMap->getAvatar();
+		        command = std::make_shared<CDropItemCommand>(shared_from_this(), avatar);
 	        }
 
 	        if (entry == kInflictHitscanCommand) {

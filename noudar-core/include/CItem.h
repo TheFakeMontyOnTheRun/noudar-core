@@ -8,15 +8,20 @@
 namespace Knights {
 	class CItem {
 		std::string mName;
+		char mView;
 	public:
-		CItem(std::string aName);
+		CItem(std::string aName, char aView);
 
 		std::string to_string() const;
+
+		char getView() const;
 	};
 
 	std::ostream &operator<<(std::ostream &os, const CItem &action);
 
 	std::string to_string(const CItem &action);
+
+
 }
 
 

@@ -13,8 +13,12 @@ namespace Knights {
         std::shared_ptr<IMapElement> map[ kMapSize ][ kMapSize ];
         std::shared_ptr<CActor> mActors[ kMapSize ][ kMapSize ];
         std::shared_ptr<CGameDelegate> mGameDelegate;
-        bool block[ kMapSize ][ kMapSize ];
+
+	    bool block[ kMapSize ][ kMapSize ];
         char mElement[ kMapSize ][ kMapSize ];
+#include <array>
+	    std::array< std::array< std::shared_ptr<CItem>, kMapSize >, kMapSize > mItems;
+
         std::vector<std::shared_ptr<CActor>> actors;
         std::shared_ptr<CActor> mAvatar;
 
@@ -37,6 +41,8 @@ namespace Knights {
         void moveActor( Vec2i from, Vec2i to, std::shared_ptr<CActor> actor );
         std::shared_ptr<CActor> attack( std::shared_ptr<CActor> a, Vec2i position , bool mutual );
 	    std::shared_ptr<CActor> projectLineOfSight( Vec2i position, EDirection dir );
+	    void giveItemAt( Vec2i from, std::shared_ptr<CActor> to );
+		void putItemAt( std::shared_ptr<CItem>, Vec2i destination );
     };
 }
 #endif

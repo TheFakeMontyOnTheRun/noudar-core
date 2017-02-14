@@ -7,11 +7,15 @@
 
 #include <sstream>
 
-Knights::CItem::CItem(std::string aName) : mName(aName) {
+Knights::CItem::CItem(std::string aName, char aView ) : mName(aName), mView( aView ) {
 }
 
 std::string Knights::CItem::to_string() const {
 	return mName;
+}
+
+char Knights::CItem::getView() const {
+	return mView;
 }
 
 std::ostream &::Knights::operator<<(std::ostream &os, const Knights::CItem &action) {

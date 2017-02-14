@@ -3,6 +3,7 @@
 #include <utility>
 #include <iostream>
 #include <vector>
+#include <algorithm>
 
 #include "Vec2i.h"
 #include "CTeam.h"
@@ -20,8 +21,8 @@ namespace Knights {
             mAttack(0),
             mDefence(0),
             mHP(0),
-            mInventory({ std::make_shared<CItem>("sword"), std::make_shared<CItem>("wand")}),
-            mCurrentItem( std::begin(mInventory) ){
+            mInventory({ std::make_shared<CItem>("sword", '+'), std::make_shared<CItem>("wand", '?')}),
+            mCurrentItem( *std::begin(mInventory) ){
     }
 
     bool CActor::canMove() {
@@ -161,22 +162,48 @@ namespace Knights {
     }
 
 	void CActor::selectNextItem() {
-		if ( mCurrentItem != std::prev(std::end( mInventory ) ) ) {
-			mCurrentItem = std::next( mCurrentItem );
+		auto it = std::find( std::begin( mInventory ), std::end( mInventory ), mCurrentItem );
+		if ( mCurrentItem != *std::prev(std::end( mInventory ) ) ) {
+			mCurrentItem = *std::next( it );
 		} else {
-			mCurrentItem = std::begin( mInventory );
+			mCurrentItem = *std::begin( mInventory );
 		}
 	}
 
 	void CActor::selectPreviousItem() {
-		if ( mCurrentItem != std::begin( mInventory ) ) {
-			mCurrentItem = std::prev( mCurrentItem );
+		auto it = std::find( std::begin( mInventory ), std::end( mInventory ), mCurrentItem );
+		if ( mCurrentItem != *std::begin( mInventory ) ) {
+			mCurrentItem = *std::prev( it );
 		} else {
-			mCurrentItem = std::prev(std::end( mInventory ));
+			mCurrentItem = *std::prev(std::end( mInventory ));
 		}
 	}
 
     std::shared_ptr<CItem> CActor::getSelectedItem() {
-		return *mCurrentItem;
+		return mCurrentItem;
     }
+
+	void CActor::useCurrentItem() {
+		this->selectNextItem();
+		mHP++;
+	}
+
+	void CActor::giveItem(std::shared_ptr<CItem> aItem) {
+		mInventory.push_back( aItem );
+		mCurrentItem = aItem;
+	}
+
+	std::shared_ptr<CItem> CActor::removeItemFromInventory(std::shared_ptr<CItem> itemToRemove) {
+
+		auto it = std::find( std::begin( mInventory ), std::end( mInventory ), itemToRemove );
+		mInventory.erase( it );
+
+		if ( mInventory.empty()) {
+			mCurrentItem = nullptr;
+		} else {
+			mCurrentItem = *std::begin( mInventory );
+		}
+
+		return itemToRemove;
+	}
 }
