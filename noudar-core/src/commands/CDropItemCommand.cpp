@@ -44,6 +44,12 @@ bool Knights::CDropItemCommand::shouldEndTurn() {
 }
 
 void Knights::CDropItemCommand::execute() {
+	auto itemToDrop = mActor->getSelectedItem();
+
+	if ( itemToDrop == nullptr ) {
+		return;
+	}
+
 	auto map = getGame()->getMap();
-	map->putItemAt( mActor->removeItemFromInventory(mActor->getSelectedItem()), map->getActorTargetPosition(mActor) );
+	map->putItemAt( mActor->removeItemFromInventory(itemToDrop), map->getActorTargetPosition(mActor) );
 }
