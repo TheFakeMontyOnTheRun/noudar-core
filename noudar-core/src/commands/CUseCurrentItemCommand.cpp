@@ -45,5 +45,10 @@ bool Knights::CUseCurrentItemCommand::shouldEndTurn() {
 }
 
 void Knights::CUseCurrentItemCommand::execute() {
-	mActor->useCurrentItem();
+
+	auto currentItem = mActor->getSelectedItem();
+
+	if ( currentItem != nullptr ) {
+		currentItem->use(mActor, getGame()->getMap());
+	}
 }
