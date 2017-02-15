@@ -3,11 +3,14 @@
 //
 #include <iostream>
 #include <string>
+#include <functional>
+#include <memory>
+
 #include "CItem.h"
 
 #include <sstream>
 
-Knights::CItem::CItem(std::string aName, char aView ) : mName(aName), mView( aView ) {
+Knights::CItem::CItem(std::string aName, char aView ) : mName(aName), mView( aView ), mItemAction( kItemDoNothingAction ) {
 }
 
 std::string Knights::CItem::to_string() const {
@@ -16,6 +19,14 @@ std::string Knights::CItem::to_string() const {
 
 char Knights::CItem::getView() const {
 	return mView;
+}
+
+Knights::CItem::CItem(std::string aName, char aView, const Knights::CItemAction &itemAction) : mName(aName), mView( aView ), mItemAction(itemAction) {
+
+}
+
+void Knights::CItem::use(std::shared_ptr<CActor> aActor, std::shared_ptr<CMap> aMap) {
+	mItemAction(aActor, aMap);
 }
 
 std::ostream &::Knights::operator<<(std::ostream &os, const Knights::CItem &action) {
