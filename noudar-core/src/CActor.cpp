@@ -180,6 +180,11 @@ namespace Knights {
 	}
 
 	void CActor::giveItem(std::shared_ptr<CItem> aItem) {
+
+		if ( aItem == nullptr ) {
+			return;
+		}
+
 		mInventory.push_back(aItem);
 		mCurrentItem = aItem;
 	}
