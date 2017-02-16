@@ -7,6 +7,17 @@ include_directories(noudar-core/include)
 
 find_package(Curses REQUIRED)
 
+add_subdirectory(lib/googletest)
+
+include_directories(lib/googletest/googletest/include)
+include_directories(lib/googletest/googlemock/include)
+
+set(TEST_SOURCE_FILES
+        Tests/TestCCharacter.cpp
+        Tests/TestCGame.cpp
+        Tests/TestVec2i.cpp
+        )
+
 set(SOURCE_FILES
         noudar-core/include/commands/CMoveActorCommand.h
         noudar-core/include/commands/CActorMeleeAttackCommand.h
@@ -68,10 +79,14 @@ set(SOURCE_FILES
         noudar-core/src/CGame.cpp
         noudar-core/src/CMap.cpp
         noudar-core/src/IMapElement.cpp
-        ncurses-version/main.cpp)
+        )
 
 include_directories(${CURSES_INCLUDE_DIR})
 
-add_executable(noudar_core ${SOURCE_FILES})
+add_executable(noudar_core ${SOURCE_FILES} ncurses-version/main.cpp)
+
+add_executable(noudar_core_test ${SOURCE_FILES} ${TEST_SOURCE_FILES})
 
 target_link_libraries(noudar_core ${CURSES_LIBRARIES} )
+
+target_link_libraries(noudar_core_test ${CURSES_LIBRARIES} gtest gmock gmock_main )
