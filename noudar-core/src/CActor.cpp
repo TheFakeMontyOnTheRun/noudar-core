@@ -202,4 +202,12 @@ namespace Knights {
 
 		return itemToRemove;
 	}
+
+	std::string CActor::getCurrentSay() {
+		return mCurrentSay;
+	}
+
+	void CActor::setCurrentSay(std::string newSay) {
+		mCurrentSay = newSay;
+	}
 }

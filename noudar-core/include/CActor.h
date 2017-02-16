@@ -35,7 +35,7 @@ namespace Knights {
 		std::shared_ptr<CTeam> mTeam;
 		std::vector<std::shared_ptr<CItem>> mInventory;
 		std::shared_ptr<CItem> mCurrentItem;
-
+		std::string mCurrentSay = "";
 	public:
 		virtual void performAttack(std::shared_ptr<CActor> other);
 
@@ -104,6 +104,10 @@ namespace Knights {
 		void giveItem( std::shared_ptr<CItem> aItem );
 
 		std::shared_ptr<CItem> removeItemFromInventory( std::shared_ptr<CItem> itemToRemove );
+
+		std::string getCurrentSay();
+
+		void setCurrentSay( std::string newSay );
 	};
 }
 #endif
