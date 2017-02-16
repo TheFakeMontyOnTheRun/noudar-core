@@ -130,8 +130,10 @@ namespace Knights {
 			if ( current->getSelectedItem() != nullptr ) {
 				mvprintw(27, 0, current->getSelectedItem()->to_string().c_str());
 			}
+	        mvprintw(28, 0, "                                          ");
+            mvprintw(28, 0, current->getCurrentSay().c_str());
         }
-        mvprintw( 28,0, "-//-" );
+        mvprintw( 29,0, "-//-" );
 
         refresh();
     }
