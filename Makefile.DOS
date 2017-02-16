@@ -8,25 +8,31 @@ OBJS = ncurses-version/main.o \
     noudar-core/src/CMonster.o \
     noudar-core/src/CTeam.o \
     noudar-core/src/CMap.o \
-    noudar-core/src/Common.o \
     noudar-core/src/CHuntApproach.o \
     noudar-core/src/CCharacter.o \
     noudar-core/src/CCharacterArchetype.o \
     noudar-core/src/CElixirFountain.o \
     noudar-core/src/CDoorway.o \
+    noudar-core/src/Common.o \
     noudar-core/src/IFileLoaderDelegate.o \
     noudar-core/src/IMapElement.o \
     noudar-core/src/CGame.o \
+    noudar-core/src/CItem.o \
     noudar-core/src/CPlainFileLoader.o \
     noudar-core/src/CGameDelegate.o \
     noudar-core/src/commands/CActorMeleeAttackCommand.o \
-    noudar-core/src/commands/CHitscanAttackCommand.o \
+    noudar-core/src/commands/CCycleNextItemCommand.o \
+    noudar-core/src/commands/CCyclePreviousItemCommand.o \
     noudar-core/src/commands/IGameCommand.o \
+    noudar-core/src/commands/CHitscanAttackCommand.o \
     noudar-core/src/commands/CMoveActorCommand.o \
     noudar-core/src/commands/CLoadNewLevelCommand.o \
     noudar-core/src/commands/CTurnActorCommand.o \
     noudar-core/src/commands/CQuitCommand.o \
+    noudar-core/src/commands/CDropItemCommand.o \
+    noudar-core/src/commands/CPickItemCommand.o \
     noudar-core/src/commands/CNullCommand.o \
+    noudar-core/src/commands/CUseCurrentItemCommand.o \
     noudar-core/src/commands/CEndTurnCommand.o
 
 
