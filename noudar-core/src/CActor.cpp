@@ -146,7 +146,7 @@ namespace Knights {
 			case EStance::kAttacking:
 				return "Attacking";
 			case EStance::kStanding:
-				return "Standidng";
+				return "Standing";
 			case EStance::kDead:
 				return "Dead";
 		}
