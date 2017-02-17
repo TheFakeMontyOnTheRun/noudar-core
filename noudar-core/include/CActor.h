@@ -107,6 +107,8 @@ namespace Knights {
 
 		std::string getCurrentSay();
 
+	protected:
+
 		void setCurrentSay( std::string newSay );
 	};
 }
