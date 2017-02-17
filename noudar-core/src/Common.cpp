@@ -69,10 +69,10 @@ namespace Knights {
 
 		std::string total;
 		fseek(fileDescriptor, 0, SEEK_END);
-		long fsize = ftell(fileDescriptor);
+		long fileSize = ftell(fileDescriptor);
 		fseek(fileDescriptor, 0, SEEK_SET);
 
-		for (auto pos = 0; pos < fsize; ++pos) {
+		for (auto pos = 0; pos < fileSize; ++pos) {
 			char buffer[1];
 			size_t read = fread((void *) &buffer[0], 1, 1, fileDescriptor);
 			if (read) {
