@@ -1,4 +1,4 @@
-CXXFLAGS = -Inoudar-core/include -Incurses-version -O2 -g -c -std=c++0x  -ferror-limit=1 -Werror -Wall
+CXXFLAGS = -Inoudar-core/include -Incurses-version -O2 -g -c -std=c++0x  -ferror-limit=1 -Werror -Wall --pedantic
 CXX = clang++
 
 OBJS = ncurses-version/main.o \
