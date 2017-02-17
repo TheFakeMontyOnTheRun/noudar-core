@@ -12,4 +12,14 @@ namespace Knights {
 	std::string CTeam::getName() {
 		return mName;
 	}
+
+	std::string CTeam::to_string() const {
+		return mName;
+	}
+
+	std::ostream& operator<<(std::ostream& os, const CTeam& aTeam) {
+		os << aTeam.to_string();
+
+		return os;
+	}
 }
