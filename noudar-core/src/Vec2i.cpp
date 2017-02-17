@@ -39,7 +39,7 @@ namespace Knights {
 	}
 
 
-	Vec2i mapOffsetForDirerction( EDirection aDirection ) {
+	Vec2i mapOffsetForDirection( EDirection aDirection ) {
 		switch (aDirection) {
 			case EDirection::kNorth:
 				return { 0 , -1 };

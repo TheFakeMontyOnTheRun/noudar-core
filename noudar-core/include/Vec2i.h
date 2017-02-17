@@ -37,7 +37,7 @@ namespace Knights {
     std::string to_string( const Vec2i& aVec );
 
     EDirection wrapDirection( EDirection direction, int offset );
-    Vec2i mapOffsetForDirerction( EDirection direction );
+    Vec2i mapOffsetForDirection( EDirection direction );
     EDirection leftOf(Knights::EDirection d);
     EDirection rightOf(Knights::EDirection d);
 }

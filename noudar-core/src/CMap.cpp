@@ -360,7 +360,7 @@ namespace Knights {
 
 	std::shared_ptr<CActor> CMap::projectLineOfSight(Vec2i aPosition, EDirection aDirection) {
 
-		auto offset = mapOffsetForDirerction( aDirection );
+		auto offset = mapOffsetForDirection( aDirection );
 		auto position = aPosition;
 		std::shared_ptr<CActor> toReturn = nullptr;
 
