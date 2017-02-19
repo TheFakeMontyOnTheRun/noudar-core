@@ -1,6 +1,7 @@
 //
 // Created by monty on 12/02/17.
 //
+#include <array>
 #include <string>
 #include <sstream>
 #include <memory>
