@@ -16,7 +16,6 @@ namespace Knights {
 
 	    bool block[ kMapSize ][ kMapSize ];
         char mElement[ kMapSize ][ kMapSize ];
-#include <array>
 	    std::array< std::array< std::shared_ptr<CItem>, kMapSize >, kMapSize > mItems;
 
         std::vector<std::shared_ptr<CActor>> actors;

@@ -1,6 +1,7 @@
 //
 // Created by monty on 31/12/16.
 //
+#include <array>
 #include <string>
 #include <memory>
 #include <vector>
