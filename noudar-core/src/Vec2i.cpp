@@ -50,8 +50,6 @@ namespace Knights {
 			case EDirection::kEast:
 				return { 1, 0 };
 		}
-
-		return { 0, 0 };
 	}
 
 	EDirection wrapDirection(EDirection direction, int offset) {

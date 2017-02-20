@@ -49,7 +49,6 @@ namespace Knights {
       int mLevel = 0;
   public:
       CGame( std::shared_ptr<IFileLoaderDelegate> fileLoaderDelegate, std::shared_ptr<IRenderer> aRenderer, std::shared_ptr<CGameDelegate> aGameDelegate );
-      ~CGame() = default;
       void endOfTurn(std::shared_ptr<CMap> map);
       std::shared_ptr<CMap> getMap();
       void tick();

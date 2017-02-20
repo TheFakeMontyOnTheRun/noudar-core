@@ -18,7 +18,7 @@
 #include "CMonster.h"
 #include "CElixirFountain.h"
 #include "CDoorway.h"
-
+#include "CItem.h"
 #include <iostream>
 
 namespace Knights {
@@ -59,6 +59,7 @@ namespace Knights {
 				mItems[ y ][ x ] = nullptr;
 
                 switch (element) {
+	                default:
                     case '0':
                     case '=':
                     case '_':
@@ -201,7 +202,6 @@ namespace Knights {
             case EDirection::kSouth:
                 return Vec2i{position.x, position.y + 1};
 
-            default:
             case EDirection::kNorth:
                 return Vec2i{position.x, position.y - 1};
         }
@@ -343,10 +343,10 @@ namespace Knights {
         auto position = this->getAvatar()->getPosition();
         auto mapElement = (map[position.y][position.x]);
 
-        if (mapElement != nullptr &&
-            (mapElement->getView() == 'E' || mapElement->getView() == 'B')) {
-            return (static_cast<Knights::CDoorway *>(&(*mapElement))->getDoorFunction() ==
-                    EDoorwayFunction::kExit);
+	    auto castToDoor = std::dynamic_pointer_cast<CDoorway>(mapElement);
+
+        if (mapElement != nullptr && castToDoor != nullptr ) {
+            return (castToDoor->getDoorFunction() == EDoorwayFunction::kExit);
         }
 
         return false;
