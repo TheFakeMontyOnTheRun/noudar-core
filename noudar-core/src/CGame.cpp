@@ -260,9 +260,19 @@ namespace Knights {
 
         mLevel = levelNumber;
         mTurn = 0;
+
+	    if ( mMap != nullptr ) {
+		    mPlayerActor = mMap->getAvatar();
+	    }
+
         auto mapData = mFileLoaderDelegate->loadFileFromPath(ss.str());
-        mMap = std::make_shared<CMap>(mapData, mGameDelegate);
-        mGameDelegate->onLevelLoaded();
+	    mMap = std::make_shared<CMap>(mapData, mGameDelegate);
+
+	    if ( mPlayerActor != nullptr ) {
+			mMap->getAvatar()->copyStateFrom( mPlayerActor );
+	    }
+
+	    mGameDelegate->onLevelLoaded();
     }
 
     void CGame::proceedToNextLevel() {

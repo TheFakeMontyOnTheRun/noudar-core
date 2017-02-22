@@ -89,6 +89,19 @@ TEST(TestCGame, GameWillRefreshUponValidMoveTest ) {
   game->tick();
 }
 
+TEST(TestCGame, GameWillKeepPlayerStatusBetweenMapChanges ) {
+	auto mockFileLoader = std::make_shared<MockFileLoader>();
+	auto renderer = std::make_shared<MockRenderer>();
+	auto delegate = std::make_shared<Knights::CGameDelegate>();
+	ON_CALL(*mockFileLoader, loadFileFromPath(_)).WillByDefault(Return(getMap()));
+	auto game = std::make_shared<Knights::CGame>( mockFileLoader, renderer, delegate );
+
+	game->getMap()->getAvatar()->addHP( 50 );
+	auto previousHP = game->getMap()->getAvatar()->getHP();
+	game->proceedToNextLevel();
+	ASSERT_EQ( previousHP, game->getMap()->getAvatar()->getHP() );
+}
+
 
 
 TEST(TestCGame, GameWillNotTryToLoadFileFromBinaryTest ) {

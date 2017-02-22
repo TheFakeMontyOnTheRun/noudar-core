@@ -40,6 +40,7 @@ namespace Knights {
 
 	class CGame : public std::enable_shared_from_this<CGame> {
       std::shared_ptr<CMap> mMap;
+	  std::shared_ptr<CActor> mPlayerActor;
       std::shared_ptr<IRenderer> mRenderer;
       std::shared_ptr<CGameDelegate> mGameDelegate;
       std::shared_ptr<IFileLoaderDelegate> mFileLoaderDelegate;

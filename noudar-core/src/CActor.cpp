@@ -210,4 +210,18 @@ namespace Knights {
 	void CActor::setCurrentSay(std::string newSay) {
 		mCurrentSay = newSay;
 	}
+
+	void CActor::copyStateFrom(std::shared_ptr<CActor> other) {
+		this->mName = other->mName;
+		this->mAttack = other->mAttack;
+		this->mCurrentItem = other->mCurrentItem;
+		this->mCurrentSay = other->mCurrentSay;
+		this->mDefaultAP = other->mDefaultAP;
+		this->mView = other->mView;
+		this->mDefence = other->mDefence;
+		this->mStance = other->mStance;
+		this->mTeam = other->mTeam;
+		this->mHP = other->mHP;
+		this->mInventory = this->mInventory;
+	}
 }
