@@ -107,6 +107,7 @@ namespace Knights {
 
 		std::string getCurrentSay();
 
+		void copyStateFrom( std::shared_ptr<CActor> other );
 	protected:
 
 		void setCurrentSay( std::string newSay );

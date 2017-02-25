@@ -89,7 +89,61 @@ TEST(TestCGame, GameWillRefreshUponValidMoveTest ) {
   game->tick();
 }
 
+TEST(TestCGame, GameWillKeepPlayerStatusBetweenMapChanges ) {
+	auto mockFileLoader = std::make_shared<MockFileLoader>();
+	auto renderer = std::make_shared<MockRenderer>();
+	auto delegate = std::make_shared<Knights::CGameDelegate>();
+	ON_CALL(*mockFileLoader, loadFileFromPath(_)).WillByDefault(Return(getMap()));
+	auto game = std::make_shared<Knights::CGame>( mockFileLoader, renderer, delegate );
 
+	game->getMap()->getAvatar()->addHP( 50 );
+	auto previousHP = game->getMap()->getAvatar()->getHP();
+	game->proceedToNextLevel();
+	ASSERT_EQ( previousHP, game->getMap()->getAvatar()->getHP() );
+}
+
+TEST(TestCGame, GameWillInvalidateStoredPlayerForNextSession ) {
+	auto mockFileLoader = std::make_shared<MockFileLoader>();
+	auto renderer = std::make_shared<MockRenderer>();
+	auto delegate = std::make_shared<Knights::CGameDelegate>();
+	ON_CALL(*mockFileLoader, loadFileFromPath(_)).WillByDefault(Return(getMap()));
+	auto game = std::make_shared<Knights::CGame>( mockFileLoader, renderer, delegate );
+	auto avatar = game->getMap()->getAvatar();
+	avatar->addHP( 50 );
+	auto previousHP = avatar->getHP();
+	game->proceedToNextLevel();
+	avatar = game->getMap()->getAvatar();
+	avatar->addHP(-avatar->getHP() * 2 );
+	ASSERT_FALSE( avatar->isAlive() );
+	game->tick();
+	ASSERT_TRUE( game->getMap()->getAvatar()->isAlive() );
+	ASSERT_NE( previousHP, game->getMap()->getAvatar()->getHP() );
+}
+
+TEST(TestCGame, AvatarInstancesBetweenLevelsAreNotTheSameInstance ) {
+	auto mockFileLoader = std::make_shared<MockFileLoader>();
+	auto renderer = std::make_shared<MockRenderer>();
+	auto delegate = std::make_shared<Knights::CGameDelegate>();
+	ON_CALL(*mockFileLoader, loadFileFromPath(_)).WillByDefault(Return(getMap()));
+	auto game = std::make_shared<Knights::CGame>( mockFileLoader, renderer, delegate );
+	auto avatar = game->getMap()->getAvatar();
+	ASSERT_EQ( game->getMap()->getAvatar(), avatar );
+	game->proceedToNextLevel();
+	ASSERT_NE( game->getMap()->getAvatar(), avatar );
+}
+
+TEST(TestCGame, RestoredPlayerWillNotRestoreTransientStateFromBackup ) {
+	auto mockFileLoader = std::make_shared<MockFileLoader>();
+	auto renderer = std::make_shared<MockRenderer>();
+	auto delegate = std::make_shared<Knights::CGameDelegate>();
+	ON_CALL(*mockFileLoader, loadFileFromPath(_)).WillByDefault(Return(getMap()));
+	auto game = std::make_shared<Knights::CGame>( mockFileLoader, renderer, delegate );
+	game->getMap()->getAvatar()->turnLeft();
+	auto direction = game->getMap()->getAvatar()->getDirection();
+	game->proceedToNextLevel();
+	game->tick();
+	ASSERT_NE( direction, game->getMap()->getAvatar()->getDirection() );
+}
 
 TEST(TestCGame, GameWillNotTryToLoadFileFromBinaryTest ) {
   
