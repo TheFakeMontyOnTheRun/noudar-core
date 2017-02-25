@@ -343,11 +343,9 @@ namespace Knights {
         auto position = this->getAvatar()->getPosition();
         auto mapElement = (map[position.y][position.x]);
 
-        auto elementView = mapElement->getView();
-
         //this is needed (when a simpler dynamic_cast would do) simply because the Android project is not currently configured to use
         //RTTI
-        if (mapElement != nullptr &&  (elementView == '9' || elementView == '*' ) ) {
+        if (mapElement != nullptr &&  (mapElement->getView() == '9' || mapElement->getView() == '*' ) ) {
             auto element = *mapElement;
             auto ptr = &element;
             auto casted = (CDoorway*)ptr;
