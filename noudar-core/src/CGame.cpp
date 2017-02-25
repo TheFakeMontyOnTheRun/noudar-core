@@ -65,6 +65,7 @@ namespace Knights {
     void CGame::tick() {
 
         if (!mMap->getAvatar()->isAlive()) {
+	        mPlayerActor = nullptr;
             playLevel(0);
         } else {
 
@@ -261,7 +262,7 @@ namespace Knights {
         mLevel = levelNumber;
         mTurn = 0;
 
-	    if ( mMap != nullptr ) {
+	    if ( mMap != nullptr && mMap->getAvatar()->isAlive()) {
 		    mPlayerActor = mMap->getAvatar();
 	    }
 
