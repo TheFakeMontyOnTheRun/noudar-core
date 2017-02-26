@@ -12,7 +12,7 @@
 #include <memory>
 #include <ncurses.h>
 #include <cstdlib>
-
+#include <array>
 #include "Vec2i.h"
 #include "IMapElement.h"
 #include "CTeam.h"
