@@ -358,10 +358,13 @@ namespace Knights {
         auto position = this->getAvatar()->getPosition();
         auto mapElement = (map[position.y][position.x]);
 
-	    auto castToDoor = std::dynamic_pointer_cast<CDoorway>(mapElement);
-
-        if (mapElement != nullptr && castToDoor != nullptr ) {
-            return (castToDoor->getDoorFunction() == EDoorwayFunction::kExit);
+        //this is needed (when a simpler dynamic_cast would do) simply because the Android project is not currently configured to use
+        //RTTI
+        if (mapElement != nullptr &&  (mapElement->getView() == '9' || mapElement->getView() == '*' ) ) {
+            auto element = *mapElement;
+            auto ptr = &element;
+            auto casted = (CDoorway*)ptr;
+            return (casted->getDoorFunction() == EDoorwayFunction::kExit);
         }
 
         return false;
