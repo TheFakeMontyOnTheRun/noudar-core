@@ -61,7 +61,7 @@ MAIN_GAME_OBJ = ncurses-version/main.o
 LDFLAGS = -lncurses
 TESTLDFLAGS = -lpthread
 TARGET = noudar
-TESTTARGET = tests
+TESTTARGET = unittests
 
 
 $(TARGET):	$(OBJS) $(MAIN_GAME_OBJ)
