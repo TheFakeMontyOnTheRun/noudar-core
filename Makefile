@@ -1,8 +1,29 @@
-CXXFLAGS = -Inoudar-core/include -Incurses-version -O2 -g -c -std=c++0x  -ferror-limit=1 -Werror -Wall --pedantic
+CXXFLAGS = -Inoudar-core/include -Incurses-version -O2 -g -c -std=c++0x  -ferror-limit=1 -Werror -Wall --pedantic \
+		-I$(GTEST_DIR)/include \
+		-I$(GTEST_DIR) \
+		-I$(GTEST_DIR)/include/gtest \
+		-I$(GTEST_DIR)/include/gtest/internal \
+		-I$(GMOCK_DIR)/include \
+		-I$(GMOCK_DIR) \
+		-I$(GMOCK_DIR)/include/gtest \
+		-I$(GMOCK_DIR)/include/gtest/internal
+
 CXX = clang++
 
-OBJS = ncurses-version/main.o \
-    ncurses-version/CConsoleRenderer.o \
+
+GTEST_DIR = lib/googletest/googletest
+GMOCK_DIR = lib/googletest/googlemock
+
+
+
+TESTOBJS = Tests/TestCCharacter.o \
+		$(GTEST_DIR)/src/gtest-all.o \
+    	$(GMOCK_DIR)/src/gmock-all.o \
+    	$(GMOCK_DIR)/src/gmock_main.o
+
+
+
+OBJS = ncurses-version/CConsoleRenderer.o \
     noudar-core/src/Vec2i.o \
     noudar-core/src/CActor.o \
     noudar-core/src/CMonster.o \
@@ -35,17 +56,25 @@ OBJS = ncurses-version/main.o \
     noudar-core/src/commands/CUseCurrentItemCommand.o \
     noudar-core/src/commands/CEndTurnCommand.o
 
+MAIN_GAME_OBJ = ncurses-version/main.o
+
 LDFLAGS = -lncurses
-
+TESTLDFLAGS = -lpthread
 TARGET = noudar
+TESTTARGET = tests
 
-$(TARGET):	$(OBJS)
-	$(CXX) -o $(TARGET) $(OBJS) $(LDFLAGS)
+
+$(TARGET):	$(OBJS) $(MAIN_GAME_OBJ)
+	$(CXX) -o $(TARGET) $(OBJS) $(MAIN_GAME_OBJ) $(LDFLAGS)
+
+$(TESTTARGET): $(OBJS) $(TESTOBJS)
+	$(CXX) -o $(TESTTARGET) $(OBJS) $(TESTOBJS) $(TESTLDFLAGS) $(LDFLAGS)
 
 all:	$(TARGET)
 
+
 clean:
-	rm -f $(OBJS) $(TARGET)
+	rm -f $(OBJS) $(TESTTARGET) $(MAIN_GAME_OBJ) $(TESTOBJS) $(TARGET)
 	rm src/*~
 	rm include/*~
 	rm *~
