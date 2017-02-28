@@ -70,11 +70,17 @@ $(TARGET):	$(OBJS) $(MAIN_GAME_OBJ)
 $(TESTTARGET): $(OBJS) $(TESTOBJS)
 	$(CXX) -o $(TESTTARGET) $(OBJS) $(TESTOBJS) $(TESTLDFLAGS) $(LDFLAGS)
 
+coverage: $(TESTTARGET)
+	./$(TESTTARGET)
+	lcov --capture --directory . --output-file lcov-output.info && genhtml lcov-output.info --output-directory coverage
+
 all:	$(TARGET)
 
 
 clean:
 	rm -f $(OBJS) $(TESTTARGET) $(MAIN_GAME_OBJ) $(TESTOBJS) $(TARGET)
+	rm lcov-output.info
+	rm -rf coverage
 	rm src/*~
 	rm include/*~
 	rm *~
