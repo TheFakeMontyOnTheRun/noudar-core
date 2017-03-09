@@ -40,5 +40,6 @@ namespace Knights {
     Vec2i mapOffsetForDirection( EDirection direction );
     EDirection leftOf(Knights::EDirection d);
     EDirection rightOf(Knights::EDirection d);
+    EDirection oppositeOf(Knights::EDirection d);
 }
 #endif //KNIGHTS_IN_PORTO_VEC2I_H

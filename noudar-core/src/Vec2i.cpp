@@ -43,12 +43,13 @@ namespace Knights {
 		switch (aDirection) {
 			case EDirection::kNorth:
 				return { 0 , -1 };
-			case EDirection::kWest:
-				return { -1, 0 };
+            case EDirection::kEast:
+                return { 1, 0 };
+            case EDirection::kWest:
+                return { -1, 0 };
 			case EDirection::kSouth:
 				return { 0, 1 };
-			case EDirection::kEast:
-				return { 1, 0 };
+
 		}
 	}
 
@@ -66,6 +67,18 @@ namespace Knights {
 		return static_cast<EDirection>( index );
 	}
 
+	EDirection oppositeOf(Knights::EDirection d) {
+		switch (d) {
+			case Knights::EDirection::kNorth:
+				return Knights::EDirection::kSouth;
+			case Knights::EDirection::kSouth:
+				return Knights::EDirection::kNorth;
+			case Knights::EDirection::kEast:
+				return Knights::EDirection::kWest;
+			case Knights::EDirection::kWest:
+				return Knights::EDirection::kEast;
+		}
+	}
 
 	EDirection leftOf(Knights::EDirection d) {
 		switch (d) {
