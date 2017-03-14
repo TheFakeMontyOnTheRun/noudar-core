@@ -44,7 +44,7 @@ namespace Knights {
         std::shared_ptr<CActor> actor = nullptr;
 
 	    auto heroArchetype = std::make_shared<CCharacterArchetype>( 5, 2, 20, 7, '^', "Hero");
-	    auto monsterArchetype = std::make_shared<CCharacterArchetype>( 4, 1, 5, 3, '@', "Monster");
+	    auto monsterArchetype = std::make_shared<CCharacterArchetype>( 4, 1, 10, 3, '@', "Monster");
 	    auto friends = std::make_shared<CTeam>("Heroes");
 	    auto foes = std::make_shared<CTeam>("Enemies");
         int id = 1;
@@ -79,10 +79,7 @@ namespace Knights {
 		                mElement[ y ][ x ] = '.';
 		                mItems[ y ][ x ] = std::make_shared<CItem>("Sword of sorrow", '+', [&](std::shared_ptr<CActor> aActor, std::shared_ptr<CMap> aMap){
                             auto target = getActorTargetPosition(aActor);
-                            auto otherActor = getActorAt(target);
-                            if (otherActor != nullptr && aActor->getTeam() != otherActor->getTeam()) {
-                                aActor->performAttack(otherActor);
-                            }
+                            attack( aActor, target, true );
 		                });
 		                break;
 	                case 'y':
@@ -115,20 +112,19 @@ namespace Knights {
                     case '~':
                         block[y][x] = false;
                         break;
-	                case 'J':
-		                actor = std::make_shared<CElixirFountain>(id++);
-		                mElement[ y ][ x ] = '.';
-		                break;
+
                     case '4':
                         actor = mAvatar = std::make_shared<CCharacter>( heroArchetype, friends, id++);
                         mElement[ y ][ x ] = '.';
                         break;
+
                     case '9':
                     case '*':
                         map[y][x] = std::make_shared<CDoorway>(
                                 element == '9' ? EDoorwayFunction::kExit
                                                : EDoorwayFunction::kEntry);
                         break;
+                    case 'J':
                     case '6':
                     case '5':
                         actor = std::make_shared<CMonster>( monsterArchetype, foes, id++);
@@ -261,16 +257,9 @@ namespace Knights {
 
     void CMap::move(EDirection d, std::shared_ptr<CActor> actor) {
 
-        if (actor->canAttack() && attackIfNotFriendly(d, actor, true)) {
-            return;
-        }
-
         if (!actor->canMove()) {
             return;
         }
-
-
-        bool moved = false;
 
         auto position = actor->getPosition();
 
@@ -279,37 +268,32 @@ namespace Knights {
             case EDirection::kEast:
 
                 if (!isBlockAt(position.x + 1, position.y)) {
-                    moved = true;
                     moveActor(position, {position.x + 1, position.y}, actor);
                 }
                 break;
 
             case EDirection::kWest:
                 if (!isBlockAt(position.x - 1, position.y)) {
-                    moved = true;
                     moveActor(position, {position.x - 1, position.y}, actor);
                 }
                 break;
 
             case EDirection::kSouth:
                 if (!isBlockAt(position.x, position.y + 1)) {
-                    moved = true;
                     moveActor(position, {position.x, position.y + 1}, actor);
                 }
                 break;
 
             case EDirection::kNorth:
                 if (!isBlockAt(position.x, position.y - 1)) {
-                    moved = true;
                     moveActor(position, {position.x, position.y - 1}, actor);
                 }
                 break;
-
+            default:
+                return;
         }
 
-        if (moved) {
-            actor->onMove();
-        }
+        actor->onMove();
     }
 
     bool CMap::isValid(int x, int y) {

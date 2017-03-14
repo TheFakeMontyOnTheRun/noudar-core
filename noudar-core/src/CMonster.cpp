@@ -30,6 +30,12 @@ namespace Knights {
 
 		if (std::abs((float) dx) >= std::abs((float) dy)) {
 
+			if ( std::abs((float) dx) == 1) {
+				map->attack( sharedThis, {x, y}, false);
+				onMove();
+				return true;
+			}
+
 			if (dx <= 0) {
 				map->move(EDirection::kWest, sharedThis);
 				return true;
@@ -38,6 +44,11 @@ namespace Knights {
 				return true;
 			}
 		} else {
+			if ( std::abs((float) dy) == 1) {
+				map->attack( sharedThis, {x, y}, false);
+				onMove();
+				return true;
+			}
 
 			if (dy <= 0) {
 				map->move(EDirection::kNorth, sharedThis);
