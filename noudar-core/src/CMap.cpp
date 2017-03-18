@@ -74,18 +74,26 @@ namespace Knights {
                     case 'H':
                         block[y][x] = false;
                         break;
-	                case '+':
+	                case 't':
 		                block[y][x] = false;
 		                mElement[ y ][ x ] = '.';
-		                mItems[ y ][ x ] = std::make_shared<CItem>("Sword of sorrow", '+', [&](std::shared_ptr<CActor> aActor, std::shared_ptr<CMap> aMap){
+		                mItems[ y ][ x ] = std::make_shared<CItem>("Sword of sorrow", 't', false, [&](std::shared_ptr<CActor> aActor, std::shared_ptr<CMap> aMap){
                             auto target = getActorTargetPosition(aActor);
                             attack( aActor, target, true );
 		                });
 		                break;
+                    case '+':
+                        block[y][x] = false;
+                        mElement[ y ][ x ] = '.';
+                        mItems[ y ][ x ] = std::make_shared<CItem>("The holy health", '+', true, [&](std::shared_ptr<CActor> aActor, std::shared_ptr<CMap> aMap){
+                            aActor->addHP(5);
+                        });
+                        break;
+
 	                case 'y':
 		                block[y][x] = false;
 		                mElement[ y ][ x ] = '.';
-		                mItems[ y ][ x ] = std::make_shared<CItem>("Crossbow of damnation", 'y', [&](std::shared_ptr<CActor> aActor, std::shared_ptr<CMap> aMap){
+		                mItems[ y ][ x ] = std::make_shared<CItem>("Crossbow of damnation", 'y', false, [&](std::shared_ptr<CActor> aActor, std::shared_ptr<CMap> aMap){
                             auto target = projectLineOfSight( aActor->getPosition(), aActor->getDirection() );
 
                             if ( target != nullptr ) {

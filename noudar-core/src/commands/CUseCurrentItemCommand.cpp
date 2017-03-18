@@ -51,5 +51,8 @@ void Knights::CUseCurrentItemCommand::execute() {
 
 	if ( currentItem != nullptr ) {
 		currentItem->use(mActor, getGame()->getMap());
+		if ( currentItem->isConsumable() ) {
+			mActor->removeItemFromInventory(currentItem);
+		}
 	}
 }

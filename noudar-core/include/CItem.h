@@ -20,14 +20,16 @@ namespace Knights {
 		std::string mName;
 		char mView;
 		CItemAction mItemAction;
+		bool mConsumable = false;
 	public:
-		CItem(std::string aName, char aView, const CItemAction& itemAction );
+		CItem(std::string aName, char aView, bool aConsumable, const CItemAction& itemAction );
 		CItem(std::string aName, char aView );
 
 		std::string to_string() const;
 
 		void use(std::shared_ptr<CActor>, std::shared_ptr<CMap>);
 		char getView() const;
+		bool isConsumable() const;
 	};
 
 	std::ostream &operator<<(std::ostream &os, const CItem &action);
