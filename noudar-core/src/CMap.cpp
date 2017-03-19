@@ -398,6 +398,10 @@ namespace Knights {
         }
 	}
 
+    std::shared_ptr<Knights::CItem> CMap::getItemAt( Vec2i from ) {
+        return mItems[ from.y ][ from.x ];
+    }
+
 	void CMap::putItemAt(std::shared_ptr<CItem> aItem, Vec2i aDestination) {
 		if ( mItems[ aDestination.y ][ aDestination.x ] == nullptr ) {
 			mItems[ aDestination.y ][ aDestination.x ] = aItem;
