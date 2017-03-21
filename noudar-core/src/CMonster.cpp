@@ -63,7 +63,7 @@ namespace Knights {
 	}
 
 	bool CMonster::actOn(int newX, int newY, std::shared_ptr<CMap> map) {
-		if (map->isValid(newX, newY)) {
+		if (map->isValid({newX, newY})) {
 
 			auto otherActor = map->getActorAt(Vec2i{newX, newY});
 
@@ -75,7 +75,7 @@ namespace Knights {
 				}
 			}
 
-			if (map->isBlockAt(newX, newY)) {
+			if (map->isBlockAt({newX, newY})) {
 				return false;
 			}
 

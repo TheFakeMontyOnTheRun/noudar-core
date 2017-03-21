@@ -23,15 +23,14 @@ namespace Knights {
 
     public:
 
-        bool isValid( int x, int y );
-        bool isBlockAt( int x, int y );
+        bool isValid( const Vec2i& p );
+        bool isBlockAt( const Vec2i& p );
         CMap( const std::string& data, std::shared_ptr<CGameDelegate> aGameDelegate );
         void move( EDirection d, std::shared_ptr<CActor> a );
-        bool attackIfNotFriendly( EDirection d, std::shared_ptr<CActor> a, bool mutual );
         void endOfTurn();
 	    bool isLevelFinished();
         Vec2i getActorTargetPosition( std::shared_ptr<CActor> a );
-        char getElementAt( int x, int y );
+        char getElementAt( const Vec2i& p );
         std::shared_ptr<CActor> getAvatar();
         std::vector<std::shared_ptr<CActor>> getActors();
         std::shared_ptr<CActor> getActorAt( Vec2i position );

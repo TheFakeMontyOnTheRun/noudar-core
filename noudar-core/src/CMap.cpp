@@ -53,6 +53,7 @@ namespace Knights {
             for (int x = 0; x < kMapSize; ++x) {
 
                 element = mapData[ pos ];
+
                 block[y][x] = false;
                 map[y][x] = nullptr;
                 mElement[y][x] = element;
@@ -81,6 +82,7 @@ namespace Knights {
                             auto target = getActorTargetPosition(aActor);
                             attack( aActor, target, true );
 		                });
+
 		                break;
                     case '+':
                         block[y][x] = false;
@@ -154,7 +156,6 @@ namespace Knights {
         }
     }
 
-
     std::shared_ptr<CActor> CMap::attack(std::shared_ptr<CActor> actor, Vec2i position,
                                          bool mutual) {
 
@@ -215,53 +216,10 @@ namespace Knights {
     }
 
     Vec2i CMap::getActorTargetPosition(std::shared_ptr<CActor> actor) {
-
         auto position = actor->getPosition();
-
-        switch (actor->getDirection()) {
-
-            case EDirection::kEast:
-                return Vec2i{position.x + 1, position.y};
-
-            case EDirection::kWest:
-                return Vec2i{position.x - 1, position.y};
-
-            case EDirection::kSouth:
-                return Vec2i{position.x, position.y + 1};
-
-            case EDirection::kNorth:
-                return Vec2i{position.x, position.y - 1};
-        }
+        auto offset = mapOffsetForDirection( actor->getDirection() );
+        return { position.x + offset.x, position.y + offset.y };
     }
-
-    bool CMap::attackIfNotFriendly(EDirection d, std::shared_ptr<CActor> actor, bool mutual) {
-
-        std::shared_ptr<CActor> other = nullptr;
-
-        auto position = actor->getPosition();
-
-        switch (d) {
-
-            case EDirection::kEast:
-                other = attack(actor, Vec2i{position.x + 1, position.y}, mutual);
-                break;
-
-            case EDirection::kWest:
-                other = attack(actor, Vec2i{position.x - 1, position.y}, mutual);
-                break;
-
-            case EDirection::kSouth:
-                other = attack(actor, Vec2i{position.x, position.y + 1}, mutual);
-                break;
-
-            case EDirection::kNorth:
-                other = attack(actor, Vec2i{position.x, position.y - 1}, mutual);
-                break;
-        }
-
-        return (other != nullptr);
-    }
-
 
     void CMap::move(EDirection d, std::shared_ptr<CActor> actor) {
 
@@ -270,75 +228,50 @@ namespace Knights {
         }
 
         auto position = actor->getPosition();
+        auto offset = mapOffsetForDirection( d );
+        auto newPosition = Vec2i{ position.x + offset.x, position.y + offset.y };
 
-        switch (d) {
-
-            case EDirection::kEast:
-
-                if (!isBlockAt(position.x + 1, position.y)) {
-                    moveActor(position, {position.x + 1, position.y}, actor);
-                }
-                break;
-
-            case EDirection::kWest:
-                if (!isBlockAt(position.x - 1, position.y)) {
-                    moveActor(position, {position.x - 1, position.y}, actor);
-                }
-                break;
-
-            case EDirection::kSouth:
-                if (!isBlockAt(position.x, position.y + 1)) {
-                    moveActor(position, {position.x, position.y + 1}, actor);
-                }
-                break;
-
-            case EDirection::kNorth:
-                if (!isBlockAt(position.x, position.y - 1)) {
-                    moveActor(position, {position.x, position.y - 1}, actor);
-                }
-                break;
-            default:
-                return;
+        if (!isBlockAt(newPosition)) {
+            moveActor(position, newPosition, actor);
+            actor->onMove();
         }
-
-        actor->onMove();
     }
 
-    bool CMap::isValid(int x, int y) {
-        if (x < 0 || x >= kMapSize || y < 0 || y >= kMapSize) {
+    bool CMap::isValid(const Vec2i& p) {
+        if (p.x < 0 || p.x >= kMapSize || p.y < 0 || p.y >= kMapSize) {
             return false;
         }
         return true;
     }
 
-    bool CMap::isBlockAt(int x, int y) {
+    bool CMap::isBlockAt(const Vec2i& p) {
 
-        if (!isValid(x, y)) {
+        if (!isValid(p)) {
             return true;
         }
 
-        if (mActors[y][x] != nullptr) {
+        if (mActors[p.y][p.x] != nullptr) {
             return true;
         }
 
-        return block[y][x];
+        return block[p.y][p.x];
     }
 
     std::shared_ptr<CActor> CMap::getActorAt(Vec2i position) {
-	    if ( isValid( position.x, position.y ) ) {
+	    if ( isValid( position ) ) {
 		    return mActors[position.y][position.x];
 	    } else {
 		    return nullptr;
 	    }
     }
 
-    char CMap::getElementAt(int x, int y) {
+    char CMap::getElementAt(const Vec2i& p) {
 
-	    if ( mItems[ y ][ x ] != nullptr ) {
-		    return mItems[ y ][ x ]->getView();
+	    if ( mItems[ p.y ][ p.x ] != nullptr ) {
+		    return mItems[ p.y ][ p.x ]->getView();
 	    }
 
-        return mElement[y][x];
+        return mElement[p.y][p.x];
     }
 
     std::vector<std::shared_ptr<CActor>> CMap::getActors() {
@@ -382,8 +315,9 @@ namespace Knights {
 		auto position = aPosition;
 		std::shared_ptr<CActor> toReturn = nullptr;
 
-		while ( isValid( position.x, position.y ) && ( !isBlockAt( position.x, position.y ) || toReturn == nullptr ) ) {
-			position = {offset.x + position.x, offset.y + position.y };
+		while ( isValid( position ) && ( !isBlockAt( position ) || toReturn == nullptr ) ) {
+			position.x += offset.x;
+            position.y += offset.y;
 			toReturn = getActorAt( position );
 		}
 

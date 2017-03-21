@@ -89,9 +89,9 @@ namespace Knights {
                     }
 
                 } else {
-                    if (map.isBlockAt( x, y )) {
+                    if (map.isBlockAt( {x, y} )) {
                         attron(COLOR_PAIR(3));
-                        addch(map.getElementAt( x, y ) );
+                        addch(map.getElementAt( {x, y} ) );
                     } else {
                         if ( targetPosition.x == x && targetPosition.y == y ) {
                             attron(COLOR_PAIR(6));
@@ -99,7 +99,7 @@ namespace Knights {
                             attron(COLOR_PAIR(4));
                         }
 
-                        addch(map.getElementAt( x, y));
+                        addch(map.getElementAt( {x, y}));
                     }
                 }
 
