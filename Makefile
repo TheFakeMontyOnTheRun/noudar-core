@@ -75,6 +75,6 @@ all:	$(TARGET)
 
 clean:
 	rm -f $(OBJS) $(TESTTARGET) $(MAIN_GAME_OBJ) $(TESTOBJS) $(TARGET)
-	rm src/*~
-	rm include/*~
-	rm *~
+	find . | grep ~ | xargs rm
+	find . | grep gcno | xargs rm
+	find . | grep gcda | xargs rm
