@@ -39,6 +39,7 @@ OBJS = ncurses-version/CConsoleRenderer.o \
     noudar-core/src/IMapElement.o \
     noudar-core/src/CGame.o \
     noudar-core/src/CItem.o \
+    noudar-core/src/CStorageItem.o \
     noudar-core/src/CPlainFileLoader.o \
     noudar-core/src/CGameDelegate.o \
     noudar-core/src/commands/CActorMeleeAttackCommand.o \
