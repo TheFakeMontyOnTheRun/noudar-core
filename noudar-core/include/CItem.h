@@ -17,6 +17,7 @@ namespace Knights {
 	const CItemAction kItemDoNothingAction = [](std::shared_ptr<CActor>, std::shared_ptr<CMap>){};
 
 	class CItem {
+	protected:
 		std::string mName;
 		char mView;
 		CItemAction mItemAction;
@@ -25,7 +26,7 @@ namespace Knights {
 		CItem(std::string aName, char aView, bool aConsumable, const CItemAction& itemAction );
 		CItem(std::string aName, char aView );
 
-		std::string to_string() const;
+        std::string to_string() const;
 
 		void use(std::shared_ptr<CActor>, std::shared_ptr<CMap>);
 		char getView() const;

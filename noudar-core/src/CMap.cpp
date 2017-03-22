@@ -20,6 +20,8 @@
 #include "CDoorway.h"
 #include "CItem.h"
 #include <iostream>
+#include <sstream>
+#include <CStorageItem.h>
 
 namespace Knights {
 
@@ -82,8 +84,13 @@ namespace Knights {
                             auto target = getActorTargetPosition(aActor);
                             attack( aActor, target, true );
 		                });
-
 		                break;
+
+                    case 'u':
+                        block[y][x] = false;
+                        mElement[ y ][ x ] = '.';
+                        mItems[ y ][ x ] = std::make_shared<CStorageItem>("Quiver", 'u', false, [&](std::shared_ptr<CActor> aActor, std::shared_ptr<CMap> aMap){}, 5);
+                        break;
                     case '+':
                         block[y][x] = false;
                         mElement[ y ][ x ] = '.';
@@ -95,12 +102,22 @@ namespace Knights {
 	                case 'y':
 		                block[y][x] = false;
 		                mElement[ y ][ x ] = '.';
+                        //The need for RTTI creeps again...
 		                mItems[ y ][ x ] = std::make_shared<CItem>("Crossbow of damnation", 'y', false, [&](std::shared_ptr<CActor> aActor, std::shared_ptr<CMap> aMap){
+
+                            auto quiver = aActor->getItemWithSymbol('u');
+
+                            if ( quiver == nullptr || (static_cast<CStorageItem*>(&(*quiver)))->getAmount() == 0 ) {
+                                return;
+                            }
+
                             auto target = projectLineOfSight( aActor->getPosition(), aActor->getDirection() );
 
                             if ( target != nullptr ) {
                                 attack( aActor, target->getPosition(), false );
                             }
+
+                            static_cast<CStorageItem*>(&(*quiver))->add( -1 );
                         });
 		                break;
 

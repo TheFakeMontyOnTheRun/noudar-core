@@ -224,4 +224,15 @@ namespace Knights {
 		this->mHP = other->mHP;
 		this->mInventory = this->mInventory;
 	}
+
+    std::shared_ptr<CItem> CActor::getItemWithSymbol(char symbol) {
+
+		for ( const auto& item : mInventory ) {
+			if ( item->getView() == symbol ) {
+				return item;
+			}
+		}
+
+		return nullptr;
+    }
 }

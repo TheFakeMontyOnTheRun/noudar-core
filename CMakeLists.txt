@@ -79,7 +79,8 @@ set(SOURCE_FILES
         noudar-core/src/CGame.cpp
         noudar-core/src/CMap.cpp
         noudar-core/src/IMapElement.cpp
-        )
+        noudar-core/src/CStorageItem.cpp
+        noudar-core/include/CStorageItem.h)
 
 include_directories(${CURSES_INCLUDE_DIR})
 

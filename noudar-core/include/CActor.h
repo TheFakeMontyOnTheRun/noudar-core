@@ -101,6 +101,8 @@ namespace Knights {
 
 		std::shared_ptr<CItem> getSelectedItem();
 
+		std::shared_ptr<CItem> getItemWithSymbol( char symbol );
+
 		void giveItem( std::shared_ptr<CItem> aItem );
 
 		std::shared_ptr<CItem> removeItemFromInventory( std::shared_ptr<CItem> itemToRemove );
