@@ -20,10 +20,14 @@ namespace Knights {
 	protected:
 		std::string mName;
 		char mView;
-		CItemAction mItemAction;
-		bool mConsumable = false;
+        bool mConsumable = false;
+
+		CItemAction mItemAction = kItemDoNothingAction;
+        CItemAction mItemPickAction = kItemDoNothingAction;
+        CItemAction mItemDropAction = kItemDoNothingAction;
 	public:
-		CItem(std::string aName, char aView, bool aConsumable, const CItemAction& itemAction );
+        CItem(std::string aName, char aView, bool aConsumable, const CItemAction& itemUseAction );
+		CItem(std::string aName, char aView, bool aConsumable, const CItemAction& itemUseAction, const CItemAction& itemPickAction, const CItemAction& itemDropAction );
 		CItem(std::string aName, char aView );
 
         std::string to_string() const;

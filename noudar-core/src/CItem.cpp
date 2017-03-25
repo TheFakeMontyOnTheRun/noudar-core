@@ -10,7 +10,7 @@
 
 #include <sstream>
 
-Knights::CItem::CItem(std::string aName, char aView ) : mName(aName), mView( aView ), mItemAction( kItemDoNothingAction ), mConsumable(false) {
+Knights::CItem::CItem(std::string aName, char aView ) : mName(aName), mView( aView ), mConsumable(false) {
 }
 
 std::string Knights::CItem::to_string() const {
@@ -21,8 +21,12 @@ char Knights::CItem::getView() const {
 	return mView;
 }
 
-Knights::CItem::CItem(std::string aName, char aView, bool aConsumable, const Knights::CItemAction &itemAction) : mName(aName), mView( aView ), mItemAction(itemAction), mConsumable(aConsumable) {
+Knights::CItem::CItem(std::string aName, char aView, bool aConsumable, const Knights::CItemAction &itemAction) : mName(aName), mView( aView ), mConsumable(aConsumable), mItemAction( itemAction ) {
 }
+
+Knights::CItem::CItem(std::string aName, char aView, bool aConsumable, const Knights::CItemAction &itemAction, const Knights::CItemAction &itemPickAction, const Knights::CItemAction &itemDropAction) : mName(aName), mView( aView ), mConsumable(aConsumable), mItemAction(itemAction), mItemPickAction(itemPickAction), mItemDropAction(itemDropAction) {
+}
+
 
 void Knights::CItem::use(std::shared_ptr<CActor> aActor, std::shared_ptr<CMap> aMap) {
 	mItemAction(aActor, aMap);
