@@ -117,7 +117,9 @@ namespace Knights {
                                 attack( aActor, target->getPosition(), false );
                             }
 
-                            static_cast<CStorageItem*>(&(*quiver))->add( -1 );
+                            if ( static_cast<CStorageItem*>(&(*quiver))->add( -1 ) == 0) {
+                                aActor->removeItemFromInventory( quiver );
+                            }
                         });
 		                break;
 

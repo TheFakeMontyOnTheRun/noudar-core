@@ -32,7 +32,8 @@ int Knights::CStorageItem::getAmount() {
     return mAmount;
 }
 
-void Knights::CStorageItem::add(int amount) {
+int Knights::CStorageItem::add(int amount) {
     mAmount = std::max( 0, mAmount + amount );
     mName = formatName( mOriginalName, mAmount );
+    return mAmount;
 }

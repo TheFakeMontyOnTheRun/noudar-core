@@ -14,7 +14,7 @@ namespace Knights {
 
         void empty();
         int getAmount();
-        void add( int amount );
+        int add( int amount );
     };
 }
 
