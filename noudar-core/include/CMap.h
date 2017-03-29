@@ -20,7 +20,7 @@ namespace Knights {
 
         std::vector<std::shared_ptr<CActor>> actors;
         std::shared_ptr<CActor> mAvatar;
-
+		int mCurrentId = 1;
     public:
 
         bool isValid( const Vec2i& p );
@@ -41,6 +41,8 @@ namespace Knights {
 	    void giveItemAt( Vec2i from, std::shared_ptr<CActor> to );
 		std::shared_ptr<Knights::CItem> getItemAt( Vec2i from );
 		void putItemAt( std::shared_ptr<CItem>, Vec2i destination );
+		void addActorAt( std::shared_ptr<CActor> actor, const Vec2i& position );
+		int getLastestId();
     };
 }
 #endif
