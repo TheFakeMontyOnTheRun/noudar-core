@@ -72,6 +72,7 @@ set(SOURCE_FILES
         noudar-core/src/CElixirFountain.cpp
         noudar-core/src/CGameDelegate.cpp
         ncurses-version/CConsoleRenderer.cpp
+        noudar-core/src/CRandomWorldGenerator.cpp
         noudar-core/src/CMonster.cpp
         noudar-core/src/IFileLoaderDelegate.cpp
         noudar-core/src/CTeam.cpp

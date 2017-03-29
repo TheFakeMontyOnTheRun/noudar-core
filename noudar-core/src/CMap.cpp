@@ -21,7 +21,8 @@
 #include "CItem.h"
 #include <iostream>
 #include <sstream>
-#include <CStorageItem.h>
+#include "CStorageItem.h"
+#include "CRandomWorldGenerator.h"
 
 namespace Knights {
 
@@ -64,6 +65,7 @@ namespace Knights {
                 switch (element) {
 	                default:
                     case '0':
+                    case 'O':
                     case '=':
                     case '_':
                     case '-':
