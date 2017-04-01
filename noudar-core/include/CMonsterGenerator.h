@@ -4,7 +4,9 @@
 namespace Knights {
     class CMonsterGenerator : public CActor {
     public:
-        CMonsterGenerator (int aId);
+        CMonsterGenerator(int aId, int aliveForTurns);
+
+        void update(std::shared_ptr<CMap> map) override;
     };
 }
 #endif

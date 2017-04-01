@@ -21,7 +21,9 @@
 #include "CItem.h"
 #include <iostream>
 #include <sstream>
-#include <CStorageItem.h>
+#include <CMonsterGenerator.h>
+#include "CStorageItem.h"
+#include "CRandomWorldGenerator.h"
 
 namespace Knights {
 
@@ -49,7 +51,6 @@ namespace Knights {
 	    auto monsterArchetype = std::make_shared<CCharacterArchetype>( 4, 1, 10, 3, '@', "Monster");
 	    auto friends = std::make_shared<CTeam>("Heroes");
 	    auto foes = std::make_shared<CTeam>("Enemies");
-        int id = 1;
         int pos = 0;
         for (int y = 0; y < kMapSize; ++y) {
             for (int x = 0; x < kMapSize; ++x) {
@@ -64,6 +65,7 @@ namespace Knights {
                 switch (element) {
 	                default:
                     case '0':
+                    case 'O':
                     case '=':
                     case '_':
                     case '-':
@@ -143,7 +145,7 @@ namespace Knights {
                         break;
 
                     case '4':
-                        actor = mAvatar = std::make_shared<CCharacter>( heroArchetype, friends, id++);
+                        actor = mAvatar = std::make_shared<CCharacter>( heroArchetype, friends, getLastestId());
                         mElement[ y ][ x ] = '.';
                         break;
 
@@ -156,9 +158,14 @@ namespace Knights {
                     case 'J':
                     case '6':
                     case '5':
-                        actor = std::make_shared<CMonster>( monsterArchetype, foes, id++);
+                        actor = std::make_shared<CMonster>( monsterArchetype, foes, getLastestId());
                         mElement[ y ][ x ] = '.';
                         break;
+                    case 'G':
+                        actor = std::make_shared<CMonsterGenerator>(getLastestId(), 5);
+                        mElement[ y ][ x ] = '.';
+                        break;
+
                 }
 
                 if (actor != nullptr) {
@@ -360,4 +367,15 @@ namespace Knights {
 			mItems[ aDestination.y ][ aDestination.x ] = aItem;
 		}
 	}
+
+    void CMap::addActorAt(std::shared_ptr<CActor> actor, const Vec2i &position) {
+        mElement[ position.y ][ position.x ] = '.';
+        actors.push_back(actor);
+        mActors[ position.y][ position.x] = actor;
+        actor->setPosition( position );
+    }
+
+    int CMap::getLastestId() {
+        return ++mCurrentId;
+    }
 }

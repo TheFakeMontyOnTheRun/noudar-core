@@ -16,7 +16,7 @@ set(TEST_SOURCE_FILES
         Tests/TestCCharacter.cpp
         Tests/TestCGame.cpp
         Tests/TestVec2i.cpp
-        )
+        noudar-core/src/CMonsterGenerator.cpp)
 
 set(SOURCE_FILES
         noudar-core/include/commands/CMoveActorCommand.h
@@ -72,6 +72,7 @@ set(SOURCE_FILES
         noudar-core/src/CElixirFountain.cpp
         noudar-core/src/CGameDelegate.cpp
         ncurses-version/CConsoleRenderer.cpp
+        noudar-core/src/CRandomWorldGenerator.cpp
         noudar-core/src/CMonster.cpp
         noudar-core/src/IFileLoaderDelegate.cpp
         noudar-core/src/CTeam.cpp
@@ -80,13 +81,13 @@ set(SOURCE_FILES
         noudar-core/src/CMap.cpp
         noudar-core/src/IMapElement.cpp
         noudar-core/src/CStorageItem.cpp
-        noudar-core/include/CStorageItem.h)
+        noudar-core/include/CStorageItem.h noudar-core/src/CMonsterGenerator.cpp)
 
 include_directories(${CURSES_INCLUDE_DIR})
 
-add_executable(noudar_core ${SOURCE_FILES} ncurses-version/main.cpp)
+add_executable(noudar_core ${SOURCE_FILES} ncurses-version/main.cpp noudar-core/src/CMonsterGenerator.cpp)
 
-add_executable(noudar_core_test ${SOURCE_FILES} ${TEST_SOURCE_FILES})
+add_executable(noudar_core_test ${SOURCE_FILES} ${TEST_SOURCE_FILES} noudar-core/src/CMonsterGenerator.cpp)
 
 target_link_libraries(noudar_core ${CURSES_LIBRARIES} )
 
