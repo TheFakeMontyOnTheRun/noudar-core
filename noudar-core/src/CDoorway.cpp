@@ -9,7 +9,7 @@
 
 namespace Knights {
 
-    CDoorway::CDoorway(EDoorwayFunction f) : doorFunction(f) {
+    CDoorway::CDoorway(EDoorwayFunction f) : IMapElement(), doorFunction(f) {
         if (f == EDoorwayFunction::kExit) {
             mView = 'E';
         } else {

@@ -151,9 +151,15 @@ namespace Knights {
 
                     case '9':
                     case '*':
-                        map[y][x] = std::make_shared<CDoorway>(
-                                element == '9' ? EDoorwayFunction::kExit
-                                               : EDoorwayFunction::kEntry);
+                        {
+                            std::shared_ptr<CDoorway> doorway = std::make_shared<CDoorway>(
+                                    element == '9' ? EDoorwayFunction::kExit
+                                                   : EDoorwayFunction::kEntry);
+                            map[y][x] = doorway;
+
+                            char elementView = map[y][x]->getView();
+                            mElement[y][x] = elementView;
+                        }
                         break;
                     case 'J':
                     case '6':
@@ -313,20 +319,8 @@ namespace Knights {
     }
 
     bool CMap::isLevelFinished() {
-
         auto position = this->getAvatar()->getPosition();
-        auto mapElement = (map[position.y][position.x]);
-
-        //this is needed (when a simpler dynamic_cast would do) simply because the Android project is not currently configured to use
-        //RTTI
-        if (mapElement != nullptr &&  (mapElement->getView() == '9' || mapElement->getView() == '*' ) ) {
-            auto element = *mapElement;
-            auto ptr = &element;
-            auto casted = (CDoorway*)ptr;
-            return (casted->getDoorFunction() == EDoorwayFunction::kExit);
-        }
-
-        return false;
+        return mElement[position.y][position.x] == 'E';
     }
 
     void CMap::moveActor(Vec2i from, Vec2i to, std::shared_ptr<CActor> actor) {
