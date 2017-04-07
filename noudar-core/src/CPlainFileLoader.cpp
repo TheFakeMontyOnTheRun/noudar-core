@@ -6,7 +6,6 @@
 #include <fstream>
 #include <vector>
 #include <functional>
-#include <Logger.h>
 #include "Common.h"
 #include "IFileLoaderDelegate.h"
 #include "CPlainFileLoader.h"
@@ -25,7 +24,6 @@ namespace Knights {
         fd = fopen((getFilePathPrefix() + mFilenameTransformation(path)).c_str(), "rb");
 
         if (fd == nullptr) {
-            odb::Logger::log("Failed to open file: %s", path.c_str());
             exit(0);
         }
 
@@ -41,7 +39,6 @@ namespace Knights {
         fd = fopen(( getFilePathPrefix() + mFilenameTransformation( path ) ).c_str(), "r");
 
         if (fd == nullptr) {
-            odb::Logger::log("Failed to open file: %s", path.c_str());
             exit(0);
         }
 

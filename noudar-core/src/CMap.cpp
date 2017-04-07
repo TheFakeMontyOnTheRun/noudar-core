@@ -113,11 +113,12 @@ namespace Knights {
                                 return;
                             }
 
-                            auto target = projectLineOfSight( aActor->getPosition(), aActor->getDirection() );
+                            auto target = projectLineOfSight( getActorTargetPosition(aActor), aActor->getDirection() );
 
-                            if ( target != nullptr ) {
-                                attack( aActor, target->getPosition(), false );
+                            if ( !( target == aActor->getPosition() ) ) {
+                                attack( aActor, target, false );
                             }
+                            mGameDelegate->onProjectileHit( target);
 
                             if ( static_cast<CStorageItem*>(&(*quiver))->add( -1 ) == 0) {
                                 aActor->removeItemFromInventory( quiver );
@@ -329,19 +330,28 @@ namespace Knights {
         actor->setPosition(to);
     }
 
-	std::shared_ptr<CActor> CMap::projectLineOfSight(Vec2i aPosition, EDirection aDirection) {
+	Vec2i CMap::projectLineOfSight(Vec2i aPosition, EDirection aDirection) {
 
 		auto offset = mapOffsetForDirection( aDirection );
 		auto position = aPosition;
 		std::shared_ptr<CActor> toReturn = nullptr;
 
-		while ( isValid( position ) && ( !isBlockAt( position ) || toReturn == nullptr ) ) {
-			position.x += offset.x;
+        auto previous = position;
+		while ( isValid( position ) && !isBlockAt( position ) ) {
+
+            previous = position;
+
+            position.x += offset.x;
             position.y += offset.y;
-			toReturn = getActorAt( position );
+
+			auto actor = getActorAt( position );
+
+            if ( actor != nullptr ) {
+                return actor->getPosition();
+            }
 		}
 
-        return toReturn;
+        return previous;
 	}
 
 	void CMap::giveItemAt(Vec2i from, std::shared_ptr<CActor> actor) {

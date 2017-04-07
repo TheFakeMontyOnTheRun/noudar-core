@@ -40,9 +40,10 @@ bool Knights::CHitscanAttackCommand::shouldEndTurn() {
 }
 
 void Knights::CHitscanAttackCommand::execute() {
-	auto target = getGame()->getMap()->projectLineOfSight( mAttacker->getPosition(), mAttacker->getDirection() );
+	auto map = getGame()->getMap();
+	auto target = map->projectLineOfSight( mAttacker->getPosition(), mAttacker->getDirection() );
 
-	if ( target != nullptr ) {
-	  getGame()->getMap()->attack( mAttacker, target->getPosition(), false );
+	if ( map->getActorAt( target ) != nullptr ) {
+	  map->attack( mAttacker, target, false );
 	}
 }
