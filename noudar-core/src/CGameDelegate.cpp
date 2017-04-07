@@ -14,6 +14,7 @@ namespace Knights {
         mOnMonsterAttack = [](Knights::Vec2i pos) { };
         mOnMonsterDamaged = [](Knights::Vec2i pos) { };
         mOnPlayerDamaged = [](Knights::Vec2i pos) { };
+        mOnProjectileHit = [](Knights::Vec2i pos) { };
         mOnLevelLoaded = []() { };
     }
 
@@ -45,6 +46,10 @@ namespace Knights {
         mOnLevelLoaded = aCallback;
     }
 
+    void CGameDelegate::setProjectileCallback(std::function<void(Knights::Vec2i)> aCallback) {
+        mOnProjectileHit = aCallback;
+    }
+
     void CGameDelegate::onPlayerAttacked(Knights::Vec2i pos) {
         mOnPlayerAttack(pos);
     }
@@ -67,6 +72,10 @@ namespace Knights {
 
     void CGameDelegate::onPlayerDamaged(Knights::Vec2i pos) {
         mOnPlayerDamaged(pos);
+    }
+
+    void CGameDelegate::onProjectileHit(Knights::Vec2i pos) {
+        mOnProjectileHit(pos);
     }
 
     void CGameDelegate::onLevelLoaded() {

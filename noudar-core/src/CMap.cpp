@@ -118,6 +118,7 @@ namespace Knights {
                             if ( !( target == aActor->getPosition() ) ) {
                                 attack( aActor, target, false );
                             }
+                            mGameDelegate->onProjectileHit( target);
 
                             if ( static_cast<CStorageItem*>(&(*quiver))->add( -1 ) == 0) {
                                 aActor->removeItemFromInventory( quiver );
