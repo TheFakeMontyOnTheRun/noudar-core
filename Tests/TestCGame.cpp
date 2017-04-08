@@ -120,6 +120,7 @@ TEST(TestCGame, GameWillKeepPlayerStatusBetweenMapChanges ) {
 	auto previousHP = game->getMap()->getAvatar()->getHP();
 	game->proceedToNextLevel();
 	ASSERT_EQ( previousHP, game->getMap()->getAvatar()->getHP() );
+    ASSERT_EQ( Knights::EDirection::kNorth, game->getMap()->getAvatar()->getDirection() );
 }
 
 TEST(TestCGame, GameWillAdvanceLevelUponEnteringExit ) {
