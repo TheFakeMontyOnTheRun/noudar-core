@@ -9,7 +9,8 @@ namespace Knights {
     const static char kMovePlayerWestCommand = 'a';
 
     const static char kMovePlayerForwardCommand = 'o';
-    const static char kTurnPlayerLeftCommand = 'i';
+	const static char kMovePlayerBackwardCommand = 'k';
+	const static char kTurnPlayerLeftCommand = 'i';
     const static char kTurnPlayerRightCommand = 'p';
 
     const static char kTurnPlayerNorthCommand = 'r';
@@ -17,7 +18,8 @@ namespace Knights {
     const static char kTurnPlayerSouthCommand = 'c';
     const static char kTurnPlayerWestCommand = 'd';
 
-    const static char kStrafeLeftCommand = 'k';
+    const static char kStrafeLeftCommand = 'j';
+
 	const static char kStrafeRightCommand = 'l';
 
     const static char kActorMeleeAttackCommand = 'e';

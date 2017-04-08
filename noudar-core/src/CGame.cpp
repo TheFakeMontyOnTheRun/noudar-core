@@ -131,7 +131,14 @@ namespace Knights {
                                                               avatar->getDirection(), avatar);
             }
 
-	        if (entry == kStrafeLeftCommand) {
+            if (entry == kMovePlayerBackwardCommand) {
+                std::shared_ptr<CActor> avatar = mMap->getAvatar();
+                command = std::make_shared<CMoveActorCommand>(shared_from_this(),
+                                                              oppositeOf( avatar->getDirection() ), avatar);
+            }
+
+
+            if (entry == kStrafeLeftCommand) {
 		        std::shared_ptr<CActor> avatar = mMap->getAvatar();
 		        command = std::make_shared<CMoveActorCommand>(shared_from_this(),
 		                                                       leftOf(avatar->getDirection()), avatar);

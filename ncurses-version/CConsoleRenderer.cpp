@@ -147,6 +147,8 @@ namespace Knights {
                 return 'p';
             case KEY_UP:
                 return 'o';
+            case KEY_DOWN:
+                return 'k'; 
             default:
                 return ch;
         }
