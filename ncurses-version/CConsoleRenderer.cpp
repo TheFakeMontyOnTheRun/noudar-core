@@ -20,7 +20,14 @@
 #include "CActor.h"
 #include "CGameDelegate.h"
 #include "CMap.h"
+#include "CDoorway.h"
+#include "CCharacterArchetype.h"
+#include "CCharacter.h"
+#include "CMonster.h"
 #include "IRenderer.h"
+#include "IFileLoaderDelegate.h"
+#include "CPlainFileLoader.h"
+#include "CGame.h"
 #include "CConsoleRenderer.h"
 
 namespace Knights {
@@ -142,13 +149,13 @@ namespace Knights {
         int ch = getch();
         switch ( ch ) {
             case KEY_LEFT:
-                return 'i';
+                return kTurnPlayerLeftCommand;
             case KEY_RIGHT:
-                return 'p';
+                return kTurnPlayerRightCommand;
             case KEY_UP:
-                return 'o';
+                return kMovePlayerForwardCommand;
             case KEY_DOWN:
-                return 'k'; 
+                return kMovePlayerBackwardCommand;
             default:
                 return ch;
         }
