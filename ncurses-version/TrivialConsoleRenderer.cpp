@@ -53,16 +53,38 @@ namespace Knights {
                     }
 
                 } else {
-	                std::cout << (map.getElementAt( x, y));
+	                std::cout << (map.getElementAt( {x, y} ));
                 }
             }
 		    std::cout << std::endl;
         }
 
+        std::cout << "-=-=-=-=-=-=-" << std::endl;
+
+        if (current != nullptr) {
+
+            std::cout << "HP: " << current->getHP() << std::endl;
+            std::cout << "AT: " << current->getAttack() << std::endl;
+            std::cout << "DF: " << current->getDefense() << std::endl;
+            std::cout << "AP: " << current->getAP() << std::endl;
+
+            if (current->getSelectedItem() != nullptr ) {
+                std::cout << current->getSelectedItem()->to_string() << std::endl;
+            }
+
+            std::cout << current->getCurrentSay() << std::endl;
+        }
+        std::cout << "-//-" << std::endl;
+
         ch = getchar();
     }
 
     char CConsoleRenderer::getInput() {
+
+        if ( ch == '0') {
+            ch = '\t';
+        }
+
 		return ch;
     }
 }

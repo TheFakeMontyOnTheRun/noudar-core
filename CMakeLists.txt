@@ -20,8 +20,6 @@ set(TEST_SOURCE_FILES
 
 set(SOURCE_FILES
         noudar-core/include/commands/CMoveActorCommand.h
-        noudar-core/include/commands/CActorMeleeAttackCommand.h
-        noudar-core/include/commands/CHitscanAttackCommand.h
         noudar-core/include/commands/CEndTurnCommand.h
         noudar-core/include/commands/CLoadNewLevelCommand.h
         noudar-core/include/commands/CNullCommand.h
@@ -47,8 +45,6 @@ set(SOURCE_FILES
         noudar-core/include/CHuntApproach.h
         noudar-core/include/CCharacter.h
         noudar-core/src/commands/CMoveActorCommand.cpp
-        noudar-core/src/commands/CActorMeleeAttackCommand.cpp
-        noudar-core/src/commands/CHitscanAttackCommand.cpp
         noudar-core/src/commands/CEndTurnCommand.cpp
         noudar-core/src/commands/CLoadNewLevelCommand.cpp
         noudar-core/src/commands/CNullCommand.cpp

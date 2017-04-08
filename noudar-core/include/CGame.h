@@ -7,36 +7,24 @@ namespace Knights {
     const static char kMovePlayerEastCommand = 's';
     const static char kMovePlayerSouthCommand = 'z';
     const static char kMovePlayerWestCommand = 'a';
-
     const static char kMovePlayerForwardCommand = 'o';
 	const static char kMovePlayerBackwardCommand = 'k';
 	const static char kTurnPlayerLeftCommand = 'i';
     const static char kTurnPlayerRightCommand = 'p';
-
     const static char kTurnPlayerNorthCommand = 'r';
     const static char kTurnPlayerEastCommand = 'f';
     const static char kTurnPlayerSouthCommand = 'c';
     const static char kTurnPlayerWestCommand = 'd';
-
     const static char kStrafeLeftCommand = 'j';
-
-	const static char kStrafeRightCommand = 'l';
-
-    const static char kActorMeleeAttackCommand = 'e';
-
-    const static char kInflictHitscanCommand = 'h';
-
+    const static char kStrafeRightCommand = 'l';
     const static char kGoToFirstLevelCommand = '1';
     const static char kGoToTitleLevelCommand = '0';
-
     const static char kEndTurnCommand = 't';
     const static char kQuitGameCommand = 'q';
-
-	const static char kCycleLeftInventoryCommand = '-';
+    const static char kCycleLeftInventoryCommand = '-';
 	const static char kCycleRightInventoryCommand = '=';
 	const static char kUseCurrentItemInInventoryCommand = '\t';
-
-	const static char kPickItemCommand = '[';
+    const static char kPickItemCommand = '[';
 	const static char kDropItemCommand = ']';
 
 
