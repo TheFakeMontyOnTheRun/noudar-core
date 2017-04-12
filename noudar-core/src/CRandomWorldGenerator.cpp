@@ -3,6 +3,7 @@
 //
 
 #include <memory>
+#include <array>
 #include <sstream>
 #include <vector>
 #include <random>

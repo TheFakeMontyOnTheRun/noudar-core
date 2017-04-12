@@ -122,6 +122,7 @@ namespace Knights {
 
                             if ( static_cast<CStorageItem*>(&(*quiver))->add( -1 ) == 0) {
                                 aActor->removeItemFromInventory( quiver );
+                                aActor->suggestCurrentItem('y');
                             }
                         });
 		                break;
