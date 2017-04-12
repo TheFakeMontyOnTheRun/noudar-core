@@ -110,6 +110,8 @@ namespace Knights {
 		std::string getCurrentSay();
 
 		void copyStateFrom( std::shared_ptr<CActor> other );
+
+		void suggestCurrentItem( char view );
 	protected:
 
 		void setCurrentSay( std::string newSay );

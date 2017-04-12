@@ -225,6 +225,14 @@ namespace Knights {
 		this->mInventory = this->mInventory;
 	}
 
+    void CActor::suggestCurrentItem( char view ) {
+        auto item = getItemWithSymbol( view );
+
+        if ( item != nullptr ) {
+            mCurrentItem = item;
+        }
+    }
+
     std::shared_ptr<CItem> CActor::getItemWithSymbol(char symbol) {
 
 		for ( const auto& item : mInventory ) {
