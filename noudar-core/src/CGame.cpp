@@ -269,4 +269,12 @@ namespace Knights {
     int CGame::getCurrentActorId() {
         return mMap->getAvatar()->getId();
     }
+
+    int CGame::getLevelNumber() {
+        return mLevel;
+    }
+
+    void CGame::setIsPlaying(bool isPlaying) {
+        mIsPlaying = isPlaying;
+    }
 }
