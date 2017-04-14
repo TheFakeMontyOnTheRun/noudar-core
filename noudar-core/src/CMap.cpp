@@ -152,15 +152,9 @@ namespace Knights {
                         break;
 
                     case '9':
-                    case '*':
                         {
-                            std::shared_ptr<CDoorway> doorway = std::make_shared<CDoorway>(
-                                    element == '9' ? EDoorwayFunction::kExit
-                                                   : EDoorwayFunction::kEntry);
-                            map[y][x] = doorway;
-
-                            char elementView = map[y][x]->getView();
-                            mElement[y][x] = elementView;
+                            map[y][x] = std::make_shared<CDoorway>();
+                            mElement[y][x] = map[y][x]->getView();
                         }
                         break;
                     case 'J':
