@@ -153,9 +153,16 @@ namespace Knights {
 	}
 
 	void CActor::selectNextItem() {
+
+		if ( mInventory.empty() ) {
+			return;
+		}
+
 		auto it = std::find(std::begin(mInventory), std::end(mInventory), mCurrentItem);
-		if (mCurrentItem != *std::prev(std::end(mInventory))) {
-			mCurrentItem = *std::next(it);
+
+		auto nextIt = std::next( it );
+		if ( nextIt != std::end( mInventory ) ) {
+			mCurrentItem = *nextIt;
 		} else {
 			mCurrentItem = *std::begin(mInventory);
 		}
