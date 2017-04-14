@@ -21,7 +21,7 @@
 #include "CItem.h"
 #include <iostream>
 #include <sstream>
-#include <CMonsterGenerator.h>
+#include "CMonsterGenerator.h"
 #include "CStorageItem.h"
 #include "CRandomWorldGenerator.h"
 
