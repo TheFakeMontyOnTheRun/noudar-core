@@ -9,7 +9,7 @@
 
 using testing::Eq;
 
-TEST( Vec2iTests, equalityForEqualMembers ) {
+TEST( TestVec2i, equalityForEqualMembers ) {
 
 	auto N = Knights::Vec2i{ 0, -1 };
 	auto offset = Knights::mapOffsetForDirection( Knights::EDirection::kNorth );
