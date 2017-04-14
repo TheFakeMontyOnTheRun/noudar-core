@@ -356,6 +356,11 @@ namespace Knights {
 	}
 
 	void CMap::giveItemAt(Vec2i from, std::shared_ptr<CActor> actor) {
+
+        if ( !isValid( from )) {
+            return;
+        }
+
         if ( mItems[ from.y ][ from.x ] != nullptr ) {
             auto item = mItems[ from.y ][ from.x ];
 	        mItems[ from.y ][ from.x ] = nullptr;
@@ -364,6 +369,11 @@ namespace Knights {
 	}
 
     std::shared_ptr<Knights::CItem> CMap::getItemAt( Vec2i from ) {
+
+        if ( !isValid( from ) ) {
+            return nullptr;
+        }
+
         return mItems[ from.y ][ from.x ];
     }
 

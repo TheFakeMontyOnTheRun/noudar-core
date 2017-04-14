@@ -17,6 +17,8 @@ GMOCK_DIR = lib/googletest/googlemock
 
 
 TESTOBJS = Tests/TestCCharacter.o \
+		Tests/TestCGame.o \
+		Tests/TestVec2i.o \
 		$(GTEST_DIR)/src/gtest-all.o \
 		$(GMOCK_DIR)/src/gmock-all.o \
 		$(GMOCK_DIR)/src/gmock_main.o

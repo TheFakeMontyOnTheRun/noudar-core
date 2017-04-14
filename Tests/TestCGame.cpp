@@ -48,8 +48,8 @@ public:
 std::string getMap() {
   std::string toReturn;
 
-    toReturn += "4000000000000000000000000000000000000000\n";
-    toReturn += "0000000000000000000000000000000000000000\n";
+    toReturn += "4y00000000000000000000000000000000000000\n";
+    toReturn += "1000000000000000000000000000000000000000\n";
     toReturn += "0000000000000000000000000000000000000000\n";
     toReturn += "0000000000000000000000000000000000000000\n";
     toReturn += "0000000000000000000000000000000000000000\n";
@@ -120,7 +120,7 @@ TEST(TestCGame, GameWillKeepPlayerStatusBetweenMapChanges ) {
 	auto previousHP = game->getMap()->getAvatar()->getHP();
 	game->proceedToNextLevel();
 	ASSERT_EQ( previousHP, game->getMap()->getAvatar()->getHP() );
-    ASSERT_EQ( Knights::EDirection::kNorth, game->getMap()->getAvatar()->getDirection() );
+    ASSERT_TRUE( Knights::EDirection::kNorth == game->getMap()->getAvatar()->getDirection() );
 }
 
 TEST(TestCGame, GameWillAdvanceLevelUponEnteringExit ) {
@@ -193,4 +193,100 @@ TEST(TestCGame, GameWillNotTryToLoadFileFromBinaryTest ) {
   EXPECT_CALL(*mockFileLoader, loadFileFromPath(_));
   std::make_shared<Knights::CGame>( mockFileLoader, renderer, delegate );
 }
+
+
+TEST(TestCGame, PlayersCarryingNothingCantDropItems ) {
+    auto mockFileLoader = std::make_shared<MockFileLoader>();
+    auto renderer = std::make_shared<MockRenderer>();
+    auto delegate = std::make_shared<Knights::CGameDelegate>();
+
+    std::string mockMapContents = getMap();
+    ON_CALL(*mockFileLoader, loadFileFromPath(_)).WillByDefault(Return(mockMapContents));
+    auto game = std::make_shared<Knights::CGame>( mockFileLoader, renderer, delegate );
+    auto actor = game->getMap()->getAvatar();
+    actor->turnRight();
+    actor->turnRight();
+    auto target = game->getMap()->getActorTargetPosition( actor );
+
+    ON_CALL(*renderer, getInput()).WillByDefault(Return(Knights::kDropItemCommand));
+    game->tick();
+
+    ASSERT_TRUE(actor->getSelectedItem() == nullptr );
+    ASSERT_TRUE(game->getMap()->getItemAt(target) == nullptr );
+}
+
+TEST(TestCGame, GameWillPreventPlayersFromDroppingItemsOnInvalidPositions ) {
+
+    auto mockFileLoader = std::make_shared<MockFileLoader>();
+    auto renderer = std::make_shared<MockRenderer>();
+    auto delegate = std::make_shared<Knights::CGameDelegate>();
+    std::string mockMapContents = getMap();
+    ON_CALL(*mockFileLoader, loadFileFromPath(_)).WillByDefault(Return(mockMapContents));
+    auto game = std::make_shared<Knights::CGame>( mockFileLoader, renderer, delegate );
+    auto actor = game->getMap()->getAvatar();
+
+    actor->turnRight();
+    ON_CALL(*renderer, getInput()).WillByDefault(Return(Knights::kPickItemCommand));
+    game->tick();
+    auto currentItem = actor->getSelectedItem();
+    actor->turnRight();
+    actor->turnRight();
+    ON_CALL(*renderer, getInput()).WillByDefault(Return(Knights::kDropItemCommand));
+    game->tick();
+
+    auto target = game->getMap()->getActorTargetPosition( actor );
+    ASSERT_FALSE( game->getMap()->isValid(target));
+    ASSERT_TRUE( actor->getSelectedItem() != nullptr );
+    auto itemOnTheFloor = game->getMap()->getItemAt(target);
+    ASSERT_TRUE(itemOnTheFloor == nullptr );
+}
+
+
+TEST(TestCGame, GameWillPreventPlayersFromPickingItemsOnInvalidPositions ) {
+
+    auto mockFileLoader = std::make_shared<MockFileLoader>();
+    auto renderer = std::make_shared<MockRenderer>();
+    auto delegate = std::make_shared<Knights::CGameDelegate>();
+    std::string mockMapContents = getMap();
+    ON_CALL(*mockFileLoader, loadFileFromPath(_)).WillByDefault(Return(mockMapContents));
+    auto game = std::make_shared<Knights::CGame>( mockFileLoader, renderer, delegate );
+    auto actor = game->getMap()->getAvatar();
+
+    actor->turnLeft();
+    ON_CALL(*renderer, getInput()).WillByDefault(Return(Knights::kPickItemCommand));
+    game->tick();
+
+    auto target = game->getMap()->getActorTargetPosition( actor );
+    ASSERT_FALSE( game->getMap()->isValid(target));
+    ASSERT_TRUE( actor->getSelectedItem() == nullptr );
+    auto itemOnTheFloor = game->getMap()->getItemAt(target);
+    ASSERT_TRUE(itemOnTheFloor == nullptr );
+}
+
+TEST(TestCGame, GameWillPreventPlayersFromDroppingItemsOnBlockingTiles ) {
+
+    auto mockFileLoader = std::make_shared<MockFileLoader>();
+    auto renderer = std::make_shared<MockRenderer>();
+    auto delegate = std::make_shared<Knights::CGameDelegate>();
+    std::string mockMapContents = getMap();
+    ON_CALL(*mockFileLoader, loadFileFromPath(_)).WillByDefault(Return(mockMapContents));
+    auto game = std::make_shared<Knights::CGame>( mockFileLoader, renderer, delegate );
+    auto actor = game->getMap()->getAvatar();
+
+    actor->turnRight();
+    ON_CALL(*renderer, getInput()).WillByDefault(Return(Knights::kPickItemCommand));
+    game->tick();
+    auto currentItem = actor->getSelectedItem();
+    actor->turnRight();
+    ON_CALL(*renderer, getInput()).WillByDefault(Return(Knights::kDropItemCommand));
+    game->tick();
+
+    auto target = game->getMap()->getActorTargetPosition( actor );
+    ASSERT_EQ(currentItem->getView(), 'y' );
+    auto mapElementView = game->getMap()->getElementAt(target);
+    ASSERT_EQ(mapElementView, '1' );
+    auto itemOnTheFloor = game->getMap()->getItemAt(target);
+    ASSERT_TRUE(itemOnTheFloor == nullptr );
+}
+
 
