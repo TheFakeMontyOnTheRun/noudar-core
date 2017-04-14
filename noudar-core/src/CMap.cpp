@@ -383,4 +383,8 @@ namespace Knights {
     int CMap::getLastestId() {
         return ++mCurrentId;
     }
+
+    char CMap::getMapAt(const Vec2i &p) {
+        return mElement[p.y][p.x];
+    }
 }
