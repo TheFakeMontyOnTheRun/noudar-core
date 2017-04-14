@@ -8,8 +8,6 @@ namespace Knights {
 
         char mView;
     public:
-        Vec2i mPosition;
-        Vec2i getPosition();
         bool isBlocker();
         char getView();
         IMapElement();
