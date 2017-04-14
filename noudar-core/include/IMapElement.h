@@ -4,14 +4,9 @@ namespace Knights {
     const char kEmptySpace = '.';
     class IMapElement {
     public:
-        bool mIsBlocker;
-
-        char mView;
+        char mView = kEmptySpace;
     public:
-        bool isBlocker();
         char getView();
-        IMapElement();
-        virtual ~IMapElement() = default;
     };
 }
 #endif
