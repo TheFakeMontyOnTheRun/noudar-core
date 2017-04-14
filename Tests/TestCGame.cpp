@@ -48,8 +48,8 @@ public:
 std::string getMap() {
   std::string toReturn;
 
-    toReturn += "4y00000000000000000000000000000000000000\n";
-    toReturn += "1000000000000000000000000000000000000000\n";
+    toReturn += "04y0000000000000000000000000000000000000\n";
+    toReturn += "0100000000000000000000000000000000000000\n";
     toReturn += "0000000000000000000000000000000000000000\n";
     toReturn += "0000000000000000000000000000000000000000\n";
     toReturn += "0000000000000000000000000000000000000000\n";
@@ -129,7 +129,7 @@ TEST(TestCGame, GameWillAdvanceLevelUponEnteringExit ) {
 	auto delegate = std::make_shared<Knights::CGameDelegate>();
 
 	auto mockMapContents = getMap();
-	mockMapContents[ 1 ] = '9';
+	mockMapContents[ 2 ] = '9';
 
 	ON_CALL(*mockFileLoader, loadFileFromPath(_)).WillByDefault(Return(mockMapContents));
 	ON_CALL(*renderer, getInput()).WillByDefault(Return('s'));
@@ -231,6 +231,7 @@ TEST(TestCGame, GameWillPreventPlayersFromDroppingItemsOnInvalidPositions ) {
     auto currentItem = actor->getSelectedItem();
     actor->turnRight();
     actor->turnRight();
+    actor->turnRight();
     ON_CALL(*renderer, getInput()).WillByDefault(Return(Knights::kDropItemCommand));
     game->tick();
 
@@ -252,7 +253,6 @@ TEST(TestCGame, GameWillPreventPlayersFromPickingItemsOnInvalidPositions ) {
     auto game = std::make_shared<Knights::CGame>( mockFileLoader, renderer, delegate );
     auto actor = game->getMap()->getAvatar();
 
-    actor->turnLeft();
     ON_CALL(*renderer, getInput()).WillByDefault(Return(Knights::kPickItemCommand));
     game->tick();
 
