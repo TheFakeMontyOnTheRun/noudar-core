@@ -58,5 +58,9 @@ void Knights::CDropItemCommand::execute() {
 		return;
 	}
 
+	if (map->getItemAt( target ) != nullptr ) {
+		return;
+	}
+
 	map->putItemAt( mActor->removeItemFromInventory(itemToDrop), target );
 }
