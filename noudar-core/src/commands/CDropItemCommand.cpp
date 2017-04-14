@@ -52,5 +52,11 @@ void Knights::CDropItemCommand::execute() {
 	}
 
 	auto map = getGame()->getMap();
-	map->putItemAt( mActor->removeItemFromInventory(itemToDrop), map->getActorTargetPosition(mActor) );
+	auto target = map->getActorTargetPosition(mActor);
+
+	if ( map->isBlockAt( target)) {
+		return;
+	}
+
+	map->putItemAt( mActor->removeItemFromInventory(itemToDrop), target );
 }
