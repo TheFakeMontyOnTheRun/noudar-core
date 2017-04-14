@@ -48,8 +48,8 @@ public:
 std::string getMap() {
   std::string toReturn;
 
-    toReturn += "4000000000000000000000000000000000000000\n";
-    toReturn += "0000000000000000000000000000000000000000\n";
+    toReturn += "4y00000000000000000000000000000000000000\n";
+    toReturn += "1000000000000000000000000000000000000000\n";
     toReturn += "0000000000000000000000000000000000000000\n";
     toReturn += "0000000000000000000000000000000000000000\n";
     toReturn += "0000000000000000000000000000000000000000\n";
@@ -194,3 +194,43 @@ TEST(TestCGame, GameWillNotTryToLoadFileFromBinaryTest ) {
   std::make_shared<Knights::CGame>( mockFileLoader, renderer, delegate );
 }
 
+
+TEST(TestCGame, PlayersCarryingNothingCantDropItems ) {
+    auto mockFileLoader = std::make_shared<MockFileLoader>();
+    auto renderer = std::make_shared<MockRenderer>();
+    auto delegate = std::make_shared<Knights::CGameDelegate>();
+
+    std::string mockMapContents = getMap();
+    ON_CALL(*mockFileLoader, loadFileFromPath(_)).WillByDefault(Return(mockMapContents));
+    auto game = std::make_shared<Knights::CGame>( mockFileLoader, renderer, delegate );
+    auto actor = game->getMap()->getAvatar();
+    actor->turnRight();
+    actor->turnRight();
+    auto target = game->getMap()->getActorTargetPosition( actor );
+
+    ON_CALL(*renderer, getInput()).WillByDefault(Return(Knights::kDropItemCommand));
+    game->tick();
+
+    ASSERT_TRUE(actor->getSelectedItem() == nullptr );
+    ASSERT_TRUE(game->getMap()->getItemAt(target) == nullptr );
+}
+TEST(TestCGame, GameWillPreventPlayersFromPickingItemsOnInvalidPositions ) {
+
+    auto mockFileLoader = std::make_shared<MockFileLoader>();
+    auto renderer = std::make_shared<MockRenderer>();
+    auto delegate = std::make_shared<Knights::CGameDelegate>();
+    std::string mockMapContents = getMap();
+    ON_CALL(*mockFileLoader, loadFileFromPath(_)).WillByDefault(Return(mockMapContents));
+    auto game = std::make_shared<Knights::CGame>( mockFileLoader, renderer, delegate );
+    auto actor = game->getMap()->getAvatar();
+
+    actor->turnLeft();
+    ON_CALL(*renderer, getInput()).WillByDefault(Return(Knights::kPickItemCommand));
+    game->tick();
+
+    auto target = game->getMap()->getActorTargetPosition( actor );
+    ASSERT_FALSE( game->getMap()->isValid(target));
+    ASSERT_TRUE( actor->getSelectedItem() == nullptr );
+    auto itemOnTheFloor = game->getMap()->getItemAt(target);
+    ASSERT_TRUE(itemOnTheFloor == nullptr );
+}
