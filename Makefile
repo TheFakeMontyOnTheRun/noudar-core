@@ -34,7 +34,6 @@ OBJS = ncurses-version/CConsoleRenderer.o \
     noudar-core/src/CHuntApproach.o \
     noudar-core/src/CCharacter.o \
     noudar-core/src/CCharacterArchetype.o \
-    noudar-core/src/CElixirFountain.o \
     noudar-core/src/CDoorway.o \
     noudar-core/src/Common.o \
     noudar-core/src/IFileLoaderDelegate.o \

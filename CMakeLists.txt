@@ -65,7 +65,6 @@ set(SOURCE_FILES
         noudar-core/src/CCharacter.cpp
         noudar-core/src/CCharacterArchetype.cpp
         noudar-core/src/CHuntApproach.cpp
-        noudar-core/src/CElixirFountain.cpp
         noudar-core/src/CGameDelegate.cpp
         ncurses-version/CConsoleRenderer.cpp
         noudar-core/src/CRandomWorldGenerator.cpp
