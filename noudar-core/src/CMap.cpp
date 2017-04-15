@@ -167,7 +167,7 @@ namespace Knights {
                     case '4':
                         actor = mAvatar = std::make_shared<CCharacter>( heroArchetype, friends, getLastestId(), [&](std::shared_ptr<CActor> character, std::shared_ptr<CMap> map){
                             auto shield = character->getItemWithSymbol('v');
-                            if ( shield != nullptr ) {
+                            if ( shield != nullptr && map->getElementAt( character->getPosition() ) == '_' ) {
                                 shield->use( character, map );
                             }
                         });
