@@ -11,16 +11,13 @@ namespace Knights {
         int x = 0;
         int y = 0;
 
-        Vec2i( int aX, int aY ) {
-            x = aX;
-            y = aY;
-        }
+        Vec2i( int aX, int aY );
 
-        Vec2i() { x = y = 0; }
+        Vec2i();
 
-        bool operator==( const Vec2i &other ) {
-            return this->x == other.x && this->y == other.y;
-        }
+        Vec2i& operator+=( const Vec2i &other );
+
+        Vec2i& operator-=( const Vec2i &other );
     };
 
     enum class EDirection {
@@ -29,6 +26,12 @@ namespace Knights {
         kSouth,
         kWest
     };
+
+    Vec2i operator+( const Vec2i &lh, const Vec2i &rh );
+
+    bool operator==( const Vec2i &lh, const Vec2i &rh );
+
+    bool operator!=( const Vec2i &lh, const Vec2i &rh );
 
     std::ostream& operator<<(std::ostream& os, const EDirection& aDirection );
     std::string to_string( const EDirection& aDirection );

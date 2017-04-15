@@ -243,9 +243,7 @@ namespace Knights {
     }
 
     Vec2i CMap::getActorTargetPosition(std::shared_ptr<CActor> actor) {
-        auto position = actor->getPosition();
-        auto offset = mapOffsetForDirection( actor->getDirection() );
-        return { position.x + offset.x, position.y + offset.y };
+        return actor->getPosition() + mapOffsetForDirection( actor->getDirection() );
     }
 
     void CMap::move(EDirection d, std::shared_ptr<CActor> actor) {
@@ -256,7 +254,7 @@ namespace Knights {
 
         auto position = actor->getPosition();
         auto offset = mapOffsetForDirection( d );
-        auto newPosition = Vec2i{ position.x + offset.x, position.y + offset.y };
+        auto newPosition = position + offset;
 
         if (!isBlockAt(newPosition)) {
             moveActor(position, newPosition, actor);
@@ -335,8 +333,7 @@ namespace Knights {
 
             previous = position;
 
-            position.x += offset.x;
-            position.y += offset.y;
+            position += offset;
 
 			auto actor = getActorAt( position );
 

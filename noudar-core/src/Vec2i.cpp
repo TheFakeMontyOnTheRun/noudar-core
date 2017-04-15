@@ -7,6 +7,35 @@
 #include "Vec2i.h"
 
 namespace Knights {
+
+	Vec2i::Vec2i( int aX, int aY ): x( aX ), y( aY ) {
+	}
+
+	Vec2i::Vec2i() : x( 0 ), y( 0 ) {
+	}
+
+    bool operator==( const Vec2i &lh, const Vec2i &rh ) {
+        return ( lh.x == rh.x ) && ( lh.y == rh.y );
+    }
+
+    bool operator!=( const Vec2i &lh, const Vec2i &rh ) {
+        return ( lh.x != rh.x ) || ( lh.y != rh.y );
+    }
+
+    Vec2i& Vec2i::operator+=(const Vec2i &other) {
+		x += other.x;
+		y += other.y;
+
+        return *this;
+	}
+
+    Vec2i& Vec2i::operator-=(const Vec2i &other) {
+		x -= other.x;
+		y -= other.y;
+
+        return *this;
+	}
+
 	std::ostream &operator<<(std::ostream &os, const EDirection &aDirection) {
 		os << to_string(aDirection);
 
@@ -106,4 +135,7 @@ namespace Knights {
 		}
 	}
 
+    Vec2i operator+(const Vec2i &lh, const Vec2i &rh) {
+        return Vec2i{ lh.x + rh.x, lh.y + rh.y };
+    }
 }
