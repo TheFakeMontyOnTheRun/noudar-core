@@ -12,11 +12,10 @@
 #include "CCharacterArchetype.h"
 #include "CCharacter.h"
 
-//const int DEFAULT_AP = 7;
 namespace Knights {
 
-	CCharacter::CCharacter(std::shared_ptr<Knights::CCharacterArchetype> aArchetype, std::shared_ptr<CTeam> aTeam, int aId) :
-	CActor( aId, aArchetype->getAP()) {
+	CCharacter::CCharacter(std::shared_ptr<Knights::CCharacterArchetype> aArchetype, std::shared_ptr<CTeam> aTeam, int aId, CUpdateMethod aUpdateMethod) :
+	CActor( aId, aArchetype->getAP() ), mUpdateMethod( aUpdateMethod ) {
         mView = aArchetype->getView();
         mTeam = aTeam;
         mHP = aArchetype->getHP();
@@ -24,4 +23,10 @@ namespace Knights {
         mDefence = aArchetype->getDefense();
         mName = aArchetype->getName();
 	}
+
+    void CCharacter::update(std::shared_ptr<CMap> map) {
+        CActor::update(map);
+
+        mUpdateMethod(shared_from_this(), map );
+    }
 }

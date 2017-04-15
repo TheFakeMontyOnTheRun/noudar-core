@@ -18,7 +18,7 @@ namespace Knights {
 
 	class CMap;
 
-	class CActor {
+	class CActor : public std::enable_shared_from_this<CActor>{
 	protected:
 		EStance mStance;
 		EDirection mDirection;

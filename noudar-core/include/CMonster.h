@@ -4,7 +4,7 @@ namespace Knights {
 
     class CMap;
 
-    class CMonster : public CCharacter, public std::enable_shared_from_this<CMonster>  {
+    class CMonster : public CCharacter {
     public:
         CMonster( std::shared_ptr<CCharacterArchetype> aArchetype, std::shared_ptr<CTeam> aTeam, int aId);
 
