@@ -26,7 +26,7 @@ namespace Knights {
 		int dx = x - mPosition.x;
 		int dy = y - mPosition.y;
 
-		std::shared_ptr<CMonster> sharedThis = shared_from_this();
+		auto sharedThis = shared_from_this();
 
 		if (std::abs((float) dx) >= std::abs((float) dy)) {
 
