@@ -31,7 +31,6 @@ set(SOURCE_FILES
         noudar-core/include/commands/IGameCommand.h
         noudar-core/include/CPlainFileLoader.h
         noudar-core/include/CActor.h
-        noudar-core/include/CElixirFountain.h
         noudar-core/include/CMonsterGenerator.h
         ncurses-version/CConsoleRenderer.h
         noudar-core/include/CMonster.h
