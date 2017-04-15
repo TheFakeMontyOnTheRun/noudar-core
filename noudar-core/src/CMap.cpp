@@ -86,6 +86,25 @@ namespace Knights {
                             attack( aActor, target, true );
 		                });
 		                break;
+                    case 'v':
+                        block[y][x] = false;
+                        mElement[ y ][ x ] = '.';
+                        mItems[ y ][ x ] = std::make_shared<CStorageItem>("Shield of restoration", 'v', false, [&](std::shared_ptr<CActor> aActor, std::shared_ptr<CMap> aMap){
+
+                            auto item = aActor->getItemWithSymbol('v');
+
+                            if ( item  == nullptr ) {
+                                return;
+                            }
+
+                            auto shield = (static_cast<CStorageItem*>(&(*item)));
+
+                            if ( shield->getAmount() < 20 ) {
+                                shield->add( 1 );
+                            }
+
+                        }, 0);
+                        break;
 
                     case 'u':
                         block[y][x] = false;
@@ -146,7 +165,12 @@ namespace Knights {
                         break;
 
                     case '4':
-                        actor = mAvatar = std::make_shared<CCharacter>( heroArchetype, friends, getLastestId());
+                        actor = mAvatar = std::make_shared<CCharacter>( heroArchetype, friends, getLastestId(), [&](std::shared_ptr<CActor> character, std::shared_ptr<CMap> map){
+                            auto shield = character->getItemWithSymbol('v');
+                            if ( shield != nullptr ) {
+                                shield->use( character, map );
+                            }
+                        });
                         mElement[ y ][ x ] = '.';
                         break;
 
