@@ -9,6 +9,7 @@
 #include "CDoorway.h"
 #include "CTeam.h"
 #include "CItem.h"
+#include "CStorageItem.h"
 #include "CActor.h"
 #include "CGameDelegate.h"
 #include "CMap.h"
@@ -21,10 +22,12 @@
 #include <iostream>
 #include <sstream>
 #include "CMonsterGenerator.h"
-#include "CStorageItem.h"
 #include "CRandomWorldGenerator.h"
 
 namespace Knights {
+
+    const auto kCrossbowAmmoUsage = 3;
+    const auto kShieldPowerUsage = 5;
 
     void CMap::endOfTurn() {
         for (int y = 0; y < kMapSize; ++y) {
@@ -91,16 +94,15 @@ namespace Knights {
                         mElement[ y ][ x ] = '.';
                         mItems[ y ][ x ] = std::make_shared<CStorageItem>("Shield of restoration", 'v', false, [&](std::shared_ptr<CActor> aActor, std::shared_ptr<CMap> aMap){
 
-                            auto item = aActor->getItemWithSymbol('v');
+                            auto shield = (CStorageItem*)aActor->getItemWithSymbol( 'v' ).get();
 
-                            if ( item  == nullptr ) {
+                            if ( shield  == nullptr ) {
                                 return;
                             }
 
-                            auto shield = (static_cast<CStorageItem*>(&(*item)));
-
-                            if ( shield->getAmount() < 20 ) {
-                                shield->add( 1 );
+                            if ( shield->getAmount() > 0 ) {
+                                aActor->addHP( 1 );
+                                shield->add( -1 );
                             }
 
                         }, 0);
@@ -123,11 +125,23 @@ namespace Knights {
 		                block[y][x] = false;
 		                mElement[ y ][ x ] = '.';
                         //The need for RTTI creeps again...
-		                mItems[ y ][ x ] = std::make_shared<CItem>("Crossbow of damnation", 'y', false, [&](std::shared_ptr<CActor> aActor, std::shared_ptr<CMap> aMap){
+		                mItems[ y ][ x ] = std::make_shared<CStorageItem>("Crossbow of damnation", 'y', false, [&](std::shared_ptr<CActor> aActor, std::shared_ptr<CMap> aMap){
 
-                            auto quiver = aActor->getItemWithSymbol('u');
+                            auto shield = (CStorageItem*)aActor->getItemWithSymbol( 'v' ).get();
+                            auto crossbow = (CStorageItem*)aActor->getItemWithSymbol( 'y' ).get();
 
-                            if ( quiver == nullptr || (static_cast<CStorageItem*>(&(*quiver)))->getAmount() == 0 ) {
+                            bool shieldHasAmmo = false;
+                            bool crossbowHasAmmo = false;
+
+                            if ( crossbow != nullptr ) {
+                                crossbowHasAmmo = (crossbow->getAmount() >= kCrossbowAmmoUsage );
+                            }
+
+                            if ( shield != nullptr ) {
+                                shieldHasAmmo = (shield->getAmount() >= kShieldPowerUsage );
+                            }
+
+                            if ( !crossbowHasAmmo ) {
                                 return;
                             }
 
@@ -135,14 +149,23 @@ namespace Knights {
 
                             if ( !( target == aActor->getPosition() ) ) {
                                 attack( aActor, target, false );
+
+                                if ( shieldHasAmmo ) {
+                                    for ( int ratio = 10; ratio >= 0; --ratio ) {
+                                        attack( aActor, target, false );
+                                    }
+                                }
                             }
+
                             mGameDelegate->onProjectileHit( target);
 
-                            if ( static_cast<CStorageItem*>(&(*quiver))->add( -1 ) == 0) {
-                                aActor->removeItemFromInventory( quiver );
-                                aActor->suggestCurrentItem('y');
+                            crossbow->add( - ( kCrossbowAmmoUsage ) );
+
+                            if ( shieldHasAmmo ) {
+                                shield->add( -( kShieldPowerUsage ) );
                             }
-                        });
+
+                        }, 0);
 		                break;
 
                     case '1':
@@ -166,10 +189,23 @@ namespace Knights {
 
                     case '4':
                         actor = mAvatar = std::make_shared<CCharacter>( heroArchetype, friends, getLastestId(), [&](std::shared_ptr<CActor> character, std::shared_ptr<CMap> map){
-                            auto shield = character->getItemWithSymbol('v');
-                            if ( shield != nullptr && map->getElementAt( character->getPosition() ) == '_' ) {
-                                shield->use( character, map );
+                            auto shield = (CStorageItem*)character->getItemWithSymbol( 'v' ).get();
+                            if ( shield != nullptr && map->getElementAt( character->getPosition() ) == '*' ) {
+                                if ( shield->getAmount() < 20 ) {
+                                    shield->add( 1 );
+                                }
                             }
+
+                            auto crossbow = (CStorageItem*)character->getItemWithSymbol( 'y' ).get();
+
+                            if ( crossbow  == nullptr ) {
+                                return;
+                            }
+
+                            if ( crossbow->getAmount() < 20 ) {
+                                crossbow->add( 1 );
+                            }
+
                         });
                         mElement[ y ][ x ] = '.';
                         break;
