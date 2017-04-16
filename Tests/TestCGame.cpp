@@ -422,4 +422,37 @@ TEST(TestCGame, HavingCrossbowChargedWillProvideRegularDamage ) {
     ASSERT_EQ( shieldEnergyBefore, shield->getAmount());
 }
 
+TEST(TestCGame, UsingTheShieldWillReplenishTheHealth ) {
+
+    auto mockFileLoader = std::make_shared<MockFileLoader>();
+    auto renderer = std::make_shared<MockRenderer>();
+    auto delegate = std::make_shared<Knights::CGameDelegate>();
+    std::string mockMapContents = getMap();
+    ON_CALL(*mockFileLoader, loadFileFromPath(_)).WillByDefault(Return(mockMapContents));
+    auto game = std::make_shared<Knights::CGame>( mockFileLoader, renderer, delegate );
+    auto actor = game->getMap()->getAvatar();
+
+    actor->turnLeft();
+    ON_CALL(*renderer, getInput()).WillByDefault(Return(Knights::kPickItemCommand));
+    game->tick();
+    actor->suggestCurrentItem('v');
+
+    auto shield = (Knights::CStorageItem*)actor->getItemWithSymbol( 'v' ).get();
+    shield->add( 100 );
+
+    auto shieldEnergyBefore = shield->getAmount();
+    auto healthBefore = actor->getHP();
+
+    ON_CALL(*renderer, getInput()).WillByDefault(Return(Knights::kUseCurrentItemInInventoryCommand));
+    game->tick();
+
+    ASSERT_TRUE( actor->getDirection() == Knights::EDirection::kWest);
+
+
+    auto newHealth = actor->getHP();
+
+    ASSERT_TRUE( healthBefore < newHealth );
+    ASSERT_TRUE( shieldEnergyBefore > shield->getAmount());
+}
+
 
