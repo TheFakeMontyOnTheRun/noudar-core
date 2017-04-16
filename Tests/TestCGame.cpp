@@ -403,6 +403,7 @@ TEST(TestCGame, HavingCrossbowChargedWillProvideRegularDamage ) {
     auto crossbow = (Knights::CStorageItem*)actor->getItemWithSymbol( 'y' ).get();
 
     crossbow->add( 100 );
+    shield->empty();
 
     auto crossbowAmmoBefore = crossbow->getAmount();
     auto shieldEnergyBefore = shield->getAmount();
