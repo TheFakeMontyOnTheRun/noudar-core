@@ -28,6 +28,7 @@ namespace Knights {
 
     const auto kCrossbowAmmoUsage = 3;
     const auto kShieldPowerUsage = 5;
+    const auto kImprovedDamageRatio = 9;
 
     void CMap::endOfTurn() {
         for (int y = 0; y < kMapSize; ++y) {
@@ -151,7 +152,7 @@ namespace Knights {
                                 attack( aActor, target, false );
 
                                 if ( shieldHasAmmo ) {
-                                    for ( int ratio = 10; ratio >= 0; --ratio ) {
+                                    for ( int ratio = kImprovedDamageRatio; ratio > 0; --ratio ) {
                                         attack( aActor, target, false );
                                     }
                                 }
