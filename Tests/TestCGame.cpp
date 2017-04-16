@@ -10,10 +10,12 @@
 #include <cstdlib>
 #include <cmath>
 #include <functional>
+
 #include "Vec2i.h"
 #include "CTeam.h"
 #include "IMapElement.h"
 #include "CItem.h"
+#include "CStorageItem.h"
 #include "CActor.h"
 #include "CCharacterArchetype.h"
 #include "IFileLoaderDelegate.h"
@@ -45,10 +47,16 @@ public:
   MOCK_METHOD0( getFilePathPrefix, std::string());
 };
 
+class MockActor : public Knights::CActor {
+public:
+    MockActor( int, int ) : Knights::CActor( 1, 1){ mDefence = 0; mHP =1000; }
+    MOCK_METHOD1( performAttack, void( std::shared_ptr<CActor> ) );
+};
+
 std::string getMap() {
   std::string toReturn;
 
-    toReturn += "t4y0000000000000000000000000000000000000\n";
+    toReturn += "v4y0000000000000000000000000000000000000\n";
     toReturn += "0100000000000000000000000000000000000000\n";
     toReturn += "0000000000000000000000000000000000000000\n";
     toReturn += "0000000000000000000000000000000000000000\n";
@@ -312,11 +320,140 @@ TEST(TestCGame, GameWillPreventPlayersFromDroppingItemsOnTopOfOtherItems ) {
     ASSERT_TRUE(actor->getSelectedItem() != nullptr );
     ASSERT_EQ(actor->getSelectedItem()->getView(), 'y' );
     auto mapElementView = game->getMap()->getElementAt(target);
-    ASSERT_EQ(mapElementView, 't' );
+    ASSERT_EQ(mapElementView, 'v' );
     auto itemOnTheFloor = game->getMap()->getItemAt(target);
     auto selectedItem = actor->getSelectedItem();
     ASSERT_TRUE(itemOnTheFloor != selectedItem );
 }
 
+TEST(TestCGame, HavingBothShieldAndCrossbowChargedWillProvideMoreDamage ) {
+
+    auto mockFileLoader = std::make_shared<MockFileLoader>();
+    auto renderer = std::make_shared<MockRenderer>();
+    auto delegate = std::make_shared<Knights::CGameDelegate>();
+    std::string mockMapContents = getMap();
+    ON_CALL(*mockFileLoader, loadFileFromPath(_)).WillByDefault(Return(mockMapContents));
+    auto game = std::make_shared<Knights::CGame>( mockFileLoader, renderer, delegate );
+    auto actor = game->getMap()->getAvatar();
+    auto mockEnemy = std::make_shared<MockActor>( 1, 1 );
+
+    game->getMap()->addActorAt( mockEnemy, { Knights::kMapSize / 2, 0 } );
+
+
+    actor->turnRight();
+    ON_CALL(*renderer, getInput()).WillByDefault(Return(Knights::kPickItemCommand));
+    game->tick();
+    actor->turnLeft();
+    actor->turnLeft();
+    game->tick();
+    actor->turnLeft();
+    actor->turnLeft();
+    actor->suggestCurrentItem('y');
+
+    auto shield = (Knights::CStorageItem*)actor->getItemWithSymbol( 'v' ).get();
+    auto crossbow = (Knights::CStorageItem*)actor->getItemWithSymbol( 'y' ).get();
+
+    shield->add( 100  );
+    crossbow->add( 100 );
+
+    auto crossbowAmmoBefore = crossbow->getAmount();
+    auto shieldEnergyBefore = shield->getAmount();
+    auto healthBefore = mockEnemy->getHP();
+
+    ON_CALL(*renderer, getInput()).WillByDefault(Return(Knights::kUseCurrentItemInInventoryCommand));
+    game->tick();
+
+    ASSERT_TRUE( actor->getDirection() == Knights::EDirection::kEast);
+    ASSERT_EQ(actor->getSelectedItem()->getView(), 'y' );
+
+    auto playerAttack = actor->getAttack();
+    auto newHealth = mockEnemy->getHP();
+
+    ASSERT_EQ( healthBefore, newHealth + ( playerAttack * 10) );
+    ASSERT_TRUE( crossbowAmmoBefore > crossbow->getAmount());
+    ASSERT_TRUE( shieldEnergyBefore > shield->getAmount());
+}
+
+
+TEST(TestCGame, HavingCrossbowChargedWillProvideRegularDamage ) {
+
+    auto mockFileLoader = std::make_shared<MockFileLoader>();
+    auto renderer = std::make_shared<MockRenderer>();
+    auto delegate = std::make_shared<Knights::CGameDelegate>();
+    std::string mockMapContents = getMap();
+    ON_CALL(*mockFileLoader, loadFileFromPath(_)).WillByDefault(Return(mockMapContents));
+    auto game = std::make_shared<Knights::CGame>( mockFileLoader, renderer, delegate );
+    auto actor = game->getMap()->getAvatar();
+    auto mockEnemy = std::make_shared<MockActor>( 1, 1 );
+
+    game->getMap()->addActorAt( mockEnemy, { Knights::kMapSize / 2, 0 } );
+
+
+    actor->turnRight();
+    ON_CALL(*renderer, getInput()).WillByDefault(Return(Knights::kPickItemCommand));
+    game->tick();
+    actor->turnLeft();
+    actor->turnLeft();
+    game->tick();
+    actor->turnLeft();
+    actor->turnLeft();
+    actor->suggestCurrentItem('y');
+
+    auto shield = (Knights::CStorageItem*)actor->getItemWithSymbol( 'v' ).get();
+    auto crossbow = (Knights::CStorageItem*)actor->getItemWithSymbol( 'y' ).get();
+
+    crossbow->add( 100 );
+    shield->empty();
+
+    auto crossbowAmmoBefore = crossbow->getAmount();
+    auto shieldEnergyBefore = shield->getAmount();
+    auto healthBefore = mockEnemy->getHP();
+
+    ON_CALL(*renderer, getInput()).WillByDefault(Return(Knights::kUseCurrentItemInInventoryCommand));
+    game->tick();
+
+    ASSERT_TRUE( actor->getDirection() == Knights::EDirection::kEast);
+    ASSERT_EQ(actor->getSelectedItem()->getView(), 'y' );
+
+    auto playerAttack = actor->getAttack();
+    auto newHealth = mockEnemy->getHP();
+
+    ASSERT_EQ( healthBefore, newHealth + ( playerAttack ) );
+    ASSERT_TRUE( crossbowAmmoBefore > crossbow->getAmount());
+    ASSERT_EQ( shieldEnergyBefore, shield->getAmount());
+}
+
+TEST(TestCGame, UsingTheShieldWillReplenishTheHealth ) {
+
+    auto mockFileLoader = std::make_shared<MockFileLoader>();
+    auto renderer = std::make_shared<MockRenderer>();
+    auto delegate = std::make_shared<Knights::CGameDelegate>();
+    std::string mockMapContents = getMap();
+    ON_CALL(*mockFileLoader, loadFileFromPath(_)).WillByDefault(Return(mockMapContents));
+    auto game = std::make_shared<Knights::CGame>( mockFileLoader, renderer, delegate );
+    auto actor = game->getMap()->getAvatar();
+
+    actor->turnLeft();
+    ON_CALL(*renderer, getInput()).WillByDefault(Return(Knights::kPickItemCommand));
+    game->tick();
+    actor->suggestCurrentItem('v');
+
+    auto shield = (Knights::CStorageItem*)actor->getItemWithSymbol( 'v' ).get();
+    shield->add( 100 );
+
+    auto shieldEnergyBefore = shield->getAmount();
+    auto healthBefore = actor->getHP();
+
+    ON_CALL(*renderer, getInput()).WillByDefault(Return(Knights::kUseCurrentItemInInventoryCommand));
+    game->tick();
+
+    ASSERT_TRUE( actor->getDirection() == Knights::EDirection::kWest);
+
+
+    auto newHealth = actor->getHP();
+
+    ASSERT_TRUE( healthBefore < newHealth );
+    ASSERT_TRUE( shieldEnergyBefore > shield->getAmount());
+}
 
 
