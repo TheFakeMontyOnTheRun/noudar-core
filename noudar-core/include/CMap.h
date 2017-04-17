@@ -46,6 +46,7 @@ namespace Knights {
 		void putItemAt( std::shared_ptr<CItem>, Vec2i destination );
 		void addActorAt( std::shared_ptr<CActor> actor, const Vec2i& position );
 		int getLastestId();
+		std::shared_ptr<CGameDelegate> getGameDelegate();
     };
 }
 #endif
