@@ -59,9 +59,10 @@ namespace Knights {
             for (int x = 0; x < kMapSize; ++x) {
 
                 element = mapData[ pos ];
-
+                actor = nullptr;
                 block[y][x] = false;
                 map[y][x] = nullptr;
+                mActors[ y ][ x ] = nullptr;
                 mElement[y][x] = element;
 				mItems[ y ][ x ] = nullptr;
 
@@ -217,6 +218,25 @@ namespace Knights {
                             mElement[y][x] = map[y][x]->getView();
                         }
                         break;
+
+                    case 'T':
+                    {
+                        auto ropeArchetype = std::make_shared<CCharacterArchetype>( 0, 0, 10000, 0, 'T', "Rope");
+
+                        actor = std::make_shared<CCharacter>( ropeArchetype, foes, getLastestId(), [](std::shared_ptr<CActor> character, std::shared_ptr<CMap> map){
+                            auto archetype = ((CCharacter*)character.get())->getArchetype();
+
+                            if ( archetype.getHP() > character->getHP() ) {
+                                map->floodFill( character->getPosition(), '#', '~' );
+                                character->addHP( -character->getHP() );
+                            }
+
+                        });
+
+
+                        mElement[ y ][ x ] = '#';
+                    }
+                    break;
                     case 'J':
                     case '6':
                     case '5':
@@ -446,6 +466,24 @@ namespace Knights {
     }
 
     char CMap::getMapAt(const Vec2i &p) {
+
+        if ( !isValid( p ) ) {
+            return '.';
+        }
+
         return mElement[p.y][p.x];
+    }
+
+    void CMap::floodFill(Vec2i position, char oldElement, char newElement) {
+        if ( getMapAt( position ) == oldElement ) {
+            mElement[ position.y ][ position.x ] = newElement;
+            block[ position.y ][ position.x ] = false;
+            map[ position.y ][ position.x ] = nullptr;
+            floodFill( position + mapOffsetForDirection( EDirection::kNorth ), oldElement, newElement );
+            floodFill( position + mapOffsetForDirection( EDirection::kEast ), oldElement, newElement );
+            floodFill( position + mapOffsetForDirection( EDirection::kSouth ), oldElement, newElement );
+            floodFill( position + mapOffsetForDirection( EDirection::kWest ), oldElement, newElement );
+        }
+
     }
 }

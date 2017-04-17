@@ -56,16 +56,16 @@ public:
 std::string getMap() {
   std::string toReturn;
 
-    toReturn += "v4y0000000000000000000000000000000000000\n";
-    toReturn += "0100000000000000000000000000000000000000\n";
-    toReturn += "0000000000000000000000000000000000000000\n";
-    toReturn += "0000000000000000000000000000000000000000\n";
-    toReturn += "0000000000000000000000000000000000000000\n";
-    toReturn += "0000000000000000000000000000000000000000\n";
-    toReturn += "0000000000000000000000000000000000000000\n";
-    toReturn += "0000000000000000000000000000000000000000\n";
-    toReturn += "0000000000000000000000000000000000000000\n";
-    toReturn += "0000000000000000000000000000000000000000\n";
+    toReturn += "v4y0000000000000000000000000000T00000000\n";
+    toReturn += "010000000000000000000000########000#0000\n";
+    toReturn += "000000000000000000000000000000#0000#0#00\n";
+    toReturn += "000000000000000000000000000000########00\n";
+    toReturn += "000000000000000000000000000000#000000000\n";
+    toReturn += "0000000000000000000000000#0000#0000#0000\n";
+    toReturn += "0000000000000000000000000###########0000\n";
+    toReturn += "000000000000000000000000000#000000000000\n";
+    toReturn += "000000000000000000000000000#000000000000\n";
+    toReturn += "000000000000000000000000000#000000000000\n";
     toReturn += "0000000000000000000000000000000000000000\n";
     toReturn += "0000000000000000000000000000000000000000\n";
     toReturn += "0000000000000000000000000000000000000000\n";
@@ -100,10 +100,25 @@ std::string getMap() {
   return toReturn;
 }
 
+int countElements(char element, std::shared_ptr<Knights::CMap> map ) {
+    int count = 0;
+
+    for ( int y = 0; y < Knights::kMapSize; ++y ) {
+        for ( int x = 0; x < Knights::kMapSize; ++x ) {
+            if ( map->getMapAt( { x, y } ) == element ) {
+                ++count;
+            }
+        }
+    }
+
+    return count;
+}
+
+
 TEST(TestCGame, GameWillRefreshUponValidMoveTest ) {
-  
+
   auto mockFileLoader = std::make_shared<MockFileLoader>();
-  auto renderer = std::make_shared<MockRenderer>(); 
+  auto renderer = std::make_shared<MockRenderer>();
   auto delegate = std::make_shared<Knights::CGameDelegate>();
 
   std::string mockMapContents = getMap();
@@ -191,9 +206,9 @@ TEST(TestCGame, RestoredPlayerWillNotRestoreTransientStateFromBackup ) {
 }
 
 TEST(TestCGame, GameWillNotTryToLoadFileFromBinaryTest ) {
-  
+
   auto mockFileLoader = std::make_shared<MockFileLoader>();
-  auto renderer = std::make_shared<MockRenderer>(); 
+  auto renderer = std::make_shared<MockRenderer>();
   auto delegate = std::make_shared<Knights::CGameDelegate>();
 
   std::string mockMapContents = getMap();
@@ -457,3 +472,40 @@ TEST(TestCGame, UsingTheShieldWillReplenishTheHealth ) {
 }
 
 
+TEST(TestCGame, ShootingTheGateNodeWillOpenAllGates ) {
+
+    auto mockFileLoader = std::make_shared<MockFileLoader>();
+    auto renderer = std::make_shared<MockRenderer>();
+    auto delegate = std::make_shared<Knights::CGameDelegate>();
+    std::string mockMapContents = getMap();
+    ON_CALL(*mockFileLoader, loadFileFromPath(_)).WillByDefault(Return(mockMapContents));
+    auto game = std::make_shared<Knights::CGame>( mockFileLoader, renderer, delegate );
+    auto actor = game->getMap()->getAvatar();
+    int gatesBefore = countElements('#', game->getMap());
+    int passagesBefore = countElements('~', game->getMap());
+
+    actor->turnRight();
+    ON_CALL(*renderer, getInput()).WillByDefault(Return(Knights::kPickItemCommand));
+    game->tick();
+    actor->suggestCurrentItem('y');
+
+    auto crossbow = (Knights::CStorageItem*)actor->getItemWithSymbol( 'y' ).get();
+
+    crossbow->add( 100 );
+
+
+    ON_CALL(*renderer, getInput()).WillByDefault(Return(Knights::kUseCurrentItemInInventoryCommand));
+    game->tick();
+    game->tick();
+    int passagesAfter = countElements('~', game->getMap());
+    int gatesAfter = countElements('#', game->getMap());
+
+    ASSERT_TRUE( actor->getDirection() == Knights::EDirection::kEast);
+    ASSERT_EQ(actor->getSelectedItem()->getView(), 'y' );
+
+    ASSERT_EQ( gatesBefore, 39 );
+    ASSERT_EQ( passagesAfter, 39 );
+    ASSERT_EQ( gatesBefore, passagesAfter );
+    ASSERT_EQ( gatesAfter, 0 );
+    ASSERT_EQ( passagesBefore, 0 );
+}

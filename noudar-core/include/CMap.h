@@ -21,6 +21,8 @@ namespace Knights {
         std::vector<std::shared_ptr<CActor>> actors;
         std::shared_ptr<CActor> mAvatar;
 		int mCurrentId = 1;
+
+		void floodFill( Vec2i position, char oldElement, char newElement );
     public:
 
         bool isValid( const Vec2i& p );
