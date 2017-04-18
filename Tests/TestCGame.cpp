@@ -57,9 +57,9 @@ std::string getMap() {
   std::string toReturn;
 
     toReturn += "v4y0000000000000000000000000000T00000000\n";
-    toReturn += "010000000000000000000000########000#0000\n";
-    toReturn += "000000000000000000000000000000#0000#0#00\n";
-    toReturn += "000000000000000000000000000000########00\n";
+    toReturn += "011110000000000000000000########000#0000\n";
+    toReturn += "050000000000000000000000000000#0000#0#00\n";
+    toReturn += "050000000000000000000000000000########00\n";
     toReturn += "000000000000000000000000000000#000000000\n";
     toReturn += "0000000000000000000000000#0000#0000#0000\n";
     toReturn += "0000000000000000000000000###########0000\n";
@@ -508,4 +508,35 @@ TEST(TestCGame, ShootingTheGateNodeWillOpenAllGates ) {
     ASSERT_EQ( gatesBefore, passagesAfter );
     ASSERT_EQ( gatesAfter, 0 );
     ASSERT_EQ( passagesBefore, 0 );
+}
+
+
+TEST(TestCGame, EnsureMonstersWontKillEachOther ) {
+
+    auto mockFileLoader = std::make_shared<MockFileLoader>();
+    auto renderer = std::make_shared<MockRenderer>();
+    auto delegate = std::make_shared<Knights::CGameDelegate>();
+    std::string mockMapContents = getMap();
+    ON_CALL(*mockFileLoader, loadFileFromPath(_)).WillByDefault(Return(mockMapContents));
+    auto game = std::make_shared<Knights::CGame>( mockFileLoader, renderer, delegate );
+    auto actors = game->getMap()->getActors();
+
+    int cumulatedHealthBefore = 0;
+
+    for (const auto& actor : actors ) {
+        cumulatedHealthBefore += actor->getHP();
+    }
+
+    ON_CALL(*renderer, getInput()).WillByDefault(Return(Knights::kEndTurnCommand));
+    game->tick();
+    game->tick();
+    game->tick();
+
+    int cumulatedHealthAfter = 0;
+
+    for (const auto& actor : actors ) {
+        cumulatedHealthAfter += actor->getHP();
+    }
+
+    ASSERT_EQ( cumulatedHealthAfter, cumulatedHealthBefore);
 }

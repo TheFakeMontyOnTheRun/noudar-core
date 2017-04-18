@@ -31,3 +31,20 @@ TEST(TestCCharacter, TestArchetypeInheritance ) {
   
   EXPECT_EQ( 1, actor1->getAttack() );
 }
+
+TEST(TestCCharacter, TestCharactersOfSameTeamCantAttackEachOther ) {
+  auto team1 = std::make_shared<Knights::CTeam>("Test");
+  auto archetype1 = std::make_shared<Knights::CCharacterArchetype>( 1, 2, 3, 4, '@', "TestCharacter" );
+  auto actor1 = std::make_shared<Knights::CCharacter>( archetype1, team1, 1 );
+  auto actor2 = std::make_shared<Knights::CCharacter>( archetype1, team1, 2 );
+
+
+
+  auto healthBefore = actor2->getHP();
+  actor1->performAttack( actor2 );
+  auto healthAfter = actor2->getHP();
+
+  EXPECT_NE( actor1, actor2 );
+  EXPECT_EQ( healthBefore, healthAfter );
+}
+
