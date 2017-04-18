@@ -503,8 +503,8 @@ TEST(TestCGame, ShootingTheGateNodeWillOpenAllGates ) {
     ASSERT_TRUE( actor->getDirection() == Knights::EDirection::kEast);
     ASSERT_EQ(actor->getSelectedItem()->getView(), 'y' );
 
-    ASSERT_EQ( gatesBefore, 39 );
-    ASSERT_EQ( passagesAfter, 39 );
+    ASSERT_EQ( gatesBefore, 38 );
+    ASSERT_EQ( passagesAfter, 38 );
     ASSERT_EQ( gatesBefore, passagesAfter );
     ASSERT_EQ( gatesAfter, 0 );
     ASSERT_EQ( passagesBefore, 0 );

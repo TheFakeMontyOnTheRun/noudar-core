@@ -227,14 +227,17 @@ namespace Knights {
                             auto archetype = ((CCharacter*)character.get())->getArchetype();
 
                             if ( archetype.getHP() > character->getHP() ) {
+                                auto position = character->getPosition();
+                                map->mElement[ position.y ][ position.x ] = '#';
                                 map->floodFill( character->getPosition(), '#', '~' );
+                                map->mElement[ position.y ][ position.x ] = '.';
                                 character->addHP( -character->getHP() );
                             }
 
                         });
 
 
-                        mElement[ y ][ x ] = '#';
+                        mElement[ y ][ x ] = '.';
                     }
                     break;
                     case 'J':
