@@ -22,7 +22,15 @@
 #include "IRenderer.h"
 #include "CConsoleRenderer.h"
 #include <conio.h>
+#include <stdio.h>
+#include <bios.h>
+#include <pc.h>
+#include <unistd.h>
+#include <termios.h>
+
 namespace Knights {
+
+
 
     static const char directions[4] = { '^', '>', 'V', '<'};
     char ch = 0;
@@ -38,8 +46,8 @@ namespace Knights {
         auto targetPosition = map.getActorTargetPosition(current);
 		auto actorPosition = current->getPosition();
 
-	    std::cout << std::endl << std::endl;;
-
+	    std::cout << std::endl;
+        std::cout << "\x1B[2J\x1B[H" << std::endl;
 	    for (int y = std::max<int>(0, actorPosition.y - 10); y < std::min<int>( Knights::kMapSize, actorPosition.y + 10); ++y) {
             for (int x = std::max<int>(0, actorPosition.x - 10); x < std::min<int>( Knights::kMapSize, actorPosition.x + 10); ++x) {
 
@@ -47,17 +55,50 @@ namespace Knights {
 
                 if (actor != nullptr) {
                     if (actor == current && current != nullptr) {
+                        std::cout << "\033[33m";
                         std::cout << (directions[static_cast<int>(current->getDirection()) ]);
                     } else {
+
+                        auto stance = actor->getStance();
+                        if ( stance == EStance::kAttacking ) {
+                            std::cout << "\033[31m";
+                        } else if ( stance == EStance::kStanding ) {
+                            std::cout << "\033[35m";
+                        }
+
+
+                        if ( map.getActorTargetPosition( current ) == Knights::Vec2i{ x, y} ) {
+
+                        } else {
+
+                        }
+
+                        if ( !map.getActorAt( {x, y} )->isAlive() ) {
+                            std::cout << "\033[37m";
+                        }
+
                         std::cout << (directions[static_cast<int>(actor->getDirection()) ]);
                     }
 
                 } else {
+                    if ( map.isBlockAt({x,y})) {
+                        std::cout << "\033[36m";
+                    } else {
+                        if ( map.getActorTargetPosition( current ) == Knights::Vec2i{ x, y} ) {
+                            std::cout << "\033[35m";
+                        } else {
+                            std::cout << "\033[32m";
+                        }
+
+                    }
+
+
 	                std::cout << (map.getElementAt( {x, y} ));
                 }
             }
 		    std::cout << std::endl;
         }
+        std::cout << "\033[32m";
 
         std::cout << "-=-=-=-=-=-=-" << std::endl;
 
@@ -76,15 +117,11 @@ namespace Knights {
         }
         std::cout << "-//-" << std::endl;
 
-        ch = getchar();
+        setvbuf(stdin, 0, _IONBF, 0);
+        ch = getc(stdin);
     }
 
     char CConsoleRenderer::getInput() {
-
-        if ( ch == '0') {
-            ch = '\t';
-        }
-
 		return ch;
     }
 }
