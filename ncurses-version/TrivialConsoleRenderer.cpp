@@ -22,6 +22,12 @@
 #include "IRenderer.h"
 #include "CConsoleRenderer.h"
 #include <conio.h>
+#include <stdio.h>
+#include <bios.h>
+#include <pc.h>
+#include <unistd.h>
+#include <termios.h>
+
 namespace Knights {
 
     static const char directions[4] = { '^', '>', 'V', '<'};
@@ -76,15 +82,11 @@ namespace Knights {
         }
         std::cout << "-//-" << std::endl;
 
-        ch = getchar();
+        setvbuf(stdin, 0, _IONBF, 0);
+        ch = getc(stdin);
     }
 
     char CConsoleRenderer::getInput() {
-
-        if ( ch == '0') {
-            ch = '\t';
-        }
-
 		return ch;
     }
 }
