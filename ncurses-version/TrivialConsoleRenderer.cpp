@@ -44,8 +44,8 @@ namespace Knights {
         auto targetPosition = map.getActorTargetPosition(current);
 		auto actorPosition = current->getPosition();
 
-	    std::cout << std::endl << std::endl;;
-
+	    std::cout << std::endl;
+        std::cout << "\x1B[2J\x1B[H" << std::endl;
 	    for (int y = std::max<int>(0, actorPosition.y - 10); y < std::min<int>( Knights::kMapSize, actorPosition.y + 10); ++y) {
             for (int x = std::max<int>(0, actorPosition.x - 10); x < std::min<int>( Knights::kMapSize, actorPosition.x + 10); ++x) {
 
