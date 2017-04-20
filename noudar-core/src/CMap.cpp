@@ -493,4 +493,14 @@ namespace Knights {
     std::shared_ptr<CGameDelegate> CMap::getGameDelegate() {
         return mGameDelegate;
     }
+
+    Vec2i CMap::getTargetProjection(std::shared_ptr<CActor> a) {
+        auto target = getActorTargetPosition( a );
+
+        if ( a->getSelectedItem() != nullptr && a->getSelectedItem()->getView() == 'y' ) {
+            return projectLineOfSight( target, a->getDirection() );
+        }
+
+        return target;
+    }
 }

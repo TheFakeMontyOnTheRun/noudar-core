@@ -43,7 +43,7 @@ namespace Knights {
 
     void CConsoleRenderer::drawMap(CMap &map, std::shared_ptr<CActor> current) {
 
-        auto targetPosition = map.getActorTargetPosition(current);
+        auto targetPosition = map.getTargetProjection(current);
 		auto actorPosition = current->getPosition();
 
 	    std::cout << std::endl;
@@ -67,12 +67,6 @@ namespace Knights {
                         }
 
 
-                        if ( map.getActorTargetPosition( current ) == Knights::Vec2i{ x, y} ) {
-
-                        } else {
-
-                        }
-
                         if ( !map.getActorAt( {x, y} )->isAlive() ) {
                             std::cout << "\033[37m";
                         }
@@ -84,7 +78,7 @@ namespace Knights {
                     if ( map.isBlockAt({x,y})) {
                         std::cout << "\033[36m";
                     } else {
-                        if ( map.getActorTargetPosition( current ) == Knights::Vec2i{ x, y} ) {
+                        if ( targetPosition == Knights::Vec2i{ x, y} ) {
                             std::cout << "\033[35m";
                         } else {
                             std::cout << "\033[32m";
