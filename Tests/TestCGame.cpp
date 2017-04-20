@@ -457,7 +457,6 @@ TEST_F(TestCGame, ShootingTheGateNodeWillOpenAllGates ) {
     ASSERT_EQ( passagesBefore, 0 );
 }
 
-
 TEST_F(TestCGame, EnsureMonstersWontKillEachOther ) {
 
     auto actors = mGame->getMap()->getActors();
@@ -484,4 +483,27 @@ TEST_F(TestCGame, EnsureMonstersWontKillEachOther ) {
     }
 
     ASSERT_EQ( cumulatedHealthAfter, cumulatedHealthBefore);
+}
+
+TEST_F(TestCGame, EnsureTheProjectionTargetWillChangeBasedOnCharacterItems ) {
+    auto actor = mGame->getMap()->getAvatar();
+    int gatesBefore = countElements('#', mGame->getMap());
+    int passagesBefore = countElements('~', mGame->getMap());
+
+    actor->turnRight();
+    auto targetBeforeCrossbow = mGame->getMap()->getTargetProjection( actor );
+    ON_CALL(*mMockRenderer, getInput()).WillByDefault(Return(Knights::kPickItemCommand));
+    mGame->tick();
+    actor->suggestCurrentItem('y');
+    auto targetWithCrossbow = mGame->getMap()->getTargetProjection( actor );
+    actor->turnRight();
+    actor->turnRight();
+    mGame->tick();
+    actor->suggestCurrentItem('t');
+    auto targetWithSword  = mGame->getMap()->getTargetProjection( actor );
+
+    ASSERT_EQ( targetBeforeCrossbow, Knights::Vec2i( 2, 0 ) );
+    ASSERT_EQ(targetWithCrossbow, Knights::Vec2i( 31, 0 ) );
+    ASSERT_EQ( targetWithSword, Knights::Vec2i( 0, 0 ) );
+
 }

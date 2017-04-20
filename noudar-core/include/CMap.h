@@ -32,6 +32,7 @@ namespace Knights {
         void endOfTurn();
 	    bool isLevelFinished();
         Vec2i getActorTargetPosition( std::shared_ptr<CActor> a );
+		Vec2i getTargetProjection( std::shared_ptr<CActor> a );
         char getElementAt( const Vec2i& p );
 		char getMapAt( const Vec2i& p );
 		std::shared_ptr<CActor> getAvatar();
