@@ -57,7 +57,7 @@ namespace Knights {
 
     void CConsoleRenderer::drawMap(CMap &map, std::shared_ptr<CActor> current) {
 
-        auto targetPosition = map.getActorTargetPosition(current);
+        auto targetPosition = map.getTargetProjection(current);
 		auto actorPosition = current->getPosition();
 
 	    for (int y = 0; y < Knights::kMapSize; ++y ) {
