@@ -67,12 +67,6 @@ namespace Knights {
                         }
 
 
-                        if ( map.getActorTargetPosition( current ) == Knights::Vec2i{ x, y} ) {
-
-                        } else {
-
-                        }
-
                         if ( !map.getActorAt( {x, y} )->isAlive() ) {
                             std::cout << "\033[37m";
                         }
