@@ -44,7 +44,7 @@ namespace Knights {
         void setActorAt( Vec2i position, std::shared_ptr<CActor> actor );
         void moveActor( Vec2i from, Vec2i to, std::shared_ptr<CActor> actor );
         std::shared_ptr<CActor> attack( std::shared_ptr<CActor> a, Vec2i position , bool mutual );
-	    Vec2i projectLineOfSight( Vec2i position, EDirection dir );
+	    Vec2i projectHitscanPosition(Vec2i position, EDirection dir);
 	    void giveItemAt( Vec2i from, std::shared_ptr<CActor> to );
 		std::shared_ptr<Knights::CItem> getItemAt( Vec2i from );
 		void putItemAt( std::shared_ptr<CItem>, Vec2i destination );

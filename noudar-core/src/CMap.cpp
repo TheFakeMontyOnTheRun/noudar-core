@@ -161,7 +161,8 @@ namespace Knights {
                                 return;
                             }
 
-                            auto target = aMap->projectLineOfSight( aMap->getActorTargetPosition(aActor), aActor->getDirection() );
+                            auto target = aMap->projectHitscanPosition(aMap->getActorTargetPosition(aActor),
+                                                                       aActor->getDirection());
 
                             if ( !( target == aActor->getPosition() ) ) {
                                 aMap->attack( aActor, target, false );
@@ -433,14 +434,14 @@ namespace Knights {
         actor->setPosition(to);
     }
 
-	Vec2i CMap::projectLineOfSight(Vec2i aPosition, EDirection aDirection) {
+	Vec2i CMap::projectHitscanPosition(Vec2i aPosition, EDirection aDirection) {
 
 		auto offset = mapOffsetForDirection( aDirection );
 		auto position = aPosition;
 		std::shared_ptr<CActor> toReturn = nullptr;
 
         auto previous = position;
-		while ( isValid( position ) && !isBlockMovementAt(position) ) {
+		while ( isValid( position ) && !isBlockProjectilesAt(position) ) {
 
             previous = position;
 
@@ -525,7 +526,7 @@ namespace Knights {
         auto target = getActorTargetPosition( a );
 
         if ( a->getSelectedItem() != nullptr && a->getSelectedItem()->getView() == 'y' ) {
-            return projectLineOfSight( target, a->getDirection() );
+            return projectHitscanPosition(target, a->getDirection());
         }
 
         return target;
