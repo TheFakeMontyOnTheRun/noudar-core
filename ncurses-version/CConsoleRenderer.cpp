@@ -47,6 +47,7 @@ namespace Knights {
         init_pair(4, COLOR_GREEN, COLOR_BLACK);
         init_pair(5, COLOR_WHITE, COLOR_BLACK);
         init_pair(6, COLOR_MAGENTA, COLOR_BLACK);
+        init_pair(7, COLOR_BLACK, COLOR_CYAN);
 
         printw( "Dungeons Of Noudar\nCore edition.\nPress any key");
     }
@@ -96,7 +97,10 @@ namespace Knights {
                     }
 
                 } else {
-                    if (map.isBlockMovementAt({x, y})) {
+                    if (map.isBlockProjectilesAt({x, y})) {
+                        attron(COLOR_PAIR(7));
+                        addch(map.getElementAt( {x, y} ) );
+                    } else if (map.isBlockMovementAt({x, y})) {
                         attron(COLOR_PAIR(3));
                         addch(map.getElementAt( {x, y} ) );
                     } else {
