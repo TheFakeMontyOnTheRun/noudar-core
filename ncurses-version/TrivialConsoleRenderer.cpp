@@ -50,8 +50,10 @@ namespace Knights {
         std::cout << "\x1B[2J\x1B[H" << std::endl;
 	    for (int y = std::max<int>(0, actorPosition.y - 10); y < std::min<int>( Knights::kMapSize, actorPosition.y + 10); ++y) {
             for (int x = std::max<int>(0, actorPosition.x - 10); x < std::min<int>( Knights::kMapSize, actorPosition.x + 10); ++x) {
-
                 auto actor = map.getActorAt( Vec2i{ x, y } );
+
+                std::cout << "\033[7;30m\033[0;32m";
+                std::cout.flush();
 
                 if (actor != nullptr) {
                     if (actor == current && current != nullptr) {
@@ -75,7 +77,10 @@ namespace Knights {
                     }
 
                 } else {
-                    if ( map.isBlockAt({x,y})) {
+
+                    if (map.isBlockProjectilesAt({x, y})) {
+                        std::cout << "\033[7;36m\033[30m";
+                    } else if (map.isBlockMovementAt({x, y})) {
                         std::cout << "\033[36m";
                     } else {
                         if ( targetPosition == Knights::Vec2i{ x, y} ) {
@@ -83,7 +88,6 @@ namespace Knights {
                         } else {
                             std::cout << "\033[32m";
                         }
-
                     }
 
 
@@ -92,7 +96,7 @@ namespace Knights {
             }
 		    std::cout << std::endl;
         }
-        std::cout << "\033[32m";
+        std::cout << "\033[0m\033[32m";
 
         std::cout << "-=-=-=-=-=-=-" << std::endl;
 

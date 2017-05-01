@@ -14,10 +14,11 @@ namespace Knights {
         std::shared_ptr<CActor> mActors[ kMapSize ][ kMapSize ];
         std::shared_ptr<CGameDelegate> mGameDelegate;
 
-	    bool block[ kMapSize ][ kMapSize ];
+	    bool mBlockCharacterMovement[ kMapSize ][ kMapSize ];
         char mElement[ kMapSize ][ kMapSize ];
 	    std::array< std::array< std::shared_ptr<CItem>, kMapSize >, kMapSize > mItems;
-
+        std::array< std::array< bool, kMapSize >, kMapSize > mBlockProjectiles;
+        std::array< std::array< bool, kMapSize >, kMapSize > mBlockView;
         std::vector<std::shared_ptr<CActor>> actors;
         std::shared_ptr<CActor> mAvatar;
 		int mCurrentId = 1;
@@ -26,7 +27,9 @@ namespace Knights {
     public:
 
         bool isValid( const Vec2i& p );
-        bool isBlockAt( const Vec2i& p );
+        bool isBlockMovementAt(const Vec2i &p);
+        bool isBlockProjectilesAt( const Vec2i &p );
+        bool isBlockViewAt( const Vec2i &p );
         CMap( const std::string& data, std::shared_ptr<CGameDelegate> aGameDelegate );
         void move( EDirection d, std::shared_ptr<CActor> a );
         void endOfTurn();
@@ -41,7 +44,7 @@ namespace Knights {
         void setActorAt( Vec2i position, std::shared_ptr<CActor> actor );
         void moveActor( Vec2i from, Vec2i to, std::shared_ptr<CActor> actor );
         std::shared_ptr<CActor> attack( std::shared_ptr<CActor> a, Vec2i position , bool mutual );
-	    Vec2i projectLineOfSight( Vec2i position, EDirection dir );
+	    Vec2i projectHitscanPosition(Vec2i position, EDirection dir);
 	    void giveItemAt( Vec2i from, std::shared_ptr<CActor> to );
 		std::shared_ptr<Knights::CItem> getItemAt( Vec2i from );
 		void putItemAt( std::shared_ptr<CItem>, Vec2i destination );

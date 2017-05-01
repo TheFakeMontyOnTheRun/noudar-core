@@ -60,12 +60,13 @@ namespace Knights {
 
                 element = mapData[ pos ];
                 actor = nullptr;
-                block[y][x] = false;
+                mBlockCharacterMovement[y][x] = false;
                 map[y][x] = nullptr;
                 mActors[ y ][ x ] = nullptr;
                 mElement[y][x] = element;
 				mItems[ y ][ x ] = nullptr;
-
+                mBlockProjectiles[ y ][ x ] = true;
+                mBlockView[ y ][ x ] = true;
                 switch (element) {
 	                default:
                     case '0':
@@ -75,16 +76,21 @@ namespace Knights {
                     case '-':
                     case '(':
                     case ')':
+                    case '~':
                     case '2':
                     case '{':
                     case '}':
                     case '7':
                     case '!':
                     case 'H':
-                        block[y][x] = false;
+                        mBlockCharacterMovement[y][x] = false;
+                        mBlockProjectiles[ y ][ x ] = false;
+                        mBlockView[ y ][ x ] = false;
                         break;
 	                case 't':
-		                block[y][x] = false;
+		                mBlockCharacterMovement[y][x] = false;
+                        mBlockProjectiles[ y ][ x ] = false;
+                        mBlockView[ y ][ x ] = false;
 		                mElement[ y ][ x ] = '.';
 		                mItems[ y ][ x ] = std::make_shared<CItem>("Sword of sorrow", 't', false, [](std::shared_ptr<CActor> aActor, std::shared_ptr<CMap> aMap){
                             auto target = aMap->getActorTargetPosition(aActor);
@@ -92,7 +98,9 @@ namespace Knights {
 		                });
 		                break;
                     case 'v':
-                        block[y][x] = false;
+                        mBlockCharacterMovement[y][x] = false;
+                        mBlockProjectiles[ y ][ x ] = false;
+                        mBlockView[ y ][ x ] = false;
                         mElement[ y ][ x ] = '.';
                         mItems[ y ][ x ] = std::make_shared<CStorageItem>("Shield of restoration", 'v', false, [](std::shared_ptr<CActor> aActor, std::shared_ptr<CMap> aMap){
 
@@ -111,12 +119,16 @@ namespace Knights {
                         break;
 
                     case 'u':
-                        block[y][x] = false;
+                        mBlockCharacterMovement[y][x] = false;
+                        mBlockProjectiles[ y ][ x ] = false;
+                        mBlockView[ y ][ x ] = false;
                         mElement[ y ][ x ] = '.';
                         mItems[ y ][ x ] = std::make_shared<CStorageItem>("Quiver", 'u', false, [](std::shared_ptr<CActor> aActor, std::shared_ptr<CMap> aMap){}, 5);
                         break;
                     case '+':
-                        block[y][x] = false;
+                        mBlockCharacterMovement[y][x] = false;
+                        mBlockProjectiles[ y ][ x ] = false;
+                        mBlockView[ y ][ x ] = false;
                         mElement[ y ][ x ] = '.';
                         mItems[ y ][ x ] = std::make_shared<CItem>("The holy health", '+', true, [](std::shared_ptr<CActor> aActor, std::shared_ptr<CMap> aMap){
                             aActor->addHP(5);
@@ -124,7 +136,9 @@ namespace Knights {
                         break;
 
 	                case 'y':
-		                block[y][x] = false;
+		                mBlockCharacterMovement[y][x] = false;
+                        mBlockProjectiles[ y ][ x ] = false;
+                        mBlockView[ y ][ x ] = false;
 		                mElement[ y ][ x ] = '.';
                         //The need for RTTI creeps again...
 		                mItems[ y ][ x ] = std::make_shared<CStorageItem>("Crossbow of damnation", 'y', false, [](std::shared_ptr<CActor> aActor, std::shared_ptr<CMap> aMap){
@@ -147,7 +161,8 @@ namespace Knights {
                                 return;
                             }
 
-                            auto target = aMap->projectLineOfSight( aMap->getActorTargetPosition(aActor), aActor->getDirection() );
+                            auto target = aMap->projectHitscanPosition(aMap->getActorTargetPosition(aActor),
+                                                                       aActor->getDirection());
 
                             if ( !( target == aActor->getPosition() ) ) {
                                 aMap->attack( aActor, target, false );
@@ -183,12 +198,15 @@ namespace Knights {
                     case '>':
                     case '<':
                     case '\'':
-                        block[y][x] = true;
+                        mBlockCharacterMovement[y][x] = true;
+                        mBlockProjectiles[ y ][ x ] = true;
+                        mBlockView[ y ][ x ] = false;
                         break;
-                    case '~':
-                        block[y][x] = false;
+                    case 'A':
+                        mBlockCharacterMovement[y][x] = true;
+                        mBlockProjectiles[ y ][ x ] = false;
+                        mBlockView[ y ][ x ] = false;
                         break;
-
                     case '4':
                         actor = mAvatar = std::make_shared<CCharacter>( heroArchetype, friends, getLastestId(), [](std::shared_ptr<CActor> character, std::shared_ptr<CMap> map){
                             auto shield = (CStorageItem*)character->getItemWithSymbol( 'v' ).get();
@@ -209,11 +227,17 @@ namespace Knights {
                             }
 
                         });
+                        mBlockCharacterMovement[ y ][ x ] = false;
+                        mBlockProjectiles[ y ][ x ] = false;
+                        mBlockView[ y ][ x ] = false;
                         mElement[ y ][ x ] = '.';
                         break;
 
                     case '9':
                         {
+                            mBlockCharacterMovement[ y ][ x ] = false;
+                            mBlockProjectiles[ y ][ x ] = false;
+                            mBlockView[ y ][ x ] = false;
                             map[y][x] = std::make_shared<CDoorway>();
                             mElement[y][x] = map[y][x]->getView();
                         }
@@ -236,7 +260,9 @@ namespace Knights {
 
                         });
 
-
+                        mBlockCharacterMovement[ y ][ x ] = true;
+                        mBlockProjectiles[ y ][ x ] = false;
+                        mBlockView[ y ][ x ] = false;
                         mElement[ y ][ x ] = '.';
                     }
                     break;
@@ -244,10 +270,16 @@ namespace Knights {
                     case '6':
                     case '5':
                         actor = std::make_shared<CMonster>( monsterArchetype, foes, getLastestId());
+                        mBlockCharacterMovement[ y ][ x ] = false;
+                        mBlockProjectiles[ y ][ x ] = false;
+                        mBlockView[ y ][ x ] = false;
                         mElement[ y ][ x ] = '.';
                         break;
                     case 'G':
                         actor = std::make_shared<CMonsterGenerator>(getLastestId(), 5);
+                        mBlockCharacterMovement[ y ][ x ] = false;
+                        mBlockProjectiles[ y ][ x ] = false;
+                        mBlockView[ y ][ x ] = false;
                         mElement[ y ][ x ] = '.';
                         break;
 
@@ -340,7 +372,7 @@ namespace Knights {
         auto offset = mapOffsetForDirection( d );
         auto newPosition = position + offset;
 
-        if (!isBlockAt(newPosition)) {
+        if (!isBlockMovementAt(newPosition)) {
             moveActor(position, newPosition, actor);
             actor->onMove();
         }
@@ -353,7 +385,7 @@ namespace Knights {
         return true;
     }
 
-    bool CMap::isBlockAt(const Vec2i& p) {
+    bool CMap::isBlockMovementAt(const Vec2i &p) {
 
         if (!isValid(p)) {
             return true;
@@ -363,7 +395,7 @@ namespace Knights {
             return true;
         }
 
-        return block[p.y][p.x];
+        return mBlockCharacterMovement[p.y][p.x];
     }
 
     std::shared_ptr<CActor> CMap::getActorAt(Vec2i position) {
@@ -406,14 +438,14 @@ namespace Knights {
         actor->setPosition(to);
     }
 
-	Vec2i CMap::projectLineOfSight(Vec2i aPosition, EDirection aDirection) {
+	Vec2i CMap::projectHitscanPosition(Vec2i aPosition, EDirection aDirection) {
 
 		auto offset = mapOffsetForDirection( aDirection );
 		auto position = aPosition;
 		std::shared_ptr<CActor> toReturn = nullptr;
 
         auto previous = position;
-		while ( isValid( position ) && !isBlockAt( position ) ) {
+		while ( isValid( position ) && !isBlockProjectilesAt(position) ) {
 
             previous = position;
 
@@ -480,7 +512,9 @@ namespace Knights {
     void CMap::floodFill(Vec2i position, char oldElement, char newElement) {
         if ( getMapAt( position ) == oldElement ) {
             mElement[ position.y ][ position.x ] = newElement;
-            block[ position.y ][ position.x ] = false;
+            mBlockCharacterMovement[ position.y ][ position.x ] = false;
+            mBlockProjectiles[ position.y ][ position.x ] = false;
+            mBlockView[ position.y ][ position.x ] = false;
             map[ position.y ][ position.x ] = nullptr;
             floodFill( position + mapOffsetForDirection( EDirection::kNorth ), oldElement, newElement );
             floodFill( position + mapOffsetForDirection( EDirection::kEast ), oldElement, newElement );
@@ -498,9 +532,31 @@ namespace Knights {
         auto target = getActorTargetPosition( a );
 
         if ( a->getSelectedItem() != nullptr && a->getSelectedItem()->getView() == 'y' ) {
-            return projectLineOfSight( target, a->getDirection() );
+            return projectHitscanPosition(target, a->getDirection());
         }
 
         return target;
+    }
+
+    bool CMap::isBlockProjectilesAt(const Vec2i &p) {
+
+        if (!isValid(p)) {
+            return true;
+        }
+
+        if (mActors[p.y][p.x] != nullptr) {
+            return true;
+        }
+
+        return mBlockProjectiles[ p.y ][ p.x ];
+    }
+
+    bool CMap::isBlockViewAt(const Vec2i &p) {
+
+        if (!isValid(p)) {
+            return true;
+        }
+
+        return mBlockView[ p.y ][ p.x ];
     }
 }
