@@ -75,7 +75,7 @@ namespace Knights {
 				}
 			}
 
-			if (map->isBlockAt({newX, newY})) {
+			if (map->isBlockMovementAt({newX, newY})) {
 				return false;
 			}
 

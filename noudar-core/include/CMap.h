@@ -26,7 +26,7 @@ namespace Knights {
     public:
 
         bool isValid( const Vec2i& p );
-        bool isBlockAt( const Vec2i& p );
+        bool isBlockMovementAt(const Vec2i &p);
         CMap( const std::string& data, std::shared_ptr<CGameDelegate> aGameDelegate );
         void move( EDirection d, std::shared_ptr<CActor> a );
         void endOfTurn();

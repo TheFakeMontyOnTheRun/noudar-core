@@ -75,6 +75,7 @@ namespace Knights {
                     case '-':
                     case '(':
                     case ')':
+                    case '~':
                     case '2':
                     case '{':
                     case '}':
@@ -186,10 +187,6 @@ namespace Knights {
                     case '\'':
                         mBlockCharacterMovement[y][x] = true;
                         break;
-                    case '~':
-                        mBlockCharacterMovement[y][x] = false;
-                        break;
-
                     case '4':
                         actor = mAvatar = std::make_shared<CCharacter>( heroArchetype, friends, getLastestId(), [](std::shared_ptr<CActor> character, std::shared_ptr<CMap> map){
                             auto shield = (CStorageItem*)character->getItemWithSymbol( 'v' ).get();
@@ -210,11 +207,13 @@ namespace Knights {
                             }
 
                         });
+                        mBlockCharacterMovement[ y ][ x ] = false;
                         mElement[ y ][ x ] = '.';
                         break;
 
                     case '9':
                         {
+                            mBlockCharacterMovement[ y ][ x ] = false;
                             map[y][x] = std::make_shared<CDoorway>();
                             mElement[y][x] = map[y][x]->getView();
                         }
@@ -237,7 +236,7 @@ namespace Knights {
 
                         });
 
-
+                        mBlockCharacterMovement[ y ][ x ] = true;
                         mElement[ y ][ x ] = '.';
                     }
                     break;
@@ -245,10 +244,12 @@ namespace Knights {
                     case '6':
                     case '5':
                         actor = std::make_shared<CMonster>( monsterArchetype, foes, getLastestId());
+                        mBlockCharacterMovement[ y ][ x ] = false;
                         mElement[ y ][ x ] = '.';
                         break;
                     case 'G':
                         actor = std::make_shared<CMonsterGenerator>(getLastestId(), 5);
+                        mBlockCharacterMovement[ y ][ x ] = false;
                         mElement[ y ][ x ] = '.';
                         break;
 
@@ -341,7 +342,7 @@ namespace Knights {
         auto offset = mapOffsetForDirection( d );
         auto newPosition = position + offset;
 
-        if (!isBlockAt(newPosition)) {
+        if (!isBlockMovementAt(newPosition)) {
             moveActor(position, newPosition, actor);
             actor->onMove();
         }
@@ -354,7 +355,7 @@ namespace Knights {
         return true;
     }
 
-    bool CMap::isBlockAt(const Vec2i& p) {
+    bool CMap::isBlockMovementAt(const Vec2i &p) {
 
         if (!isValid(p)) {
             return true;
@@ -414,7 +415,7 @@ namespace Knights {
 		std::shared_ptr<CActor> toReturn = nullptr;
 
         auto previous = position;
-		while ( isValid( position ) && !isBlockAt( position ) ) {
+		while ( isValid( position ) && !isBlockMovementAt(position) ) {
 
             previous = position;
 

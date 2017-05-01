@@ -54,7 +54,7 @@ void Knights::CDropItemCommand::execute() {
 	auto map = getGame()->getMap();
 	auto target = map->getActorTargetPosition(mActor);
 
-	if ( map->isBlockAt( target)) {
+	if (map->isBlockMovementAt(target)) {
 		return;
 	}
 

@@ -96,7 +96,7 @@ namespace Knights {
                     }
 
                 } else {
-                    if (map.isBlockAt( {x, y} )) {
+                    if (map.isBlockMovementAt({x, y})) {
                         attron(COLOR_PAIR(3));
                         addch(map.getElementAt( {x, y} ) );
                     } else {
