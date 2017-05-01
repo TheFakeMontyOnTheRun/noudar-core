@@ -193,12 +193,16 @@ namespace Knights {
                     case 'X':
                     case '|':
                     case 'Y':
-                    case 'A':
                     case 'Z':
                     case 'S':
                     case '>':
                     case '<':
                     case '\'':
+                        mBlockCharacterMovement[y][x] = true;
+                        mBlockProjectiles[ y ][ x ] = true;
+                        mBlockView[ y ][ x ] = false;
+                        break;
+                    case 'A':
                         mBlockCharacterMovement[y][x] = true;
                         mBlockProjectiles[ y ][ x ] = false;
                         mBlockView[ y ][ x ] = false;
