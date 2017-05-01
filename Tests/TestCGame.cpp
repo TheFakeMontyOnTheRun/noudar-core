@@ -74,10 +74,24 @@ protected:
         return count;
     }
 
+    int getTotalHealthInLevel() {
+
+        auto actors = mGame->getMap()->getActors();
+        auto cumulatedHealth = 0;
+
+        for (const auto& actor : actors ) {
+            if ( actor->getView() == '@') {
+                cumulatedHealth += actor->getHP();
+            }
+        }
+
+        return cumulatedHealth;
+    }
+
     std::string getMap() {
         std::string toReturn;
 
-        toReturn += "v4y0000000000000000000000000000T00000000\n";
+        toReturn += "v4y000000000000000000A000000000T00000000\n";
         toReturn += "011110000000000000000000########000#0000\n";
         toReturn += "050000000000000000000000000000#0000#0#00\n";
         toReturn += "050000000000000000000000000000########00\n";
@@ -95,7 +109,7 @@ protected:
         toReturn += "0000000000000000000000000000000000000000\n";
         toReturn += "0000000000000000000000000000000000000000\n";
         toReturn += "0000000000000000000000000000000000000000\n";
-        toReturn += "0000000000000000000000000000000000000000\n";
+        toReturn += "0500000000000000000000000000000000000000\n";
         toReturn += "0000000000000000000000000000000000000000\n";
         toReturn += "0000000000000000000000000000000000000000\n";
         toReturn += "0000000000000000000000000000000000000000\n";
@@ -459,36 +473,18 @@ TEST_F(TestCGame, ShootingTheGateNodeWillOpenAllGates ) {
 
 TEST_F(TestCGame, EnsureMonstersWontKillEachOther ) {
 
-    auto actors = mGame->getMap()->getActors();
-
-    int cumulatedHealthBefore = 0;
-
-    for (const auto& actor : actors ) {
-        if ( actor->getView() == '@') {
-            cumulatedHealthBefore += actor->getHP();
-        }
-    }
+    int cumulatedHealthBefore = getTotalHealthInLevel();
 
     ON_CALL(*mMockRenderer, getInput()).WillByDefault(Return(Knights::kEndTurnCommand));
     mGame->tick();
     mGame->tick();
     mGame->tick();
 
-    int cumulatedHealthAfter = 0;
-
-    for (const auto& actor : actors ) {
-        if ( actor->getView() == '@') {
-            cumulatedHealthAfter += actor->getHP();
-        }
-    }
-
-    ASSERT_EQ( cumulatedHealthAfter, cumulatedHealthBefore);
+    ASSERT_EQ( getTotalHealthInLevel(), cumulatedHealthBefore);
 }
 
 TEST_F(TestCGame, EnsureTheProjectionTargetWillChangeBasedOnCharacterItems ) {
     auto actor = mGame->getMap()->getAvatar();
-    int gatesBefore = countElements('#', mGame->getMap());
-    int passagesBefore = countElements('~', mGame->getMap());
 
     actor->turnRight();
     auto targetBeforeCrossbow = mGame->getMap()->getTargetProjection( actor );
@@ -506,4 +502,23 @@ TEST_F(TestCGame, EnsureTheProjectionTargetWillChangeBasedOnCharacterItems ) {
     ASSERT_EQ(targetWithCrossbow, Knights::Vec2i( 31, 0 ) );
     ASSERT_EQ( targetWithSword, Knights::Vec2i( 0, 0 ) );
 
+}
+
+TEST_F(TestCGame, ShootingWallsWillBlockDarts ) {
+    auto actor = mGame->getMap()->getAvatar();
+    int cumulatedHealthBefore = getTotalHealthInLevel();
+
+    actor->turnRight();
+    ON_CALL(*mMockRenderer, getInput()).WillByDefault(Return(Knights::kPickItemCommand));
+    mGame->tick();
+    actor->suggestCurrentItem('y');
+    auto crossbow = (Knights::CStorageItem*)actor->getItemWithSymbol( 'y' ).get();
+    crossbow->add( 100 );
+    actor->turnRight();
+    ON_CALL(*mMockRenderer, getInput()).WillByDefault(Return(Knights::kUseCurrentItemInInventoryCommand));
+    mGame->tick();
+
+    ASSERT_TRUE( actor->getDirection() == Knights::EDirection::kSouth);
+    ASSERT_EQ(actor->getSelectedItem()->getView(), 'y' );
+    ASSERT_EQ( getTotalHealthInLevel(), cumulatedHealthBefore);
 }
