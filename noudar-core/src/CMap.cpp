@@ -513,6 +513,8 @@ namespace Knights {
         if ( getMapAt( position ) == oldElement ) {
             mElement[ position.y ][ position.x ] = newElement;
             mBlockCharacterMovement[ position.y ][ position.x ] = false;
+            mBlockProjectiles[ position.y ][ position.x ] = false;
+            mBlockView[ position.y ][ position.x ] = false;
             map[ position.y ][ position.x ] = nullptr;
             floodFill( position + mapOffsetForDirection( EDirection::kNorth ), oldElement, newElement );
             floodFill( position + mapOffsetForDirection( EDirection::kEast ), oldElement, newElement );
