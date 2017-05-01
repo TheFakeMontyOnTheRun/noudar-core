@@ -533,10 +533,24 @@ namespace Knights {
     }
 
     bool CMap::isBlockProjectilesAt(const Vec2i &p) {
+
+        if (!isValid(p)) {
+            return true;
+        }
+
+        if (mActors[p.y][p.x] != nullptr) {
+            return true;
+        }
+
         return mBlockProjectiles[ p.y ][ p.x ];
     }
 
     bool CMap::isBlockViewAt(const Vec2i &p) {
+
+        if (!isValid(p)) {
+            return true;
+        }
+
         return mBlockView[ p.y ][ p.x ];
     }
 }
