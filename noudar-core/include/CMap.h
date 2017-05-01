@@ -17,7 +17,8 @@ namespace Knights {
 	    bool mBlockCharacterMovement[ kMapSize ][ kMapSize ];
         char mElement[ kMapSize ][ kMapSize ];
 	    std::array< std::array< std::shared_ptr<CItem>, kMapSize >, kMapSize > mItems;
-
+        std::array< std::array< bool, kMapSize >, kMapSize > mBlockProjectiles;
+        std::array< std::array< bool, kMapSize >, kMapSize > mBlockView;
         std::vector<std::shared_ptr<CActor>> actors;
         std::shared_ptr<CActor> mAvatar;
 		int mCurrentId = 1;
@@ -27,6 +28,8 @@ namespace Knights {
 
         bool isValid( const Vec2i& p );
         bool isBlockMovementAt(const Vec2i &p);
+        bool isBlockProjectilesAt( const Vec2i &p );
+        bool isBlockViewAt( const Vec2i &p );
         CMap( const std::string& data, std::shared_ptr<CGameDelegate> aGameDelegate );
         void move( EDirection d, std::shared_ptr<CActor> a );
         void endOfTurn();
