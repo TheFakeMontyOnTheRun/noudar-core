@@ -14,7 +14,7 @@ namespace Knights {
         std::shared_ptr<CActor> mActors[ kMapSize ][ kMapSize ];
         std::shared_ptr<CGameDelegate> mGameDelegate;
 
-	    bool block[ kMapSize ][ kMapSize ];
+	    bool mBlockCharacterMovement[ kMapSize ][ kMapSize ];
         char mElement[ kMapSize ][ kMapSize ];
 	    std::array< std::array< std::shared_ptr<CItem>, kMapSize >, kMapSize > mItems;
 

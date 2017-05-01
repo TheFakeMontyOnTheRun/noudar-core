@@ -60,7 +60,7 @@ namespace Knights {
 
                 element = mapData[ pos ];
                 actor = nullptr;
-                block[y][x] = false;
+                mBlockCharacterMovement[y][x] = false;
                 map[y][x] = nullptr;
                 mActors[ y ][ x ] = nullptr;
                 mElement[y][x] = element;
@@ -81,10 +81,10 @@ namespace Knights {
                     case '7':
                     case '!':
                     case 'H':
-                        block[y][x] = false;
+                        mBlockCharacterMovement[y][x] = false;
                         break;
 	                case 't':
-		                block[y][x] = false;
+		                mBlockCharacterMovement[y][x] = false;
 		                mElement[ y ][ x ] = '.';
 		                mItems[ y ][ x ] = std::make_shared<CItem>("Sword of sorrow", 't', false, [](std::shared_ptr<CActor> aActor, std::shared_ptr<CMap> aMap){
                             auto target = aMap->getActorTargetPosition(aActor);
@@ -92,7 +92,7 @@ namespace Knights {
 		                });
 		                break;
                     case 'v':
-                        block[y][x] = false;
+                        mBlockCharacterMovement[y][x] = false;
                         mElement[ y ][ x ] = '.';
                         mItems[ y ][ x ] = std::make_shared<CStorageItem>("Shield of restoration", 'v', false, [](std::shared_ptr<CActor> aActor, std::shared_ptr<CMap> aMap){
 
@@ -111,12 +111,12 @@ namespace Knights {
                         break;
 
                     case 'u':
-                        block[y][x] = false;
+                        mBlockCharacterMovement[y][x] = false;
                         mElement[ y ][ x ] = '.';
                         mItems[ y ][ x ] = std::make_shared<CStorageItem>("Quiver", 'u', false, [](std::shared_ptr<CActor> aActor, std::shared_ptr<CMap> aMap){}, 5);
                         break;
                     case '+':
-                        block[y][x] = false;
+                        mBlockCharacterMovement[y][x] = false;
                         mElement[ y ][ x ] = '.';
                         mItems[ y ][ x ] = std::make_shared<CItem>("The holy health", '+', true, [](std::shared_ptr<CActor> aActor, std::shared_ptr<CMap> aMap){
                             aActor->addHP(5);
@@ -124,7 +124,7 @@ namespace Knights {
                         break;
 
 	                case 'y':
-		                block[y][x] = false;
+		                mBlockCharacterMovement[y][x] = false;
 		                mElement[ y ][ x ] = '.';
                         //The need for RTTI creeps again...
 		                mItems[ y ][ x ] = std::make_shared<CStorageItem>("Crossbow of damnation", 'y', false, [](std::shared_ptr<CActor> aActor, std::shared_ptr<CMap> aMap){
@@ -178,15 +178,16 @@ namespace Knights {
                     case 'X':
                     case '|':
                     case 'Y':
+                    case 'A':
                     case 'Z':
                     case 'S':
                     case '>':
                     case '<':
                     case '\'':
-                        block[y][x] = true;
+                        mBlockCharacterMovement[y][x] = true;
                         break;
                     case '~':
-                        block[y][x] = false;
+                        mBlockCharacterMovement[y][x] = false;
                         break;
 
                     case '4':
@@ -363,7 +364,7 @@ namespace Knights {
             return true;
         }
 
-        return block[p.y][p.x];
+        return mBlockCharacterMovement[p.y][p.x];
     }
 
     std::shared_ptr<CActor> CMap::getActorAt(Vec2i position) {
@@ -480,7 +481,7 @@ namespace Knights {
     void CMap::floodFill(Vec2i position, char oldElement, char newElement) {
         if ( getMapAt( position ) == oldElement ) {
             mElement[ position.y ][ position.x ] = newElement;
-            block[ position.y ][ position.x ] = false;
+            mBlockCharacterMovement[ position.y ][ position.x ] = false;
             map[ position.y ][ position.x ] = nullptr;
             floodFill( position + mapOffsetForDirection( EDirection::kNorth ), oldElement, newElement );
             floodFill( position + mapOffsetForDirection( EDirection::kEast ), oldElement, newElement );
