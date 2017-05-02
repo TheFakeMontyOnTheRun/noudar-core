@@ -229,7 +229,7 @@ namespace Knights {
 		this->mStance = other->mStance;
 		this->mTeam = other->mTeam;
 		this->mHP = other->mHP;
-		this->mInventory = this->mInventory;
+		this->mInventory = other->mInventory;
 	}
 
     void CActor::suggestCurrentItem( char view ) {
