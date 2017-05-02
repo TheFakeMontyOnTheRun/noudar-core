@@ -91,7 +91,7 @@ protected:
     std::string getMap() {
         std::string toReturn;
 
-        toReturn += "v4y000000000000000000A000000000T00000000\n";
+        toReturn += "v4yE00000000000000000A000000000T00000000\n";
         toReturn += "011110000000000000000000########000#0000\n";
         toReturn += "050000000000000000000000000000#0000#0#00\n";
         toReturn += "050000000000000000000000000000########00\n";
@@ -184,6 +184,31 @@ TEST_F(TestCGame, GameWillAdvanceLevelUponEnteringExit ) {
     game->tick();
 }
 
+TEST_F(TestCGame, AdvancingLevelWillKeepItemsWorkingProperly ) {
+    auto actor = mGame->getMap()->getAvatar();
+    auto mockMapContents = getMap();
+
+    actor->turnRight();
+    ON_CALL(*mMockRenderer, getInput()).WillByDefault(Return(Knights::kPickItemCommand));
+    mGame->tick();
+    ON_CALL(*mMockRenderer, getInput()).WillByDefault(Return(Knights::kMovePlayerForwardCommand));
+    mGame->tick();
+    actor->suggestCurrentItem('y');
+    EXPECT_CALL(*mMockFileLoader, loadFileFromPath(_));
+    //this will load a new level
+    mGame->tick();
+    ON_CALL(*mMockRenderer, getInput()).WillByDefault(Return(Knights::kUseCurrentItemInInventoryCommand));
+    auto crossbow = (Knights::CStorageItem*)actor->getItemWithSymbol( 'y' ).get();
+    crossbow->add( 100 );
+
+    auto previousAmmo = crossbow->getAmount();
+    mGame->tick();
+
+    auto stillCrossbow = mGame->getMap()->getAvatar()->getItemWithSymbol('y');
+
+    ASSERT_TRUE( stillCrossbow->getView() == crossbow->getView() );
+    ASSERT_NE( crossbow->getAmount(), previousAmmo );
+}
 
 TEST_F(TestCGame, GameWillInvalidateStoredPlayerForNextSession ) {
 	auto avatar = mGame->getMap()->getAvatar();
