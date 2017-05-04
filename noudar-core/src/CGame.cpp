@@ -5,7 +5,7 @@
 #include <fstream>
 #include <sstream>
 #include <vector>
-
+#include <map>
 
 #include "Vec2i.h"
 #include "IMapElement.h"

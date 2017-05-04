@@ -23,7 +23,7 @@ namespace Knights {
         std::shared_ptr<CActor> mAvatar;
 		int mCurrentId = 1;
 
-		void floodFill( Vec2i position, char oldElement, char newElement );
+		void floodFill( Vec2i position, std::map<char, char> transformations );
     public:
 
         bool isValid( const Vec2i& p );

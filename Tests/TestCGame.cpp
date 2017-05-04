@@ -92,13 +92,13 @@ protected:
         std::string toReturn;
 
         toReturn += "v4yE00000000000000000A000000000T00000000\n";
-        toReturn += "011110000000000000000000########000#0000\n";
-        toReturn += "050000000000000000000000000000#0000#0#00\n";
-        toReturn += "050000000000000000000000000000########00\n";
-        toReturn += "000000000000000000000000000000#000000000\n";
-        toReturn += "0000000000000000000000000#0000#0000#0000\n";
-        toReturn += "0000000000000000000000000###########0000\n";
-        toReturn += "000000000000000000000000000#000000000000\n";
+        toReturn += "011110000000000000000000##TTTTTT000#0000\n";
+        toReturn += "050000000000000000000000000000T0000#0#00\n";
+        toReturn += "050000000000000000000000000000TTTTTT##00\n";
+        toReturn += "000000000000000000000000000000T000000000\n";
+        toReturn += "0000000000000000000000000#0000T0000#0000\n";
+        toReturn += "0000000000000000000000000#TTTTTTTT##0000\n";
+        toReturn += "000000000000000000000000000T000000000000\n";
         toReturn += "000000000000000000000000000#000000000000\n";
         toReturn += "000000000000000000000000000#000000000000\n";
         toReturn += "0000000000000000000000000000000000000000\n";
@@ -173,20 +173,18 @@ TEST_F(TestCGame, GameWillKeepPlayerStatusBetweenMapChanges ) {
 }
 
 TEST_F(TestCGame, GameWillAdvanceLevelUponEnteringExit ) {
+    auto actor = mGame->getMap()->getAvatar();
+    actor->turnRight();
 
-    auto mockMapContents = getMap();
-	mockMapContents[ 2 ] = '9';
-
-	ON_CALL(*mMockFileLoader, loadFileFromPath(_)).WillByDefault(Return(mockMapContents));
-	ON_CALL(*mMockRenderer, getInput()).WillByDefault(Return('s'));
-	auto game = std::make_shared<Knights::CGame>( mMockFileLoader, mMockRenderer, mDelegate );
+	ON_CALL(*mMockRenderer, getInput()).WillByDefault(Return(Knights::kMovePlayerForwardCommand));
+    mGame->tick();
     EXPECT_CALL(*mMockFileLoader, loadFileFromPath(_));
-    game->tick();
+    mGame->tick();
 }
 
 TEST_F(TestCGame, AdvancingLevelWillKeepItemsWorkingProperly ) {
-    auto actor = mGame->getMap()->getAvatar();
     auto mockMapContents = getMap();
+    auto actor = mGame->getMap()->getAvatar();
 
     actor->turnRight();
     ON_CALL(*mMockRenderer, getInput()).WillByDefault(Return(Knights::kPickItemCommand));
@@ -485,14 +483,14 @@ TEST_F(TestCGame, ShootingTheGateNodeWillOpenAllGates ) {
     mGame->tick();
     int passagesAfter = countElements('~', mGame->getMap());
     int gatesAfter = countElements('#', mGame->getMap());
+    int ropesAfter = countElements('T', mGame->getMap());
 
     ASSERT_TRUE( actor->getDirection() == Knights::EDirection::kEast);
     ASSERT_EQ(actor->getSelectedItem()->getView(), 'y' );
 
-    ASSERT_EQ( gatesBefore, 38 );
-    ASSERT_EQ( passagesAfter, 38 );
     ASSERT_EQ( gatesBefore, passagesAfter );
     ASSERT_EQ( gatesAfter, 0 );
+    ASSERT_EQ( ropesAfter, 0 );
     ASSERT_EQ( passagesBefore, 0 );
 }
 

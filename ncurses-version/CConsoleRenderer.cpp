@@ -9,6 +9,7 @@
 #include <string>
 #include <iostream>
 #include <vector>
+#include <map>
 #include <memory>
 #include <ncurses.h>
 #include <cstdlib>

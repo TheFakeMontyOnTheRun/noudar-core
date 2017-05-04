@@ -6,7 +6,7 @@
 #include <vector>
 #include <memory>
 #include <functional>
-
+#include <map>
 #include "Vec2i.h"
 #include "IMapElement.h"
 #include "CTeam.h"

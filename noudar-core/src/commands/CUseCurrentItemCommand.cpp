@@ -15,7 +15,7 @@
 #include <utility>
 #include <iostream>
 #include <vector>
-
+#include <map>
 #include "Vec2i.h"
 #include "CTeam.h"
 #include "CItem.h"
