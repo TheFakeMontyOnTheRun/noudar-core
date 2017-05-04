@@ -145,10 +145,11 @@ namespace Knights {
 		switch (aStance) {
 			case EStance::kAttacking:
 				return "Attacking";
-			case EStance::kStanding:
-				return "Standing";
 			case EStance::kDead:
 				return "Dead";
+			case EStance::kStanding:
+			default:
+				return "Standing";
 		}
 	}
 
