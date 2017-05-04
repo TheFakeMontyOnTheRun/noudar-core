@@ -1,6 +1,7 @@
 #include <string>
 #include <array>
 #include <vector>
+#include <map>
 #include <memory>
 #include <functional>
 #include <algorithm>
@@ -21,6 +22,7 @@
 #include "CItem.h"
 #include <iostream>
 #include <sstream>
+#include <map>
 #include "CMonsterGenerator.h"
 #include "CRandomWorldGenerator.h"
 
@@ -253,7 +255,7 @@ namespace Knights {
                             if ( archetype.getHP() > character->getHP() ) {
                                 auto position = character->getPosition();
                                 map->mElement[ position.y ][ position.x ] = '#';
-                                map->floodFill( character->getPosition(), '#', '~' );
+                                map->floodFill( position, {{'#', '~'}, {'T', '_'}} );
                                 map->mElement[ position.y ][ position.x ] = '.';
                                 character->addHP( -character->getHP() );
                             }
@@ -263,7 +265,7 @@ namespace Knights {
                         mBlockCharacterMovement[ y ][ x ] = true;
                         mBlockProjectiles[ y ][ x ] = false;
                         mBlockView[ y ][ x ] = false;
-                        mElement[ y ][ x ] = '.';
+                        mElement[ y ][ x ] = 'T';
                     }
                     break;
                     case 'J':
@@ -509,19 +511,22 @@ namespace Knights {
         return mElement[p.y][p.x];
     }
 
-    void CMap::floodFill(Vec2i position, char oldElement, char newElement) {
-        if ( getMapAt( position ) == oldElement ) {
-            mElement[ position.y ][ position.x ] = newElement;
-            mBlockCharacterMovement[ position.y ][ position.x ] = false;
-            mBlockProjectiles[ position.y ][ position.x ] = false;
-            mBlockView[ position.y ][ position.x ] = false;
-            map[ position.y ][ position.x ] = nullptr;
-            floodFill( position + mapOffsetForDirection( EDirection::kNorth ), oldElement, newElement );
-            floodFill( position + mapOffsetForDirection( EDirection::kEast ), oldElement, newElement );
-            floodFill( position + mapOffsetForDirection( EDirection::kSouth ), oldElement, newElement );
-            floodFill( position + mapOffsetForDirection( EDirection::kWest ), oldElement, newElement );
-        }
+    void CMap::floodFill(Vec2i position, std::map<char, char> transformations ) {
+        auto oldElement = getMapAt( position );
+        if ( transformations.count( oldElement ) > 0 ) {
 
+                auto newElement = transformations[ oldElement ];
+                mElement[ position.y ][ position.x ] = newElement;
+                mBlockCharacterMovement[ position.y ][ position.x ] = false;
+                mBlockProjectiles[ position.y ][ position.x ] = false;
+                mBlockView[ position.y ][ position.x ] = false;
+                map[ position.y ][ position.x ] = nullptr;
+                floodFill( position + mapOffsetForDirection( EDirection::kNorth ), transformations );
+                floodFill( position + mapOffsetForDirection( EDirection::kEast ), transformations );
+                floodFill( position + mapOffsetForDirection( EDirection::kSouth ), transformations );
+                floodFill( position + mapOffsetForDirection( EDirection::kWest ), transformations );
+
+        }
     }
 
     std::shared_ptr<CGameDelegate> CMap::getGameDelegate() {

@@ -13,6 +13,7 @@
 #include <array>
 #include <fstream>
 #include <vector>
+#include <map>
 
 #include "IFileLoaderDelegate.h"
 #include "CPlainFileLoader.h"

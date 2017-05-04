@@ -6,6 +6,7 @@
 #include <sstream>
 #include <memory>
 #include <vector>
+#include <map>
 #include <functional>
 #include "Vec2i.h"
 #include "IMapElement.h"
