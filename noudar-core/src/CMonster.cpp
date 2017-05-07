@@ -19,9 +19,13 @@
 
 namespace Knights {
 
-	CMonster::CMonster(std::shared_ptr<CCharacterArchetype> aArchetype, std::shared_ptr<CTeam> aTeam, int aId)
-			: CCharacter(aArchetype, aTeam, aId) {
+	CMonster::CMonster(std::shared_ptr<CCharacterArchetype> aArchetype, std::shared_ptr<CTeam> aTeam, int aId, CMonsterUpdateCallback updateCallback)
+			: CCharacter(aArchetype, aTeam, aId), mUpdateCallback( updateCallback ) {
 	}
+
+    CMonster::CMonster(std::shared_ptr<CCharacterArchetype> aArchetype, std::shared_ptr<CTeam> aTeam, int aId)
+            : CCharacter(aArchetype, aTeam, aId), mUpdateCallback( [](std::shared_ptr <CMap> map, std::shared_ptr<CActor> me){} ){
+    }
 
 	bool CMonster::dealWith(std::shared_ptr<CMap> map, int x, int y) {
 		int dx = x - mPosition.x;
@@ -87,6 +91,7 @@ namespace Knights {
 	void CMonster::update(std::shared_ptr<CMap> map) {
 
 		CCharacter::update(map);
+        mUpdateCallback(map, shared_from_this() );
 
 		int newX;
 		int newY;
