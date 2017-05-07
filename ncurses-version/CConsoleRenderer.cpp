@@ -94,7 +94,7 @@ namespace Knights {
                         } else {
                             attron(COLOR_PAIR(5));
                         }
-                        addch(directions[static_cast<int>(actor->getDirection()) ]);
+                        addch( actor->getView() );
                     }
 
                 } else {

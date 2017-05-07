@@ -73,7 +73,7 @@ namespace Knights {
                             std::cout << "\033[37m";
                         }
 
-                        std::cout << (directions[static_cast<int>(actor->getDirection()) ]);
+                        std::cout << actor->getView();
                     }
 
                 } else {
