@@ -261,6 +261,7 @@ namespace Knights {
                                 map->floodFill( position, {{'#', '~'}, {'T', '_'}} );
                                 map->mElement[ position.y ][ position.x ] = '.';
                                 character->addHP( -character->getHP() );
+                                map->removeActorFrom( character->getPosition() );
                             }
 
                         });
@@ -588,5 +589,10 @@ namespace Knights {
         }
 
         return mBlockView[ p.y ][ p.x ];
+    }
+
+    void CMap::removeActorFrom(Vec2i position) {
+        auto actor = getActorAt( position );
+        mActors[ position.y ][ position.x ] = nullptr;
     }
 }
