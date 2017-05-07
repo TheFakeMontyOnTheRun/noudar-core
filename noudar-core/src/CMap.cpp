@@ -54,6 +54,9 @@ namespace Knights {
 
 	    auto heroArchetype = std::make_shared<CCharacterArchetype>( 5, 2, 20, 7, '^', "Hero");
 	    auto monsterArchetype = std::make_shared<CCharacterArchetype>( 4, 1, 10, 3, '@', "Monster");
+        auto cocoonArchetype = std::make_shared<CCharacterArchetype>( 0, 5, 20, 3, 'C', "Cocoon");
+        auto weakenedDemonArchetype = std::make_shared<CCharacterArchetype>( 10, 30, 100, 3, 's', "Master Demon (premature)");
+        auto demonArchetype = std::make_shared<CCharacterArchetype>( 20, 30, 100, 3, 'S', "Master Demon");
 	    auto friends = std::make_shared<CTeam>("Heroes");
 	    auto foes = std::make_shared<CTeam>("Enemies");
         int pos = 0;
@@ -277,6 +280,28 @@ namespace Knights {
                         mBlockView[ y ][ x ] = false;
                         mElement[ y ][ x ] = '.';
                         break;
+                    case 'c':
+                        actor = std::make_shared<CMonster>( cocoonArchetype, foes, getLastestId());
+                        mBlockCharacterMovement[ y ][ x ] = false;
+                        mBlockProjectiles[ y ][ x ] = false;
+                        mBlockView[ y ][ x ] = false;
+                        mElement[ y ][ x ] = '.';
+                        break;
+                    case 'd':
+                        actor = std::make_shared<CMonster>( weakenedDemonArchetype, foes, getLastestId());
+                        mBlockCharacterMovement[ y ][ x ] = false;
+                        mBlockProjectiles[ y ][ x ] = false;
+                        mBlockView[ y ][ x ] = false;
+                        mElement[ y ][ x ] = '.';
+                        break;
+                    case 'e':
+                        actor = std::make_shared<CMonster>( demonArchetype, foes, getLastestId());
+                        mBlockCharacterMovement[ y ][ x ] = false;
+                        mBlockProjectiles[ y ][ x ] = false;
+                        mBlockView[ y ][ x ] = false;
+                        mElement[ y ][ x ] = '.';
+                        break;
+
                     case 'G':
                         actor = std::make_shared<CMonsterGenerator>(getLastestId(), 5);
                         mBlockCharacterMovement[ y ][ x ] = false;
