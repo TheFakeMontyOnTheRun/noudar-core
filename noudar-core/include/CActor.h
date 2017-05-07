@@ -29,6 +29,7 @@ namespace Knights {
 		int mAttack;
 		int mDefence;
 		int mHP;
+		int mAttackBonus = 0;
 		Vec2i mPosition;
 		char mView;
 		std::string mName;
@@ -112,6 +113,8 @@ namespace Knights {
 		void copyStateFrom( std::shared_ptr<CActor> other );
 
 		void suggestCurrentItem( char view );
+
+		void setAttackBonus( int attackBonus );
 	protected:
 
 		void setCurrentSay( std::string newSay );

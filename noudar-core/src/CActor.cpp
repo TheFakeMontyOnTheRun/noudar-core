@@ -63,10 +63,10 @@ namespace Knights {
 	void CActor::performAttack(std::shared_ptr<CActor> other) {
 
 		onAttack();
-		int diff = (mAttack - other->mDefence);
+		int diff = (getAttack() - other->getDefense());
 
 		if (diff > 0) {
-			other->mHP -= diff;
+            other->addHP(-diff );
 		}
 	}
 
@@ -103,7 +103,7 @@ namespace Knights {
 	}
 
 	int CActor::getAttack() {
-		return mAttack;
+		return mAttack + mAttackBonus;
 	}
 
 	int CActor::getId() {
@@ -250,5 +250,9 @@ namespace Knights {
 		}
 
 		return nullptr;
+    }
+
+    void CActor::setAttackBonus(int attackBonus) {
+        mAttackBonus = attackBonus;
     }
 }
