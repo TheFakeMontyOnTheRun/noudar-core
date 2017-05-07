@@ -30,7 +30,7 @@ namespace Knights {
 
     const auto kCrossbowAmmoUsage = 3;
     const auto kShieldPowerUsage = 5;
-    const auto kImprovedDamageRatio = 9;
+    const auto kImprovedDamageRatio = 10;
 
     void CMap::endOfTurn() {
         for (int y = 0; y < kMapSize; ++y) {
@@ -52,11 +52,11 @@ namespace Knights {
         char element;
         std::shared_ptr<CActor> actor = nullptr;
 
-	    auto heroArchetype = std::make_shared<CCharacterArchetype>( 5, 2, 20, 7, '^', "Hero");
+	    auto heroArchetype = std::make_shared<CCharacterArchetype>( 5, 3, 20, 7, '^', "Hero");
 	    auto monsterArchetype = std::make_shared<CCharacterArchetype>( 4, 1, 10, 3, '@', "Monster");
-        auto cocoonArchetype = std::make_shared<CCharacterArchetype>( 0, 0, 10, 0, 'C', "Cocoon");
-        auto weakenedDemonArchetype = std::make_shared<CCharacterArchetype>( 10, 30, 100, 3, 'd', "Master Demon (premature)");
-        auto demonArchetype = std::make_shared<CCharacterArchetype>( 20, 30, 100, 3, 'D', "Master Demon");
+        auto cocoonArchetype = std::make_shared<CCharacterArchetype>( 0, 0, 10000, 0, 'C', "Cocoon");
+        auto weakenedDemonArchetype = std::make_shared<CCharacterArchetype>( 10, 3000, 10, 3, 'd', "Master Demon (premature)");
+        auto demonArchetype = std::make_shared<CCharacterArchetype>( 20, 10, 50, 3, 'D', "Master Demon");
 	    auto friends = std::make_shared<CTeam>("Heroes");
 	    auto foes = std::make_shared<CTeam>("Enemies");
         int pos = 0;
@@ -173,9 +173,10 @@ namespace Knights {
                                 aMap->attack( aActor, target, false );
 
                                 if ( shieldHasAmmo ) {
-                                    for ( int ratio = kImprovedDamageRatio; ratio > 0; --ratio ) {
-                                        aMap->attack( aActor, target, false );
-                                    }
+
+                                    aActor->setAttackBonus( kImprovedDamageRatio );
+                                    aMap->attack( aActor, target, false );
+                                    aActor->setAttackBonus( 0 );
                                 }
                             }
 
