@@ -91,7 +91,7 @@ protected:
     std::string getMap() {
         std::string toReturn;
 
-        toReturn += "v4yE00000000000000000A000000000T00000000\n";
+        toReturn += "v4yE00000000000000000A000000000T0000000c\n";
         toReturn += "011110000000000000000000##TTTTTT000#0000\n";
         toReturn += "050000000000000000000000000000T0000#0#00\n";
         toReturn += "050000000000000000000000000000TTTTTT##00\n";
@@ -545,3 +545,29 @@ TEST_F(TestCGame, ShootingWallsWillBlockDarts ) {
     ASSERT_EQ(actor->getSelectedItem()->getView(), 'y' );
     ASSERT_EQ( getTotalHealthInLevel(), cumulatedHealthBefore);
 }
+
+TEST_F(TestCGame, KillingTheCocoonWillSpawnTheWeakenedMasterDemon ) {
+    auto actor = mGame->getMap()->getAvatar();
+
+    actor->turnRight();
+    ON_CALL(*mMockRenderer, getInput()).WillByDefault(Return(Knights::kPickItemCommand));
+    mGame->tick();
+    actor->suggestCurrentItem('y');
+    auto crossbow = (Knights::CStorageItem*)actor->getItemWithSymbol( 'y' ).get();
+    crossbow->add( 100 );
+
+    //clear the path to the cocoon
+    ON_CALL(*mMockRenderer, getInput()).WillByDefault(Return(Knights::kUseCurrentItemInInventoryCommand));
+    mGame->tick();
+
+    //kill the cocoon
+    auto shouldBeCocoonNow = mGame->getMap()->getActorAt({ Knights::kMapSize - 1, 0 })->getView();
+
+    mGame->tick();
+    mGame->tick();
+    auto shouldBeDemonNow= mGame->getMap()->getActorAt({ Knights::kMapSize - 1, 0 })->getView();
+
+    ASSERT_EQ( shouldBeCocoonNow, 'C');
+    ASSERT_EQ( shouldBeDemonNow, 'd');
+}
+
