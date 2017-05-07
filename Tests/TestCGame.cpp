@@ -571,3 +571,21 @@ TEST_F(TestCGame, KillingTheCocoonWillSpawnTheWeakenedMasterDemon ) {
     ASSERT_EQ( shouldBeDemonNow, 'd');
 }
 
+
+
+TEST_F(TestCGame, CocoonShouldNotMove ) {
+    auto actor = mGame->getMap()->getAvatar();
+
+    auto shouldBeCocoonNow = mGame->getMap()->getActorAt({ Knights::kMapSize - 1, 0 })->getView();
+    mGame->getMap()->moveActor( actor->getPosition(), { Knights::kMapSize - 2, 0 }, actor );
+    actor->turnRight();
+    actor->turnRight();
+    ON_CALL(*mMockRenderer, getInput()).WillByDefault(Return(Knights::kMovePlayerForwardCommand));
+    mGame->tick();
+    mGame->tick();
+    auto shouldStillBeCocoon = mGame->getMap()->getActorAt({ Knights::kMapSize - 1, 0 })->getView();
+
+    ASSERT_EQ( shouldBeCocoonNow, 'C');
+    ASSERT_EQ( shouldStillBeCocoon, 'C');
+}
+
