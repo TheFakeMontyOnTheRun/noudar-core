@@ -42,6 +42,7 @@ namespace Knights {
         std::vector<std::shared_ptr<CActor>> getActors();
         std::shared_ptr<CActor> getActorAt( Vec2i position );
         void setActorAt( Vec2i position, std::shared_ptr<CActor> actor );
+		void removeActorFrom( Vec2i position );
         void moveActor( Vec2i from, Vec2i to, std::shared_ptr<CActor> actor );
         std::shared_ptr<CActor> attack( std::shared_ptr<CActor> a, Vec2i position , bool mutual );
 	    Vec2i projectHitscanPosition(Vec2i position, EDirection dir);

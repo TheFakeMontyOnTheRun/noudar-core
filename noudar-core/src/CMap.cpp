@@ -54,9 +54,9 @@ namespace Knights {
 
 	    auto heroArchetype = std::make_shared<CCharacterArchetype>( 5, 2, 20, 7, '^', "Hero");
 	    auto monsterArchetype = std::make_shared<CCharacterArchetype>( 4, 1, 10, 3, '@', "Monster");
-        auto cocoonArchetype = std::make_shared<CCharacterArchetype>( 0, 5, 20, 3, 'C', "Cocoon");
-        auto weakenedDemonArchetype = std::make_shared<CCharacterArchetype>( 10, 30, 100, 3, 's', "Master Demon (premature)");
-        auto demonArchetype = std::make_shared<CCharacterArchetype>( 20, 30, 100, 3, 'S', "Master Demon");
+        auto cocoonArchetype = std::make_shared<CCharacterArchetype>( 0, 0, 10, 1, 'C', "Cocoon");
+        auto weakenedDemonArchetype = std::make_shared<CCharacterArchetype>( 10, 30, 100, 3, 'd', "Master Demon (premature)");
+        auto demonArchetype = std::make_shared<CCharacterArchetype>( 20, 30, 100, 3, 'D', "Master Demon");
 	    auto friends = std::make_shared<CTeam>("Heroes");
 	    auto foes = std::make_shared<CTeam>("Enemies");
         int pos = 0;
@@ -261,6 +261,7 @@ namespace Knights {
                                 map->floodFill( position, {{'#', '~'}, {'T', '_'}} );
                                 map->mElement[ position.y ][ position.x ] = '.';
                                 character->addHP( -character->getHP() );
+                                map->removeActorFrom( character->getPosition() );
                             }
 
                         });
@@ -281,7 +282,19 @@ namespace Knights {
                         mElement[ y ][ x ] = '.';
                         break;
                     case 'c':
-                        actor = std::make_shared<CMonster>( cocoonArchetype, foes, getLastestId());
+                        actor = std::make_shared<CMonster>( cocoonArchetype, foes, getLastestId(), [weakenedDemonArchetype, foes](std::shared_ptr <CMap> map, std::shared_ptr<CActor> me) {
+
+                            auto character = (CCharacter*)(me.get());
+                            auto defaultHP = character->getArchetype().getHP();
+                            auto currentHP = me->getHP();
+
+                            if ( currentHP < defaultHP ) {
+                                character->addHP( -character->getHP() );
+                                auto position = me->getPosition();
+                                map->removeActorFrom( position );
+                                map->addActorAt( std::make_shared<CMonster>( weakenedDemonArchetype, foes, map->getLastestId()), position );
+                            }
+                        });
                         mBlockCharacterMovement[ y ][ x ] = false;
                         mBlockProjectiles[ y ][ x ] = false;
                         mBlockView[ y ][ x ] = false;
@@ -588,5 +601,10 @@ namespace Knights {
         }
 
         return mBlockView[ p.y ][ p.x ];
+    }
+
+    void CMap::removeActorFrom(Vec2i position) {
+        auto actor = getActorAt( position );
+        mActors[ position.y ][ position.x ] = nullptr;
     }
 }
