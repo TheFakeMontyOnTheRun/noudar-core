@@ -54,7 +54,7 @@ namespace Knights {
 
 	    auto heroArchetype = std::make_shared<CCharacterArchetype>( 5, 2, 20, 7, '^', "Hero");
 	    auto monsterArchetype = std::make_shared<CCharacterArchetype>( 4, 1, 10, 3, '@', "Monster");
-        auto cocoonArchetype = std::make_shared<CCharacterArchetype>( 0, 0, 10, 1, 'C', "Cocoon");
+        auto cocoonArchetype = std::make_shared<CCharacterArchetype>( 0, 0, 10, 0, 'C', "Cocoon");
         auto weakenedDemonArchetype = std::make_shared<CCharacterArchetype>( 10, 30, 100, 3, 'd', "Master Demon (premature)");
         auto demonArchetype = std::make_shared<CCharacterArchetype>( 20, 30, 100, 3, 'D', "Master Demon");
 	    auto friends = std::make_shared<CTeam>("Heroes");
