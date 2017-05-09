@@ -31,6 +31,8 @@ namespace Knights {
     const auto kCrossbowAmmoUsage = 3;
     const auto kShieldPowerUsage = 5;
     const auto kImprovedDamageRatio = 10;
+    const auto kRegularDemonViewRange = 8;
+    const auto kMasterDemonViewRange = kMapSize / 2;
 
     void CMap::endOfTurn() {
         for (int y = 0; y < kMapSize; ++y) {
@@ -276,14 +278,14 @@ namespace Knights {
                     case 'J':
                     case '6':
                     case '5':
-                        actor = std::make_shared<CMonster>( monsterArchetype, foes, getLastestId());
+                        actor = std::make_shared<CMonster>( monsterArchetype, foes, getLastestId(), kRegularDemonViewRange );
                         mBlockCharacterMovement[ y ][ x ] = false;
                         mBlockProjectiles[ y ][ x ] = false;
                         mBlockView[ y ][ x ] = false;
                         mElement[ y ][ x ] = '.';
                         break;
                     case 'c':
-                        actor = std::make_shared<CMonster>( cocoonArchetype, foes, getLastestId(), [weakenedDemonArchetype, foes](std::shared_ptr <CMap> map, std::shared_ptr<CActor> me) {
+                        actor = std::make_shared<CMonster>( cocoonArchetype, foes, getLastestId(), 0, [weakenedDemonArchetype, foes](std::shared_ptr <CMap> map, std::shared_ptr<CActor> me) {
 
                             auto character = (CCharacter*)(me.get());
                             auto defaultHP = character->getArchetype().getHP();
@@ -293,7 +295,7 @@ namespace Knights {
                                 character->addHP( -character->getHP() );
                                 auto position = me->getPosition();
                                 map->removeActorFrom( position );
-                                map->addActorAt( std::make_shared<CMonster>( weakenedDemonArchetype, foes, map->getLastestId()), position );
+                                map->addActorAt( std::make_shared<CMonster>( weakenedDemonArchetype, foes, map->getLastestId(), kMasterDemonViewRange), position );
                             }
                         });
                         mBlockCharacterMovement[ y ][ x ] = false;
@@ -302,14 +304,14 @@ namespace Knights {
                         mElement[ y ][ x ] = '.';
                         break;
                     case 'd':
-                        actor = std::make_shared<CMonster>( weakenedDemonArchetype, foes, getLastestId());
+                        actor = std::make_shared<CMonster>( weakenedDemonArchetype, foes, getLastestId(), kMasterDemonViewRange);
                         mBlockCharacterMovement[ y ][ x ] = false;
                         mBlockProjectiles[ y ][ x ] = false;
                         mBlockView[ y ][ x ] = false;
                         mElement[ y ][ x ] = '.';
                         break;
                     case 'e':
-                        actor = std::make_shared<CMonster>( demonArchetype, foes, getLastestId());
+                        actor = std::make_shared<CMonster>( demonArchetype, foes, getLastestId(), kMasterDemonViewRange );
                         mBlockCharacterMovement[ y ][ x ] = false;
                         mBlockProjectiles[ y ][ x ] = false;
                         mBlockView[ y ][ x ] = false;

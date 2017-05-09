@@ -36,12 +36,12 @@ void Knights::CMonsterGenerator::update(std::shared_ptr<Knights::CMap> map) {
     auto foes = std::make_shared<CTeam>("Enemies");
 
     if ( map->getActorAt( { position.x, position.y - 1 } ) == nullptr ) {
-        map->addActorAt( std::make_shared<CMonster>( monsterArchetype, foes, id), { position.x, position.y - 1 }  );
+        map->addActorAt( std::make_shared<CMonster>( monsterArchetype, foes, id, 8), { position.x, position.y - 1 }  );
     } else if ( map->getActorAt( { position.x, position.y + 1 } ) == nullptr ) {
-        map->addActorAt( std::make_shared<CMonster>( monsterArchetype, foes, id), { position.x, position.y + 1 }  );
+        map->addActorAt( std::make_shared<CMonster>( monsterArchetype, foes, id, 8), { position.x, position.y + 1 }  );
     } else if ( map->getActorAt( { position.x - 1, position.y } ) == nullptr ) {
-        map->addActorAt( std::make_shared<CMonster>( monsterArchetype, foes, id), { position.x - 1, position.y - 1 }  );
+        map->addActorAt( std::make_shared<CMonster>( monsterArchetype, foes, id, 8), { position.x - 1, position.y - 1 }  );
     } else if ( map->getActorAt( { position.x + 1, position.y } ) == nullptr ) {
-        map->addActorAt( std::make_shared<CMonster>( monsterArchetype, foes, id), { position.x + 1, position.y - 1 }  );
+        map->addActorAt( std::make_shared<CMonster>( monsterArchetype, foes, id, 8), { position.x + 1, position.y - 1 }  );
     }
 }

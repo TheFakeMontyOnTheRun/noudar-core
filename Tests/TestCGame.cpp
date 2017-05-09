@@ -770,3 +770,29 @@ TEST_F(TestCGame, WeakDemonShouldNotBeVulnerableToCrossbowsAndChardgedShield ) {
 
     ASSERT_EQ( weakDemonEnergyBeforeBolt, weakDemonEnergyAfterBolt );
 }
+
+TEST_F(TestCGame, WeakDemonShouldHaveAHalfMapViewRange ) {
+    auto actor = mGame->getMap()->getAvatar();
+
+
+    mGame->getMap()->moveActor( actor->getPosition(), { (Knights::kMapSize / 4), Knights::kMapSize - 2 }, actor );
+    auto monsterAtOriginalPosition = mGame->getMap()->getActorAt({ 0, Knights::kMapSize - 2 });
+    ON_CALL(*mMockRenderer, getInput()).WillByDefault(Return(Knights::kEndTurnCommand));
+    mGame->tick();
+
+    ASSERT_TRUE( monsterAtOriginalPosition != nullptr );
+    ASSERT_EQ( monsterAtOriginalPosition->getPosition(), Knights::Vec2i( 1, Knights::kMapSize - 2 ) );
+}
+
+TEST_F(TestCGame, StrongDemonShouldHaveAHalfMapViewRange ) {
+    auto actor = mGame->getMap()->getAvatar();
+
+
+    mGame->getMap()->moveActor( actor->getPosition(), { ( (3 * Knights::kMapSize) / 4), Knights::kMapSize - 2 }, actor );
+    auto monsterAtOriginalPosition = mGame->getMap()->getActorAt({ Knights::kMapSize - 1, Knights::kMapSize - 2 });
+    ON_CALL(*mMockRenderer, getInput()).WillByDefault(Return(Knights::kEndTurnCommand));
+    mGame->tick();
+
+    ASSERT_TRUE( monsterAtOriginalPosition != nullptr );
+    ASSERT_EQ( monsterAtOriginalPosition->getPosition(), Knights::Vec2i( Knights::kMapSize - 2, Knights::kMapSize - 2 ) );
+}

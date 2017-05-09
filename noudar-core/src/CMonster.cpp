@@ -19,12 +19,12 @@
 
 namespace Knights {
 
-	CMonster::CMonster(std::shared_ptr<CCharacterArchetype> aArchetype, std::shared_ptr<CTeam> aTeam, int aId, CMonsterUpdateCallback updateCallback)
-			: CCharacter(aArchetype, aTeam, aId), mUpdateCallback( updateCallback ) {
+	CMonster::CMonster(std::shared_ptr<CCharacterArchetype> aArchetype, std::shared_ptr<CTeam> aTeam, int aId, int aViewRange, CMonsterUpdateCallback updateCallback)
+			: CCharacter(aArchetype, aTeam, aId), mViewRange( aViewRange), mUpdateCallback( updateCallback ) {
 	}
 
-    CMonster::CMonster(std::shared_ptr<CCharacterArchetype> aArchetype, std::shared_ptr<CTeam> aTeam, int aId)
-            : CCharacter(aArchetype, aTeam, aId), mUpdateCallback( [](std::shared_ptr <CMap> map, std::shared_ptr<CActor> me){} ){
+    CMonster::CMonster(std::shared_ptr<CCharacterArchetype> aArchetype, std::shared_ptr<CTeam> aTeam, int aId, int aViewRange )
+            : CCharacter(aArchetype, aTeam, aId), mViewRange( aViewRange ), mUpdateCallback( [](std::shared_ptr <CMap> map, std::shared_ptr<CActor> me){} ){
     }
 
 	bool CMonster::dealWith(std::shared_ptr<CMap> map, int x, int y) {
@@ -96,16 +96,16 @@ namespace Knights {
 		int newX;
 		int newY;
 
-		for (int x = -4; x < 4; ++x) {
+		for (int x = -mViewRange / 2; x <= mViewRange / 2; ++x) {
 
-			for (int y = -4; y < 4; ++y) {
+			for (int y = -mViewRange / 2; y <= mViewRange / 2; ++y) {
 
 				if (x == 0 && y == 0) {
 					continue;
 				}
 
-				newX = std::min<int>(kMapSize, std::max<int>(0, (x + mPosition.x)));
-				newY = std::min<int>(kMapSize, std::max<int>(0, (y + mPosition.y)));
+				newX = std::min<int>(kMapSize - 1, std::max<int>(0, (x + mPosition.x)));
+				newY = std::min<int>(kMapSize - 1, std::max<int>(0, (y + mPosition.y)));
 
 				if (actOn(newX, newY, map)) {
 					return;
