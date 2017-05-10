@@ -92,7 +92,7 @@ protected:
         std::string toReturn;
 
         toReturn += "v4yE00000000000000000A000000000T0000000c\n";
-        toReturn += "011110000000000000000000##TTTTTT000#0000\n";
+        toReturn += "01111000000000000000+000##TTTTTT000#0000\n";
         toReturn += "050000000000000000000000000000T0000#0#00\n";
         toReturn += "050000000000000000000000000000TTTTTT##00\n";
         toReturn += "000000000000000000000000000000T000000000\n";
@@ -801,4 +801,61 @@ TEST_F(TestCGame, StrongDemonShouldHaveAHalfMapViewRange ) {
 
     ASSERT_TRUE( monsterAtOriginalPosition != nullptr );
     ASSERT_EQ( monsterAtOriginalPosition->getPosition(), Knights::Vec2i( Knights::kMapSize - 2, Knights::kMapSize - 2 ) );
+}
+
+TEST_F(TestCGame, TakingATokenOfFaithWillReplenishHealth ) {
+    auto actor = mGame->getMap()->getAvatar();
+
+    auto playerOriginalHealth = actor->getHP();
+    mGame->tick();
+    mGame->getMap()->moveActor( actor->getPosition(), { Knights::kMapSize / 2, 0 }, actor );
+
+    //get the token
+    actor->turnLeft();
+    actor->turnLeft();
+    ON_CALL(*mMockRenderer, getInput()).WillByDefault(Return(Knights::kPickItemCommand));
+    mGame->tick();
+
+    auto healthAfterPickingIt = actor->getHP();
+
+    //wait several turns...
+    ON_CALL(*mMockRenderer, getInput()).WillByDefault(Return(Knights::kEndTurnCommand));
+    mGame->tick();
+    mGame->tick();
+    mGame->tick();
+    mGame->tick();
+    auto healthAfterSeveralTurnsHoldingIt = actor->getHP();
+
+    //finally use it
+    actor->suggestCurrentItem('+');
+    ON_CALL(*mMockRenderer, getInput()).WillByDefault(Return(Knights::kUseCurrentItemInInventoryCommand));
+    mGame->tick();
+
+    auto turn1InEffect = actor->getHP();
+    mGame->tick();
+
+    auto noLongerInEffect = actor->getHP();
+    mGame->tick();
+
+    auto stopTryingItWontWork = actor->getHP();
+    mGame->tick();
+
+    auto pleaseRefrainFromInsistingItsNotGoingToWorkAndWillOnlyHumiliateYourself = actor->getHP();
+    mGame->tick();
+
+    //some more turns
+    mGame->tick();
+    mGame->tick();
+    mGame->tick();
+    mGame->tick();
+
+    auto finalHealth = actor->getHP();
+
+    ASSERT_EQ( healthAfterPickingIt, playerOriginalHealth );
+    ASSERT_EQ( healthAfterSeveralTurnsHoldingIt, playerOriginalHealth );
+    ASSERT_EQ( turn1InEffect, playerOriginalHealth + 5 );
+    ASSERT_EQ( noLongerInEffect, playerOriginalHealth + 5  );
+    ASSERT_EQ( stopTryingItWontWork, playerOriginalHealth + 5  );
+    ASSERT_EQ( pleaseRefrainFromInsistingItsNotGoingToWorkAndWillOnlyHumiliateYourself, playerOriginalHealth + 5 );
+    ASSERT_EQ( finalHealth, playerOriginalHealth + 5 );
 }
