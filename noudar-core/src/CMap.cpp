@@ -32,7 +32,7 @@ namespace Knights {
     const auto kShieldPowerUsage = 5;
     const auto kImprovedDamageRatio = 10;
     const auto kRegularDemonViewRange = 8;
-    const auto kMasterDemonViewRange = kMapSize / 2;
+    const auto kMasterDemonViewRange = (3 * kMapSize) / 4;
 
     void CMap::endOfTurn() {
         for (int y = 0; y < kMapSize; ++y) {

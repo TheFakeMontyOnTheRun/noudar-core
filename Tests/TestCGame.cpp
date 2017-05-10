@@ -774,6 +774,9 @@ TEST_F(TestCGame, WeakDemonShouldNotBeVulnerableToCrossbowsAndChardgedShield ) {
 TEST_F(TestCGame, WeakDemonShouldHaveAHalfMapViewRange ) {
     auto actor = mGame->getMap()->getAvatar();
 
+    //add one turn here so that if the demon master had any extra range, he would still pursue the player from this far
+    //and causing it not to be on the predicted position down below
+    mGame->tick();
 
     mGame->getMap()->moveActor( actor->getPosition(), { (Knights::kMapSize / 4), Knights::kMapSize - 2 }, actor );
     auto monsterAtOriginalPosition = mGame->getMap()->getActorAt({ 0, Knights::kMapSize - 2 });
@@ -787,6 +790,9 @@ TEST_F(TestCGame, WeakDemonShouldHaveAHalfMapViewRange ) {
 TEST_F(TestCGame, StrongDemonShouldHaveAHalfMapViewRange ) {
     auto actor = mGame->getMap()->getAvatar();
 
+    //add one turn here so that if the demon master had any extra range, he would still pursue the player from this far
+    //and causing it not to be on the predicted position down below
+    mGame->tick();
 
     mGame->getMap()->moveActor( actor->getPosition(), { ( (3 * Knights::kMapSize) / 4), Knights::kMapSize - 2 }, actor );
     auto monsterAtOriginalPosition = mGame->getMap()->getActorAt({ Knights::kMapSize - 1, Knights::kMapSize - 2 });
