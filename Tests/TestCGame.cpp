@@ -101,7 +101,7 @@ protected:
         toReturn += "000000000000000000000000000T000000000000\n";
         toReturn += "000000000000000000000000000#000000000000\n";
         toReturn += "000000000000000000000000000#000000000000\n";
-        toReturn += "0000000000000000000000000000000000000000\n";
+        toReturn += "000000000000000000000000000000000000000w\n";
         toReturn += "0000000000000000000000000000000000000000\n";
         toReturn += "0000000000000000000000000000000000000000\n";
         toReturn += "0000000000000000000000000000000000000000\n";
@@ -431,8 +431,8 @@ TEST_F(TestCGame, HavingCrossbowChargedWillProvideRegularDamage ) {
     auto playerAttack = actor->getAttack();
     auto newHealth = mockEnemy->getHP();
 
-    ASSERT_EQ( healthBefore, newHealth + ( playerAttack ) );
-    ASSERT_TRUE( crossbowAmmoBefore > crossbow->getAmount());
+    ASSERT_GT( healthBefore, newHealth );
+    ASSERT_GT( crossbowAmmoBefore, crossbow->getAmount());
     ASSERT_EQ( shieldEnergyBefore, shield->getAmount());
 }
 
@@ -710,6 +710,62 @@ TEST_F(TestCGame, StrongDemonShouldNotBeVulnerableToCrossbowsAndDischardgedShiel
 
     ASSERT_EQ( strongDemonEnergyBeforeBolt, strongDemonEnergyAfterBolt );
 }
+
+TEST_F(TestCGame, EvilSpiritsShouldNotBeVulnerableToSwords ) {
+    auto actor = mGame->getMap()->getAvatar();
+
+    mGame->getMap()->moveActor( actor->getPosition(), { Knights::kMapSize / 2 , Knights::kMapSize - 2 }, actor );
+    actor->turnRight();
+    actor->turnRight();
+
+    ON_CALL(*mMockRenderer, getInput()).WillByDefault(Return(Knights::kPickItemCommand));
+    mGame->tick();
+    actor->suggestCurrentItem('t');
+    actor->turnLeft();
+    mGame->getMap()->moveActor( actor->getPosition(), { Knights::kMapSize - 2, Knights::kMapSize / 4 }, actor );
+
+    auto strongDemonHealthBefore = mGame->getMap()->getActorAt( { Knights::kMapSize - 1, Knights::kMapSize / 4 })->getHP();
+
+    ON_CALL(*mMockRenderer, getInput()).WillByDefault(Return(Knights::kUseCurrentItemInInventoryCommand));
+    mGame->tick();
+
+    auto strongDemonHealthAfter = mGame->getMap()->getActorAt( { Knights::kMapSize - 1, Knights::kMapSize / 4 })->getHP();
+
+    ASSERT_EQ( strongDemonHealthAfter, strongDemonHealthBefore );
+}
+
+
+TEST_F(TestCGame, EvilSpiritShouldBeVulnerableToTheCrossbow ) {
+    auto actor = mGame->getMap()->getAvatar();
+
+    actor->turnRight();
+    ON_CALL(*mMockRenderer, getInput()).WillByDefault(Return(Knights::kPickItemCommand));
+    mGame->tick();
+
+    actor->turnRight();
+    actor->turnRight();
+    mGame->tick();
+    actor->turnLeft();
+    actor->turnLeft();
+
+    mGame->getMap()->moveActor( actor->getPosition(), { 0, Knights::kMapSize / 4 }, actor );
+
+    auto strongDemonEnergyBeforeBolt = mGame->getMap()->getActorAt( { Knights::kMapSize - 1, Knights::kMapSize / 4 })->getHP();
+    auto shield = (Knights::CStorageItem*)actor->getItemWithSymbol( 'v' ).get();
+    shield->add( -shield->getAmount() );
+    auto crossbow = (Knights::CStorageItem*)actor->getItemWithSymbol( 'y' ).get();
+    crossbow->add( 100 );
+
+    actor->suggestCurrentItem('y');
+
+    ON_CALL(*mMockRenderer, getInput()).WillByDefault(Return(Knights::kUseCurrentItemInInventoryCommand));
+    mGame->tick();
+
+    auto strongDemonEnergyAfterBolt = mGame->getMap()->getActorAt( { Knights::kMapSize - 1, Knights::kMapSize / 4 })->getHP();
+
+    ASSERT_GT( strongDemonEnergyBeforeBolt, strongDemonEnergyAfterBolt );
+}
+
 
 TEST_F(TestCGame, StrongDemonShouldBeVulnerableToCrossbowsAndChardgedShield ) {
     auto actor = mGame->getMap()->getAvatar();
