@@ -57,6 +57,7 @@ namespace Knights {
 	    auto heroArchetype = std::make_shared<CCharacterArchetype>( 5, 3, 20, 7, '^', "Hero");
 	    auto monsterArchetype = std::make_shared<CCharacterArchetype>( 4, 1, 10, 3, '@', "Monster");
         auto cocoonArchetype = std::make_shared<CCharacterArchetype>( 0, 0, 10000, 0, 'C', "Cocoon");
+        auto evilSpiritArchetype = std::make_shared<CCharacterArchetype>( 3, 5, 10, 3, 'w', "Evil Spirit");
         auto weakenedDemonArchetype = std::make_shared<CCharacterArchetype>( 10, 3000, 10, 3, 'd', "Master Demon (premature)");
         auto demonArchetype = std::make_shared<CCharacterArchetype>( 20, 10, 50, 3, 'D', "Master Demon");
 	    auto friends = std::make_shared<CTeam>("Heroes");
@@ -172,14 +173,15 @@ namespace Knights {
                                                                        aActor->getDirection());
 
                             if ( !( target == aActor->getPosition() ) ) {
+                                aActor->setAttackBonus( 1 );
                                 aMap->attack( aActor, target, false );
 
                                 if ( shieldHasAmmo ) {
 
                                     aActor->setAttackBonus( kImprovedDamageRatio );
                                     aMap->attack( aActor, target, false );
-                                    aActor->setAttackBonus( 0 );
                                 }
+                                aActor->setAttackBonus( 0 );
                             }
 
                             aMap->getGameDelegate()->onProjectileHit( target);
@@ -275,6 +277,14 @@ namespace Knights {
                         mElement[ y ][ x ] = 'T';
                     }
                     break;
+                    case 'w':
+                        actor = std::make_shared<CMonster>( evilSpiritArchetype, foes, getLastestId(), kRegularDemonViewRange );
+                        mBlockCharacterMovement[ y ][ x ] = false;
+                        mBlockProjectiles[ y ][ x ] = false;
+                        mBlockView[ y ][ x ] = false;
+                        mElement[ y ][ x ] = '.';
+                        break;
+
                     case 'J':
                     case '6':
                     case '5':
