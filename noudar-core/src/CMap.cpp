@@ -31,7 +31,8 @@ namespace Knights {
     const auto kCrossbowAmmoUsage = 3;
     const auto kShieldPowerUsage = 5;
     const auto kImprovedDamageRatio = 10;
-    const auto kRegularDemonViewRange = 8;
+    const auto kRegularEnemyViewRange = 8;
+    const auto kMonkViewRange = 4;
     const auto kMasterDemonViewRange = (3 * kMapSize) / 4;
 
     void CMap::endOfTurn() {
@@ -55,9 +56,11 @@ namespace Knights {
         std::shared_ptr<CActor> actor = nullptr;
 
 	    auto heroArchetype = std::make_shared<CCharacterArchetype>( 5, 3, 20, 7, '^', "Hero");
-	    auto monsterArchetype = std::make_shared<CCharacterArchetype>( 4, 1, 10, 3, '@', "Monster");
+	    auto fallenArchetype = std::make_shared<CCharacterArchetype>( 4, 1, 10, 3, '$', "Fallen Hero");
+        auto monkArchetype = std::make_shared<CCharacterArchetype>( 4, 0, 10, 3, '@', "Insane Monk");
         auto cocoonArchetype = std::make_shared<CCharacterArchetype>( 0, 0, 10000, 0, 'C', "Cocoon");
         auto evilSpiritArchetype = std::make_shared<CCharacterArchetype>( 3, 5, 10, 3, 'w', "Evil Spirit");
+        auto warthogArchetype = std::make_shared<CCharacterArchetype>( 8, 4, 10, 3, 'J', "Demon Warthog");
         auto weakenedDemonArchetype = std::make_shared<CCharacterArchetype>( 10, 3000, 10, 3, 'd', "Master Demon (premature)");
         auto demonArchetype = std::make_shared<CCharacterArchetype>( 20, 10, 50, 3, 'D', "Master Demon");
 	    auto friends = std::make_shared<CTeam>("Heroes");
@@ -139,7 +142,7 @@ namespace Knights {
                         mBlockView[ y ][ x ] = false;
                         mElement[ y ][ x ] = '.';
                         mItems[ y ][ x ] = std::make_shared<CItem>("The holy health", '+', true, [](std::shared_ptr<CActor> aActor, std::shared_ptr<CMap> aMap){
-                            aActor->addHP(5);
+                            aActor->addHP(20);
                         });
                         break;
 
@@ -278,7 +281,7 @@ namespace Knights {
                     }
                     break;
                     case 'w':
-                        actor = std::make_shared<CMonster>( evilSpiritArchetype, foes, getLastestId(), kRegularDemonViewRange );
+                        actor = std::make_shared<CMonster>( evilSpiritArchetype, foes, getLastestId(), kRegularEnemyViewRange );
                         mBlockCharacterMovement[ y ][ x ] = false;
                         mBlockProjectiles[ y ][ x ] = false;
                         mBlockView[ y ][ x ] = false;
@@ -286,9 +289,21 @@ namespace Knights {
                         break;
 
                     case 'J':
+                        actor = std::make_shared<CMonster>( warthogArchetype, foes, getLastestId(), kRegularEnemyViewRange );
+                        mBlockCharacterMovement[ y ][ x ] = false;
+                        mBlockProjectiles[ y ][ x ] = false;
+                        mBlockView[ y ][ x ] = false;
+                        mElement[ y ][ x ] = '.';
+                        break;
                     case '6':
+                        actor = std::make_shared<CMonster>( monkArchetype, foes, getLastestId(), kMonkViewRange );
+                        mBlockCharacterMovement[ y ][ x ] = false;
+                        mBlockProjectiles[ y ][ x ] = false;
+                        mBlockView[ y ][ x ] = false;
+                        mElement[ y ][ x ] = '.';
+                        break;
                     case '5':
-                        actor = std::make_shared<CMonster>( monsterArchetype, foes, getLastestId(), kRegularDemonViewRange );
+                        actor = std::make_shared<CMonster>( fallenArchetype, foes, getLastestId(), kRegularEnemyViewRange );
                         mBlockCharacterMovement[ y ][ x ] = false;
                         mBlockProjectiles[ y ][ x ] = false;
                         mBlockView[ y ][ x ] = false;
