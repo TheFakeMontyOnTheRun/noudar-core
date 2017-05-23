@@ -909,9 +909,9 @@ TEST_F(TestCGame, TakingATokenOfFaithWillReplenishHealth ) {
 
     ASSERT_EQ( healthAfterPickingIt, playerOriginalHealth );
     ASSERT_EQ( healthAfterSeveralTurnsHoldingIt, playerOriginalHealth );
-    ASSERT_EQ( turn1InEffect, playerOriginalHealth + 5 );
-    ASSERT_EQ( noLongerInEffect, playerOriginalHealth + 5  );
-    ASSERT_EQ( stopTryingItWontWork, playerOriginalHealth + 5  );
-    ASSERT_EQ( pleaseRefrainFromInsistingItsNotGoingToWorkAndWillOnlyHumiliateYourself, playerOriginalHealth + 5 );
-    ASSERT_EQ( finalHealth, playerOriginalHealth + 5 );
+    ASSERT_EQ( turn1InEffect, playerOriginalHealth + 20 );
+    ASSERT_EQ( noLongerInEffect, playerOriginalHealth + 20  );
+    ASSERT_EQ( stopTryingItWontWork, playerOriginalHealth + 20  );
+    ASSERT_EQ( pleaseRefrainFromInsistingItsNotGoingToWorkAndWillOnlyHumiliateYourself, playerOriginalHealth + 20 );
+    ASSERT_EQ( finalHealth, playerOriginalHealth + 20 );
 }
