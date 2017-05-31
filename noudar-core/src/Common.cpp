@@ -48,13 +48,20 @@ namespace Knights {
 
 	std::vector<char> readToBuffer(FILE *fileDescriptor) {
 		const unsigned N = 1024;
-		std::vector<char> total;
-		while (true) {
+
+		fseek(fileDescriptor, 0, SEEK_END);
+		auto endPos = ftell( fileDescriptor );
+		rewind(fileDescriptor);
+		std::vector<char> total(endPos);
+		auto writeHead = std::begin( total );
+
+		for ( int c = 0; c < endPos; ++c ) {
 			char buffer[N];
 			size_t read = fread((void *) &buffer[0], 1, N, fileDescriptor);
 			if (read) {
 				for (int c = 0; c < read; ++c) {
-					total.push_back(buffer[c]);
+					*writeHead = (buffer[c]);
+					writeHead = std::next(writeHead);
 				}
 			}
 			if (read < N) {
@@ -67,17 +74,18 @@ namespace Knights {
 
 	std::string readToString(FILE *fileDescriptor) {
 
-		std::string total;
 		fseek(fileDescriptor, 0, SEEK_END);
 		long fileSize = ftell(fileDescriptor);
-		fseek(fileDescriptor, 0, SEEK_SET);
+		rewind(fileDescriptor);
+		std::string total;
+		total.assign(fileSize, 0);
 
 		for (auto pos = 0; pos < fileSize; ++pos) {
 			char buffer[1];
 			size_t read = fread((void *) &buffer[0], 1, 1, fileDescriptor);
 			if (read) {
 				for (int c = 0; c < read; ++c) {
-					total.push_back(buffer[c]);
+					total[pos] = buffer[c];
 				}
 			}
 			if (read < 1) {
