@@ -157,7 +157,7 @@ namespace Knights {
         refresh();
     }
 
-    char CConsoleRenderer::getInput() {
+    CommandType CConsoleRenderer::getInput() {
         int ch = getch();
         switch ( ch ) {
             case KEY_LEFT:

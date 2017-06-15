@@ -13,7 +13,7 @@ namespace Knights {
       CConsoleRenderer();
       ~CConsoleRenderer();
     void drawMap( CMap& map, std::shared_ptr<CActor> current ) override;
-    char getInput() override;
+    CommandType getInput() override;
   };
 }
 #endif

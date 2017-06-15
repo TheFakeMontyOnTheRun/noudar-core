@@ -124,7 +124,7 @@ namespace Knights {
         ch = getc(stdin);
     }
 
-    char CConsoleRenderer::getInput() {
+    CommandType CConsoleRenderer::getInput() {
 		return ch;
     }
 }

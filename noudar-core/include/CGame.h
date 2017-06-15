@@ -2,8 +2,6 @@
 #define NOUDAR_CORE_CGAME_H
 
 namespace Knights {
-    using CommandType = char;
-
     const static CommandType kMovePlayerNorthCommand = 'w';
     const static CommandType kMovePlayerEastCommand = 's';
     const static CommandType kMovePlayerSouthCommand = 'z';
