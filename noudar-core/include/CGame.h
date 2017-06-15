@@ -2,30 +2,31 @@
 #define NOUDAR_CORE_CGAME_H
 
 namespace Knights {
+    using CommandType = char;
 
-    const static char kMovePlayerNorthCommand = 'w';
-    const static char kMovePlayerEastCommand = 's';
-    const static char kMovePlayerSouthCommand = 'z';
-    const static char kMovePlayerWestCommand = 'a';
-    const static char kMovePlayerForwardCommand = 'o';
-	const static char kMovePlayerBackwardCommand = 'k';
-	const static char kTurnPlayerLeftCommand = 'i';
-    const static char kTurnPlayerRightCommand = 'p';
-    const static char kTurnPlayerNorthCommand = 'r';
-    const static char kTurnPlayerEastCommand = 'f';
-    const static char kTurnPlayerSouthCommand = 'c';
-    const static char kTurnPlayerWestCommand = 'd';
-    const static char kStrafeLeftCommand = 'j';
-    const static char kStrafeRightCommand = 'l';
-    const static char kGoToFirstLevelCommand = '1';
-    const static char kGoToTitleLevelCommand = '0';
-    const static char kEndTurnCommand = 't';
-    const static char kQuitGameCommand = 'q';
-    const static char kCycleLeftInventoryCommand = '-';
-	const static char kCycleRightInventoryCommand = '=';
-	const static char kUseCurrentItemInInventoryCommand = '\t';
-    const static char kPickItemCommand = '[';
-	const static char kDropItemCommand = ']';
+    const static CommandType kMovePlayerNorthCommand = 'w';
+    const static CommandType kMovePlayerEastCommand = 's';
+    const static CommandType kMovePlayerSouthCommand = 'z';
+    const static CommandType kMovePlayerWestCommand = 'a';
+    const static CommandType kMovePlayerForwardCommand = 'o';
+	const static CommandType kMovePlayerBackwardCommand = 'k';
+	const static CommandType kTurnPlayerLeftCommand = 'i';
+    const static CommandType kTurnPlayerRightCommand = 'p';
+    const static CommandType kTurnPlayerNorthCommand = 'r';
+    const static CommandType kTurnPlayerEastCommand = 'f';
+    const static CommandType kTurnPlayerSouthCommand = 'c';
+    const static CommandType kTurnPlayerWestCommand = 'd';
+    const static CommandType kStrafeLeftCommand = 'j';
+    const static CommandType kStrafeRightCommand = 'l';
+    const static CommandType kGoToFirstLevelCommand = '1';
+    const static CommandType kGoToTitleLevelCommand = '0';
+    const static CommandType kEndTurnCommand = 't';
+    const static CommandType kQuitGameCommand = 'q';
+    const static CommandType kCycleLeftInventoryCommand = '-';
+	const static CommandType kCycleRightInventoryCommand = '=';
+	const static CommandType kUseCurrentItemInInventoryCommand = '\t';
+    const static CommandType kPickItemCommand = '[';
+	const static CommandType kDropItemCommand = ']';
 
 
 	class CGame : public std::enable_shared_from_this<CGame> {
