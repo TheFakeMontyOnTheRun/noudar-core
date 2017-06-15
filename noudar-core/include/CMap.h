@@ -21,7 +21,7 @@ namespace Knights {
         std::array< std::array< bool, kMapSize >, kMapSize > mBlockView;
         std::vector<std::shared_ptr<CActor>> actors;
         std::shared_ptr<CActor> mAvatar;
-		int mCurrentId = 1;
+		ActorId mCurrentId = 1;
 
 		void floodFill( Vec2i position, std::map<ElementView, ElementView> transformations );
     public:
@@ -50,7 +50,7 @@ namespace Knights {
 		std::shared_ptr<Knights::CItem> getItemAt( Vec2i from );
 		void putItemAt( std::shared_ptr<CItem>, Vec2i destination );
 		void addActorAt( std::shared_ptr<CActor> actor, const Vec2i& position );
-		int getLastestId();
+		ActorId getLastestId();
 		std::shared_ptr<CGameDelegate> getGameDelegate();
     };
 }

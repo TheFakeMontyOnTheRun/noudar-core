@@ -18,13 +18,14 @@ namespace Knights {
 
 	class CMap;
 
+	using ActorId = short;
     using ActorView = char;
 
 	class CActor : public std::enable_shared_from_this<CActor>{
 	protected:
 		EStance mStance;
 		EDirection mDirection;
-		int mId;
+		ActorId mId;
 		int mMoves;
 		int mDefaultAP;
 		int mRemainingAP;
@@ -42,7 +43,7 @@ namespace Knights {
 	public:
 		virtual void performAttack(std::shared_ptr<CActor> other);
 
-		CActor(int aId, int defaultAP);
+		CActor(ActorId aId, int defaultAP);
 
 		Vec2i getPosition();
 
@@ -66,7 +67,7 @@ namespace Knights {
 
 		ActorView getView();
 
-		int getId();
+		ActorId getId();
 
 		int getMoves();
 

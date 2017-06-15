@@ -589,7 +589,7 @@ namespace Knights {
         actor->setPosition( position );
     }
 
-    int CMap::getLastestId() {
+    ActorId CMap::getLastestId() {
         return ++mCurrentId;
     }
 

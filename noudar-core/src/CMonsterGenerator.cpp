@@ -22,7 +22,7 @@
 
 #include "CMonsterGenerator.h"
 
-Knights::CMonsterGenerator::CMonsterGenerator(int aId, int aliveForTurns) : CActor(aId, 1) {
+Knights::CMonsterGenerator::CMonsterGenerator(ActorId aId, int aliveForTurns) : CActor(aId, 1) {
     mHP = aliveForTurns;
 }
 

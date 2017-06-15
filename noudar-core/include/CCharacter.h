@@ -13,7 +13,7 @@ namespace Knights {
         CUpdateMethod mUpdateMethod;
         CCharacterArchetype mArchetype;
     public:
-        CCharacter( std::shared_ptr<CCharacterArchetype> aArchetype, std::shared_ptr<CTeam> aTeam, int aId, CUpdateMethod aUpdateMethod = kEmptyUpdateMethod);
+        CCharacter( std::shared_ptr<CCharacterArchetype> aArchetype, std::shared_ptr<CTeam> aTeam, ActorId aId, CUpdateMethod aUpdateMethod = kEmptyUpdateMethod);
         virtual void update(std::shared_ptr<CMap> map) override;
         CCharacterArchetype getArchetype();
     };

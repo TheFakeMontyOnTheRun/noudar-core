@@ -12,7 +12,7 @@
 #include "CActor.h"
 
 namespace Knights {
-	CActor::CActor(int aId, int defaultAP) :
+	CActor::CActor(ActorId aId, int defaultAP) :
 			mStance(EStance::kStanding), mDirection(EDirection::kNorth), mId(aId), mMoves(0), mDefaultAP(defaultAP),
 			mRemainingAP(defaultAP), mAttack(0), mDefence(0), mHP(0) {
 	}
@@ -107,7 +107,7 @@ namespace Knights {
 		return mAttack + mAttackBonus;
 	}
 
-	int CActor::getId() {
+	ActorId CActor::getId() {
 		return mId;
 	}
 

@@ -19,11 +19,11 @@
 
 namespace Knights {
 
-	CMonster::CMonster(std::shared_ptr<CCharacterArchetype> aArchetype, std::shared_ptr<CTeam> aTeam, int aId, int aViewRange, CMonsterUpdateCallback updateCallback)
+	CMonster::CMonster(std::shared_ptr<CCharacterArchetype> aArchetype, std::shared_ptr<CTeam> aTeam, ActorId aId, int aViewRange, CMonsterUpdateCallback updateCallback)
 			: CCharacter(aArchetype, aTeam, aId), mUpdateCallback( updateCallback ), mViewRange( aViewRange) {
 	}
 
-    CMonster::CMonster(std::shared_ptr<CCharacterArchetype> aArchetype, std::shared_ptr<CTeam> aTeam, int aId, int aViewRange )
+    CMonster::CMonster(std::shared_ptr<CCharacterArchetype> aArchetype, std::shared_ptr<CTeam> aTeam, ActorId aId, int aViewRange )
             : CCharacter(aArchetype, aTeam, aId), mUpdateCallback( [](std::shared_ptr <CMap> map, std::shared_ptr<CActor> me){} ), mViewRange( aViewRange){
     }
 

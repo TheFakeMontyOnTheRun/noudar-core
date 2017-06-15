@@ -14,7 +14,7 @@
 
 namespace Knights {
 
-	CCharacter::CCharacter(std::shared_ptr<Knights::CCharacterArchetype> aArchetype, std::shared_ptr<CTeam> aTeam, int aId, CUpdateMethod aUpdateMethod) :
+	CCharacter::CCharacter(std::shared_ptr<Knights::CCharacterArchetype> aArchetype, std::shared_ptr<CTeam> aTeam, ActorId aId, CUpdateMethod aUpdateMethod) :
 	CActor( aId, aArchetype->getAP() ), mUpdateMethod( aUpdateMethod ), mArchetype( *aArchetype ) {
         mView = aArchetype->getView();
         mTeam = aTeam;

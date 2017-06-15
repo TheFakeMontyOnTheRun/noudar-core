@@ -10,8 +10,8 @@ namespace Knights {
         CMonsterUpdateCallback mUpdateCallback;
         int mViewRange;
     public:
-        CMonster( std::shared_ptr<CCharacterArchetype> aArchetype, std::shared_ptr<CTeam> aTeam, int aId, int viewRange, CMonsterUpdateCallback updateCallback);
-        CMonster( std::shared_ptr<CCharacterArchetype> aArchetype, std::shared_ptr<CTeam> aTeam, int aId, int viewRange );
+        CMonster( std::shared_ptr<CCharacterArchetype> aArchetype, std::shared_ptr<CTeam> aTeam, ActorId aId, int viewRange, CMonsterUpdateCallback updateCallback);
+        CMonster( std::shared_ptr<CCharacterArchetype> aArchetype, std::shared_ptr<CTeam> aTeam, ActorId aId, int viewRange );
 
         void update(std::shared_ptr <CMap> map) override;
 
