@@ -7,7 +7,7 @@
 #include "IMapElement.h"
 
 namespace Knights {
-    char IMapElement::getView() {
+    ElementView IMapElement::getView() {
         return mView;
     }
 }

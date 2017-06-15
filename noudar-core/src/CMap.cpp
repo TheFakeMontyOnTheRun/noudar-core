@@ -52,7 +52,7 @@ namespace Knights {
     CMap::CMap(const std::string &mapData, std::shared_ptr<CGameDelegate> aGameDelegate)
             : mGameDelegate(aGameDelegate) {
 
-        char element;
+        ElementView element;
         std::shared_ptr<CActor> actor = nullptr;
 
 	    auto heroArchetype = std::make_shared<CCharacterArchetype>( 5, 3, 20, 7, '^', "Hero");
@@ -474,11 +474,8 @@ namespace Knights {
 	    }
     }
 
-    char CMap::getElementAt(const Vec2i& p) {
+    ElementView CMap::getElementAt(const Vec2i& p) {
 
-	    if ( mItems[ p.y ][ p.x ] != nullptr ) {
-		    return mItems[ p.y ][ p.x ]->getView();
-	    }
 
         return mElement[p.y][p.x];
     }
@@ -568,17 +565,8 @@ namespace Knights {
         return ++mCurrentId;
     }
 
-    char CMap::getMapAt(const Vec2i &p) {
-
-        if ( !isValid( p ) ) {
-            return '.';
-        }
-
-        return mElement[p.y][p.x];
-    }
-
     void CMap::floodFill(Vec2i position, std::map<char, char> transformations ) {
-        auto oldElement = getMapAt( position );
+        auto oldElement = getElementAt( position );
         if ( transformations.count( oldElement ) > 0 ) {
 
                 auto newElement = transformations[ oldElement ];
@@ -634,5 +622,18 @@ namespace Knights {
     void CMap::removeActorFrom(Vec2i position) {
         auto actor = getActorAt( position );
         mActors[ position.y ][ position.x ] = nullptr;
+    }
+
+    ItemView CMap::getItemViewAt(const Vec2i &p) {
+
+        if ( isValid( p ) ) {
+            auto item = mItems[p.y][p.x];
+
+            if (item != nullptr) {
+                return item->getView();
+            }
+        }
+
+        return kEmptySpace;
     }
 }

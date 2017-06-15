@@ -9,6 +9,7 @@
 #include <string>
 #include <iostream>
 #include <vector>
+#include <functional>
 #include <memory>
 #include <cstdlib>
 #include <map>
@@ -90,8 +91,12 @@ namespace Knights {
                         }
                     }
 
-
-	                std::cout << (map.getElementAt( {x, y} ));
+                    auto cellView = map.getItemViewAt( {x,y} );
+                    if ( cellView == kEmptySpace ) {
+                        std::cout << (map.getElementAt( {x, y} ));
+                    } else {
+                        std::cout << cellView;
+                    }
                 }
             }
 		    std::cout << std::endl;

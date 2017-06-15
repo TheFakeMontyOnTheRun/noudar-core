@@ -1,12 +1,13 @@
 #ifndef NOUDAR_CORE_IMAPELEMENT_H
 #define NOUDAR_CORE_IMAPELEMENT_H
 namespace Knights {
-    const char kEmptySpace = '.';
+    using ElementView = char;
+    const ElementView kEmptySpace = '.';
     class IMapElement {
     public:
-        char mView = kEmptySpace;
+        ElementView mView = kEmptySpace;
     public:
-        char getView();
+        ElementView getView();
     };
 }
 #endif

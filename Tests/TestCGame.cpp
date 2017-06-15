@@ -65,7 +65,7 @@ protected:
 
         for ( int y = 0; y < Knights::kMapSize; ++y ) {
             for ( int x = 0; x < Knights::kMapSize; ++x ) {
-                if ( map->getMapAt( { x, y } ) == element ) {
+                if ( map->getElementAt( { x, y } ) == element ) {
                     ++count;
                 }
             }
@@ -345,8 +345,9 @@ TEST_F(TestCGame, GameWillPreventPlayersFromDroppingItemsOnTopOfOtherItems ) {
     auto target = mGame->getMap()->getActorTargetPosition( actor );
     ASSERT_TRUE(actor->getSelectedItem() != nullptr );
     ASSERT_EQ(actor->getSelectedItem()->getView(), 'y' );
-    auto mapElementView = mGame->getMap()->getElementAt(target);
-    ASSERT_EQ(mapElementView, 'v' );
+    auto mapElementView = mGame->getMap()->getItemViewAt(target);
+    Knights::ItemView shield = 'v';
+    ASSERT_EQ(mapElementView, shield );
     auto itemOnTheFloor = mGame->getMap()->getItemAt(target);
     auto selectedItem = actor->getSelectedItem();
     ASSERT_TRUE(itemOnTheFloor != selectedItem );

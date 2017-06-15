@@ -11,16 +11,16 @@ namespace Knights {
 		int mDefense;
 		int mHP;
 		int mAP;
-		char mView;
+		ActorView mView;
 		std::string mName;
 
 	public:
-		CCharacterArchetype( int aAttack, int aDefense, int aHP, int aAP, char aView, std::string aName );
+		CCharacterArchetype( int aAttack, int aDefense, int aHP, int aAP, ActorView aView, std::string aName );
 		int getAttack();
 		int getDefense();
 		int getHP();
 		int getAP();
-		char getView();
+		ActorView getView();
 		std::string getName();
 	};
 }

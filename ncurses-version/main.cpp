@@ -7,6 +7,7 @@
 */
 
 #include <utility>
+#include <functional>
 #include <string>
 #include <iostream>
 #include <memory>

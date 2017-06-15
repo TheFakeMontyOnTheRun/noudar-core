@@ -15,25 +15,26 @@ namespace Knights {
 	using CItemAction = std::function< void(std::shared_ptr<CActor>, std::shared_ptr<CMap>)>;
 
 	const CItemAction kItemDoNothingAction = [](std::shared_ptr<CActor>, std::shared_ptr<CMap>){};
+	using ItemView = char;
 
 	class CItem {
 	protected:
 		std::string mName;
-		char mView;
+		ItemView mView;
         bool mConsumable = false;
 
 		CItemAction mItemAction = kItemDoNothingAction;
         CItemAction mItemPickAction = kItemDoNothingAction;
         CItemAction mItemDropAction = kItemDoNothingAction;
 	public:
-        CItem(std::string aName, char aView, bool aConsumable, const CItemAction& itemUseAction );
-		CItem(std::string aName, char aView, bool aConsumable, const CItemAction& itemUseAction, const CItemAction& itemPickAction, const CItemAction& itemDropAction );
-		CItem(std::string aName, char aView );
+        CItem(std::string aName, ItemView aView, bool aConsumable, const CItemAction& itemUseAction );
+		CItem(std::string aName, ItemView aView, bool aConsumable, const CItemAction& itemUseAction, const CItemAction& itemPickAction, const CItemAction& itemDropAction );
+		CItem(std::string aName, ItemView aView );
 
         std::string to_string() const;
 
 		void use(std::shared_ptr<CActor>, std::shared_ptr<CMap>);
-		char getView() const;
+		ItemView getView() const;
 		bool isConsumable() const;
 	};
 

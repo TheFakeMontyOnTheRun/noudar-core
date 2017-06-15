@@ -98,12 +98,19 @@ namespace Knights {
                     }
 
                 } else {
+
+                    ItemView cellView = map.getItemViewAt( {x,y});
+
+                    if ( cellView == kEmptySpace ) {
+                        cellView = map.getElementAt( {x,y } );
+                    }
+
                     if (map.isBlockProjectilesAt({x, y})) {
                         attron(COLOR_PAIR(7));
-                        addch(map.getElementAt( {x, y} ) );
+                        addch(cellView);
                     } else if (map.isBlockMovementAt({x, y})) {
                         attron(COLOR_PAIR(3));
-                        addch(map.getElementAt( {x, y} ) );
+                        addch(cellView);
                     } else {
                         if ( targetPosition.x == x && targetPosition.y == y ) {
                             attron(COLOR_PAIR(6));
@@ -111,7 +118,7 @@ namespace Knights {
                             attron(COLOR_PAIR(4));
                         }
 
-                        addch(map.getElementAt( {x, y}));
+                        addch(cellView);
                     }
                 }
 

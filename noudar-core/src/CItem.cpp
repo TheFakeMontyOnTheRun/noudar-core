@@ -10,21 +10,21 @@
 
 #include <sstream>
 
-Knights::CItem::CItem(std::string aName, char aView ) : mName(aName), mView( aView ), mConsumable(false) {
+Knights::CItem::CItem(std::string aName, ItemView aView ) : mName(aName), mView( aView ), mConsumable(false) {
 }
 
 std::string Knights::CItem::to_string() const {
 	return mName;
 }
 
-char Knights::CItem::getView() const {
+Knights::ItemView Knights::CItem::getView() const {
 	return mView;
 }
 
-Knights::CItem::CItem(std::string aName, char aView, bool aConsumable, const Knights::CItemAction &itemAction) : mName(aName), mView( aView ), mConsumable(aConsumable), mItemAction( itemAction ) {
+Knights::CItem::CItem(std::string aName, ItemView aView, bool aConsumable, const Knights::CItemAction &itemAction) : mName(aName), mView( aView ), mConsumable(aConsumable), mItemAction( itemAction ) {
 }
 
-Knights::CItem::CItem(std::string aName, char aView, bool aConsumable, const Knights::CItemAction &itemAction, const Knights::CItemAction &itemPickAction, const Knights::CItemAction &itemDropAction) : mName(aName), mView( aView ), mConsumable(aConsumable), mItemAction(itemAction), mItemPickAction(itemPickAction), mItemDropAction(itemDropAction) {
+Knights::CItem::CItem(std::string aName, ItemView aView, bool aConsumable, const Knights::CItemAction &itemAction, const Knights::CItemAction &itemPickAction, const Knights::CItemAction &itemDropAction) : mName(aName), mView( aView ), mConsumable(aConsumable), mItemAction(itemAction), mItemPickAction(itemPickAction), mItemDropAction(itemDropAction) {
 }
 
 

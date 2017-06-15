@@ -18,6 +18,8 @@ namespace Knights {
 
 	class CMap;
 
+    using ActorView = char;
+
 	class CActor : public std::enable_shared_from_this<CActor>{
 	protected:
 		EStance mStance;
@@ -31,7 +33,7 @@ namespace Knights {
 		int mHP;
 		int mAttackBonus = 0;
 		Vec2i mPosition;
-		char mView;
+		ActorView mView;
 		std::string mName;
 		std::shared_ptr<CTeam> mTeam;
 		std::vector<std::shared_ptr<CItem>> mInventory;
@@ -62,7 +64,7 @@ namespace Knights {
 
 		void turnRight();
 
-		char getView();
+		ActorView getView();
 
 		int getId();
 
@@ -102,7 +104,7 @@ namespace Knights {
 
 		std::shared_ptr<CItem> getSelectedItem();
 
-		std::shared_ptr<CItem> getItemWithSymbol( char symbol );
+		std::shared_ptr<CItem> getItemWithSymbol( ItemView symbol );
 
 		void giveItem( std::shared_ptr<CItem> aItem );
 
@@ -112,7 +114,7 @@ namespace Knights {
 
 		void copyStateFrom( std::shared_ptr<CActor> other );
 
-		void suggestCurrentItem( char view );
+		void suggestCurrentItem( ItemView view );
 
 		void setAttackBonus( int attackBonus );
 	protected:

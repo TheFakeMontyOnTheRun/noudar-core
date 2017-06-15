@@ -15,7 +15,7 @@ namespace Knights {
         std::shared_ptr<CGameDelegate> mGameDelegate;
 
 	    bool mBlockCharacterMovement[ kMapSize ][ kMapSize ];
-        char mElement[ kMapSize ][ kMapSize ];
+        ElementView mElement[ kMapSize ][ kMapSize ];
 	    std::array< std::array< std::shared_ptr<CItem>, kMapSize >, kMapSize > mItems;
         std::array< std::array< bool, kMapSize >, kMapSize > mBlockProjectiles;
         std::array< std::array< bool, kMapSize >, kMapSize > mBlockView;
@@ -23,7 +23,7 @@ namespace Knights {
         std::shared_ptr<CActor> mAvatar;
 		int mCurrentId = 1;
 
-		void floodFill( Vec2i position, std::map<char, char> transformations );
+		void floodFill( Vec2i position, std::map<ElementView, ElementView> transformations );
     public:
 
         bool isValid( const Vec2i& p );
@@ -36,8 +36,8 @@ namespace Knights {
 	    bool isLevelFinished();
         Vec2i getActorTargetPosition( std::shared_ptr<CActor> a );
 		Vec2i getTargetProjection( std::shared_ptr<CActor> a );
-        char getElementAt( const Vec2i& p );
-		char getMapAt( const Vec2i& p );
+        ElementView getElementAt( const Vec2i& p );
+		ItemView getItemViewAt( const Vec2i& p );
 		std::shared_ptr<CActor> getAvatar();
         std::vector<std::shared_ptr<CActor>> getActors();
         std::shared_ptr<CActor> getActorAt( Vec2i position );

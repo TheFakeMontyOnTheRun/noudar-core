@@ -119,7 +119,7 @@ namespace Knights {
 		return mName;
 	}
 
-	char CActor::getView() {
+	ActorView CActor::getView() {
 		return mView;
 	}
 
@@ -234,7 +234,7 @@ namespace Knights {
 		this->mInventory = other->mInventory;
 	}
 
-    void CActor::suggestCurrentItem( char view ) {
+    void CActor::suggestCurrentItem( ItemView view ) {
         auto item = getItemWithSymbol( view );
 
         if ( item != nullptr ) {
@@ -242,7 +242,7 @@ namespace Knights {
         }
     }
 
-    std::shared_ptr<CItem> CActor::getItemWithSymbol(char symbol) {
+    std::shared_ptr<CItem> CActor::getItemWithSymbol(ItemView symbol) {
 
 		for ( const auto& item : mInventory ) {
 			if ( item->getView() == symbol ) {

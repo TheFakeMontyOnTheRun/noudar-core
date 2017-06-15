@@ -19,7 +19,7 @@ std::string formatName( const std::string& name, int amount ) {
     return ss.str();
 }
 
-Knights::CStorageItem::CStorageItem(const std::string &aName, char aView, bool aConsumable,
+Knights::CStorageItem::CStorageItem(const std::string &aName, ItemView aView, bool aConsumable,
                                     const Knights::CItemAction &itemAction, int initialAmount )
         : CItem( formatName( aName, initialAmount ), aView, aConsumable, itemAction), mAmount( initialAmount ), mOriginalName(aName) {
 }
