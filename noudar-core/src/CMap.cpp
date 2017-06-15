@@ -476,6 +476,9 @@ namespace Knights {
 
     ElementView CMap::getElementAt(const Vec2i& p) {
 
+        if ( !isValid( p ) ) {
+            return kEmptySpace;
+        }
 
         return mElement[p.y][p.x];
     }
@@ -489,15 +492,30 @@ namespace Knights {
     }
 
     void CMap::setActorAt(Vec2i position, std::shared_ptr<CActor> actor) {
+
+        if ( !isValid(position)) {
+            return;
+        }
+
         mActors[position.y][position.x] = actor;
     }
 
     bool CMap::isLevelFinished() {
+
         auto position = this->getAvatar()->getPosition();
+
+        if ( !isValid(position)) {
+            return false;
+        }
+
         return mElement[position.y][position.x] == 'E';
     }
 
     void CMap::moveActor(Vec2i from, Vec2i to, std::shared_ptr<CActor> actor) {
+        if ( !isValid(from) || !isValid(to)) {
+            return;
+        }
+
         mActors[from.y][from.x] = nullptr;
         mActors[to.y][to.x] = actor;
         actor->setPosition(to);
@@ -549,12 +567,22 @@ namespace Knights {
     }
 
 	void CMap::putItemAt(std::shared_ptr<CItem> aItem, Vec2i aDestination) {
+
+        if ( !isValid(aDestination)) {
+            return;
+        }
+
 		if ( mItems[ aDestination.y ][ aDestination.x ] == nullptr ) {
 			mItems[ aDestination.y ][ aDestination.x ] = aItem;
 		}
 	}
 
     void CMap::addActorAt(std::shared_ptr<CActor> actor, const Vec2i &position) {
+
+        if ( !isValid(position)) {
+            return;
+        }
+
         mElement[ position.y ][ position.x ] = '.';
         actors.push_back(actor);
         mActors[ position.y][ position.x] = actor;
@@ -620,6 +648,10 @@ namespace Knights {
     }
 
     void CMap::removeActorFrom(Vec2i position) {
+        if (!isValid(position)) {
+            return;
+        }
+
         auto actor = getActorAt( position );
         mActors[ position.y ][ position.x ] = nullptr;
     }
