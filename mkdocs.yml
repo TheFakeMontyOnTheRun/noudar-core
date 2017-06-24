@@ -1,0 +1,16 @@
+site_name: Dungeons of Noudar (core)
+repo_url: https://github.com/TheFakeMontyOnTheRun/noudar-core
+theme: readthedocs
+pages:
+- Index: index.md
+- Items: items.md
+- Levels: levels.md
+- Locations: locations.md
+- Church: church.md
+- Monastery: monastery.md
+- Cemitery: cemitery.md
+- The Nest: nest.md
+- Prison: prison.md
+- Patium: patium.md
+- Mausoleum: mausoleum.md
+- Characters: characters.md
