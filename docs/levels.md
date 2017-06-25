@@ -12,22 +12,22 @@ must find the demon before it's too late.
 
 [Patium](patium.md), [Church](church.md) halls.
 [Cemetery](cemitery.md) is visible from outside. The left 
-auxiliry chamber is not acessible (behind bars). The player
-must proceed to the [Montastery](monastery.md) to find the
-entrance to the cemetery.
+auxiliary chamber is not acessible (behind bars). The player
+must find it's way to the [Monastery](monastery.md) to 
+find the entrance to the [Dungeon](prison.md).
 
-In this level, the player has to fend off lot's of insane
-monks
+In this level, the player has to fend off lot's of [insane
+monks](monks.md).
 
 - Level 2
 
 Inside the Monastery, the player must find the entrace to 
 the dungeon. To do it so, he must cut 4 ropes that hold 
-together the gate to the [Dungeons](prison.md). It is
-overrun by [insane monks](monks.md).
+together the gate to the Dungeons. This level is also 
+overrun by insane monks.
 
 Each rope is held inside a small altar, with the altars being
-distributed across the field. 
+distributed across the praying rooms. 
 
 - Level 3
 
@@ -40,11 +40,11 @@ as you pass by, you realize that one of the cells has a small
 passage hidden behind a pillar. You must cut a cord that 
 holds all cells closed and kill all the [demons](demon.md).
 
-Once inside the mausoleum, the player has to take the crossbow
-and use it to cut a rope on the other side of a chasm. This
-will open the passage that leads to the patium.
+Once inside the mausoleum, the player has to take the 
+crossbow and use it to cut a rope on the other side of a
+chasm. This will open the passage that leads to the patium.
 
-In this level, the player will battle lot's of fallen 
+In this level, the player will battle lots of fallen 
 crusaders and finally the [warthog](warthog.md).
 
 - Level 4
@@ -96,12 +96,14 @@ One of the vitrals show that the battle must happen on the
 patium, in front of the cathedral, due to the statue in the
 middle having one of the magical stones.
 
-Finally facing the [master demon](master-demon.md) in it's final form, the hero
-must charge the shield inside the cathedral to finally slay
-the beast.- Epilogue
+Finally facing the [master demon](master-demon.md) in it's
+final form, the hero must charge the shield inside the 
+cathedral to finally slay the beast.
 
-The citadel crumbes as the demon, once again, sinks into the
+- Epilogue
+
+The citadel crumbles as the demon, once again, sinks into the
 underground for good. As a remainder of what happened, only
 the walls survived such violent event. The hero, of course,
-will have all eternity to suffer the wrath of the demon 
+will have all eternity to suffer the wrath of the demon's 
 revenge.
