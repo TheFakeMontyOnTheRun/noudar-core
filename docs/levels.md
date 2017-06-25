@@ -64,6 +64,9 @@ As the player finally encounters the cocoon inside the pagan
 temple, there is no other way out other than shooting it, 
 causing the demon to wake up prematurely.
 
+(The paintings on the mausoleum walls show that you're 
+supposed to fight the demon with the crossbow anyway).
+
 A great battle ensues, but the demon is weak and eventually
 flees. 
 
