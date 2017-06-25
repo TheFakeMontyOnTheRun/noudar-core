@@ -1,5 +1,12 @@
 Levels
 ======
+- Prologue
+
+The player is an old crusader that used to be a priest. Since
+he's capable of performing old rituals to purge demons back
+to lower planes. Upon arrival on the citadel holding the
+supposed victim, he discovers that he came too late. Now, he
+must find the demon before it's too late.
 
 - Level 1
 
@@ -88,4 +95,10 @@ middle having one of the magical stones.
 
 Finally facing the [master demon](master-demon.md) in it's final form, the hero
 must charge the shield inside the cathedral to finally slay
-the beast.
+the beast.- Epilogue
+
+The citadel crumbes as the demon, once again, sinks into the
+underground for good. As a remainder of what happened, only
+the walls survived such violent event. The hero, of course,
+will have all eternity to suffer the wrath of the demon 
+revenge.
