@@ -98,7 +98,15 @@ middle having one of the magical stones.
 
 Finally facing the [master demon](master-demon.md) in it's
 final form, the hero must charge the shield inside the 
-cathedral to finally slay the beast.
+cathedral to break the [statue](statue.md) for good (you 
+can't break it with the uncharged crossbow), take the gem 
+and mount it on the crossbow. This will give the crossbow a 
+supercharge powerful enough to obliterate the beast for good
+with just a few shots.
+
+You can defeat the master demon with the crossbow in normal
+charge, but it would take a long time (some 100 shots, fully 
+charged).
 
 - Epilogue
 
