@@ -7,7 +7,7 @@ he's capable of performing old rituals to purge demons back
 to lower planes, he was asked to go to the citadel to 
 investigate some strange phenomena. Upon arrival, he discovers
 that he came too late. Now, he must find the demon before it's
-too late.
+powers reach it's peak.
 
 - Level 1
 
