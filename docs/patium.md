@@ -7,9 +7,9 @@ place, which also guards the [cemetery](cemetery.md), the
 other has the entrance to the [church](church.md) and then 
 citadel walls.
 
-The cemetery lies on a higher ground than the square. Nothing
-much going on here - it's kind of a training ground for the
-game.
+The cemetery lies on a higher ground than the [patium](patium.md).
+Nothing much going on here - it's kind of a training ground
+for the game.
 
-Inside the statue, there is a small red gem with a 
-interesting sparkle.
+Inside the [statue](statue.md), there is a small red gem 
+with a interesting sparkle to it.
