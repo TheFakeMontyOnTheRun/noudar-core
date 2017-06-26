@@ -4,9 +4,10 @@ Levels
 
 The player is an old crusader that used to be a priest. Since
 he's capable of performing old rituals to purge demons back
-to lower planes. Upon arrival on the citadel holding the
-supposed victim, he discovers that he came too late. Now, he
-must find the demon before it's too late.
+to lower planes, he was asked to go to the citadel to 
+investigate some strange phenomena. Upon arrival, he discovers
+that he came too late. Now, he must find the demon before it's
+too late.
 
 - Level 1
 
