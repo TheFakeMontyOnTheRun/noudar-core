@@ -5,7 +5,7 @@ Locations
 
 - [Monastery](monastery.md)
 
-- [Cemitery](cemitery.md)
+- [Cemetery](cemetery.md)
 
 - [Patium](patium.md)
 

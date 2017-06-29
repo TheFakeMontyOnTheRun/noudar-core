@@ -12,7 +12,7 @@ powers reach it's peak.
 - Level 1
 
 [Patium](patium.md), [Church](church.md) halls.
-[Cemetery](cemitery.md) is visible from outside. The left 
+[Cemetery](cemetery.md) is visible from outside. The left 
 auxiliary chamber is not acessible (behind bars). The player
 must find it's way to the [Monastery](monastery.md) to 
 find the entrance to the [Dungeon](prison.md).
