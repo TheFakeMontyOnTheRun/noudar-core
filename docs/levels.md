@@ -96,7 +96,8 @@ open, allowing you to grab the shield.
 
 One of the vitrals show that the battle must happen on the
 patium, in front of the cathedral, due to the statue in the
-middle having one of the magical stones.
+middle having one of the magical stones. To lure the beast,
+you must break the statue.
 
 Finally facing the [master demon](master-demon.md) in it's
 final form, the hero must charge the shield inside the 
