@@ -10,7 +10,7 @@ to investigate some strange phenomena. Upon arrival, he
 discovers that he came too late. Now, he must find the demon
 before it's powers reach it's peak.
 
-- Level 1
+- Chapter 1
 
 [Patium](patium.md), [Church](church.md) halls.
 [Cemetery](cemetery.md) is visible from outside. The left 
@@ -21,17 +21,17 @@ find the entrance to the [Dungeon](prison.md).
 In this level, the player has to fend off lot's of [insane
 monks](monks.md).
 
-- Level 2
+- Chapter 2
 
 Inside the Monastery, the player must find the entrace to 
 the dungeon. To do it so, he must cut 4 ropes that hold 
-together the gate to the Dungeons. This level is also 
+together the gate to the Dungeons. This area is also 
 overrun by insane monks.
 
 Each rope is held inside a small altar, with the altars being
 distributed across the praying rooms. 
 
-- Level 3
+- Chapter 3
 
 At the dungeon, the player must find the entrance to the 
 [mausoleum](mausoleum.md) and acquire the
@@ -49,7 +49,7 @@ chasm. This will open the passage that leads to the patium.
 In this level, the player will battle lots of fallen 
 crusaders and finally the [warthog](warthog.md).
 
-- Level 4
+- Chapter 4
 
 Back at the patium, at the monastery, the door to the 
 dungeon is closed. Having the crossbow, the player can 
@@ -60,7 +60,7 @@ the citadel.
 There, the player finally has access to the other side of 
 the chasm and to the [nest](nest.md) at the pagan temple.
 
-- Level 5
+- Chapter 5
 
 As the player finally encounters the cocoon inside the pagan 
 temple, there is no other way out other than shooting it, 
@@ -72,7 +72,7 @@ supposed to fight the demon with the crossbow anyway).
 A great battle ensues, but the demon is weak and eventually
 flees. 
 
-- Level 6
+- Chapter 6
 
 The hero is weak, but eventually manages to come back
 to the surface. On his way, we surfaces inside the cathedral
@@ -83,7 +83,7 @@ you must fetch the shield.
 
 Time to get the shield!
 
-- Level 7
+- Chapter 7
 
 The shield is on top of the resting place of a mighty 
 warrior on a chamber on the 2nd floor, revealed when you cut
@@ -92,7 +92,7 @@ you must cut all other remaining ropes from the vitrals and
 reveal the whole story. After doing it so, the doors will 
 open, allowing you to grab the shield.
 
-- Level 8
+- Chapter 8
 
 One of the vitrals show that the battle must happen on the
 patium, in front of the cathedral, due to the statue in the
