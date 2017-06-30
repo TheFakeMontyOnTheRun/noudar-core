@@ -1,13 +1,14 @@
 Levels
 ======
+
 - Prologue
 
 The player is an old crusader that used to be a priest. Since
 he's capable of performing old rituals to purge demons back
-to lower planes, he was asked to go to the citadel to 
-investigate some strange phenomena. Upon arrival, he discovers
-that he came too late. Now, he must find the demon before it's
-powers reach it's peak.
+to lower planes, he was asked to go to the [citadel](citadel.md)
+to investigate some strange phenomena. Upon arrival, he 
+discovers that he came too late. Now, he must find the demon
+before it's powers reach it's peak.
 
 - Level 1
 
