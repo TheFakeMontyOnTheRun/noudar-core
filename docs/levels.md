@@ -18,8 +18,8 @@ auxiliary chamber is not acessible (behind bars). The player
 must find it's way to the [Monastery](monastery.md) to 
 find the entrance to the [Dungeon](prison.md).
 
-In this level, the player has to fend off lot's of [insane
-monks](monks.md).
+In this level, the player has to fend off lot's of 
+[insane monks](monks.md).
 
 - Chapter 2
 
