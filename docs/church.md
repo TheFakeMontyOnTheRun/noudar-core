@@ -28,7 +28,7 @@ red carpet running thru the middle of it.
 Serves as the end for both stairwells for the 2nd floor 
 north and south chambers.
 
-- the west on the 1st floor
+- The west on the 1st floor
 
 There is a door that Takes you to
 [monastery](monastery.md).

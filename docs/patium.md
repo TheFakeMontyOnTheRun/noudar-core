@@ -14,4 +14,4 @@ a training ground for the game.
 Inside the [statue](statue.md), there is a small red gem 
 with a interesting sparkle to it. Later in the game, the 
 player will have to break the statue to start the final 
-battle, in effect, summoning the demon.
+battle, in effect, summoning the [master demon](master-demon.md).
