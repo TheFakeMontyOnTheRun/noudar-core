@@ -508,6 +508,24 @@ namespace Knights {
             return false;
         }
 
+        int monsters = 0;
+        auto heroTeam = getAvatar()->getTeam();
+
+        for (int y = 0; y < kMapSize; ++y) {
+            for (int x = 0; x < kMapSize; ++x) {
+                if (mActors[y][x] != nullptr) {
+                    auto actor = mActors[ y ][ x ];
+                    if ( actor->getTeam() != heroTeam ) {
+                        monsters++;
+                    }
+                }
+            }
+        }
+
+        if ( monsters == 0 ) {
+            return true;
+        }
+
         return mElement[position.y][position.x] == 'E';
     }
 
