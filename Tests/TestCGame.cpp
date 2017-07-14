@@ -74,6 +74,18 @@ protected:
         return count;
     }
 
+    void removeAllMonsters() {
+        auto actors = mGame->getMap()->getActors();
+        auto player = mGame->getMap()->getAvatar();
+
+        for (const auto& actor : actors ) {
+            if ( actor != player ) {
+                mGame->getMap()->removeActorFrom( actor->getPosition() );
+            }
+        }
+    }
+
+
     int getTotalHealthInLevel() {
 
         auto actors = mGame->getMap()->getActors();
@@ -858,6 +870,50 @@ TEST_F(TestCGame, StrongDemonShouldHaveAHalfMapViewRange ) {
 
     ASSERT_TRUE( monsterAtOriginalPosition != nullptr );
     ASSERT_EQ( monsterAtOriginalPosition->getPosition(), Knights::Vec2i( Knights::kMapSize - 2, Knights::kMapSize - 2 ) );
+}
+
+TEST_F(TestCGame, KillingTheMasterDemonWillSpawnEndLevelPortal ) {
+
+    auto actor = mGame->getMap()->getAvatar();
+    auto demon = mGame->getMap()->getActorAt( { Knights::kMapSize - 1, Knights::kMapSize - 2 });
+    demon->addHP( 1 - demon->getHP() );
+
+    actor->turnRight();
+
+    ON_CALL(*mMockRenderer, getInput()).WillByDefault(Return(Knights::kPickItemCommand));
+    mGame->tick();
+
+    actor->turnRight();
+
+    actor->turnRight();
+
+    ON_CALL(*mMockRenderer, getInput()).WillByDefault(Return(Knights::kPickItemCommand));
+    mGame->tick();
+
+    actor->turnLeft();
+
+    actor->turnLeft();
+
+    mGame->getMap()->moveActor( actor->getPosition(), { Knights::kMapSize / 2 , Knights::kMapSize - 2 }, actor );
+
+    auto shield = (Knights::CStorageItem*)actor->getItemWithSymbol( 'v' ).get();
+    shield->add( -shield->getAmount() + 20 );
+
+    auto crossbow = (Knights::CStorageItem*)actor->getItemWithSymbol( 'y' ).get();
+    crossbow->add( 100 );
+
+    actor->suggestCurrentItem('y');
+
+    ASSERT_TRUE( demon->isAlive() );
+
+    ON_CALL(*mMockRenderer, getInput()).WillByDefault(Return(Knights::kUseCurrentItemInInventoryCommand));
+    mGame->tick();
+
+    removeAllMonsters();
+
+    ON_CALL(*mMockRenderer, getInput()).WillByDefault(Return(Knights::kEndTurnCommand));
+    EXPECT_CALL(*mMockFileLoader, loadFileFromPath(_));
+    mGame->tick();
 }
 
 TEST_F(TestCGame, TakingATokenOfFaithWillReplenishHealth ) {
