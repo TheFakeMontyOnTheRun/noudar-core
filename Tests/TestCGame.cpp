@@ -85,6 +85,17 @@ protected:
         }
     }
 
+    void removeAllExits() {
+        auto map = mGame->getMap();
+
+        for ( int y = 0; y < Knights::kMapSize; ++y ) {
+            for ( int x = 0; x < Knights::kMapSize; ++x ) {
+                if ( map->getElementAt( { x, y } ) == 'E' ) {
+                    map->floodFill({ x, y}, {{ 'E', '.'}} );
+                }
+            }
+        }
+    }
 
     int getTotalHealthInLevel() {
 
@@ -910,7 +921,7 @@ TEST_F(TestCGame, KillingTheMasterDemonWillSpawnEndLevelPortal ) {
     mGame->tick();
 
     removeAllMonsters();
-
+    removeAllExits();
     ON_CALL(*mMockRenderer, getInput()).WillByDefault(Return(Knights::kEndTurnCommand));
     EXPECT_CALL(*mMockFileLoader, loadFileFromPath(_));
     mGame->tick();

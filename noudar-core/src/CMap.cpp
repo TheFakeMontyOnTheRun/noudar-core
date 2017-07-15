@@ -509,10 +509,16 @@ namespace Knights {
         }
 
         int monsters = 0;
+        bool hasExit = false;
         auto heroTeam = getAvatar()->getTeam();
 
         for (int y = 0; y < kMapSize; ++y) {
             for (int x = 0; x < kMapSize; ++x) {
+
+                if ( mElement[ y ][ x ] == 'E' ) {
+                    hasExit = true;
+                }
+
                 if (mActors[y][x] != nullptr) {
                     auto actor = mActors[ y ][ x ];
                     if ( actor->getTeam() != heroTeam ) {
@@ -522,7 +528,7 @@ namespace Knights {
             }
         }
 
-        if ( monsters == 0 ) {
+        if ( monsters == 0 && !hasExit ) {
             return true;
         }
 

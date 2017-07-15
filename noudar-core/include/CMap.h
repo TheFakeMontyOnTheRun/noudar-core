@@ -8,7 +8,9 @@ namespace Knights {
     class CMap {
     public:
 
-    private:
+		void floodFill( Vec2i position, std::map<ElementView, ElementView> transformations );
+
+	private:
 
         std::shared_ptr<IMapElement> map[ kMapSize ][ kMapSize ];
         std::shared_ptr<CActor> mActors[ kMapSize ][ kMapSize ];
@@ -23,8 +25,7 @@ namespace Knights {
         std::shared_ptr<CActor> mAvatar;
 		ActorId mCurrentId = 1;
 
-		void floodFill( Vec2i position, std::map<ElementView, ElementView> transformations );
-    public:
+	public:
 
         bool isValid( const Vec2i& p );
         bool isBlockMovementAt(const Vec2i &p);
