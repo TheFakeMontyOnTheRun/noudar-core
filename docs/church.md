@@ -35,9 +35,10 @@ There is a door that Takes you to
 
 - The south chamber on the 2nd floor
 
-Has a passage from [pagan temple](nest.md), with exactly one 
-clear shot path to some ropes that hold the cloth covering 
-the vitrals and revealing the path to the bell tower.
+Has a passage from [pagan temple](prison.md), with 
+exactly one clear shot path to some ropes that hold the 
+cloth covering the vitrals and revealing the path to the
+bell tower.
 
 On the porches around the tower entrance, you get the only
 clear shots into the ropes that hold the other vitrals covered
