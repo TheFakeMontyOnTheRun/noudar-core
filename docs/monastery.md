@@ -19,5 +19,6 @@ When you reemerge from the dungeon, the Dungeon
 entrance is closed but the exit to the backyard is 
 open.
 
-After that, the player won't visit the monastery again.
+After that, the player won't visit the monastery again 
+(but it's chimney is visible from most surface levels).
 

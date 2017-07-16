@@ -13,3 +13,6 @@ this shot, there is a small porch from a big burial vault.
 
 That shot will have to pass thru the windows of another
 vault containing demons locked up.
+
+Once inside the tower, all the player has to do is go down
+the stairs and into the [pagan temple](prison.md).
