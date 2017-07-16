@@ -40,7 +40,8 @@ At the dungeon, the player must find the entrance to the
 At first, the cells of the dungeon will all be closed, but 
 as you pass by, you realize that one of the cells has a small
 passage hidden behind a pillar. You must cut a cord that 
-holds all cells closed and kill all the [demons](demon.md).
+holds all cells closed and kill all the 
+[evil spirits](evil-spirit.md).
 
 Once inside the mausoleum, the player has to take the 
 crossbow and use it to cut a rope on the other side of a
