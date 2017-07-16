@@ -3,27 +3,29 @@ repo_url: https://github.com/TheFakeMontyOnTheRun/noudar-core
 theme: readthedocs
 pages:
 - Index: index.md
-- Items: items.md
 - Levels: levels.md
 - Locations: locations.md
 - Church: church.md
+- Vitrals: vitrals.md
 - Monastery: monastery.md
 - Cemetery: cemetery.md
 - The Nest: nest.md
 - Prison: prison.md
 - Patium: patium.md
+- Statue: statue.md
 - Mausoleum: mausoleum.md
+- Prison: prison.md
+- The Citadel: citadel.md
+- Bell tower: bell-tower.md
+- Tower: tower.md
+- Items: items.md
+- Crossbow: crossbow.md
+- Shield: shield.md
+- Tokens of faith: tokens-of-faith.md
 - Characters: characters.md
-- crossbow.md
 - Demon: demon.md
 - Master demon: master-demon.md
 - Monks: monks.md
-- Prison: prison.md
-- Shield: shield.md
-- Statue: statue.md
-- Tower: tower.md
-- Vitrals: vitrals.md
 - Warthog: warthog.md
-- Tokens of faith: tokens-of-faith.md
-- The citadel: citadel.md
-- Bell tower: bell-tower.md
+- Fallen heroes: fallen-heroes.md
+
