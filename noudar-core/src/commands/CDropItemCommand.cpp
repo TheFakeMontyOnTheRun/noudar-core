@@ -51,6 +51,10 @@ void Knights::CDropItemCommand::execute() {
 		return;
 	}
 
+	if ( !itemToDrop->canBeDropped() ) {
+        return;
+	}
+
 	auto map = getGame()->getMap();
 	auto target = map->getActorTargetPosition(mActor);
 
