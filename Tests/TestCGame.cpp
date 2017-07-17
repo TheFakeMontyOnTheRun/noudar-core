@@ -983,3 +983,17 @@ TEST_F(TestCGame, TakingATokenOfFaithWillReplenishHealth ) {
     ASSERT_EQ( pleaseRefrainFromInsistingItsNotGoingToWorkAndWillOnlyHumiliateYourself, playerOriginalHealth + 20 );
     ASSERT_EQ( finalHealth, playerOriginalHealth + 20 );
 }
+
+TEST_F(TestCGame, PlayerShouldNotBeAbleToDropEssentialWeapons ) {
+    auto actor = mGame->getMap()->getAvatar();
+
+    actor->turnRight();
+
+    ON_CALL(*mMockRenderer, getInput()).WillByDefault(Return(Knights::kPickItemCommand));
+    mGame->tick();
+
+    ON_CALL(*mMockRenderer, getInput()).WillByDefault(Return(Knights::kDropItemCommand));
+    mGame->tick();
+
+    ASSERT_NE( actor->getSelectedItem(), nullptr );
+}

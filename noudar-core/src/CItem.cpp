@@ -21,10 +21,10 @@ Knights::ItemView Knights::CItem::getView() const {
 	return mView;
 }
 
-Knights::CItem::CItem(std::string aName, ItemView aView, bool aConsumable, const Knights::CItemAction &itemAction) : mName(aName), mView( aView ), mConsumable(aConsumable), mItemAction( itemAction ) {
+Knights::CItem::CItem(std::string aName, ItemView aView, bool aConsumable, bool aCanBeDropped, const Knights::CItemAction &itemAction) : mName(aName), mView( aView ), mConsumable(aConsumable), mCanBeDropped(aCanBeDropped), mItemAction( itemAction ) {
 }
 
-Knights::CItem::CItem(std::string aName, ItemView aView, bool aConsumable, const Knights::CItemAction &itemAction, const Knights::CItemAction &itemPickAction, const Knights::CItemAction &itemDropAction) : mName(aName), mView( aView ), mConsumable(aConsumable), mItemAction(itemAction), mItemPickAction(itemPickAction), mItemDropAction(itemDropAction) {
+Knights::CItem::CItem(std::string aName, ItemView aView, bool aConsumable, bool aCanBeDropped, const Knights::CItemAction &itemAction, const Knights::CItemAction &itemPickAction, const Knights::CItemAction &itemDropAction) : mName(aName), mView( aView ), mConsumable(aConsumable), mCanBeDropped(aCanBeDropped), mItemAction(itemAction), mItemPickAction(itemPickAction), mItemDropAction(itemDropAction) {
 }
 
 
@@ -45,4 +45,8 @@ std::string Knights::to_string(const Knights::CItem &action) {
 
 bool Knights::CItem::isConsumable() const {
 	return mConsumable;
+}
+
+bool Knights::CItem::canBeDropped() const {
+    return mCanBeDropped;
 }
