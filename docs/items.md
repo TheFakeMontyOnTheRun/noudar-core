@@ -3,7 +3,7 @@ Items
 
 Weapons:
 
-- Sword
+- [Sword](sword.md)
 
 An old sword, but capable of providing basic defense without
 requiring any cooling time.
