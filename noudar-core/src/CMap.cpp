@@ -103,7 +103,7 @@ namespace Knights {
                         mBlockProjectiles[ y ][ x ] = false;
                         mBlockView[ y ][ x ] = false;
 		                mElement[ y ][ x ] = '.';
-		                mItems[ y ][ x ] = std::make_shared<CItem>("Sword of sorrow", 't', false, [](std::shared_ptr<CActor> aActor, std::shared_ptr<CMap> aMap){
+		                mItems[ y ][ x ] = std::make_shared<CItem>("Sword of sorrow", 't', false, false, [](std::shared_ptr<CActor> aActor, std::shared_ptr<CMap> aMap){
                             auto target = aMap->getActorTargetPosition(aActor);
                             aMap->attack( aActor, target, true );
 		                });
@@ -113,7 +113,7 @@ namespace Knights {
                         mBlockProjectiles[ y ][ x ] = false;
                         mBlockView[ y ][ x ] = false;
                         mElement[ y ][ x ] = '.';
-                        mItems[ y ][ x ] = std::make_shared<CStorageItem>("Shield of restoration", 'v', false, [](std::shared_ptr<CActor> aActor, std::shared_ptr<CMap> aMap){
+                        mItems[ y ][ x ] = std::make_shared<CStorageItem>("Shield of restoration", 'v', false, false, [](std::shared_ptr<CActor> aActor, std::shared_ptr<CMap> aMap){
 
                             auto shield = (CStorageItem*)aActor->getItemWithSymbol( 'v' ).get();
 
@@ -134,14 +134,14 @@ namespace Knights {
                         mBlockProjectiles[ y ][ x ] = false;
                         mBlockView[ y ][ x ] = false;
                         mElement[ y ][ x ] = '.';
-                        mItems[ y ][ x ] = std::make_shared<CStorageItem>("Quiver", 'u', false, [](std::shared_ptr<CActor> aActor, std::shared_ptr<CMap> aMap){}, 5);
+                        mItems[ y ][ x ] = std::make_shared<CStorageItem>("Quiver", 'u', false, true, [](std::shared_ptr<CActor> aActor, std::shared_ptr<CMap> aMap){}, 5);
                         break;
                     case '+':
                         mBlockCharacterMovement[y][x] = false;
                         mBlockProjectiles[ y ][ x ] = false;
                         mBlockView[ y ][ x ] = false;
                         mElement[ y ][ x ] = '.';
-                        mItems[ y ][ x ] = std::make_shared<CItem>("The holy health", '+', true, [](std::shared_ptr<CActor> aActor, std::shared_ptr<CMap> aMap){
+                        mItems[ y ][ x ] = std::make_shared<CItem>("The holy health", '+', true, true, [](std::shared_ptr<CActor> aActor, std::shared_ptr<CMap> aMap){
                             aActor->addHP(20);
                         });
                         break;
@@ -152,7 +152,7 @@ namespace Knights {
                         mBlockView[ y ][ x ] = false;
 		                mElement[ y ][ x ] = '.';
                         //The need for RTTI creeps again...
-		                mItems[ y ][ x ] = std::make_shared<CStorageItem>("Crossbow of damnation", 'y', false, [](std::shared_ptr<CActor> aActor, std::shared_ptr<CMap> aMap){
+		                mItems[ y ][ x ] = std::make_shared<CStorageItem>("Crossbow of damnation", 'y', false, false, [](std::shared_ptr<CActor> aActor, std::shared_ptr<CMap> aMap){
 
                             auto shield = (CStorageItem*)aActor->getItemWithSymbol( 'v' ).get();
                             auto crossbow = (CStorageItem*)aActor->getItemWithSymbol( 'y' ).get();

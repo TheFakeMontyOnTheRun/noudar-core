@@ -22,13 +22,13 @@ namespace Knights {
 		std::string mName;
 		ItemView mView;
         bool mConsumable = false;
-
+		bool mCanBeDropped = false;
 		CItemAction mItemAction = kItemDoNothingAction;
         CItemAction mItemPickAction = kItemDoNothingAction;
         CItemAction mItemDropAction = kItemDoNothingAction;
 	public:
-        CItem(std::string aName, ItemView aView, bool aConsumable, const CItemAction& itemUseAction );
-		CItem(std::string aName, ItemView aView, bool aConsumable, const CItemAction& itemUseAction, const CItemAction& itemPickAction, const CItemAction& itemDropAction );
+        CItem(std::string aName, ItemView aView, bool aConsumable, bool aCanBeDropped, const CItemAction& itemUseAction );
+		CItem(std::string aName, ItemView aView, bool aConsumable, bool aCanBeDropped, const CItemAction& itemUseAction, const CItemAction& itemPickAction, const CItemAction& itemDropAction );
 		CItem(std::string aName, ItemView aView );
 
         std::string to_string() const;
@@ -36,6 +36,7 @@ namespace Knights {
 		void use(std::shared_ptr<CActor>, std::shared_ptr<CMap>);
 		ItemView getView() const;
 		bool isConsumable() const;
+		bool canBeDropped() const;
 	};
 
 	std::ostream &operator<<(std::ostream &os, const CItem &action);
