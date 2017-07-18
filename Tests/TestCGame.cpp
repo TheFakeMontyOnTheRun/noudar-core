@@ -125,7 +125,7 @@ protected:
         toReturn += "000000000000000000000000000#000000000000\n";
         toReturn += "000000000000000000000000000#000000000000\n";
         toReturn += "000000000000000000000000000000000000000w\n";
-        toReturn += "0000000000000000000000000000000000000000\n";
+        toReturn += "6000000000000000000000000000000000000000\n";
         toReturn += "0000000000000000000000000000000000000000\n";
         toReturn += "0000000000000000000000000000000000000000\n";
         toReturn += "0000000000000000000000000000000000000000\n";
@@ -996,4 +996,41 @@ TEST_F(TestCGame, PlayerShouldNotBeAbleToDropEssentialWeapons ) {
     mGame->tick();
 
     ASSERT_NE( actor->getSelectedItem(), nullptr );
+}
+
+
+TEST_F(TestCGame, DeadMonksShouldDropTokensOfFaith ) {
+    auto actor = mGame->getMap()->getAvatar();
+
+    actor->turnRight();
+    ON_CALL(*mMockRenderer, getInput()).WillByDefault(Return(Knights::kPickItemCommand));
+    mGame->tick();
+
+    actor->turnRight();
+    actor->turnRight();
+    mGame->tick();
+    actor->turnLeft();
+    actor->turnLeft();
+
+    mGame->getMap()->moveActor( actor->getPosition(), { Knights::kMapSize / 2, (Knights::kMapSize / 2) + 1}, actor );
+    actor->setDirection(Knights::EDirection::kWest);
+    auto crossbow = (Knights::CStorageItem*)actor->getItemWithSymbol( 'y' ).get();
+    crossbow->add( 100 );
+
+    actor->suggestCurrentItem('y');
+
+    mGame->getMap()->moveActor( actor->getPosition(), { (Knights::kMapSize / 2), (Knights::kMapSize / 4) + 1}, actor );
+
+    ON_CALL(*mMockRenderer, getInput()).WillByDefault(Return(Knights::kUseCurrentItemInInventoryCommand));
+    mGame->tick();
+    mGame->tick();
+
+    mGame->getMap()->moveActor( actor->getPosition(), { 1, (Knights::kMapSize / 4) + 1}, actor );
+
+    ON_CALL(*mMockRenderer, getInput()).WillByDefault(Return(Knights::kPickItemCommand));
+    mGame->tick();
+
+    actor->suggestCurrentItem('+');
+
+    ASSERT_EQ( actor->getSelectedItem()->getView(), '+');
 }
