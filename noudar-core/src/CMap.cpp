@@ -296,7 +296,24 @@ namespace Knights {
                         mElement[ y ][ x ] = '.';
                         break;
                     case '6':
-                        actor = std::make_shared<CMonster>( monkArchetype, foes, getLastestId(), kMonkViewRange );
+                        actor = std::make_shared<CMonster>( monkArchetype, foes, getLastestId(), kMonkViewRange, [](std::shared_ptr <CMap> map, std::shared_ptr<CActor> me) {
+
+                            auto character = (CCharacter*)(me.get());
+                            auto defaultHP = character->getArchetype().getHP();
+                            auto currentHP = me->getHP();
+
+                            if ( currentHP < defaultHP ) {
+                                character->addHP( -character->getHP() );
+                                auto position = me->getPosition();
+                                map->removeActorFrom( position );
+                                auto x = me->getPosition().x;
+                                auto y = me->getPosition().y;
+
+                                map->mItems[ y ][ x ] = std::make_shared<CItem>("The holy health", '+', true, true, [](std::shared_ptr<CActor> aActor, std::shared_ptr<CMap> aMap){
+                                    aActor->addHP(20);
+                                });
+                            }
+                        });
                         mBlockCharacterMovement[ y ][ x ] = false;
                         mBlockProjectiles[ y ][ x ] = false;
                         mBlockView[ y ][ x ] = false;
