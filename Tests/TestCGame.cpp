@@ -281,21 +281,6 @@ TEST_F(TestCGame, GameWillNotTryToLoadFileFromBinaryTest ) {
   std::make_shared<Knights::CGame>( mockFileLoader, renderer, delegate );
 }
 
-
-TEST_F(TestCGame, PlayersCarryingNothingCantDropItems ) {
-
-    auto actor = mGame->getMap()->getAvatar();
-    actor->turnRight();
-    actor->turnRight();
-    auto target = mGame->getMap()->getActorTargetPosition( actor );
-
-    ON_CALL(*mMockRenderer, getInput()).WillByDefault(Return(Knights::kDropItemCommand));
-    mGame->tick();
-
-    ASSERT_TRUE(actor->getSelectedItem() == nullptr );
-    ASSERT_TRUE(mGame->getMap()->getItemAt(target) == nullptr );
-}
-
 TEST_F(TestCGame, GameWillPreventPlayersFromDroppingItemsOnInvalidPositions ) {
 
     auto actor = mGame->getMap()->getAvatar();
