@@ -98,16 +98,6 @@ namespace Knights {
                         mBlockProjectiles[ y ][ x ] = false;
                         mBlockView[ y ][ x ] = false;
                         break;
-	                case 't':
-		                mBlockCharacterMovement[y][x] = false;
-                        mBlockProjectiles[ y ][ x ] = false;
-                        mBlockView[ y ][ x ] = false;
-		                mElement[ y ][ x ] = '.';
-		                mItems[ y ][ x ] = std::make_shared<CItem>("Sword of sorrow", 't', false, false, [](std::shared_ptr<CActor> aActor, std::shared_ptr<CMap> aMap){
-                            auto target = aMap->getActorTargetPosition(aActor);
-                            aMap->attack( aActor, target, true );
-		                });
-		                break;
                     case 'v':
                         mBlockCharacterMovement[y][x] = false;
                         mBlockProjectiles[ y ][ x ] = false;
@@ -240,6 +230,17 @@ namespace Knights {
                             }
 
                         });
+
+                        {
+                            auto sword = std::make_shared<CItem>("Sword of sorrow", 't', false, false,
+                                                                 [](std::shared_ptr<CActor> aActor,
+                                                                    std::shared_ptr<CMap> aMap) {
+                                                                     auto target = aMap->getActorTargetPosition(aActor);
+                                                                     aMap->attack(aActor, target, true);
+                                                                 });
+
+                            actor->giveItem(sword);
+                        }
                         mBlockCharacterMovement[ y ][ x ] = false;
                         mBlockProjectiles[ y ][ x ] = false;
                         mBlockView[ y ][ x ] = false;
