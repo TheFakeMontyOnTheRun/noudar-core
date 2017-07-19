@@ -153,7 +153,7 @@ protected:
         toReturn += "0000000000000000000000000000000000000000\n";
         toReturn += "0000000000000000000000000000000000000000\n";
         toReturn += "d00000000000000000000000000000000000000e\n";
-        toReturn += "0000000000000000000t00000000000000000000";
+        toReturn += "0000000000000000000000000000000000000000";
 
         return toReturn;
     }
@@ -281,21 +281,6 @@ TEST_F(TestCGame, GameWillNotTryToLoadFileFromBinaryTest ) {
   std::make_shared<Knights::CGame>( mockFileLoader, renderer, delegate );
 }
 
-
-TEST_F(TestCGame, PlayersCarryingNothingCantDropItems ) {
-
-    auto actor = mGame->getMap()->getAvatar();
-    actor->turnRight();
-    actor->turnRight();
-    auto target = mGame->getMap()->getActorTargetPosition( actor );
-
-    ON_CALL(*mMockRenderer, getInput()).WillByDefault(Return(Knights::kDropItemCommand));
-    mGame->tick();
-
-    ASSERT_TRUE(actor->getSelectedItem() == nullptr );
-    ASSERT_TRUE(mGame->getMap()->getItemAt(target) == nullptr );
-}
-
 TEST_F(TestCGame, GameWillPreventPlayersFromDroppingItemsOnInvalidPositions ) {
 
     auto actor = mGame->getMap()->getAvatar();
@@ -325,9 +310,11 @@ TEST_F(TestCGame, GameWillPreventPlayersFromPickingItemsOnInvalidPositions ) {
     ON_CALL(*mMockRenderer, getInput()).WillByDefault(Return(Knights::kPickItemCommand));
     mGame->tick();
 
+    auto itemBefore = actor->getSelectedItem();
+
     auto target = mGame->getMap()->getActorTargetPosition( actor );
     ASSERT_FALSE( mGame->getMap()->isValid(target));
-    ASSERT_TRUE( actor->getSelectedItem() == nullptr );
+    ASSERT_EQ( actor->getSelectedItem(), itemBefore );
     auto itemOnTheFloor = mGame->getMap()->getItemAt(target);
     ASSERT_TRUE(itemOnTheFloor == nullptr );
 }
@@ -998,6 +985,9 @@ TEST_F(TestCGame, PlayerShouldNotBeAbleToDropEssentialWeapons ) {
     ASSERT_NE( actor->getSelectedItem(), nullptr );
 }
 
+TEST_F(TestCGame, PlayerShouldStartWithSword ) {
+    ASSERT_EQ( mGame->getMap()->getAvatar()->getSelectedItem()->getView(), 't' );
+}
 
 TEST_F(TestCGame, DeadMonksShouldDropTokensOfFaith ) {
     auto actor = mGame->getMap()->getAvatar();
