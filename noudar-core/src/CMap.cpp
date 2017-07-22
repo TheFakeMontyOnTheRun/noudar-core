@@ -71,13 +71,10 @@ namespace Knights {
 
                 element = mapData[ pos ];
                 actor = nullptr;
-                mBlockCharacterMovement[y][x] = false;
                 map[y][x] = nullptr;
                 mActors[ y ][ x ] = nullptr;
                 mElement[y][x] = element;
 				mItems[ y ][ x ] = nullptr;
-                mBlockProjectiles[ y ][ x ] = true;
-                mBlockView[ y ][ x ] = true;
                 switch (element) {
 	                default:
                     case '0':
@@ -94,14 +91,8 @@ namespace Knights {
                     case '7':
                     case '!':
                     case 'H':
-                        mBlockCharacterMovement[y][x] = false;
-                        mBlockProjectiles[ y ][ x ] = false;
-                        mBlockView[ y ][ x ] = false;
                         break;
                     case 'v':
-                        mBlockCharacterMovement[y][x] = false;
-                        mBlockProjectiles[ y ][ x ] = false;
-                        mBlockView[ y ][ x ] = false;
                         mElement[ y ][ x ] = '.';
                         mItems[ y ][ x ] = std::make_shared<CStorageItem>("Shield of restoration", 'v', false, false, [](std::shared_ptr<CActor> aActor, std::shared_ptr<CMap> aMap){
 
@@ -120,16 +111,10 @@ namespace Knights {
                         break;
 
                     case 'u':
-                        mBlockCharacterMovement[y][x] = false;
-                        mBlockProjectiles[ y ][ x ] = false;
-                        mBlockView[ y ][ x ] = false;
                         mElement[ y ][ x ] = '.';
                         mItems[ y ][ x ] = std::make_shared<CStorageItem>("Quiver", 'u', false, true, [](std::shared_ptr<CActor> aActor, std::shared_ptr<CMap> aMap){}, 5);
                         break;
                     case '+':
-                        mBlockCharacterMovement[y][x] = false;
-                        mBlockProjectiles[ y ][ x ] = false;
-                        mBlockView[ y ][ x ] = false;
                         mElement[ y ][ x ] = '.';
                         mItems[ y ][ x ] = std::make_shared<CItem>("The holy health", '+', true, true, [](std::shared_ptr<CActor> aActor, std::shared_ptr<CMap> aMap){
                             aActor->addHP(20);
@@ -137,9 +122,6 @@ namespace Knights {
                         break;
 
 	                case 'y':
-		                mBlockCharacterMovement[y][x] = false;
-                        mBlockProjectiles[ y ][ x ] = false;
-                        mBlockView[ y ][ x ] = false;
 		                mElement[ y ][ x ] = '.';
                         //The need for RTTI creeps again...
 		                mItems[ y ][ x ] = std::make_shared<CStorageItem>("Crossbow of damnation", 'y', false, false, [](std::shared_ptr<CActor> aActor, std::shared_ptr<CMap> aMap){
@@ -201,14 +183,10 @@ namespace Knights {
                     case '>':
                     case '<':
                     case '\'':
-                        mBlockCharacterMovement[y][x] = true;
-                        mBlockProjectiles[ y ][ x ] = true;
-                        mBlockView[ y ][ x ] = false;
+                        mTileBlockProperties[y][x].mBlockMovement = true;
                         break;
                     case 'A':
-                        mBlockCharacterMovement[y][x] = true;
-                        mBlockProjectiles[ y ][ x ] = false;
-                        mBlockView[ y ][ x ] = false;
+                        mTileBlockProperties[y][x].mBlockMovement = true;
                         break;
                     case '4':
                         actor = mAvatar = std::make_shared<CCharacter>( heroArchetype, friends, getLastestId(), [](std::shared_ptr<CActor> character, std::shared_ptr<CMap> map){
@@ -241,17 +219,11 @@ namespace Knights {
 
                             actor->giveItem(sword);
                         }
-                        mBlockCharacterMovement[ y ][ x ] = false;
-                        mBlockProjectiles[ y ][ x ] = false;
-                        mBlockView[ y ][ x ] = false;
                         mElement[ y ][ x ] = '.';
                         break;
 
                     case '9':
                         {
-                            mBlockCharacterMovement[ y ][ x ] = false;
-                            mBlockProjectiles[ y ][ x ] = false;
-                            mBlockView[ y ][ x ] = false;
                             map[y][x] = std::make_shared<CDoorway>();
                             mElement[y][x] = map[y][x]->getView();
                         }
@@ -267,33 +239,28 @@ namespace Knights {
                             if ( archetype.getHP() > character->getHP() ) {
                                 auto position = character->getPosition();
                                 map->mElement[ position.y ][ position.x ] = '#';
-                                map->floodFill( position, {{'#', '~'}, {'T', '_'}} );
+                                map->floodFill( position,
+                                                {
+                                                        {'#', std::pair<ElementView , CBlockProperties>('~', CBlockProperties())},
+                                                        {'T', std::pair<ElementView, CBlockProperties>('_', CBlockProperties()) }
+                                                });
                                 map->mElement[ position.y ][ position.x ] = '.';
                                 character->addHP( -character->getHP() );
                                 map->removeActorFrom( character->getPosition() );
                             }
 
                         });
-
-                        mBlockCharacterMovement[ y ][ x ] = true;
-                        mBlockProjectiles[ y ][ x ] = false;
-                        mBlockView[ y ][ x ] = false;
+                        mTileBlockProperties[y][x].mBlockMovement = true;
                         mElement[ y ][ x ] = 'T';
                     }
                     break;
                     case 'w':
                         actor = std::make_shared<CMonster>( evilSpiritArchetype, foes, getLastestId(), kRegularEnemyViewRange );
-                        mBlockCharacterMovement[ y ][ x ] = false;
-                        mBlockProjectiles[ y ][ x ] = false;
-                        mBlockView[ y ][ x ] = false;
                         mElement[ y ][ x ] = '.';
                         break;
 
                     case 'J':
                         actor = std::make_shared<CMonster>( warthogArchetype, foes, getLastestId(), kRegularEnemyViewRange );
-                        mBlockCharacterMovement[ y ][ x ] = false;
-                        mBlockProjectiles[ y ][ x ] = false;
-                        mBlockView[ y ][ x ] = false;
                         mElement[ y ][ x ] = '.';
                         break;
                     case '6':
@@ -315,16 +282,10 @@ namespace Knights {
                                 });
                             }
                         });
-                        mBlockCharacterMovement[ y ][ x ] = false;
-                        mBlockProjectiles[ y ][ x ] = false;
-                        mBlockView[ y ][ x ] = false;
                         mElement[ y ][ x ] = '.';
                         break;
                     case '5':
                         actor = std::make_shared<CMonster>( fallenArchetype, foes, getLastestId(), kRegularEnemyViewRange );
-                        mBlockCharacterMovement[ y ][ x ] = false;
-                        mBlockProjectiles[ y ][ x ] = false;
-                        mBlockView[ y ][ x ] = false;
                         mElement[ y ][ x ] = '.';
                         break;
                     case 'c':
@@ -341,31 +302,19 @@ namespace Knights {
                                 map->addActorAt( std::make_shared<CMonster>( weakenedDemonArchetype, foes, map->getLastestId(), kMasterDemonViewRange), position );
                             }
                         });
-                        mBlockCharacterMovement[ y ][ x ] = false;
-                        mBlockProjectiles[ y ][ x ] = false;
-                        mBlockView[ y ][ x ] = false;
                         mElement[ y ][ x ] = '.';
                         break;
                     case 'd':
                         actor = std::make_shared<CMonster>( weakenedDemonArchetype, foes, getLastestId(), kMasterDemonViewRange);
-                        mBlockCharacterMovement[ y ][ x ] = false;
-                        mBlockProjectiles[ y ][ x ] = false;
-                        mBlockView[ y ][ x ] = false;
                         mElement[ y ][ x ] = '.';
                         break;
                     case 'e':
                         actor = std::make_shared<CMonster>( demonArchetype, foes, getLastestId(), kMasterDemonViewRange );
-                        mBlockCharacterMovement[ y ][ x ] = false;
-                        mBlockProjectiles[ y ][ x ] = false;
-                        mBlockView[ y ][ x ] = false;
                         mElement[ y ][ x ] = '.';
                         break;
 
                     case 'G':
                         actor = std::make_shared<CMonsterGenerator>(getLastestId(), 5);
-                        mBlockCharacterMovement[ y ][ x ] = false;
-                        mBlockProjectiles[ y ][ x ] = false;
-                        mBlockView[ y ][ x ] = false;
                         mElement[ y ][ x ] = '.';
                         break;
 
@@ -480,8 +429,7 @@ namespace Knights {
         if (mActors[p.y][p.x] != nullptr) {
             return true;
         }
-
-        return mBlockCharacterMovement[p.y][p.x];
+        return mTileBlockProperties[p.y][p.x].mBlockMovement;
     }
 
     std::shared_ptr<CActor> CMap::getActorAt(Vec2i position) {
@@ -635,15 +583,13 @@ namespace Knights {
         return ++mCurrentId;
     }
 
-    void CMap::floodFill(Vec2i position, std::map<char, char> transformations ) {
+    void CMap::floodFill(Vec2i position, std::map<char, std::pair<ElementView, CBlockProperties>> transformations ) {
         auto oldElement = getElementAt( position );
         if ( transformations.count( oldElement ) > 0 ) {
 
                 auto newElement = transformations[ oldElement ];
-                mElement[ position.y ][ position.x ] = newElement;
-                mBlockCharacterMovement[ position.y ][ position.x ] = false;
-                mBlockProjectiles[ position.y ][ position.x ] = false;
-                mBlockView[ position.y ][ position.x ] = false;
+                mElement[ position.y ][ position.x ] = newElement.first;
+                mTileBlockProperties[position.y][position.x] = newElement.second;
                 map[ position.y ][ position.x ] = nullptr;
                 floodFill( position + mapOffsetForDirection( EDirection::kNorth ), transformations );
                 floodFill( position + mapOffsetForDirection( EDirection::kEast ), transformations );
@@ -676,8 +622,7 @@ namespace Knights {
         if (mActors[p.y][p.x] != nullptr) {
             return true;
         }
-
-        return mBlockProjectiles[ p.y ][ p.x ];
+        return mTileBlockProperties[p.y][p.x].mBlockProjectile;
     }
 
     bool CMap::isBlockViewAt(const Vec2i &p) {
@@ -686,7 +631,7 @@ namespace Knights {
             return true;
         }
 
-        return mBlockView[ p.y ][ p.x ];
+        return mTileBlockProperties[p.y][p.x].mBlockView;
     }
 
     void CMap::removeActorFrom(Vec2i position) {

@@ -91,7 +91,7 @@ protected:
         for ( int y = 0; y < Knights::kMapSize; ++y ) {
             for ( int x = 0; x < Knights::kMapSize; ++x ) {
                 if ( map->getElementAt( { x, y } ) == 'E' ) {
-                    map->floodFill({ x, y}, {{ 'E', '.'}} );
+                    map->floodFill({ x, y}, {{ 'E', {'.', Knights::CBlockProperties()}}} );
                 }
             }
         }
