@@ -7,9 +7,14 @@ namespace Knights {
 
     class CBlockProperties {
     public:
+        explicit CBlockProperties(bool aBlockMovement, bool aBlockProjectile, bool aBlockView):
+                mBlockMovement(aBlockMovement), mBlockProjectile(aBlockProjectile), mBlockView(aBlockView){
+        }
+
         explicit CBlockProperties():
                 mBlockMovement(false), mBlockProjectile(false), mBlockView(false){
         }
+
 
         bool mBlockMovement = false;
         bool mBlockProjectile = false;

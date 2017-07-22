@@ -171,6 +171,7 @@ namespace Knights {
 		                break;
 
                     case '1':
+                    case 'R':
                     case '#':
                     case '/':
                     case '\\':
@@ -242,7 +243,8 @@ namespace Knights {
                                 map->floodFill( position,
                                                 {
                                                         {'#', std::pair<ElementView , CBlockProperties>('~', CBlockProperties())},
-                                                        {'T', std::pair<ElementView, CBlockProperties>('_', CBlockProperties()) }
+                                                        {'T', std::pair<ElementView, CBlockProperties>('_', CBlockProperties()) },
+                                                        {'R', std::pair<ElementView, CBlockProperties>('1', CBlockProperties{true, false, false}) }
                                                 });
                                 map->mElement[ position.y ][ position.x ] = '.';
                                 character->addHP( -character->getHP() );
