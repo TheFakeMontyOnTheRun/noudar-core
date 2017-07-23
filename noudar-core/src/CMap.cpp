@@ -171,6 +171,7 @@ namespace Knights {
 		                break;
 
                     case '1':
+                    case 'I':
                     case 'R':
                     case '#':
                     case '/':
