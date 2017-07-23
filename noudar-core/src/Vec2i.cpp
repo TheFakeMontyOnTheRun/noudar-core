@@ -44,14 +44,15 @@ namespace Knights {
 
 	std::string to_string(const EDirection &aDirection) {;
 		switch (aDirection) {
-			case EDirection::kNorth:
-				return "North";
 			case EDirection::kWest:
 				return "West";
 			case EDirection::kSouth:
 				return "South";
 			case EDirection::kEast:
 				return "East";
+			case EDirection::kNorth:
+			default:
+				return "North";
 		}
 	}
 
@@ -70,15 +71,15 @@ namespace Knights {
 
 	Vec2i mapOffsetForDirection( EDirection aDirection ) {
 		switch (aDirection) {
-			case EDirection::kNorth:
-				return { 0 , -1 };
             case EDirection::kEast:
                 return { 1, 0 };
             case EDirection::kWest:
                 return { -1, 0 };
 			case EDirection::kSouth:
 				return { 0, 1 };
-
+			case EDirection::kNorth:
+			default:
+				return { 0 , -1 };
 		}
 	}
 
@@ -98,14 +99,15 @@ namespace Knights {
 
 	EDirection oppositeOf(Knights::EDirection d) {
 		switch (d) {
-			case Knights::EDirection::kNorth:
-				return Knights::EDirection::kSouth;
 			case Knights::EDirection::kSouth:
 				return Knights::EDirection::kNorth;
 			case Knights::EDirection::kEast:
 				return Knights::EDirection::kWest;
 			case Knights::EDirection::kWest:
 				return Knights::EDirection::kEast;
+			case Knights::EDirection::kNorth:
+			default:
+				return Knights::EDirection::kSouth;
 		}
 	}
 
@@ -118,6 +120,7 @@ namespace Knights {
 			case Knights::EDirection::kEast:
 				return Knights::EDirection::kNorth;
 			case Knights::EDirection::kWest:
+			default:
 				return Knights::EDirection::kSouth;
 		}
 	}
@@ -131,6 +134,7 @@ namespace Knights {
 			case Knights::EDirection::kEast:
 				return Knights::EDirection::kSouth;
 			case Knights::EDirection::kWest:
+			default:
 				return Knights::EDirection::kNorth;
 		}
 	}

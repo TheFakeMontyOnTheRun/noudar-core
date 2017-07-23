@@ -60,7 +60,7 @@ namespace Knights {
 			char buffer[N];
 			size_t read = fread((void *) &buffer[0], 1, N, fileDescriptor);
 			if (read) {
-				for (int c = 0; c < read; ++c) {
+				for (unsigned int c = 0; c < read; ++c) {
 					*writeHead = (buffer[c]);
 					writeHead = std::next(writeHead);
 				}
@@ -85,7 +85,7 @@ namespace Knights {
 			char buffer[1];
 			size_t read = fread((void *) &buffer[0], 1, 1, fileDescriptor);
 			if (read) {
-				for (int c = 0; c < read; ++c) {
+				for (unsigned int c = 0; c < read; ++c) {
 					total[pos] = buffer[c];
 				}
 			}

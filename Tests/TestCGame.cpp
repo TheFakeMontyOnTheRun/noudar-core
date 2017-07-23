@@ -396,7 +396,6 @@ TEST_F(TestCGame, HavingBothShieldAndCrossbowChargedWillProvideMoreDamage ) {
     ASSERT_TRUE( actor->getDirection() == Knights::EDirection::kEast);
     ASSERT_EQ(actor->getSelectedItem()->getView(), 'y' );
 
-    auto playerAttack = actor->getAttack();
     auto newHealth = mockEnemy->getHP();
 
     ASSERT_GT( healthBefore, newHealth );
@@ -439,7 +438,6 @@ TEST_F(TestCGame, HavingCrossbowChargedWillProvideRegularDamage ) {
     ASSERT_TRUE( actor->getDirection() == Knights::EDirection::kEast);
     ASSERT_EQ(actor->getSelectedItem()->getView(), 'y' );
 
-    auto playerAttack = actor->getAttack();
     auto newHealth = mockEnemy->getHP();
 
     ASSERT_GT( healthBefore, newHealth );
