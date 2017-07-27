@@ -255,7 +255,6 @@ namespace Knights {
 
                         });
                         mTileBlockProperties[y][x].mBlockMovement = true;
-                        mElement[ y ][ x ] = 'T';
                     }
                     break;
                     case 'w':
