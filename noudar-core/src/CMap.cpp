@@ -231,12 +231,15 @@ namespace Knights {
                             mElement[y][x] = map[y][x]->getView();
                         }
                         break;
-
+                    case '3':
                     case 'T':
                     {
-                        auto ropeArchetype = std::make_shared<CCharacterArchetype>( 0, 0, 10000, 0, 'T', "Rope");
+                        auto ropeArchetype = std::make_shared<CCharacterArchetype>( 0,
+                                                                                    element == 'T' ? 0 : 10,
+                                                                                    10000, 0, element,
+                                                                                    element == 'T' ? "Rope" : "Reenforced Door");
 
-                        actor = std::make_shared<CCharacter>( ropeArchetype, foes, getLastestId(), [](std::shared_ptr<CActor> character, std::shared_ptr<CMap> map){
+                        actor = std::make_shared<CCharacter>( ropeArchetype, foes, getLastestId(), [element](std::shared_ptr<CActor> character, std::shared_ptr<CMap> map){
                             auto archetype = ((CCharacter*)character.get())->getArchetype();
 
                             if ( archetype.getHP() > character->getHP() ) {
@@ -244,31 +247,7 @@ namespace Knights {
                                 map->floodFill( position,
                                                 {
                                                         {'#', std::pair<ElementView , CBlockProperties>('~', CBlockProperties())},
-                                                        {'T', std::pair<ElementView, CBlockProperties>('_', CBlockProperties()) },
-                                                        {'R', std::pair<ElementView, CBlockProperties>('1', CBlockProperties{true, false, false}) }
-                                                });
-                                character->addHP( -character->getHP() );
-                                map->removeActorFrom( character->getPosition() );
-                            }
-
-                        });
-                        mTileBlockProperties[y][x].mBlockMovement = true;
-                    }
-                    break;
-
-                    case '3':
-                    {
-                        auto ropeArchetype = std::make_shared<CCharacterArchetype>( 0, 10, 10000, 0, '3', "Rope");
-
-                        actor = std::make_shared<CCharacter>( ropeArchetype, foes, getLastestId(), [](std::shared_ptr<CActor> character, std::shared_ptr<CMap> map){
-                            auto archetype = ((CCharacter*)character.get())->getArchetype();
-
-                            if ( archetype.getHP() > character->getHP() ) {
-                                auto position = character->getPosition();
-                                map->floodFill( position,
-                                                {
-                                                        {'#', std::pair<ElementView , CBlockProperties>('~', CBlockProperties())},
-                                                        {'3', std::pair<ElementView, CBlockProperties>('_', CBlockProperties()) },
+                                                        {element, std::pair<ElementView, CBlockProperties>('_', CBlockProperties()) },
                                                         {'R', std::pair<ElementView, CBlockProperties>('1', CBlockProperties{true, false, false}) }
                                                 });
                                 character->addHP( -character->getHP() );
