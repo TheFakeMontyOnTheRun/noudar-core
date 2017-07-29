@@ -33,7 +33,7 @@
 
 
 int main ( int argc, char **argv ) {
-    const auto LEVEL_LIMIT = 6;
+    const auto LEVEL_LIMIT = 7;
 
     auto delegate = std::make_shared<Knights::CGameDelegate>();
     auto fileLoader = std::make_shared<Knights::CPlainFileLoader>();
