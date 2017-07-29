@@ -3,8 +3,10 @@
 
 namespace Knights {
     class CMonsterGenerator : public CActor {
+        std::shared_ptr<CCharacterArchetype> mArchetypeToBuild;
+        std::shared_ptr<CTeam> mTeam;
     public:
-        CMonsterGenerator(ActorId aId, int aliveForTurns);
+        CMonsterGenerator(std::shared_ptr<CCharacterArchetype> aAchertypeToBuild, std::shared_ptr<CTeam> aTeam, ActorId aId, int aliveForTurns);
 
         void update(std::shared_ptr<CMap> map) override;
     };

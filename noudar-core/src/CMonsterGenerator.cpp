@@ -22,7 +22,8 @@
 
 #include "CMonsterGenerator.h"
 
-Knights::CMonsterGenerator::CMonsterGenerator(ActorId aId, int aliveForTurns) : CActor(aId, 1) {
+Knights::CMonsterGenerator::CMonsterGenerator(std::shared_ptr<CCharacterArchetype> aArchetypeToBuild, std::shared_ptr<CTeam> aTeam,
+ActorId aId, int aliveForTurns) : CActor(aId, 1), mArchetypeToBuild(aArchetypeToBuild), mTeam(aTeam) {
     mHP = aliveForTurns;
 }
 
@@ -31,17 +32,15 @@ void Knights::CMonsterGenerator::update(std::shared_ptr<Knights::CMap> map) {
 
     --mHP;
     auto position = getPosition();
-    auto monsterArchetype = std::make_shared<CCharacterArchetype>( 4, 1, 10, 3, '@', "Monster");
     auto id = map->getLastestId();
-    auto foes = std::make_shared<CTeam>("Enemies");
 
     if ( map->getActorAt( { position.x, position.y - 1 } ) == nullptr ) {
-        map->addActorAt( std::make_shared<CMonster>( monsterArchetype, foes, id, 8), { position.x, position.y - 1 }  );
+        map->addActorAt( std::make_shared<CMonster>( mArchetypeToBuild, mTeam, id, 8), { position.x, position.y - 1 }  );
     } else if ( map->getActorAt( { position.x, position.y + 1 } ) == nullptr ) {
-        map->addActorAt( std::make_shared<CMonster>( monsterArchetype, foes, id, 8), { position.x, position.y + 1 }  );
+        map->addActorAt( std::make_shared<CMonster>( mArchetypeToBuild, mTeam, id, 8), { position.x, position.y + 1 }  );
     } else if ( map->getActorAt( { position.x - 1, position.y } ) == nullptr ) {
-        map->addActorAt( std::make_shared<CMonster>( monsterArchetype, foes, id, 8), { position.x - 1, position.y - 1 }  );
+        map->addActorAt( std::make_shared<CMonster>( mArchetypeToBuild, mTeam, id, 8), { position.x - 1, position.y - 1 }  );
     } else if ( map->getActorAt( { position.x + 1, position.y } ) == nullptr ) {
-        map->addActorAt( std::make_shared<CMonster>( monsterArchetype, foes, id, 8), { position.x + 1, position.y - 1 }  );
+        map->addActorAt( std::make_shared<CMonster>( mArchetypeToBuild, mTeam, id, 8), { position.x + 1, position.y - 1 }  );
     }
 }

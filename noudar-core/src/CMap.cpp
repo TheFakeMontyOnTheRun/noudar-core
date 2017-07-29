@@ -318,7 +318,7 @@ namespace Knights {
                         break;
 
                     case 'G':
-                        actor = std::make_shared<CMonsterGenerator>(getLastestId(), 5);
+                        actor = std::make_shared<CMonsterGenerator>( evilSpiritArchetype, foes, getLastestId(), 5);
                         mElement[ y ][ x ] = '.';
                         break;
 
