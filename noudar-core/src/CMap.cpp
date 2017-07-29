@@ -188,6 +188,7 @@ namespace Knights {
                     case '\'':
                         mTileBlockProperties[y][x].mBlockMovement = true;
                         break;
+                    case 'K':
                     case 'A':
                         mTileBlockProperties[y][x].mBlockMovement = true;
                         break;
