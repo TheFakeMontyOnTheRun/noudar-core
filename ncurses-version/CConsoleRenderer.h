@@ -11,7 +11,7 @@ namespace Knights {
   class CConsoleRenderer : public IRenderer {
   public:
       CConsoleRenderer();
-      ~CConsoleRenderer();
+    virtual ~CConsoleRenderer() override;
     void drawMap( CMap& map, std::shared_ptr<CActor> current ) override;
     CommandType getInput() override;
   };
