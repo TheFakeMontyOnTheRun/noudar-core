@@ -6,8 +6,10 @@
 #include <functional>
 #include <utility>
 #include <iostream>
-#include <vector>
+#include <EASTL/vector.h>
 #include <algorithm>
+
+using eastl::vector;
 
 #include "Vec2i.h"
 #include "CTeam.h"

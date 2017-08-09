@@ -11,6 +11,9 @@
 #include <cmath>
 #include <functional>
 
+using std::vector;
+using std::array;
+
 #include "Vec2i.h"
 #include "CTeam.h"
 #include "IMapElement.h"
@@ -28,6 +31,15 @@
 #include "IRenderer.h"
 #include "CGame.h"
 
+void* operator new[](size_t size, const char* pName, int flags, unsigned debugFlags,
+                     const char* file, int line) {
+    return malloc( size );
+}
+
+void* operator new[](size_t size, size_t alignment, size_t alignmentOffset, const char* pName,
+                     int flags, unsigned debugFlags, const char* file, int line) {
+    return malloc( size );
+}
 
 using ::testing::Return;
 using ::testing::_;
@@ -43,7 +55,7 @@ class MockFileLoader : public Knights::IFileLoaderDelegate {
 public:
 
   MOCK_METHOD1( loadFileFromPath, std::string( const std::string& path ) );
-  MOCK_METHOD1( loadBinaryFileFromPath, std::vector<char>( const std::string& path ) );
+  MOCK_METHOD1( loadBinaryFileFromPath, vector<char>( const std::string& path ) );
   MOCK_METHOD0( getFilePathPrefix, std::string());
 };
 

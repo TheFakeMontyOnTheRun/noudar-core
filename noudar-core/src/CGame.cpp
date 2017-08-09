@@ -4,8 +4,11 @@
 #include <string>
 #include <fstream>
 #include <sstream>
-#include <vector>
+#include <EASTL/vector.h>
 #include <map>
+
+using eastl::vector;
+using std::array;
 
 #include "Vec2i.h"
 #include "IMapElement.h"

@@ -11,7 +11,6 @@ namespace Knights {
 	public:
 		CTeam(std::string aName);
 
-		std::string getName();
 		std::string to_string() const;
 	};
 

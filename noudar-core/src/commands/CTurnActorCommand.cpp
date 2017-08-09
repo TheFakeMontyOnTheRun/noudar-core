@@ -5,9 +5,13 @@
 #include <string>
 #include <sstream>
 #include <memory>
-#include <vector>
+#include <EASTL/vector.h>
 #include <map>
 #include <functional>
+
+using eastl::vector;
+using std::array;
+
 #include "Vec2i.h"
 #include "IMapElement.h"
 #include "CGameDelegate.h"

@@ -5,6 +5,8 @@ CXXFLAGS = -Inoudar-core/include -Incurses-version -O2 -g -c -std=c++0x  -ferror
 		-I$(GTEST_DIR)/include/gtest/internal \
 		-I$(GMOCK_DIR)/include \
 		-I$(GMOCK_DIR) \
+		-IEASTL/include \
+		-IEASTL/test/packages/EABase/include/Common \
 		-I$(GMOCK_DIR)/include/gtest \
 		-I$(GMOCK_DIR)/include/gtest/internal
 
@@ -31,7 +33,6 @@ OBJS = ncurses-version/CConsoleRenderer.o \
     noudar-core/src/CMonster.o \
     noudar-core/src/CTeam.o \
     noudar-core/src/CMap.o \
-    noudar-core/src/CHuntApproach.o \
     noudar-core/src/CCharacter.o \
     noudar-core/src/CCharacterArchetype.o \
     noudar-core/src/CDoorway.o \
@@ -40,7 +41,6 @@ OBJS = ncurses-version/CConsoleRenderer.o \
     noudar-core/src/IMapElement.o \
     noudar-core/src/CGame.o \
     noudar-core/src/CMonsterGenerator.o \
-    noudar-core/src/CRandomWorldGenerator.o \
     noudar-core/src/CItem.o \
     noudar-core/src/CStorageItem.o \
     noudar-core/src/CPlainFileLoader.o \

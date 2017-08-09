@@ -7,6 +7,9 @@
 #include <memory>
 #include <cmath>
 #include <functional>
+
+using std::vector;
+
 #include "Vec2i.h"
 #include "CTeam.h"
 #include "IMapElement.h"

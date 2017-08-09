@@ -1,8 +1,11 @@
 //
 // Created by monty on 09/12/16.
 //
-#include <vector>
+#include <EASTL/vector.h>
 #include <string>
+
+using eastl::vector;
+
 #include "IFileLoaderDelegate.h"
 
 namespace Knights {

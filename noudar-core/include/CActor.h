@@ -37,7 +37,7 @@ namespace Knights {
 		ActorView mView;
 		std::string mName;
 		std::shared_ptr<CTeam> mTeam;
-		std::vector<std::shared_ptr<CItem>> mInventory;
+		vector<std::shared_ptr<CItem>> mInventory;
 		std::shared_ptr<CItem> mCurrentItem;
 		std::string mCurrentSay = "";
 	public:

@@ -8,9 +8,12 @@ include_directories(noudar-core/include)
 find_package(Curses REQUIRED)
 
 add_subdirectory(lib/googletest)
+add_subdirectory(EASTL)
 
 include_directories(lib/googletest/googletest/include)
 include_directories(lib/googletest/googlemock/include)
+include_directories(EASTL/include)
+include_directories(EASTL/test/packages/EABase/include/Common)
 
 set(TEST_SOURCE_FILES
         Tests/TestCCharacter.cpp
@@ -41,7 +44,6 @@ set(SOURCE_FILES
         noudar-core/include/Vec2i.h
         noudar-core/include/CTeam.h
         noudar-core/include/CCharacterArchetype.h
-        noudar-core/include/CHuntApproach.h
         noudar-core/include/CCharacter.h
         noudar-core/src/commands/CMoveActorCommand.cpp
         noudar-core/src/commands/CEndTurnCommand.cpp
@@ -63,10 +65,8 @@ set(SOURCE_FILES
         noudar-core/include/CItem.h
         noudar-core/src/CCharacter.cpp
         noudar-core/src/CCharacterArchetype.cpp
-        noudar-core/src/CHuntApproach.cpp
         noudar-core/src/CGameDelegate.cpp
         ncurses-version/CConsoleRenderer.cpp
-        noudar-core/src/CRandomWorldGenerator.cpp
         noudar-core/src/CMonster.cpp
         noudar-core/src/IFileLoaderDelegate.cpp
         noudar-core/src/CTeam.cpp

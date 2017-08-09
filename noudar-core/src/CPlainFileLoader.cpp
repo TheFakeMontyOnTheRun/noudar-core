@@ -4,8 +4,11 @@
 #include <string>
 #include <iostream>
 #include <fstream>
-#include <vector>
+#include <EASTL/vector.h>
 #include <functional>
+
+using eastl::vector;
+
 #include "Common.h"
 #include "IFileLoaderDelegate.h"
 #include "CPlainFileLoader.h"
@@ -18,7 +21,7 @@ namespace Knights {
     CPlainFileLoader::CPlainFileLoader(std::string prefix) : mPrefix(prefix) {
     }
 
-    std::vector<char> CPlainFileLoader::loadBinaryFileFromPath(const std::string &path) {
+    vector<char> CPlainFileLoader::loadBinaryFileFromPath(const std::string &path) {
         FILE *fd;
 
         fd = fopen((getFilePathPrefix() + mFilenameTransformation(path)).c_str(), "rb");
@@ -27,7 +30,7 @@ namespace Knights {
             exit(0);
         }
 
-        std::vector<char> toReturn = readToBuffer(fd);
+        auto toReturn = readToBuffer(fd);
         fclose(fd);
 
         return toReturn;

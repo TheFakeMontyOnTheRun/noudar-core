@@ -14,6 +14,10 @@
 #include <ncurses.h>
 #include <cstdlib>
 #include <array>
+
+using std::vector;
+using std::array;
+
 #include "Vec2i.h"
 #include "IMapElement.h"
 #include "CTeam.h"
