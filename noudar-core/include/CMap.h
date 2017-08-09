@@ -33,7 +33,8 @@ namespace Knights {
         std::array< std::array<CBlockProperties, kMapSize>, kMapSize> mTileBlockProperties;
         ElementView mElement[ kMapSize ][ kMapSize ];
 	    std::array< std::array< std::shared_ptr<CItem>, kMapSize >, kMapSize > mItems;
-        std::vector<std::shared_ptr<CActor>> actors;
+
+        vector<std::shared_ptr<CActor>> actors;
         std::shared_ptr<CActor> mAvatar;
 		ActorId mCurrentId = 1;
 
@@ -52,7 +53,7 @@ namespace Knights {
         ElementView getElementAt( const Vec2i& p );
 		ItemView getItemViewAt( const Vec2i& p );
 		std::shared_ptr<CActor> getAvatar();
-        std::vector<std::shared_ptr<CActor>> getActors();
+        vector<std::shared_ptr<CActor>> getActors();
         std::shared_ptr<CActor> getActorAt( Vec2i position );
         void setActorAt( Vec2i position, std::shared_ptr<CActor> actor );
 		void removeActorFrom( Vec2i position );

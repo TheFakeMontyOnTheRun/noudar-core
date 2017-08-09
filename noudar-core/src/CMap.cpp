@@ -1,10 +1,13 @@
 #include <string>
 #include <array>
-#include <vector>
+#include <EASTL/vector.h>
 #include <map>
 #include <memory>
 #include <functional>
 #include <algorithm>
+
+using eastl::vector;
+
 #include "Vec2i.h"
 #include "IMapElement.h"
 #include "CDoorway.h"
@@ -24,7 +27,6 @@
 #include <sstream>
 #include <map>
 #include "CMonsterGenerator.h"
-#include "CRandomWorldGenerator.h"
 
 namespace Knights {
 
@@ -454,7 +456,7 @@ namespace Knights {
         return mElement[p.y][p.x];
     }
 
-    std::vector<std::shared_ptr<CActor>> CMap::getActors() {
+    vector<std::shared_ptr<CActor>> CMap::getActors() {
         return actors;
     }
 

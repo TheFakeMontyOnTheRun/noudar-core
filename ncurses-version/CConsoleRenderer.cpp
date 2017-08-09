@@ -14,6 +14,9 @@
 #include <ncurses.h>
 #include <cstdlib>
 #include <array>
+
+using std::vector;
+
 #include "Vec2i.h"
 #include "IMapElement.h"
 #include "CTeam.h"

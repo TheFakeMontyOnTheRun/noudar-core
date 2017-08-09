@@ -1,11 +1,14 @@
 #include <array>
 #include <string>
-#include <vector>
+#include <EASTL/vector.h>
 #include <cstdlib>
 #include <memory>
 #include <cmath>
 #include <map>
 #include <functional>
+
+using eastl::vector;
+
 #include "Vec2i.h"
 #include "IMapElement.h"
 #include "CTeam.h"

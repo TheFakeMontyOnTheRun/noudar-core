@@ -6,7 +6,9 @@
 #include <iterator>
 #include <iostream>
 #include <sstream>
-#include <vector>
+#include <EASTL/vector.h>
+
+using eastl::vector;
 
 #include "Common.h"
 
@@ -47,13 +49,13 @@ namespace Knights {
 		return output.str();
 	}
 
-	std::vector<char> readToBuffer(FILE *fileDescriptor) {
+	vector<char> readToBuffer(FILE *fileDescriptor) {
 		const unsigned N = 1024;
 
 		fseek(fileDescriptor, 0, SEEK_END);
 		auto endPos = ftell( fileDescriptor );
 		rewind(fileDescriptor);
-		std::vector<char> total(endPos);
+		vector<char> total(endPos);
 		auto writeHead = std::begin( total );
 
 		for ( int c = 0; c < endPos; ++c ) {

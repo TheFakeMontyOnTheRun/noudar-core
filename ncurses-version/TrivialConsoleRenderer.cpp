@@ -8,11 +8,15 @@
 
 #include <string>
 #include <iostream>
-#include <vector>
 #include <functional>
 #include <memory>
 #include <cstdlib>
 #include <map>
+
+#include <EASTL/vector.h>
+
+using eastl::vector;
+
 #include "Vec2i.h"
 #include "IMapElement.h"
 #include "CTeam.h"

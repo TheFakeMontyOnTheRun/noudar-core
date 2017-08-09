@@ -1,9 +1,12 @@
 #include <string>
-#include <vector>
 #include <cstdlib>
 #include <memory>
 #include <cmath>
 #include <functional>
+#include <EASTL/vector.h>
+
+using eastl::vector;
+
 #include "Vec2i.h"
 #include "CTeam.h"
 #include "IMapElement.h"

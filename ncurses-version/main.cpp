@@ -13,8 +13,10 @@
 #include <memory>
 #include <array>
 #include <fstream>
-#include <vector>
 #include <map>
+#include <EASTL/vector.h>
+
+using eastl::vector;
 
 #include "IFileLoaderDelegate.h"
 #include "CPlainFileLoader.h"
@@ -31,6 +33,15 @@
 #include "CGame.h"
 #include "commands/IGameCommand.h"
 
+void* operator new[](size_t size, const char* pName, int flags, unsigned debugFlags,
+                     const char* file, int line) {
+    return malloc( size );
+}
+
+void* operator new[](size_t size, size_t alignment, size_t alignmentOffset, const char* pName,
+                     int flags, unsigned debugFlags, const char* file, int line) {
+    return malloc( size );
+}
 
 int main ( int argc, char **argv ) {
     const auto LEVEL_LIMIT = 8;

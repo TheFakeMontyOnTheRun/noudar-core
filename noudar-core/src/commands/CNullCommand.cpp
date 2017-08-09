@@ -3,10 +3,13 @@
 //
 #include <array>
 #include <string>
-#include <vector>
+#include <EASTL/vector.h>
 #include <memory>
 #include <functional>
 #include <map>
+
+using eastl::vector;
+
 #include "Vec2i.h"
 #include "IMapElement.h"
 #include "CTeam.h"

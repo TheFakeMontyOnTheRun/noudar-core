@@ -5,7 +5,7 @@
 #include <string>
 #include <sstream>
 #include <memory>
-#include <vector>
+#include <EASTL/vector.h>
 #include <functional>
 #include "Vec2i.h"
 #include "IMapElement.h"
@@ -14,8 +14,11 @@
 #include <memory>
 #include <utility>
 #include <iostream>
-#include <vector>
+#include <EASTL/vector.h>
 #include <map>
+
+using eastl::vector;
+
 #include "Vec2i.h"
 #include "CTeam.h"
 #include "CItem.h"
