@@ -17,6 +17,7 @@
 #include <EASTL/vector.h>
 
 using eastl::vector;
+using std::array;
 
 #include "IFileLoaderDelegate.h"
 #include "CPlainFileLoader.h"

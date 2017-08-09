@@ -30,9 +30,9 @@ namespace Knights {
         std::shared_ptr<IMapElement> map[ kMapSize ][ kMapSize ];
         std::shared_ptr<CActor> mActors[ kMapSize ][ kMapSize ];
         std::shared_ptr<CGameDelegate> mGameDelegate;
-        std::array< std::array<CBlockProperties, kMapSize>, kMapSize> mTileBlockProperties;
+        array< array<CBlockProperties, kMapSize>, kMapSize> mTileBlockProperties;
         ElementView mElement[ kMapSize ][ kMapSize ];
-	    std::array< std::array< std::shared_ptr<CItem>, kMapSize >, kMapSize > mItems;
+	    array< array< std::shared_ptr<CItem>, kMapSize >, kMapSize > mItems;
 
         vector<std::shared_ptr<CActor>> actors;
         std::shared_ptr<CActor> mAvatar;

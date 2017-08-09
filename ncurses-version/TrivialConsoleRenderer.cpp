@@ -16,6 +16,7 @@
 #include <EASTL/vector.h>
 
 using eastl::vector;
+using std::array;
 
 #include "Vec2i.h"
 #include "IMapElement.h"
