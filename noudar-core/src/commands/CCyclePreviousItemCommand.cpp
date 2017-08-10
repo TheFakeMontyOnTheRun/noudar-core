@@ -1,11 +1,10 @@
 //
 // Created by monty on 12/02/17.
 //
-#include <array>
+
 #include <string>
 #include <sstream>
 #include <memory>
-#include <EASTL/vector.h>
 #include <functional>
 #include "Vec2i.h"
 #include "IMapElement.h"
@@ -14,11 +13,12 @@
 #include <memory>
 #include <utility>
 #include <iostream>
-#include <EASTL/vector.h>
 #include <map>
+#include <EASTL/vector.h>
+#include <EASTL/array.h>
 
 using eastl::vector;
-using std::array;
+using eastl::array;
 
 #include "Vec2i.h"
 #include "CTeam.h"

@@ -6,13 +6,14 @@
 #include <iostream>
 #include <memory>
 #include <fstream>
-#include <vector>
 #include <cstdlib>
 #include <cmath>
 #include <functional>
+#include <EASTL/vector.h>
+#include <EASTL/array.h>
 
-using std::vector;
-using std::array;
+using eastl::vector;
+using eastl::array;
 
 #include "Vec2i.h"
 #include "CTeam.h"

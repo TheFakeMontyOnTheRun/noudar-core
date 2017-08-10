@@ -1,13 +1,14 @@
 #include <string>
-#include <array>
-#include <EASTL/vector.h>
+
 #include <map>
 #include <memory>
 #include <functional>
 #include <algorithm>
+#include <EASTL/vector.h>
+#include <EASTL/array.h>
 
 using eastl::vector;
-using std::array;
+using eastl::array;
 
 #include "Vec2i.h"
 #include "IMapElement.h"

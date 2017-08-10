@@ -3,8 +3,8 @@
 #include <memory>
 #include <utility>
 #include <iostream>
-#include <EASTL/vector.h>
 #include <algorithm>
+#include <EASTL/vector.h>
 
 using eastl::vector;
 
