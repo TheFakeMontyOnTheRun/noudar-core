@@ -5,7 +5,6 @@
 #include <memory>
 #include <functional>
 #include <utility>
-#include <iostream>
 #include <EASTL/vector.h>
 #include <algorithm>
 

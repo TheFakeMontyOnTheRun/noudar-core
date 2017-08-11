@@ -13,7 +13,6 @@
 #include <string>
 #include <memory>
 #include <utility>
-#include <iostream>
 #include <map>
 
 using eastl::vector;

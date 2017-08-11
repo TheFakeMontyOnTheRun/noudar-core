@@ -1,7 +1,6 @@
 #include <string>
 #include <memory>
 #include <utility>
-#include <iostream>
 #include <sstream>
 
 #include "Vec2i.h"

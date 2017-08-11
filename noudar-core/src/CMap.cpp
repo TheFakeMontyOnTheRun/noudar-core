@@ -20,13 +20,13 @@ using std::array;
 #include "CMap.h"
 #include "CCharacterArchetype.h"
 #include "CCharacter.h"
-
 #include "CMonster.h"
 #include "CDoorway.h"
 #include "CItem.h"
-#include <iostream>
+
 #include <sstream>
 #include <map>
+
 #include "CMonsterGenerator.h"
 
 namespace Knights {

@@ -4,7 +4,6 @@
 #include <functional>
 #include <string>
 #include <iterator>
-#include <iostream>
 #include <sstream>
 #include <EASTL/vector.h>
 

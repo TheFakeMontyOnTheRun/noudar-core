@@ -2,7 +2,6 @@
 #include <string>
 #include <memory>
 #include <utility>
-#include <iostream>
 #include <EASTL/vector.h>
 #include <algorithm>
 
