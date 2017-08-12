@@ -1,13 +1,14 @@
 #include <string>
-#include <array>
-#include <EASTL/vector.h>
+
 #include <map>
 #include <memory>
 #include <functional>
 #include <algorithm>
+#include <EASTL/vector.h>
+#include <EASTL/array.h>
 
 using eastl::vector;
-using std::array;
+using eastl::array;
 
 #include "Vec2i.h"
 #include "IMapElement.h"
@@ -62,7 +63,7 @@ namespace Knights {
 	    auto fallenArchetype = std::make_shared<CCharacterArchetype>( 4, 1, 10, 3, '$', "Fallen Hero");
         auto monkArchetype = std::make_shared<CCharacterArchetype>( 4, 0, 10, 3, '@', "Insane Monk");
         auto cocoonArchetype = std::make_shared<CCharacterArchetype>( 0, 0, 10000, 0, 'C', "Cocoon");
-        auto evilSpiritArchetype = std::make_shared<CCharacterArchetype>( 4, 5, 10, 3, 'w', "Evil Spirit");
+        auto evilSpiritArchetype = std::make_shared<CCharacterArchetype>( 4, 5, 5, 3, 'w', "Evil Spirit");
         auto warthogArchetype = std::make_shared<CCharacterArchetype>( 6, 4, 10, 3, 'J', "Demon Warthog");
         auto weakenedDemonArchetype = std::make_shared<CCharacterArchetype>( 8, 3000, 10, 3, 'd', "Master Demon (premature)");
         auto demonArchetype = std::make_shared<CCharacterArchetype>( 12, 10, 50, 3, 'D', "Master Demon");

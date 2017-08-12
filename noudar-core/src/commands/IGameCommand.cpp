@@ -1,15 +1,16 @@
 //
 // Created by monty on 25/10/16.
 //
-#include <array>
+
 #include <string>
-#include <EASTL/vector.h>
 #include <memory>
 #include <functional>
 #include <map>
+#include <EASTL/vector.h>
+#include <EASTL/array.h>
 
 using eastl::vector;
-using std::array;
+using eastl::array;
 
 #include "Vec2i.h"
 #include "IMapElement.h"

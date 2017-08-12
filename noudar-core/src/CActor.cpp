@@ -2,8 +2,8 @@
 #include <string>
 #include <memory>
 #include <utility>
-#include <EASTL/vector.h>
 #include <algorithm>
+#include <EASTL/vector.h>
 
 using eastl::vector;
 
