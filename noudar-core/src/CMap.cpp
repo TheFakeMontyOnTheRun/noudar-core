@@ -97,7 +97,6 @@ namespace Knights {
                     case 'H':
                         break;
                     case 'v':
-                        mElement[ y ][ x ] = '.';
                         mItems[ y ][ x ] = std::make_shared<CStorageItem>("Shield of restoration", 'v', false, false, [](std::shared_ptr<CActor> aActor, std::shared_ptr<CMap> aMap){
 
                             auto shield = (CStorageItem*)aActor->getItemWithSymbol( 'v' ).get();
@@ -115,18 +114,15 @@ namespace Knights {
                         break;
 
                     case 'u':
-                        mElement[ y ][ x ] = '.';
                         mItems[ y ][ x ] = std::make_shared<CStorageItem>("Quiver", 'u', false, true, [](std::shared_ptr<CActor> aActor, std::shared_ptr<CMap> aMap){}, 5);
                         break;
                     case '+':
-                        mElement[ y ][ x ] = '.';
                         mItems[ y ][ x ] = std::make_shared<CItem>("The holy health", '+', true, true, [](std::shared_ptr<CActor> aActor, std::shared_ptr<CMap> aMap){
                             aActor->addHP(20);
                         });
                         break;
 
 	                case 'y':
-		                mElement[ y ][ x ] = '.';
                         //The need for RTTI creeps again...
 		                mItems[ y ][ x ] = std::make_shared<CStorageItem>("Crossbow of damnation", 'y', false, false, [](std::shared_ptr<CActor> aActor, std::shared_ptr<CMap> aMap){
 
@@ -227,7 +223,6 @@ namespace Knights {
 
                             actor->giveItem(sword);
                         }
-                        mElement[ y ][ x ] = '.';
                         break;
 
                     case '9':
@@ -265,12 +260,10 @@ namespace Knights {
                     break;
                     case 'w':
                         actor = std::make_shared<CMonster>( evilSpiritArchetype, foes, getLastestId(), kRegularEnemyViewRange );
-                        mElement[ y ][ x ] = '.';
                         break;
 
                     case 'J':
                         actor = std::make_shared<CMonster>( warthogArchetype, foes, getLastestId(), kRegularEnemyViewRange );
-                        mElement[ y ][ x ] = '.';
                         break;
                     case '6':
                         actor = std::make_shared<CMonster>( monkArchetype, foes, getLastestId(), kMonkViewRange, [](std::shared_ptr <CMap> map, std::shared_ptr<CActor> me) {
@@ -291,11 +284,9 @@ namespace Knights {
                                 });
                             }
                         });
-                        mElement[ y ][ x ] = '.';
                         break;
                     case '5':
                         actor = std::make_shared<CMonster>( fallenArchetype, foes, getLastestId(), kRegularEnemyViewRange );
-                        mElement[ y ][ x ] = '.';
                         break;
                     case 'c':
                         actor = std::make_shared<CMonster>( cocoonArchetype, foes, getLastestId(), 0, [weakenedDemonArchetype, foes](std::shared_ptr <CMap> map, std::shared_ptr<CActor> me) {
@@ -311,20 +302,16 @@ namespace Knights {
                                 map->addActorAt( std::make_shared<CMonster>( weakenedDemonArchetype, foes, map->getLastestId(), kMasterDemonViewRange), position );
                             }
                         });
-                        mElement[ y ][ x ] = '.';
                         break;
                     case 'd':
                         actor = std::make_shared<CMonster>( weakenedDemonArchetype, foes, getLastestId(), kMasterDemonViewRange);
-                        mElement[ y ][ x ] = '.';
                         break;
                     case 'e':
                         actor = std::make_shared<CMonster>( demonArchetype, foes, getLastestId(), kMasterDemonViewRange );
-                        mElement[ y ][ x ] = '.';
                         break;
 
                     case 'G':
                         actor = std::make_shared<CMonsterGenerator>( evilSpiritArchetype, foes, getLastestId(), 5);
-                        mElement[ y ][ x ] = '.';
                         break;
 
                 }
@@ -332,6 +319,7 @@ namespace Knights {
                 if (actor != nullptr) {
                     actors.push_back(actor);
                     mActors[y][x] = actor;
+                    mElement[y][x] = element;
                     actor->setPosition({x, y});
                     actor = nullptr;
                 }
