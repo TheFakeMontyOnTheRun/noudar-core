@@ -65,7 +65,7 @@ namespace Knights {
 
     void CGame::tick() {
 
-        if (!mMap->getAvatar()->isAlive()) {
+        if (mMap == nullptr || mMap->getAvatar() == nullptr || !mMap->getAvatar()->isAlive()) {
 	        mPlayerActor = nullptr;
             playLevel(0);
         } else {
@@ -251,9 +251,9 @@ namespace Knights {
         mLevel = levelNumber;
         mTurn = 0;
 
-	    if ( mMap != nullptr && mMap->getAvatar()->isAlive()) {
+	    if ( mMap != nullptr && mMap->getAvatar() != nullptr && mMap->getAvatar()->isAlive()) {
 		    mPlayerActor = mMap->getAvatar();
-	    }
+        }
 
         auto mapData = mFileLoaderDelegate->loadFileFromPath(ss.str());
 	    mMap = std::make_shared<CMap>(mapData, mGameDelegate);

@@ -28,13 +28,13 @@ namespace Knights {
 
 
 	class CGame : public std::enable_shared_from_this<CGame> {
-      std::shared_ptr<CMap> mMap;
-	  std::shared_ptr<CActor> mPlayerActor;
-      std::shared_ptr<IRenderer> mRenderer;
-      std::shared_ptr<CGameDelegate> mGameDelegate;
-      std::shared_ptr<IFileLoaderDelegate> mFileLoaderDelegate;
+      std::shared_ptr<CMap> mMap = nullptr;
+	  std::shared_ptr<CActor> mPlayerActor = nullptr;
+      std::shared_ptr<IRenderer> mRenderer = nullptr;
+      std::shared_ptr<CGameDelegate> mGameDelegate = nullptr;
+      std::shared_ptr<IFileLoaderDelegate> mFileLoaderDelegate = nullptr;
 
-      bool mIsPlaying;
+      bool mIsPlaying = true;
       int mTurn = 0;
       int mLevel = 0;
   public:
