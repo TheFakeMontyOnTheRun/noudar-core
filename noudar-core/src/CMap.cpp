@@ -39,7 +39,11 @@ namespace Knights {
     const auto kMonkViewRange = 4;
     const auto kMasterDemonViewRange = (3 * kMapSize) / 4;
     const static bool kPlaceEmptySpacesForSpawnPoints =
+#if defined(__ANDROID__ ) || defined(__EMSCRIPTEN__) || defined(MESA_GLES2) || defined(TARGET_IOS)  || defined(TARGET_OSX) || defined(OSMESA)
+            false;
+#else
             true;
+#endif
 
     void CMap::endOfTurn() {
         for (int y = 0; y < kMapSize; ++y) {
