@@ -38,6 +38,8 @@ namespace Knights {
     const auto kRegularEnemyViewRange = 8;
     const auto kMonkViewRange = 4;
     const auto kMasterDemonViewRange = (3 * kMapSize) / 4;
+    const static bool kPlaceEmptySpacesForSpawnPoints =
+            true;
 
     void CMap::endOfTurn() {
         for (int y = 0; y < kMapSize; ++y) {
@@ -58,6 +60,7 @@ namespace Knights {
 
         ElementView element;
         std::shared_ptr<CActor> actor = nullptr;
+        std::shared_ptr<CItem> item = nullptr;
 
 	    auto heroArchetype = std::make_shared<CCharacterArchetype>( 5, 3, 20, 7, '^', "Hero");
 	    auto fallenArchetype = std::make_shared<CCharacterArchetype>( 4, 1, 10, 3, '$', "Fallen Hero");
@@ -75,10 +78,12 @@ namespace Knights {
 
                 element = mapData[ pos ];
                 actor = nullptr;
+                item = nullptr;
                 map[y][x] = nullptr;
                 mActors[ y ][ x ] = nullptr;
                 mElement[y][x] = element;
 				mItems[ y ][ x ] = nullptr;
+
                 switch (element) {
 	                default:
                     case '0':
@@ -97,7 +102,7 @@ namespace Knights {
                     case 'H':
                         break;
                     case 'v':
-                        mItems[ y ][ x ] = std::make_shared<CStorageItem>("Shield of restoration", 'v', false, false, [](std::shared_ptr<CActor> aActor, std::shared_ptr<CMap> aMap){
+                        item = std::make_shared<CStorageItem>("Shield of restoration", 'v', false, false, [](std::shared_ptr<CActor> aActor, std::shared_ptr<CMap> aMap){
 
                             auto shield = (CStorageItem*)aActor->getItemWithSymbol( 'v' ).get();
 
@@ -114,17 +119,17 @@ namespace Knights {
                         break;
 
                     case 'u':
-                        mItems[ y ][ x ] = std::make_shared<CStorageItem>("Quiver", 'u', false, true, [](std::shared_ptr<CActor> aActor, std::shared_ptr<CMap> aMap){}, 5);
+                        item = std::make_shared<CStorageItem>("Quiver", 'u', false, true, [](std::shared_ptr<CActor> aActor, std::shared_ptr<CMap> aMap){}, 5);
                         break;
                     case '+':
-                        mItems[ y ][ x ] = std::make_shared<CItem>("The holy health", '+', true, true, [](std::shared_ptr<CActor> aActor, std::shared_ptr<CMap> aMap){
+                        item = std::make_shared<CItem>("The holy health", '+', true, true, [](std::shared_ptr<CActor> aActor, std::shared_ptr<CMap> aMap){
                             aActor->addHP(20);
                         });
                         break;
 
 	                case 'y':
                         //The need for RTTI creeps again...
-		                mItems[ y ][ x ] = std::make_shared<CStorageItem>("Crossbow of damnation", 'y', false, false, [](std::shared_ptr<CActor> aActor, std::shared_ptr<CMap> aMap){
+		                item = std::make_shared<CStorageItem>("Crossbow of damnation", 'y', false, false, [](std::shared_ptr<CActor> aActor, std::shared_ptr<CMap> aMap){
 
                             auto shield = (CStorageItem*)aActor->getItemWithSymbol( 'v' ).get();
                             auto crossbow = (CStorageItem*)aActor->getItemWithSymbol( 'y' ).get();
@@ -319,9 +324,23 @@ namespace Knights {
                 if (actor != nullptr) {
                     actors.push_back(actor);
                     mActors[y][x] = actor;
-                    mElement[y][x] = element;
+
+                    if (kPlaceEmptySpacesForSpawnPoints && element != '3' && element != 'T' ) {
+                        mElement[y][x] = '.';
+                    } else {
+                        mElement[y][x] = element;
+                    }
+
                     actor->setPosition({x, y});
                     actor = nullptr;
+                } else if ( item != nullptr ) {
+                    mItems[ y ][ x ] = item;
+
+                    if (kPlaceEmptySpacesForSpawnPoints) {
+                        mElement[y][x] = '.';
+                    } else {
+                        mElement[y][x] = element;
+                    }
                 }
 
                 ++pos;
