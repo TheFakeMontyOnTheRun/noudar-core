@@ -14,10 +14,13 @@
 #include <ncurses.h>
 #include <cstdlib>
 #include <array>
+#include <fstream>
+#include <cstring>
 
 using std::vector;
 using std::array;
 
+#include "Common.h"
 #include "Vec2i.h"
 #include "IMapElement.h"
 #include "CTeam.h"
@@ -132,31 +135,22 @@ namespace Knights {
         attron(COLOR_PAIR(4));
         mvprintw( 22, 0, "-=-=-=-=-=-=-" );
 
-        char buffer[ 10 ];
+        char buffer[ 20 ];
 
         if (current != nullptr) {
 
-            snprintf( buffer, 9, "HP: %d", current->getHP() );
+            memset( buffer, 20, 0 );
+            snprintf( buffer, 20, "Faith: %d", current->getHP() );
+
             mvprintw( 23,0, buffer );
 
-            snprintf( buffer, 9, "AT: %d", current->getAttack() );
-            mvprintw( 24,0, buffer );
+            if ( current->getSelectedItem() != nullptr ) {
+                mvprintw(24, 0, current->getSelectedItem()->to_string().c_str());
+            }
 
-            snprintf( buffer, 9, "DF: %d", current->getDefense() );
-            mvprintw( 25,0, buffer );
-
-            snprintf( buffer, 9, "AP: %d", current->getAP() );
-            mvprintw( 26,0, buffer );
-
-	        mvprintw(27, 0, "                          ");
-
-			if ( current->getSelectedItem() != nullptr ) {
-				mvprintw(27, 0, current->getSelectedItem()->to_string().c_str());
-			}
-	        mvprintw(28, 0, "                                          ");
-            mvprintw(28, 0, current->getCurrentSay().c_str());
         }
-        mvprintw( 29,0, "-//-" );
+        mvprintw( 25,0, "=-=-=-=-=-=-=" );
+        mvprintw( 26,0, "." );
 
         refresh();
     }

@@ -8,6 +8,7 @@
 
 #include <string>
 #include <iostream>
+#include <fstream>
 #include <functional>
 #include <memory>
 #include <cstdlib>
@@ -18,6 +19,7 @@
 using eastl::vector;
 using std::array;
 
+#include "Common.h"
 #include "Vec2i.h"
 #include "IMapElement.h"
 #include "CTeam.h"
@@ -112,18 +114,13 @@ namespace Knights {
 
         if (current != nullptr) {
 
-            std::cout << "HP: " << current->getHP() << std::endl;
-            std::cout << "AT: " << current->getAttack() << std::endl;
-            std::cout << "DF: " << current->getDefense() << std::endl;
-            std::cout << "AP: " << current->getAP() << std::endl;
+            std::cout << "Faith: " << current->getHP() << std::endl;
 
             if (current->getSelectedItem() != nullptr ) {
                 std::cout << current->getSelectedItem()->to_string() << std::endl;
             }
-
-            std::cout << current->getCurrentSay() << std::endl;
         }
-        std::cout << "-//-" << std::endl;
+        std::cout << "=-=-=-=-=-=-=" << std::endl;
 
         setvbuf(stdin, 0, _IONBF, 0);
         ch = getc(stdin);
