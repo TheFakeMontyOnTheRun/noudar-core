@@ -19,6 +19,7 @@
 using eastl::vector;
 using std::array;
 
+#include "Common.h"
 #include "IFileLoaderDelegate.h"
 #include "CPlainFileLoader.h"
 
@@ -45,7 +46,7 @@ void* operator new[](size_t size, size_t alignment, size_t alignmentOffset, cons
 }
 
 int main ( int argc, char **argv ) {
-    const auto LEVEL_LIMIT = 8;
+    const auto LEVEL_LIMIT = 7;
 
     auto delegate = std::make_shared<Knights::CGameDelegate>();
     auto fileLoader = std::make_shared<Knights::CPlainFileLoader>();
@@ -54,6 +55,10 @@ int main ( int argc, char **argv ) {
     auto onLevelLoaded = [&]() {
         if ( game->getLevelNumber() >= LEVEL_LIMIT ) {
             game->setIsPlaying( false );
+            std::cout << std::endl;
+            std::cout << "\x1B[2J\x1B[H" << std::endl;
+            std::cout << Knights::fileFromString("res/outro") << std::endl;
+            exit(0);
         }
     };
 
