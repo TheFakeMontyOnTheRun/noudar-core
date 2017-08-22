@@ -564,6 +564,12 @@ namespace Knights {
             auto item = mItems[ from.y ][ from.x ];
 	        mItems[ from.y ][ from.x ] = nullptr;
 	        actor->giveItem( item );
+
+#ifdef USE_ITEMS_INSTANTLY
+            if( item->isConsumable() ) {
+                useItem( item, actor );
+            }
+#endif
         }
 	}
 

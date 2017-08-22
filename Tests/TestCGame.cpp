@@ -939,10 +939,10 @@ TEST_F(TestCGame, TakingATokenOfFaithWillReplenishHealth ) {
     mGame->tick();
 
     auto healthAfterPickingIt = actor->getHP();
-
+#ifndef USE_ITEMS_INSTANTLY
     //wait several turns...
     ON_CALL(*mMockRenderer, getInput()).WillByDefault(Return(Knights::kEndTurnCommand));
-    mGame->tick();
+
     mGame->tick();
     mGame->tick();
     mGame->tick();
@@ -952,7 +952,7 @@ TEST_F(TestCGame, TakingATokenOfFaithWillReplenishHealth ) {
     actor->suggestCurrentItem('+');
     ON_CALL(*mMockRenderer, getInput()).WillByDefault(Return(Knights::kUseCurrentItemInInventoryCommand));
     mGame->tick();
-
+#endif
     auto turn1InEffect = actor->getHP();
     mGame->tick();
 
@@ -973,8 +973,10 @@ TEST_F(TestCGame, TakingATokenOfFaithWillReplenishHealth ) {
 
     auto finalHealth = actor->getHP();
 
+#ifndef USE_ITEMS_INSTANTLY
     ASSERT_EQ( healthAfterPickingIt, playerOriginalHealth );
     ASSERT_EQ( healthAfterSeveralTurnsHoldingIt, playerOriginalHealth );
+#endif
     ASSERT_EQ( turn1InEffect, playerOriginalHealth + 20 );
     ASSERT_EQ( noLongerInEffect, playerOriginalHealth + 20  );
     ASSERT_EQ( stopTryingItWontWork, playerOriginalHealth + 20  );
@@ -1002,7 +1004,7 @@ TEST_F(TestCGame, PlayerShouldStartWithSword ) {
 
 TEST_F(TestCGame, DeadMonksShouldDropTokensOfFaith ) {
     auto actor = mGame->getMap()->getAvatar();
-
+    auto actorHP = actor->getHP();
     actor->turnRight();
     ON_CALL(*mMockRenderer, getInput()).WillByDefault(Return(Knights::kPickItemCommand));
     mGame->tick();
@@ -1030,8 +1032,10 @@ TEST_F(TestCGame, DeadMonksShouldDropTokensOfFaith ) {
 
     ON_CALL(*mMockRenderer, getInput()).WillByDefault(Return(Knights::kPickItemCommand));
     mGame->tick();
-
+#ifndef USE_ITEMS_INSTANTLY
     actor->suggestCurrentItem('+');
-
     ASSERT_EQ( actor->getSelectedItem()->getView(), '+');
+#else
+    ASSERT_GT( actor->getHP(), actorHP);
+#endif
 }
