@@ -21,7 +21,7 @@ namespace Knights {
         bool mBlockView = false;
     };
 
-    class CMap {
+    class CMap : public std::enable_shared_from_this<CMap> {
     public:
 		void floodFill( Vec2i position, std::map<ElementView, std::pair<ElementView, CBlockProperties> > transformations );
 
@@ -66,6 +66,7 @@ namespace Knights {
 		void addActorAt( std::shared_ptr<CActor> actor, const Vec2i& position );
 		ActorId getLastestId();
 		std::shared_ptr<CGameDelegate> getGameDelegate();
+		void useItem( std::shared_ptr<CItem> item, std::shared_ptr<CActor> actor );
     };
 }
 #endif

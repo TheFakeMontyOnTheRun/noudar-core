@@ -675,4 +675,13 @@ namespace Knights {
 
         return kEmptySpace;
     }
+
+    void CMap::useItem(std::shared_ptr<CItem> item, std::shared_ptr<CActor> actor) {
+
+        item->use(actor, shared_from_this());
+
+        if ( item->isConsumable() ) {
+            actor->removeItemFromInventory(item);
+        }
+    }
 }
