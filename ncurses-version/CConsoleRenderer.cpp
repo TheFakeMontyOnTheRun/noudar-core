@@ -58,7 +58,7 @@ namespace Knights {
         init_pair(7, COLOR_BLACK, COLOR_CYAN);
 
         printw( "Dungeons Of Noudar\n");
-        printw( "Core edition.\n\n");
+        printw( "Core edition.\n2017 - Daniel Monteiro\n\n");
         printw( fileFromString("res/intro").c_str());
         printw( "\n\n\nPress any key to start\n");
     }

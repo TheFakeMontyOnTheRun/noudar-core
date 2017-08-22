@@ -48,7 +48,7 @@ namespace Knights {
         std::cout << "\x1B[2J\x1B[H" << std::endl;
 
         std::cout << "Dungeons Of Noudar" << std::endl;
-        std::cout << "Core edition.\n" << std::endl;
+        std::cout << "Core edition.\n2017 - Daniel Monteiro\n\n" << std::endl;
         std::cout << Knights::fileFromString("res/intro") << std::endl;
         std::cout << "\n\n\nPress any key to start" << std::endl;
         getchar();
