@@ -141,8 +141,7 @@ namespace Knights {
         char buffer[ 20 ];
 
         if (current != nullptr) {
-
-            memset( buffer, 20, 0 );
+            std::fill( std::begin(buffer), std::end(buffer), 0);
             snprintf( buffer, 20, "Faith: %d", current->getHP() );
 
             mvprintw( 23,0, buffer );
