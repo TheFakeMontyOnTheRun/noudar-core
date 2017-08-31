@@ -1,8 +1,8 @@
-CXXFLAGS = -Inoudar-core/include -Incurses-version -O2 -g -c -std=c++0x  -march=i486 -IEASTL/include -IEASTL/test/packages/EABase/include/Common -DEA_PLATFORM_LINUX 
+CXXFLAGS = -Inoudar-core/include -Incurses-version -O2 -g -c -fpermissive  -march=i486 -IEASTL/include -IEASTL/test/packages/EABase/include/Common -DEA_PLATFORM_LINUX 
 CXX = i586-pc-msdosdjgpp-g++
 
 OBJS = ncurses-version/main.o \
-    ncurses-version/TrivialConsoleRenderer.o \
+    ncurses-version/BIOSConsoleRenderer.o \
     noudar-core/src/Vec2i.o \
     noudar-core/src/CActor.o \
     noudar-core/src/CMonster.o \
