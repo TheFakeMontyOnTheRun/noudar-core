@@ -78,9 +78,11 @@ using std::array;
 #include "CConsoleRenderer.h"
 
 namespace Knights {
-
+    int col = 0;
+    int row = 0;
     static const char directions[4] = { '^', '>', 'V', '<'};
     char ch = 0;
+    uint8_t currAttrib = 0;
     enum EColor{
         COLOR_BLACK,
         COLOR_BLUE,
@@ -102,8 +104,25 @@ namespace Knights {
 
     std::array< std::pair<EColor, EColor>, 8 > colors;
 
+    void attron( std::pair<EColor, EColor> colors ) {
+        currAttrib = ((static_cast<int>(colors.second) << 4) | static_cast<int>(colors.first)) & 0xFF;
+    }
+
+    std::pair<EColor, EColor> COLOR_PAIR(int index ) {
+        return colors[ index ];
+    }
+
     void clear() {
-        clrscr();
+        attron(COLOR_PAIR(4));
+
+        for ( row = 0; row < 25; ++row ) {
+            for ( col = 0; col < 80; ++col ) {
+                _farpokeb(_dos_ds, 0xB800*16 + (( 80 * row * 2 ) + ( col * 2)), 0 );
+                _farpokeb(_dos_ds, 0xB800*16 + (( 80 * row * 2 ) + ( col * 2)) + 1, currAttrib );
+            }
+        }
+
+        col = row = 0;
     }
 
     void init_pair( int index, EColor attrib1, EColor attrib2) {
@@ -111,31 +130,29 @@ namespace Knights {
     }
 
     void printw(std::string str ) {
-        std::cout << str << std::endl;
+
+
+        for ( const char& c : str ) {
+            ++col;
+           _farpokeb(_dos_ds, 0xB800*16 + (( 80 * row * 2 ) + ( col * 2)), c );
+            _farpokeb(_dos_ds, 0xB800*16 + (( 80 * row * 2 ) + ( col * 2)) + 1, currAttrib );
+        }
     }
 
     void addch(char ch) {
-        std::cout << ch;
-    }
-
-    void attron( std::pair<EColor, EColor> colors ) {
-        textcolor(static_cast<int>(colors.first));
-        textbackground(static_cast<int>(colors.second));
-        textattr((BLUE << 4) | WHITE);
-
+        ++col;
+        _farpokeb(_dos_ds, 0xB800*16 + (( 80 * row * 2 ) + ( col * 2)), ch );
+        _farpokeb(_dos_ds, 0xB800*16 + (( 80 * row * 2 ) + ( col * 2)) + 1, currAttrib );
     }
 
     void move( int y, int x ) {
-//        gotoxy(x, y);
-    }
-
-    std::pair<EColor, EColor> COLOR_PAIR(int index ) {
-        return colors[ index ];
+        row = y;
+        col = x;
     }
 
     void refresh() {
-        std::cout.flush();
     }
+
 
     void endwin(){}
 
@@ -147,10 +164,7 @@ namespace Knights {
 
     CConsoleRenderer::CConsoleRenderer() {
 
-        textmode(C80);
-
-
-        clear();
+        init_pair(0, COLOR_WHITE, COLOR_BLACK);
         init_pair(1, COLOR_YELLOW, COLOR_BLACK);
         init_pair(2, COLOR_RED, COLOR_BLACK);
         init_pair(3, COLOR_CYAN, COLOR_BLACK);
@@ -166,6 +180,7 @@ namespace Knights {
         std::cout << "i - turn left, o - move forward, p - turn right; q twice - quit\n";
         std::cout << "tab - use item, [ - pick item, ] - drop item\nPress ENTER to start" << std::endl;
         getchar();
+        clear();
     }
 
     CConsoleRenderer::~CConsoleRenderer() {
@@ -208,6 +223,13 @@ namespace Knights {
 
                 } else {
 
+                    auto item = map.getItemAt({x, y});
+                    if ( item != nullptr) {
+                        attron(COLOR_PAIR(5));
+                        addch(item->getView());
+                        continue;
+                    }
+
                     ItemView cellView = map.getItemViewAt( {x,y});
 
                     if ( cellView == kEmptySpace ) {
@@ -232,22 +254,24 @@ namespace Knights {
                 }
 
             }
-            std::cout << std::endl;
         }
-        std::cout << std::endl;
         attron(COLOR_PAIR(4));
         mvprintw( 21, 0, "-=-=-=-=-=-=-" );
 
-        char buffer[ 20 ];
+        char buffer[ 80 ];
 
         if (current != nullptr) {
-            std::fill( std::begin(buffer), std::end(buffer), 0);
+            std::fill( std::begin(buffer), std::end(buffer), ' ');
+            mvprintw( 22,0, buffer );
+
             snprintf( buffer, 20, "Faith: %d", current->getHP() );
 
             mvprintw( 22,0, buffer );
 
             if ( current->getSelectedItem() != nullptr ) {
-                mvprintw(23, 0, current->getSelectedItem()->to_string().c_str());
+                std::fill( std::begin(buffer), std::end(buffer), ' ');
+                mvprintw( 23, 0, buffer );
+                mvprintw( 23, 0, current->getSelectedItem()->to_string().c_str());
             }
 
         }
