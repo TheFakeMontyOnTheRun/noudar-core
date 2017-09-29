@@ -5,7 +5,6 @@
 #ifndef DUNGEONSOFNOUDAR_NDK_COMMON_H
 #define DUNGEONSOFNOUDAR_NDK_COMMON_H
 namespace Knights {
-    float floatFrom(std::string str);
 
     int intFrom(std::string str);
 

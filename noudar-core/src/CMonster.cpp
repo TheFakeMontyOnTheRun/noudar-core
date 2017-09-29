@@ -38,9 +38,9 @@ namespace Knights {
 
 		auto sharedThis = shared_from_this();
 
-		if (std::abs((float) dx) >= std::abs((float) dy)) {
+		if (std::abs(dx) >= std::abs(dy)) {
 
-			if ( std::abs((float) dx) == 1) {
+			if ( std::abs(dx) == 1) {
 				map->attack( sharedThis, {x, y}, false);
 				onMove();
 				return true;
@@ -54,7 +54,7 @@ namespace Knights {
 				return true;
 			}
 		} else {
-			if ( std::abs((float) dy) == 1) {
+			if ( std::abs(dy) == 1) {
 				map->attack( sharedThis, {x, y}, false);
 				onMove();
 				return true;

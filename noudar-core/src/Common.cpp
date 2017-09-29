@@ -13,13 +13,6 @@ using eastl::vector;
 #include "Common.h"
 
 namespace Knights {
-	float floatFrom(std::string str) {
-		std::istringstream buffer(str);
-		float temp;
-		buffer >> temp;
-
-		return temp;
-	}
 
 	int intFrom(std::string str) {
 		std::istringstream buffer(str);
