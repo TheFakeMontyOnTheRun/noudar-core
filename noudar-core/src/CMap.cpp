@@ -59,6 +59,80 @@ namespace Knights {
         ), actors.end());
     }
 
+    std::shared_ptr<Knights::CItem> CMap::makeItemWithSymbol(char symbol ) {
+        switch( symbol ) {
+            case 'v':
+                return std::make_shared<CStorageItem>("Shield of restoration", 'v', false, false, [](std::shared_ptr<CActor> aActor, std::shared_ptr<CMap> aMap){
+
+                    auto shield = (CStorageItem*)aActor->getItemWithSymbol( 'v' ).get();
+
+                    if ( shield  == nullptr ) {
+                        return;
+                    }
+
+                    if ( shield->getAmount() > 0 ) {
+                        aActor->addHP( 1 );
+                        shield->add( -1 );
+                    }
+
+                }, 0);
+
+            case 'y':
+                return std::make_shared<CStorageItem>("Crossbow of damnation", 'y', false, false, [](std::shared_ptr<CActor> aActor, std::shared_ptr<CMap> aMap){
+
+                    auto shield = (CStorageItem*)aActor->getItemWithSymbol( 'v' ).get();
+                    auto crossbow = (CStorageItem*)aActor->getItemWithSymbol( 'y' ).get();
+
+                    bool shieldHasAmmo = false;
+                    bool crossbowHasAmmo = false;
+
+                    if ( crossbow != nullptr ) {
+                        crossbowHasAmmo = (crossbow->getAmount() >= kCrossbowAmmoUsage );
+                    }
+
+                    if ( shield != nullptr ) {
+                        shieldHasAmmo = (shield->getAmount() >= kShieldPowerUsage );
+                    }
+
+                    if ( !crossbowHasAmmo ) {
+                        return;
+                    }
+
+                    auto target = aMap->projectHitscanPosition(aMap->getActorTargetPosition(aActor),
+                                                               aActor->getDirection());
+
+                    if ( !( target == aActor->getPosition() ) ) {
+                        aActor->setAttackBonus( 1 );
+                        aMap->attack( aActor, target, false );
+
+                        if ( shieldHasAmmo ) {
+
+                            aActor->setAttackBonus( kImprovedDamageRatio );
+                            aMap->attack( aActor, target, false );
+                        }
+                        aActor->setAttackBonus( 0 );
+                    }
+
+                    aMap->getGameDelegate()->onProjectileHit( target);
+
+                    crossbow->add( - ( kCrossbowAmmoUsage ) );
+
+                    if ( shieldHasAmmo ) {
+                        shield->add( -( kShieldPowerUsage ) );
+                    }
+
+                }, 0);
+            case 'u':
+                return std::make_shared<CStorageItem>("Quiver", 'u', false, true, [](std::shared_ptr<CActor> aActor, std::shared_ptr<CMap> aMap){}, 5);
+            case '+':
+                return std::make_shared<CItem>("The holy health", '+', true, true, [](std::shared_ptr<CActor> aActor, std::shared_ptr<CMap> aMap){
+                    aActor->addHP(20);
+                });
+            default:
+                return nullptr;
+        }
+    }
+
     CMap::CMap(const std::string &mapData, std::shared_ptr<CGameDelegate> aGameDelegate)
             : mGameDelegate(aGameDelegate) {
 
@@ -66,16 +140,16 @@ namespace Knights {
         std::shared_ptr<CActor> actor = nullptr;
         std::shared_ptr<CItem> item = nullptr;
 
-	    auto heroArchetype = std::make_shared<CCharacterArchetype>( 5, 3, 20, 7, '^', "Hero");
-	    auto fallenArchetype = std::make_shared<CCharacterArchetype>( 4, 1, 10, 3, '$', "Fallen Hero");
+        auto heroArchetype = std::make_shared<CCharacterArchetype>( 5, 3, 20, 7, '^', "Hero");
+        auto fallenArchetype = std::make_shared<CCharacterArchetype>( 4, 1, 10, 3, '$', "Fallen Hero");
         auto monkArchetype = std::make_shared<CCharacterArchetype>( 4, 0, 10, 3, '@', "Insane Monk");
         auto cocoonArchetype = std::make_shared<CCharacterArchetype>( 0, 0, 10000, 0, 'C', "Cocoon");
         auto evilSpiritArchetype = std::make_shared<CCharacterArchetype>( 4, 5, 5, 3, 'w', "Evil Spirit");
         auto warthogArchetype = std::make_shared<CCharacterArchetype>( 6, 4, 10, 3, 'J', "Demon Warthog");
         auto weakenedDemonArchetype = std::make_shared<CCharacterArchetype>( 8, 3000, 10, 3, 'd', "Master Demon (premature)");
         auto demonArchetype = std::make_shared<CCharacterArchetype>( 12, 10, 50, 3, 'D', "Master Demon");
-	    auto friends = std::make_shared<CTeam>("Heroes");
-	    auto foes = std::make_shared<CTeam>("Enemies");
+        auto friends = std::make_shared<CTeam>("Heroes");
+        auto foes = std::make_shared<CTeam>("Enemies");
         int pos = 0;
         for (int y = 0; y < kMapSize; ++y) {
             for (int x = 0; x < kMapSize; ++x) {
@@ -86,10 +160,9 @@ namespace Knights {
                 map[y][x] = nullptr;
                 mActors[ y ][ x ] = nullptr;
                 mElement[y][x] = element;
-				mItems[ y ][ x ] = nullptr;
+                mItems[ y ][ x ] = nullptr;
 
                 switch (element) {
-	                default:
                     case '0':
                     case 'O':
                     case '=':
@@ -105,80 +178,6 @@ namespace Knights {
                     case '!':
                     case 'H':
                         break;
-                    case 'v':
-                        item = std::make_shared<CStorageItem>("Shield of restoration", 'v', false, false, [](std::shared_ptr<CActor> aActor, std::shared_ptr<CMap> aMap){
-
-                            auto shield = (CStorageItem*)aActor->getItemWithSymbol( 'v' ).get();
-
-                            if ( shield  == nullptr ) {
-                                return;
-                            }
-
-                            if ( shield->getAmount() > 0 ) {
-                                aActor->addHP( 1 );
-                                shield->add( -1 );
-                            }
-
-                        }, 0);
-                        break;
-
-                    case 'u':
-                        item = std::make_shared<CStorageItem>("Quiver", 'u', false, true, [](std::shared_ptr<CActor> aActor, std::shared_ptr<CMap> aMap){}, 5);
-                        break;
-                    case '+':
-                        item = std::make_shared<CItem>("The holy health", '+', true, true, [](std::shared_ptr<CActor> aActor, std::shared_ptr<CMap> aMap){
-                            aActor->addHP(20);
-                        });
-                        break;
-
-	                case 'y':
-                        //The need for RTTI creeps again...
-		                item = std::make_shared<CStorageItem>("Crossbow of damnation", 'y', false, false, [](std::shared_ptr<CActor> aActor, std::shared_ptr<CMap> aMap){
-
-                            auto shield = (CStorageItem*)aActor->getItemWithSymbol( 'v' ).get();
-                            auto crossbow = (CStorageItem*)aActor->getItemWithSymbol( 'y' ).get();
-
-                            bool shieldHasAmmo = false;
-                            bool crossbowHasAmmo = false;
-
-                            if ( crossbow != nullptr ) {
-                                crossbowHasAmmo = (crossbow->getAmount() >= kCrossbowAmmoUsage );
-                            }
-
-                            if ( shield != nullptr ) {
-                                shieldHasAmmo = (shield->getAmount() >= kShieldPowerUsage );
-                            }
-
-                            if ( !crossbowHasAmmo ) {
-                                return;
-                            }
-
-                            auto target = aMap->projectHitscanPosition(aMap->getActorTargetPosition(aActor),
-                                                                       aActor->getDirection());
-
-                            if ( !( target == aActor->getPosition() ) ) {
-                                aActor->setAttackBonus( 1 );
-                                aMap->attack( aActor, target, false );
-
-                                if ( shieldHasAmmo ) {
-
-                                    aActor->setAttackBonus( kImprovedDamageRatio );
-                                    aMap->attack( aActor, target, false );
-                                }
-                                aActor->setAttackBonus( 0 );
-                            }
-
-                            aMap->getGameDelegate()->onProjectileHit( target);
-
-                            crossbow->add( - ( kCrossbowAmmoUsage ) );
-
-                            if ( shieldHasAmmo ) {
-                                shield->add( -( kShieldPowerUsage ) );
-                            }
-
-                        }, 0);
-		                break;
-
                     case '1':
                     case 'L':
                     case 'I':
@@ -235,10 +234,10 @@ namespace Knights {
                         break;
 
                     case '9':
-                        {
-                            map[y][x] = std::make_shared<CDoorway>();
-                            mElement[y][x] = map[y][x]->getView();
-                        }
+                    {
+                        map[y][x] = std::make_shared<CDoorway>();
+                        mElement[y][x] = map[y][x]->getView();
+                    }
                         break;
                     case '3':
                     case 'T':
@@ -266,7 +265,7 @@ namespace Knights {
                         });
                         mTileBlockProperties[y][x].mBlockMovement = true;
                     }
-                    break;
+                        break;
                     case 'w':
                         actor = std::make_shared<CMonster>( evilSpiritArchetype, foes, getLastestId(), kRegularEnemyViewRange );
                         break;
@@ -322,6 +321,8 @@ namespace Knights {
                     case 'G':
                         actor = std::make_shared<CMonsterGenerator>( evilSpiritArchetype, foes, getLastestId(), 5);
                         break;
+                    default:
+                        item = makeItemWithSymbol(element);
 
                 }
 
@@ -453,11 +454,11 @@ namespace Knights {
     }
 
     std::shared_ptr<CActor> CMap::getActorAt(Vec2i position) {
-	    if ( isValid( position ) ) {
-		    return mActors[position.y][position.x];
-	    } else {
-		    return nullptr;
-	    }
+        if ( isValid( position ) ) {
+            return mActors[position.y][position.x];
+        } else {
+            return nullptr;
+        }
     }
 
     ElementView CMap::getElementAt(const Vec2i& p) {
@@ -531,30 +532,30 @@ namespace Knights {
         actor->setPosition(to);
     }
 
-	Vec2i CMap::projectHitscanPosition(Vec2i aPosition, EDirection aDirection) {
+    Vec2i CMap::projectHitscanPosition(Vec2i aPosition, EDirection aDirection) {
 
-		auto offset = mapOffsetForDirection( aDirection );
-		auto position = aPosition;
-		std::shared_ptr<CActor> toReturn = nullptr;
+        auto offset = mapOffsetForDirection( aDirection );
+        auto position = aPosition;
+        std::shared_ptr<CActor> toReturn = nullptr;
 
         auto previous = position;
-		while ( isValid( position ) && !isBlockProjectilesAt(position) ) {
+        while ( isValid( position ) && !isBlockProjectilesAt(position) ) {
 
             previous = position;
 
             position += offset;
 
-			auto actor = getActorAt( position );
+            auto actor = getActorAt( position );
 
             if ( actor != nullptr ) {
                 return actor->getPosition();
             }
-		}
+        }
 
         return previous;
-	}
+    }
 
-	void CMap::giveItemAt(Vec2i from, std::shared_ptr<CActor> actor) {
+    void CMap::giveItemAt(Vec2i from, std::shared_ptr<CActor> actor) {
 
         if ( !isValid( from )) {
             return;
@@ -562,8 +563,8 @@ namespace Knights {
 
         if ( mItems[ from.y ][ from.x ] != nullptr ) {
             auto item = mItems[ from.y ][ from.x ];
-	        mItems[ from.y ][ from.x ] = nullptr;
-	        actor->giveItem( item );
+            mItems[ from.y ][ from.x ] = nullptr;
+            actor->giveItem( item );
 
 #ifdef USE_ITEMS_INSTANTLY
             if( item->isConsumable() ) {
@@ -571,7 +572,7 @@ namespace Knights {
             }
 #endif
         }
-	}
+    }
 
     std::shared_ptr<Knights::CItem> CMap::getItemAt( Vec2i from ) {
 
@@ -582,16 +583,16 @@ namespace Knights {
         return mItems[ from.y ][ from.x ];
     }
 
-	void CMap::putItemAt(std::shared_ptr<CItem> aItem, Vec2i aDestination) {
+    void CMap::putItemAt(std::shared_ptr<CItem> aItem, Vec2i aDestination) {
 
         if ( !isValid(aDestination)) {
             return;
         }
 
-		if ( mItems[ aDestination.y ][ aDestination.x ] == nullptr ) {
-			mItems[ aDestination.y ][ aDestination.x ] = aItem;
-		}
-	}
+        if ( mItems[ aDestination.y ][ aDestination.x ] == nullptr ) {
+            mItems[ aDestination.y ][ aDestination.x ] = aItem;
+        }
+    }
 
     void CMap::addActorAt(std::shared_ptr<CActor> actor, const Vec2i &position) {
 
@@ -613,14 +614,14 @@ namespace Knights {
         auto oldElement = getElementAt( position );
         if ( transformations.count( oldElement ) > 0 ) {
 
-                auto newElement = transformations[ oldElement ];
-                mElement[ position.y ][ position.x ] = newElement.first;
-                mTileBlockProperties[position.y][position.x] = newElement.second;
-                map[ position.y ][ position.x ] = nullptr;
-                floodFill( position + mapOffsetForDirection( EDirection::kNorth ), transformations );
-                floodFill( position + mapOffsetForDirection( EDirection::kEast ), transformations );
-                floodFill( position + mapOffsetForDirection( EDirection::kSouth ), transformations );
-                floodFill( position + mapOffsetForDirection( EDirection::kWest ), transformations );
+            auto newElement = transformations[ oldElement ];
+            mElement[ position.y ][ position.x ] = newElement.first;
+            mTileBlockProperties[position.y][position.x] = newElement.second;
+            map[ position.y ][ position.x ] = nullptr;
+            floodFill( position + mapOffsetForDirection( EDirection::kNorth ), transformations );
+            floodFill( position + mapOffsetForDirection( EDirection::kEast ), transformations );
+            floodFill( position + mapOffsetForDirection( EDirection::kSouth ), transformations );
+            floodFill( position + mapOffsetForDirection( EDirection::kWest ), transformations );
 
         }
     }

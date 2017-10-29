@@ -39,7 +39,7 @@ namespace Knights {
 		ActorId mCurrentId = 1;
 
 	public:
-
+		std::shared_ptr<CItem> makeItemWithSymbol(char symbol );
         bool isValid( const Vec2i& p );
         bool isBlockMovementAt(const Vec2i &p);
         bool isBlockProjectilesAt( const Vec2i &p );
