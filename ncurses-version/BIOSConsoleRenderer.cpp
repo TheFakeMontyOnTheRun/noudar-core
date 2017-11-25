@@ -15,7 +15,6 @@
 #include <unistd.h>
 #include <array>
 #include <string>
-#include <iostream>
 #include <vector>
 #include <memory>
 #include <map>
@@ -37,15 +36,12 @@
 #include <vector>
 #include <cstring>
 #include <memory>
-#include <iostream>
 #include <map>
 #include <array>
-#include <iostream>
 #include <string>
 #include <vector>
 
 #include <string>
-#include <iostream>
 #include <vector>
 #include <functional>
 #include <utility>
@@ -53,7 +49,6 @@
 #include <memory>
 #include <cstdlib>
 #include <array>
-#include <fstream>
 #include <cstring>
 
 using std::vector;
@@ -173,12 +168,13 @@ namespace Knights {
         init_pair(6, COLOR_MAGENTA, COLOR_BLACK);
         init_pair(7, COLOR_BLACK, COLOR_CYAN);
 
-        std::cout << "Dungeons Of Noudar" << std::endl;
-        std::cout << "Core edition.\n2017 - Daniel Monteiro\n\n" << std::endl;
-        std::cout << Knights::fileFromString("res/intro") << std::endl;
-        std::cout << "\nControls:\n+ and - cycle thru items in inventory\n";
-        std::cout << "i - turn left, o - move forward, p - turn right; q twice - quit\n";
-        std::cout << "tab - use item, [ - pick item, ] - drop item\nPress ENTER to start" << std::endl;
+        printf("Dungeons Of Noudar\n");
+        printf("Core edition.\n2017 - Daniel Monteiro\n\n\n");
+        printf("%s\n", Knights::fileFromString("res/intro").c_str());
+        printf("\nControls:\n+ and - cycle thru items in inventory\n");
+        printf("i - turn left, o - move forward, p - turn right; q twice - quit\n");
+        printf("tab - use item, [ - pick item, ] - drop item\nPress ENTER to start");
+
         getchar();
         clear();
     }

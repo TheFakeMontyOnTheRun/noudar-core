@@ -6,7 +6,6 @@
 #include <iterator>
 #include <sstream>
 #include <EASTL/vector.h>
-#include <fstream>
 
 using eastl::vector;
 
@@ -23,9 +22,27 @@ namespace Knights {
 	}
 
 	std::string fileFromString( const std::string& path ) {
-		std::ifstream t(path);
-		return std::string((std::istreambuf_iterator<char>(t)),
-						   std::istreambuf_iterator<char>());
+		char * buffer = 0;
+		long length;
+		FILE * f = fopen (path.c_str(), "r");
+
+		if (f)
+		{
+			fseek (f, 0, SEEK_END);
+			length = ftell (f);
+			fseek (f, 0, SEEK_SET);
+			buffer = static_cast<char *>(malloc (length));
+			if (buffer)
+			{
+				fread (buffer, 1, length, f);
+			}
+			fclose (f);
+		}
+
+		std::string toReturn(buffer);
+
+		return toReturn;
+
 	}
 
 	std::string filterComments(std::string input) {

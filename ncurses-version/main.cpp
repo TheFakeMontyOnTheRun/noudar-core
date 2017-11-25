@@ -9,10 +9,8 @@
 #include <utility>
 #include <functional>
 #include <string>
-#include <iostream>
 #include <memory>
 #include <array>
-#include <fstream>
 #include <map>
 #include <EASTL/vector.h>
 
@@ -55,9 +53,7 @@ int main ( int argc, char **argv ) {
     auto onLevelLoaded = [&]() {
         if ( game->getLevelNumber() >= LEVEL_LIMIT ) {
             game->setIsPlaying( false );
-            std::cout << std::endl;
-            std::cout << "\x1B[2J\x1B[H" << std::endl;
-            std::cout << Knights::fileFromString("res/outro") << std::endl;
+            printf("\n%s\n", Knights::fileFromString("res/outro").c_str());
             exit(0);
         }
     };

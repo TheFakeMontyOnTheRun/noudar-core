@@ -7,14 +7,12 @@
 */
 
 #include <string>
-#include <iostream>
 #include <vector>
 #include <map>
 #include <memory>
 #include <ncurses.h>
 #include <cstdlib>
 #include <array>
-#include <fstream>
 #include <cstring>
 
 using std::vector;
