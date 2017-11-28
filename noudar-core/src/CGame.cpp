@@ -1,7 +1,9 @@
 #include <functional>
 #include <memory>
-#include <string>
+
+#ifdef USE_IOSTREAM
 #include <sstream>
+#endif
 
 #include <map>
 #include <EASTL/vector.h>
@@ -243,10 +245,9 @@ namespace Knights {
     }
 
     void CGame::playLevel(int levelNumber) {
-        std::stringstream ss;
-        ss << "map";
-        ss << levelNumber;
-        ss << ".txt";
+
+        char buffer[10];
+        snprintf(buffer, 9, "map%d.txt", levelNumber);
 
         mLevel = levelNumber;
         mTurn = 0;
@@ -255,7 +256,7 @@ namespace Knights {
 		    mPlayerActor = mMap->getAvatar();
         }
 
-        auto mapData = mFileLoaderDelegate->loadFileFromPath(ss.str());
+        auto mapData = mFileLoaderDelegate->loadFileFromPath(buffer);
 	    mMap = std::make_shared<CMap>(mapData, mGameDelegate);
 
 	    if ( mPlayerActor != nullptr ) {

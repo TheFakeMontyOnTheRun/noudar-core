@@ -7,16 +7,16 @@
 */
 
 #include <string>
-#include <vector>
 #include <map>
 #include <memory>
 #include <ncurses.h>
 #include <cstdlib>
-#include <array>
 #include <cstring>
+#include <EASTL/vector.h>
+#include <EASTL/array.h>
 
-using std::vector;
-using std::array;
+using eastl::vector;
+using eastl::array;
 
 #include "Common.h"
 #include "Vec2i.h"

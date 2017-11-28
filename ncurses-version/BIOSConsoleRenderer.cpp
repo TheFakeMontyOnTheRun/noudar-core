@@ -13,14 +13,6 @@
 #include <bios.h>
 #include <time.h>
 #include <unistd.h>
-#include <array>
-#include <string>
-#include <vector>
-#include <memory>
-#include <map>
-#include <conio.h>
-#include <dpmi.h>
-#include <go32.h>
 #include <sys/movedata.h>
 #include <pc.h>
 #include <sys/farptr.h>
@@ -28,31 +20,20 @@
 #include <sys/nearptr.h>
 
 #include <cstdlib>
+#include <cstring>
+#include <cmath>
 #include <cstdio>
 #include <functional>
-#include <cmath>
 #include <algorithm>
-#include <cmath>
-#include <vector>
-#include <cstring>
-#include <memory>
-#include <map>
-#include <array>
 #include <string>
-#include <vector>
-
-#include <string>
-#include <vector>
-#include <functional>
 #include <utility>
 #include <map>
 #include <memory>
-#include <cstdlib>
-#include <array>
-#include <cstring>
+#include <EASTL/vector.h>
+#include <EASTL/array.h>
 
-using std::vector;
-using std::array;
+using eastl::vector;
+using eastl::array;
 
 #include "Common.h"
 #include "Vec2i.h"
@@ -273,7 +254,6 @@ namespace Knights {
         }
         mvprintw( 24,0, "=-=-=-=-=-=-=" );
 
-//        setvbuf(stdin, 0, _IONBF, 0);
         refresh();
         ch = getch();
     }

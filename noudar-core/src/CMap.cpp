@@ -25,8 +25,9 @@ using eastl::array;
 #include "CDoorway.h"
 #include "CItem.h"
 
+#ifdef USE_IOSTREAM
 #include <sstream>
-#include <map>
+#endif
 
 #include "CMonsterGenerator.h"
 
@@ -157,7 +158,7 @@ namespace Knights {
                 element = mapData[ pos ];
                 actor = nullptr;
                 item = nullptr;
-                map[y][x] = nullptr;
+                mElementsMap[y][x] = nullptr;
                 mActors[ y ][ x ] = nullptr;
                 mElement[y][x] = element;
                 mItems[ y ][ x ] = nullptr;
@@ -235,8 +236,8 @@ namespace Knights {
 
                     case '9':
                     {
-                        map[y][x] = std::make_shared<CDoorway>();
-                        mElement[y][x] = map[y][x]->getView();
+                        mElementsMap[y][x] = std::make_shared<CDoorway>();
+                        mElement[y][x] = mElementsMap[y][x]->getView();
                     }
                         break;
                     case '3':
@@ -617,7 +618,7 @@ namespace Knights {
             auto newElement = transformations[ oldElement ];
             mElement[ position.y ][ position.x ] = newElement.first;
             mTileBlockProperties[position.y][position.x] = newElement.second;
-            map[ position.y ][ position.x ] = nullptr;
+            mElementsMap[ position.y ][ position.x ] = nullptr;
             floodFill( position + mapOffsetForDirection( EDirection::kNorth ), transformations );
             floodFill( position + mapOffsetForDirection( EDirection::kEast ), transformations );
             floodFill( position + mapOffsetForDirection( EDirection::kSouth ), transformations );

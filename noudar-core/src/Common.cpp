@@ -4,7 +4,11 @@
 #include <functional>
 #include <string>
 #include <iterator>
+
+#ifdef USE_IOSTREAM
 #include <sstream>
+#endif
+
 #include <EASTL/vector.h>
 
 using eastl::vector;
@@ -12,14 +16,6 @@ using eastl::vector;
 #include "Common.h"
 
 namespace Knights {
-
-	int intFrom(std::string str) {
-		std::istringstream buffer(str);
-		int temp;
-		buffer >> temp;
-
-		return temp;
-	}
 
 	std::string fileFromString( const std::string& path ) {
 		char * buffer = 0;
@@ -43,26 +39,6 @@ namespace Knights {
 
 		return toReturn;
 
-	}
-
-	std::string filterComments(std::string input) {
-		bool reading = true;
-		std::stringstream output;
-
-		for (auto &character : input) {
-
-			if (character == '/') {
-				reading = false;
-			} else if (character == '\n') {
-				reading = true;
-			}
-
-			if (reading) {
-				output << character;
-			}
-		}
-
-		return output.str();
 	}
 
 	vector<char> readToBuffer(FILE *fileDescriptor) {

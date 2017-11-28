@@ -4,11 +4,16 @@
 #include <string>
 #include <functional>
 #include <memory>
+
+#ifdef USE_IOSTREAM
 #include <sstream>
+#endif
+
 #include "CItem.h"
 #include "CStorageItem.h"
 
 std::string formatName( const std::string& name, int amount ) {
+#ifdef USE_IOSTREAM
     std::stringstream ss;
 
     ss << name;
@@ -17,7 +22,11 @@ std::string formatName( const std::string& name, int amount ) {
     ss << ")";
 
     return ss.str();
+#else
+    return name;
+#endif
 }
+
 
 Knights::CStorageItem::CStorageItem(const std::string &aName, ItemView aView, bool aConsumable, bool aCanBeDropped,
                                     const Knights::CItemAction &itemAction, int initialAmount )

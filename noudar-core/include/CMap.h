@@ -27,7 +27,7 @@ namespace Knights {
 
 	private:
 
-        std::shared_ptr<IMapElement> map[ kMapSize ][ kMapSize ];
+        std::shared_ptr<IMapElement> mElementsMap[ kMapSize ][ kMapSize ];
         std::shared_ptr<CActor> mActors[ kMapSize ][ kMapSize ];
         std::shared_ptr<CGameDelegate> mGameDelegate;
         array< array<CBlockProperties, kMapSize>, kMapSize> mTileBlockProperties;

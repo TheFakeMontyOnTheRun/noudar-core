@@ -11,12 +11,11 @@
 #include <functional>
 #include <memory>
 #include <cstdlib>
-#include <map>
-
 #include <EASTL/vector.h>
+#include <EASTL/array.h>
 
 using eastl::vector;
-using std::array;
+using eastl::array;
 
 #include "Common.h"
 #include "Vec2i.h"

@@ -3,7 +3,11 @@
 //
 
 #include <string>
+
+#ifdef USE_IOSTREAM
 #include <sstream>
+#endif
+
 #include <memory>
 #include <map>
 #include <functional>
@@ -38,11 +42,17 @@ namespace Knights {
     }
 
     std::string CMoveActorCommand::to_string() const {
-
+#ifdef USE_IOSTREAM
         std::stringstream ss;
         ss << "Move actor by ";
         ss << mDirection;
         return ss.str();
+#else
+        auto directions = "NESW";
+        auto direction = directions[static_cast<int>(mDirection)];
+
+        return std::string("Move actor by ") + direction;
+#endif
     }
 
     bool CMoveActorCommand::shouldEndTurn() {

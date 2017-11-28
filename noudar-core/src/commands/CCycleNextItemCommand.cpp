@@ -3,7 +3,11 @@
 //
 
 #include <string>
+
+#ifdef USE_IOSTREAM
 #include <sstream>
+#endif
+
 #include <memory>
 #include <functional>
 #include "Vec2i.h"

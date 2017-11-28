@@ -33,10 +33,14 @@ namespace Knights {
 
     bool operator!=( const Vec2i &lh, const Vec2i &rh );
 
+#ifdef USE_IOSTREAM
+    std::ostream& operator<<(std::ostream& os, const Vec2i& aVec );
+
     std::ostream& operator<<(std::ostream& os, const EDirection& aDirection );
+#endif
+
     std::string to_string( const EDirection& aDirection );
 
-    std::ostream& operator<<(std::ostream& os, const Vec2i& aVec );
     std::string to_string( const Vec2i& aVec );
 
     EDirection wrapDirection( EDirection direction, int offset );

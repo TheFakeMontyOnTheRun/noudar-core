@@ -1,7 +1,10 @@
 #include <string>
 #include <memory>
 #include <utility>
+
+#ifdef USE_IOSTREAM
 #include <sstream>
+#endif
 
 #include "Vec2i.h"
 
@@ -55,16 +58,23 @@ namespace Knights {
 		}
 	}
 
+#ifdef USE_IOSTREAM
 	std::ostream &operator<<(std::ostream &os, const Vec2i &aVec) {
+
 		os << to_string(aVec);
 
 		return os;
 	}
+#endif
 
 	std::string to_string(const Vec2i &aVec) {
+#ifdef USE_IOSTREAM
 		std::stringstream ss;
 		ss << aVec.x << ", " << aVec.y;
 		return ss.str();
+#else
+        return "";
+#endif
 	}
 
 
