@@ -22,9 +22,7 @@ using eastl::array;
 #include "IRenderer.h"
 #include "IFileLoaderDelegate.h"
 #include "CPlainFileLoader.h"
-
 #include "CGame.h"
-
 #include "commands/IGameCommand.h"
 #include "commands/CQuitCommand.h"
 

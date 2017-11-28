@@ -1,10 +1,8 @@
-#include <functional>
-#include <memory>
-
 #ifdef USE_IOSTREAM
 #include <sstream>
 #endif
-
+#include <functional>
+#include <memory>
 #include <map>
 #include <EASTL/vector.h>
 #include <EASTL/array.h>
@@ -20,23 +18,17 @@ using eastl::array;
 #include "CGameDelegate.h"
 #include "CMap.h"
 #include "CDoorway.h"
-
 #include "CCharacterArchetype.h"
 #include "CCharacter.h"
-
 #include "CMonster.h"
 #include "IRenderer.h"
-
 #include "IFileLoaderDelegate.h"
 #include "CPlainFileLoader.h"
-
 #include "CGame.h"
-
 #include "commands/IGameCommand.h"
 #include "commands/CMoveActorCommand.h"
 #include "commands/CTurnActorCommand.h"
 #include "commands/CLoadNewLevelCommand.h"
-
 #include "commands/CCycleNextItemCommand.h"
 #include "commands/CCyclePreviousItemCommand.h"
 #include "commands/CUseCurrentItemCommand.h"

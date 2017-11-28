@@ -2,17 +2,12 @@
 // Created by monty on 12/02/17.
 //
 
-#include <string>
-
 #ifdef USE_IOSTREAM
 #include <sstream>
 #endif
 
 #include <memory>
 #include <functional>
-#include "Vec2i.h"
-#include "IMapElement.h"
-#include "CGameDelegate.h"
 #include <string>
 #include <memory>
 #include <utility>
@@ -24,19 +19,17 @@ using eastl::vector;
 using eastl::array;
 
 #include "Vec2i.h"
+#include "IMapElement.h"
+#include "CGameDelegate.h"
 #include "CTeam.h"
 #include "CItem.h"
 #include "CActor.h"
-
-
 #include "CMap.h"
 #include "IRenderer.h"
 #include "IFileLoaderDelegate.h"
 #include "CPlainFileLoader.h"
-
 #include "CGame.h"
 #include "commands/IGameCommand.h"
-
 #include "commands/CCycleNextItemCommand.h"
 
 namespace Knights {

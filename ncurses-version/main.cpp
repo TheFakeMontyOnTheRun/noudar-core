@@ -10,7 +10,6 @@
 #include <functional>
 #include <string>
 #include <memory>
-#include <array>
 #include <map>
 #include <EASTL/vector.h>
 #include <EASTL/array.h>
@@ -21,7 +20,6 @@ using eastl::array;
 #include "Common.h"
 #include "IFileLoaderDelegate.h"
 #include "CPlainFileLoader.h"
-
 #include "Vec2i.h"
 #include "IMapElement.h"
 #include "CTeam.h"

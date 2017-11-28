@@ -1,8 +1,8 @@
 //
 // Created by monty on 09/12/16.
 //
-#include <EASTL/vector.h>
 #include <string>
+#include <EASTL/vector.h>
 
 using eastl::vector;
 

@@ -6,17 +6,14 @@
   Copyright (c) 2014 Daniel Monteiro. All rights reserved.
 */
 #include <go32.h>
-#include <sys/farptr.h>
 #include <conio.h>
 #include <dpmi.h>
 #include <pc.h>
 #include <bios.h>
 #include <time.h>
 #include <unistd.h>
-#include <sys/movedata.h>
-#include <pc.h>
 #include <sys/farptr.h>
-#include <bios.h>
+#include <sys/movedata.h>
 #include <sys/nearptr.h>
 
 #include <cstdlib>

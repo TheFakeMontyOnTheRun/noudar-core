@@ -23,7 +23,6 @@ using eastl::array;
 #include "CMonster.h"
 #include "CGameDelegate.h"
 #include "CMap.h"
-
 #include "CMonsterGenerator.h"
 
 Knights::CMonsterGenerator::CMonsterGenerator(std::shared_ptr<CCharacterArchetype> aArchetypeToBuild, std::shared_ptr<CTeam> aTeam,

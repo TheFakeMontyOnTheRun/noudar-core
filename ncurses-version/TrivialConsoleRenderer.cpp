@@ -5,6 +5,12 @@
   Created by Daniel Monteiro on 11/26/14.
   Copyright (c) 2014 Daniel Monteiro. All rights reserved.
 */
+#include <conio.h>
+#include <stdio.h>
+#include <bios.h>
+#include <pc.h>
+#include <unistd.h>
+#include <termios.h>
 
 #include <string>
 #include <iostream>
@@ -27,16 +33,8 @@ using eastl::array;
 #include "CMap.h"
 #include "IRenderer.h"
 #include "CConsoleRenderer.h"
-#include <conio.h>
-#include <stdio.h>
-#include <bios.h>
-#include <pc.h>
-#include <unistd.h>
-#include <termios.h>
 
 namespace Knights {
-
-
 
     static const char directions[4] = { '^', '>', 'V', '<'};
     char ch = 0;

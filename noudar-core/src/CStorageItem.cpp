@@ -1,13 +1,12 @@
 //
 // Created by monty on 22-03-2017.
 //
-#include <string>
-#include <functional>
-#include <memory>
-
 #ifdef USE_IOSTREAM
 #include <sstream>
 #endif
+#include <string>
+#include <functional>
+#include <memory>
 
 #include "CItem.h"
 #include "CStorageItem.h"

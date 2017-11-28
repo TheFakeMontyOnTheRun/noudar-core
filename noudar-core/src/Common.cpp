@@ -1,14 +1,13 @@
 //
 // Created by monty on 26/09/16.
 //
-#include <functional>
-#include <string>
-#include <iterator>
-
 #ifdef USE_IOSTREAM
 #include <sstream>
 #endif
 
+#include <functional>
+#include <string>
+#include <iterator>
 #include <EASTL/vector.h>
 
 using eastl::vector;

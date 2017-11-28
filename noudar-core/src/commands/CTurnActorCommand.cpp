@@ -2,12 +2,11 @@
 // Created by monty on 25/10/16.
 //
 
-#include <string>
-
 #ifdef USE_IOSTREAM
 #include <sstream>
 #endif
 
+#include <string>
 #include <memory>
 #include <map>
 #include <functional>
@@ -27,7 +26,6 @@ using eastl::array;
 #include "IRenderer.h"
 #include "IFileLoaderDelegate.h"
 #include "CPlainFileLoader.h"
-
 #include "CGame.h"
 #include "commands/IGameCommand.h"
 #include "commands/CTurnActorCommand.h"

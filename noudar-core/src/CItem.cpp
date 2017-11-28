@@ -1,15 +1,14 @@
 //
 // Created by monty on 12/02/17.
 //
+#ifdef USE_IOSTREAM
+#include <sstream>
+#endif
 #include <string>
 #include <functional>
 #include <memory>
 
 #include "CItem.h"
-
-#ifdef USE_IOSTREAM
-#include <sstream>
-#endif
 
 Knights::CItem::CItem(std::string aName, ItemView aView ) : mName(aName), mView( aView ), mConsumable(false) {
 }

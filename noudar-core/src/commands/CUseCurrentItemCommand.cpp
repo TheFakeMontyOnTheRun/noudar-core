@@ -1,20 +1,13 @@
 //
 // Created by monty on 13/02/17.
 //
-
-#include <string>
-
 #ifdef USE_IOSTREAM
 #include <sstream>
 #endif
 
-#include <memory>
-#include <functional>
-#include "Vec2i.h"
-#include "IMapElement.h"
-#include "CGameDelegate.h"
 #include <string>
 #include <memory>
+#include <functional>
 #include <utility>
 #include <map>
 #include <EASTL/vector.h>
@@ -24,6 +17,8 @@ using eastl::vector;
 using eastl::array;
 
 #include "Vec2i.h"
+#include "IMapElement.h"
+#include "CGameDelegate.h"
 #include "CTeam.h"
 #include "CItem.h"
 #include "CActor.h"
@@ -31,10 +26,8 @@ using eastl::array;
 #include "IRenderer.h"
 #include "IFileLoaderDelegate.h"
 #include "CPlainFileLoader.h"
-
 #include "CGame.h"
 #include "commands/IGameCommand.h"
-
 #include "commands/CUseCurrentItemCommand.h"
 
 Knights::CUseCurrentItemCommand::CUseCurrentItemCommand(std::shared_ptr<Knights::CGame> aGame,

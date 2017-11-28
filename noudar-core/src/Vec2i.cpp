@@ -1,10 +1,10 @@
-#include <string>
-#include <memory>
-#include <utility>
-
 #ifdef USE_IOSTREAM
 #include <sstream>
 #endif
+
+#include <string>
+#include <memory>
+#include <utility>
 
 #include "Vec2i.h"
 

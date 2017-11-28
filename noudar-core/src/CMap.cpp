@@ -1,5 +1,7 @@
+#ifdef USE_IOSTREAM
+#include <sstream>
+#endif
 #include <string>
-
 #include <map>
 #include <memory>
 #include <functional>
@@ -22,13 +24,6 @@ using eastl::array;
 #include "CCharacterArchetype.h"
 #include "CCharacter.h"
 #include "CMonster.h"
-#include "CDoorway.h"
-#include "CItem.h"
-
-#ifdef USE_IOSTREAM
-#include <sstream>
-#endif
-
 #include "CMonsterGenerator.h"
 
 namespace Knights {

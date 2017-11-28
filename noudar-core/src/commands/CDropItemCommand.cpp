@@ -2,18 +2,12 @@
 // Created by monty on 13/02/17.
 //
 
-#include <string>
-
 #ifdef USE_IOSTREAM
 #include <sstream>
 #endif
 
-#include <memory>
-#include <functional>
-#include "Vec2i.h"
-#include "IMapElement.h"
-#include "CGameDelegate.h"
 #include <string>
+#include <functional>
 #include <memory>
 #include <utility>
 #include <map>
@@ -24,19 +18,17 @@ using eastl::vector;
 using eastl::array;
 
 #include "Vec2i.h"
+#include "IMapElement.h"
+#include "CGameDelegate.h"
 #include "CTeam.h"
 #include "CItem.h"
 #include "CActor.h"
-
-
 #include "CMap.h"
 #include "IRenderer.h"
 #include "IFileLoaderDelegate.h"
 #include "CPlainFileLoader.h"
-
 #include "CGame.h"
 #include "commands/IGameCommand.h"
-
 #include "commands/CDropItemCommand.h"
 
 Knights::CDropItemCommand::CDropItemCommand(std::shared_ptr<Knights::CGame> aGame,
