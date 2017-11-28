@@ -1,4 +1,4 @@
-CXXFLAGS = -Inoudar-core/include -Incurses-version -O2 -g -c -fpermissive  -march=i486 -IEASTL/include -IEASTL/test/packages/EABase/include/Common -DEA_PLATFORM_LINUX 
+CXXFLAGS = -Inoudar-core/include -Incurses-version -O2 -g -c -fpermissive  -march=i486 -IEASTL/include -IEASTL/test/packages/EABase/include/Common -DEA_PLATFORM_LINUX -DUSE_IOSTREAM
 CXX = i586-pc-msdosdjgpp-g++
 
 OBJS = ncurses-version/main.o \
