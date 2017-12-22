@@ -1,4 +1,4 @@
-CXXFLAGS = -Inoudar-core/include -Incurses-version -O2 -g -c -std=c++0x  -ferror-limit=1 -DUSE_IOSTREAM -Werror -Wall --pedantic \
+CXXFLAGS = -Inoudar-core/include -Incurses-version -O2 -g -c -std=c++0x  -ferror-limit=1 -DUSE_IOSTREAM -Wno-narrowing   \
 		-I$(GTEST_DIR)/include \
 		-I$(GTEST_DIR) \
 		-I$(GTEST_DIR)/include/gtest \

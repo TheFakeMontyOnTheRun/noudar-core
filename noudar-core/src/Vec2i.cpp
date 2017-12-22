@@ -151,6 +151,6 @@ namespace Knights {
 	}
 
     Vec2i operator+(const Vec2i &lh, const Vec2i &rh) {
-        return Vec2i{ lh.x + rh.x, lh.y + rh.y };
+		return Vec2i{static_cast<int16_t >(lh.x + rh.x), static_cast<int16_t >(lh.y + rh.y) };
     }
 }
