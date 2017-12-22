@@ -39,7 +39,9 @@ namespace Knights {
 		bool canBeDropped() const;
 	};
 
+#ifdef USE_IOSTREAM
 	std::ostream &operator<<(std::ostream &os, const CItem &action);
+#endif
 
 	std::string to_string(const CItem &action);
 

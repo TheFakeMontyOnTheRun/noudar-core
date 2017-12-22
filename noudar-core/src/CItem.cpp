@@ -32,12 +32,14 @@ void Knights::CItem::use(std::shared_ptr<CActor> aActor, std::shared_ptr<CMap> a
 	mItemAction(aActor, aMap);
 }
 
+#ifdef USE_IOSTREAM
 std::ostream &::Knights::operator<<(std::ostream &os, const Knights::CItem &action) {
 
 	os << action.to_string();
 
 	return os;
 }
+#endif
 
 std::string Knights::to_string(const Knights::CItem &action) {
 	return action.to_string();

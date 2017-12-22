@@ -38,11 +38,13 @@ namespace Knights {
         return *this;
 	}
 
+#ifdef USE_IOSTREAM
 	std::ostream &operator<<(std::ostream &os, const EDirection &aDirection) {
 		os << to_string(aDirection);
 
 		return os;
 	}
+#endif
 
 	std::string to_string(const EDirection &aDirection) {;
 		switch (aDirection) {

@@ -12,7 +12,9 @@ namespace Knights {
 		kDead
 	};
 
+#ifdef USE_IOSTREAM
 	std::ostream &operator<<(std::ostream &os, const EStance &aStance);
+#endif
 
 	std::string to_string(const EStance &aStance);
 

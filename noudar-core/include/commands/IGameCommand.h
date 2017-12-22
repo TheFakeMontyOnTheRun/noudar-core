@@ -15,7 +15,10 @@ namespace Knights {
         virtual std::string to_string() const = 0;
     };
 
+#ifdef USE_IOSTREAM
     std::ostream& operator<<(std::ostream& os, const IGameCommand& action);
+#endif
+
     std::string to_string( const IGameCommand& action );
 }
 #endif //NOUDAR_CORE_ACTORACTION_H

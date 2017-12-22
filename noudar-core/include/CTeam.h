@@ -14,8 +14,9 @@ namespace Knights {
 		std::string to_string() const;
 	};
 
-
+#ifdef USE_IOSTREAM
 	std::ostream& operator<<(std::ostream& os, const CTeam& aTeam);
+#endif
 }
 
 #endif //NOUDAR_CORE_CTEAM_H

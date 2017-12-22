@@ -137,11 +137,13 @@ namespace Knights {
 		return mStance;
 	}
 
+#ifdef USE_IOSTREAM
 	std::ostream &operator<<(std::ostream &os, const EStance &aStance) {
 		os << to_string(aStance);
 
 		return os;
 	}
+#endif
 
 	std::string to_string(const EStance &aStance) {
 		switch (aStance) {
