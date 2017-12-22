@@ -8,10 +8,10 @@ namespace Knights {
 
     class Vec2i {
     public:
-        int x = 0;
-        int y = 0;
+        int16_t x = 0;
+        int16_t y = 0;
 
-        Vec2i( int aX, int aY );
+        Vec2i( int16_t aX, int16_t aY );
 
         Vec2i();
 

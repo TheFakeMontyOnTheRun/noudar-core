@@ -10,7 +10,7 @@
 
 namespace Knights {
 
-	Vec2i::Vec2i( int aX, int aY ): x( aX ), y( aY ) {
+	Vec2i::Vec2i( int16_t aX, int16_t aY ): x( aX ), y( aY ) {
 	}
 
 	Vec2i::Vec2i() : x( 0 ), y( 0 ) {
