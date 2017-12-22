@@ -33,12 +33,11 @@ OBJS = ncurses-version/main.o \
     noudar-core/src/commands/CUseCurrentItemCommand.o \
     noudar-core/src/commands/CEndTurnCommand.o
 
-
-
 TARGET = NOUDAR.exe
 
 $(TARGET):	$(OBJS)
 	$(CXX) -o $(TARGET) $(OBJS) $(LDFLAGS)
+	i586-pc-msdosdjgpp-strip $(TARGET)
 
 all:	$(TARGET)
 
