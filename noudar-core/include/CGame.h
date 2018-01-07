@@ -33,7 +33,7 @@ namespace Knights {
       std::shared_ptr<IRenderer> mRenderer = nullptr;
       std::shared_ptr<CGameDelegate> mGameDelegate = nullptr;
       std::shared_ptr<IFileLoaderDelegate> mFileLoaderDelegate = nullptr;
-
+		std::string mLastCommand = "";
       bool mIsPlaying = true;
       int mTurn = 0;
       int mLevel = 0;
@@ -50,6 +50,7 @@ namespace Knights {
       ActorId getCurrentActorId();
       int getLevelNumber();
       void setIsPlaying( bool isPlaying );
+		std::string getLastCommand();
   };
 }
 #endif

@@ -201,6 +201,7 @@ namespace Knights {
 
             if (command != nullptr) {
                 command->execute();
+                mLastCommand = command->to_string();
 
                 if (command->shouldEndTurn()) {
                     endOfTurn(mMap);
@@ -272,5 +273,9 @@ namespace Knights {
 
     void CGame::setIsPlaying(bool isPlaying) {
         mIsPlaying = isPlaying;
+    }
+
+    std::string CGame::getLastCommand() {
+        return mLastCommand;
     }
 }

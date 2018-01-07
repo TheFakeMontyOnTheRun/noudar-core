@@ -48,6 +48,8 @@ public:
 
   MOCK_METHOD2(drawMap, void( Knights::CMap &map, std::shared_ptr<Knights::CActor> current ) );
   MOCK_METHOD0(getInput, char());
+  Knights::CommandType peekInput() override {
+  }
 };
 
 class MockFileLoader : public Knights::IFileLoaderDelegate {
