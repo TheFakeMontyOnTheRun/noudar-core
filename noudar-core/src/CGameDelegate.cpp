@@ -16,6 +16,7 @@ namespace Knights {
         mOnPlayerDamaged = [](Knights::Vec2i pos) { };
         mOnProjectileHit = [](Knights::Vec2i pos) { };
         mOnLevelLoaded = []() { };
+        mOnLevelWillLoad = []() { };
     }
 
     void CGameDelegate::setMonsterDiedCallback(std::function<void(Knights::Vec2i)> aCallback) {
@@ -44,6 +45,10 @@ namespace Knights {
 
     void CGameDelegate::setOnLevelLoadedCallback(std::function<void(void)> aCallback) {
         mOnLevelLoaded = aCallback;
+    }
+
+    void CGameDelegate::setOnLevelWillLoadCallback(std::function<void(void)> aCallback) {
+        mOnLevelWillLoad = aCallback;
     }
 
     void CGameDelegate::setProjectileCallback(std::function<void(Knights::Vec2i)> aCallback) {
@@ -80,5 +85,9 @@ namespace Knights {
 
     void CGameDelegate::onLevelLoaded() {
         mOnLevelLoaded();
+    }
+
+    void CGameDelegate::onLevelWillLoad() {
+        mOnLevelWillLoad();
     }
 }

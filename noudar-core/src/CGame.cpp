@@ -239,6 +239,8 @@ namespace Knights {
 
     void CGame::playLevel(int levelNumber) {
 
+        mGameDelegate->onLevelWillLoad();
+
         char buffer[10];
         snprintf(buffer, 9, "map%d.txt", levelNumber);
 
