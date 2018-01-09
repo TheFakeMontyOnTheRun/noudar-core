@@ -49,7 +49,7 @@ namespace Knights {
         auto directions = "NESW";
         auto direction = directions[static_cast<int>(mDirection)];
 
-        return std::string("Move actor by ") + direction;
+        return std::string("Move by ") + direction;
 #endif
     }
 
