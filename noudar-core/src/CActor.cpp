@@ -128,6 +128,12 @@ namespace Knights {
 		return mMoves;
 	}
 
+	void CActor::setTarget(std::shared_ptr<CActor> target ) {
+		if (isAlive()) {
+			mTarget = target;
+		}
+	}
+
 
 	void CActor::addHP(int aHP) {
 		mHP += aHP;

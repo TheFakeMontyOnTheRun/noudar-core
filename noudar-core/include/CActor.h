@@ -42,6 +42,7 @@ namespace Knights {
 		vector<std::shared_ptr<CItem>> mInventory;
 		std::shared_ptr<CItem> mCurrentItem;
 		std::string mCurrentSay = "";
+        std::shared_ptr<CActor> mTarget = nullptr;
 	public:
 		virtual void performAttack(std::shared_ptr<CActor> other);
 
@@ -52,6 +53,8 @@ namespace Knights {
 		void setPosition(Vec2i position);
 
 		void onMove();
+
+		void setTarget(std::shared_ptr<CActor> target );
 
 		void onAttack();
 

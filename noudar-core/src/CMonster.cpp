@@ -96,22 +96,27 @@ namespace Knights {
 		CCharacter::update(map);
         mUpdateCallback(map, shared_from_this() );
 
-		int newX;
-		int newY;
+		if ( mTarget != nullptr && getAP() > 0 && isAlive() ) {
+			auto pos = mTarget->getPosition();
+			actOn(pos.x, pos.y, map);
+		} else {
+			int newX;
+			int newY;
 
-		for (int x = -mViewRange / 2; x <= mViewRange / 2; ++x) {
+			for (int x = -mViewRange / 2; x <= mViewRange / 2; ++x) {
 
-			for (int y = -mViewRange / 2; y <= mViewRange / 2; ++y) {
+				for (int y = -mViewRange / 2; y <= mViewRange / 2; ++y) {
 
-				if (x == 0 && y == 0) {
-					continue;
-				}
+					if (x == 0 && y == 0) {
+						continue;
+					}
 
-				newX = std::min<int>(kMapSize - 1, std::max<int>(0, (x + mPosition.x)));
-				newY = std::min<int>(kMapSize - 1, std::max<int>(0, (y + mPosition.y)));
+					newX = std::min<int>(kMapSize - 1, std::max<int>(0, (x + mPosition.x)));
+					newY = std::min<int>(kMapSize - 1, std::max<int>(0, (y + mPosition.y)));
 
-				if (actOn(newX, newY, map)) {
-					return;
+					if (actOn(newX, newY, map)) {
+						return;
+					}
 				}
 			}
 		}
