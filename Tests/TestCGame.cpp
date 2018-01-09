@@ -587,7 +587,7 @@ TEST_F(TestCGame, KillingTheCocoonWillSpawnTheWeakenedMasterDemon ) {
 
     mGame->tick();
     mGame->tick();
-    auto shouldBeDemonNow= mGame->getMap()->getActorAt({ Knights::kMapSize - 1, 0 })->getView();
+    auto shouldBeDemonNow= mGame->getMap()->getActorAt({ Knights::kMapSize - 2, 0 })->getView();
 
     ASSERT_EQ( shouldBeCocoonNow, 'C');
     ASSERT_EQ( shouldBeDemonNow, 'd');
@@ -651,7 +651,7 @@ TEST_F(TestCGame, WeakDemonShouldNotBeVulnerableToCrossbows ) {
     ON_CALL(*mMockRenderer, getInput()).WillByDefault(Return(Knights::kUseCurrentItemInInventoryCommand));
     mGame->tick();
 
-    auto weakDemonEnergyAfterBolt = mGame->getMap()->getActorAt( { 0, Knights::kMapSize - 2 })->getHP();
+    auto weakDemonEnergyAfterBolt = mGame->getMap()->getActorAt( { 1, Knights::kMapSize - 2 })->getHP();
 
     ASSERT_EQ( weakDemonEnergyBeforeBolt, weakDemonEnergyAfterBolt );
 }
@@ -696,7 +696,7 @@ TEST_F(TestCGame, StrongDemonShouldNotBeVulnerableToCrossbows ) {
     ON_CALL(*mMockRenderer, getInput()).WillByDefault(Return(Knights::kUseCurrentItemInInventoryCommand));
     mGame->tick();
 
-    auto strongDemonEnergyAfterBolt = mGame->getMap()->getActorAt( { Knights::kMapSize - 1, Knights::kMapSize - 2 })->getHP();
+    auto strongDemonEnergyAfterBolt = mGame->getMap()->getActorAt( { Knights::kMapSize - 2, Knights::kMapSize - 2 })->getHP();
 
     ASSERT_EQ( strongDemonEnergyBeforeBolt, strongDemonEnergyAfterBolt );
 }
@@ -728,7 +728,7 @@ TEST_F(TestCGame, StrongDemonShouldNotBeVulnerableToCrossbowsAndDischardgedShiel
     ON_CALL(*mMockRenderer, getInput()).WillByDefault(Return(Knights::kUseCurrentItemInInventoryCommand));
     mGame->tick();
 
-    auto strongDemonEnergyAfterBolt = mGame->getMap()->getActorAt( { Knights::kMapSize - 1, Knights::kMapSize - 2 })->getHP();
+    auto strongDemonEnergyAfterBolt = mGame->getMap()->getActorAt( { Knights::kMapSize - 2, Knights::kMapSize - 2 })->getHP();
 
     ASSERT_EQ( strongDemonEnergyBeforeBolt, strongDemonEnergyAfterBolt );
 }
@@ -783,7 +783,7 @@ TEST_F(TestCGame, EvilSpiritShouldBeVulnerableToTheCrossbow ) {
     ON_CALL(*mMockRenderer, getInput()).WillByDefault(Return(Knights::kUseCurrentItemInInventoryCommand));
     mGame->tick();
 
-    auto strongDemonEnergyAfterBolt = mGame->getMap()->getActorAt( { Knights::kMapSize - 1, Knights::kMapSize / 4 })->getHP();
+    auto strongDemonEnergyAfterBolt = mGame->getMap()->getActorAt( { Knights::kMapSize - 2, Knights::kMapSize / 4 })->getHP();
 
     ASSERT_GT( strongDemonEnergyBeforeBolt, strongDemonEnergyAfterBolt );
 }
@@ -815,7 +815,7 @@ TEST_F(TestCGame, StrongDemonShouldBeVulnerableToCrossbowsAndChardgedShield ) {
     ON_CALL(*mMockRenderer, getInput()).WillByDefault(Return(Knights::kUseCurrentItemInInventoryCommand));
     mGame->tick();
 
-    auto strongDemonEnergyAfterBolt = mGame->getMap()->getActorAt( { Knights::kMapSize - 1, Knights::kMapSize - 2 })->getHP();
+    auto strongDemonEnergyAfterBolt = mGame->getMap()->getActorAt( { Knights::kMapSize - 2, Knights::kMapSize - 2 })->getHP();
 
     ASSERT_GT( strongDemonEnergyBeforeBolt, strongDemonEnergyAfterBolt );
 }
@@ -844,7 +844,7 @@ TEST_F(TestCGame, WeakDemonShouldNotBeVulnerableToCrossbowsAndChardgedShield ) {
     ON_CALL(*mMockRenderer, getInput()).WillByDefault(Return(Knights::kUseCurrentItemInInventoryCommand));
     mGame->tick();
 
-    auto weakDemonEnergyAfterBolt = mGame->getMap()->getActorAt( { 0, Knights::kMapSize - 2 })->getHP();
+    auto weakDemonEnergyAfterBolt = mGame->getMap()->getActorAt( { 1, Knights::kMapSize - 2 })->getHP();
 
     ASSERT_EQ( weakDemonEnergyBeforeBolt, weakDemonEnergyAfterBolt );
 }
