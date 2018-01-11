@@ -251,8 +251,9 @@ namespace Knights {
                                 map->floodFill( position,
                                                 {
                                                         {'#', std::pair<ElementView , CBlockProperties>('~', CBlockProperties())},
+                                                        {'H', std::pair<ElementView , CBlockProperties>('F', CBlockProperties(true, false, false))},
                                                         {element, std::pair<ElementView, CBlockProperties>('_', CBlockProperties()) },
-                                                        {'R', std::pair<ElementView, CBlockProperties>('1', CBlockProperties{true, false, false}) }
+                                                        {'R', std::pair<ElementView, CBlockProperties>('1', CBlockProperties{true, true, true}) }
                                                 });
                                 character->addHP( -character->getHP() );
                                 map->removeActorFrom( character->getPosition() );
