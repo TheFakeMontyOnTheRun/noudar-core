@@ -279,9 +279,9 @@ namespace Knights {
                             if ( currentHP < defaultHP ) {
                                 character->addHP( -character->getHP() );
                                 auto position = me->getPosition();
-                                map->removeActorFrom( position );
                                 auto x = me->getPosition().x;
                                 auto y = me->getPosition().y;
+                                map->removeActorFrom( position );
 
                                 map->mItems[ y ][ x ] = std::make_shared<CItem>("The holy health", '+', true, true, [](std::shared_ptr<CActor> aActor, std::shared_ptr<CMap> aMap){
                                     aActor->addHP(20);
@@ -508,7 +508,7 @@ namespace Knights {
 
                 if (mActors[y][x] != nullptr) {
                     auto actor = mActors[ y ][ x ];
-                    if ( actor->getTeam() != heroTeam ) {
+                    if ( actor->isAlive() && actor->getTeam() != heroTeam ) {
                         monsters++;
                     }
                 }
@@ -667,6 +667,7 @@ namespace Knights {
         }
 
         auto actor = getActorAt( position );
+        actor->setPosition({-1, -1});
         mActors[ position.y ][ position.x ] = nullptr;
     }
 
