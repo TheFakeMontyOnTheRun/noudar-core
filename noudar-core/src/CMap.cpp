@@ -415,10 +415,10 @@ namespace Knights {
         return actor->getPosition() + mapOffsetForDirection( actor->getDirection() );
     }
 
-    void CMap::move(EDirection d, std::shared_ptr<CActor> actor) {
+    bool CMap::move(EDirection d, std::shared_ptr<CActor> actor) {
 
         if (!actor->canMove()) {
-            return;
+            return false;
         }
 
         auto position = actor->getPosition();
@@ -428,7 +428,10 @@ namespace Knights {
         if (!isBlockMovementAt(newPosition)) {
             moveActor(position, newPosition, actor);
             actor->onMove();
+            return true;
         }
+
+        return false;
     }
 
     bool CMap::isValid(const Vec2i& p) {

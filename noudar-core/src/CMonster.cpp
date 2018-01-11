@@ -45,25 +45,48 @@ namespace Knights {
 			}
 
 			if (dx <= 0) {
-				map->move(EDirection::kWest, sharedThis);
-				return true;
+
+                if (!map->move(EDirection::kWest, sharedThis)) {
+					if (!map->move(EDirection::kSouth, sharedThis)) {
+						return map->move(EDirection::kNorth, sharedThis);
+					}
+                }
+
+                return true;
 			} else if (dx > 0) {
-				map->move(EDirection::kEast, sharedThis);
-				return true;
+
+                if (!map->move(EDirection::kEast, sharedThis)) {
+					if (!map->move(EDirection::kNorth, sharedThis)) {
+						return map->move(EDirection::kSouth, sharedThis);
+					}
+				}
+
+                return true;
 			}
 		} else {
 			if ( std::abs(dy) == 1) {
-				map->attack( sharedThis, {x, y}, false);
-				onMove();
+                map->attack( sharedThis, {x, y}, false);
+                onMove();
 				return true;
 			}
 
 			if (dy <= 0) {
-				map->move(EDirection::kNorth, sharedThis);
+
+                if (!map->move(EDirection::kNorth, sharedThis)) {
+					if (!map->move(EDirection::kWest, sharedThis)) {
+						return map->move(EDirection::kEast, sharedThis);
+					}
+                }
+
 				return true;
 			} else if (dy > 0) {
-				map->move(EDirection::kSouth, sharedThis);
-				return true;
+
+                if (!map->move(EDirection::kSouth, sharedThis)) {
+					if (!map->move(EDirection::kEast, sharedThis)) {
+						return map->move(EDirection::kWest, sharedThis);
+					}
+				}
+                return true;
 			}
 		}
 
@@ -77,6 +100,8 @@ namespace Knights {
 
 			if (otherActor != nullptr
 			    && otherActor->getTeam() != getTeam()) {
+
+				setTarget(otherActor);
 
 				if (dealWith(map, newX, newY)) {
 					return true;

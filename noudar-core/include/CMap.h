@@ -45,7 +45,8 @@ namespace Knights {
         bool isBlockProjectilesAt( const Vec2i &p );
         bool isBlockViewAt( const Vec2i &p );
         CMap( const std::string& data, std::shared_ptr<CGameDelegate> aGameDelegate );
-        void move( EDirection d, std::shared_ptr<CActor> a );
+
+		bool move( EDirection d, std::shared_ptr<CActor> a );
         void endOfTurn();
 	    bool isLevelFinished();
         Vec2i getActorTargetPosition( std::shared_ptr<CActor> a );
