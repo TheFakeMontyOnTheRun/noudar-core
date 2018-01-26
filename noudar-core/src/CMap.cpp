@@ -136,7 +136,7 @@ namespace Knights {
         std::shared_ptr<CActor> actor = nullptr;
         std::shared_ptr<CItem> item = nullptr;
 
-        auto heroArchetype = std::make_shared<CCharacterArchetype>( 5, 3, 20, 7, '^', "Hero");
+        auto heroArchetype = std::make_shared<CCharacterArchetype>( 5, 3, 100, 7, '^', "Hero");
         auto fallenArchetype = std::make_shared<CCharacterArchetype>( 4, 1, 10, 3, '$', "Fallen Hero");
         auto monkArchetype = std::make_shared<CCharacterArchetype>( 4, 0, 10, 3, '@', "Insane Monk");
         auto cocoonArchetype = std::make_shared<CCharacterArchetype>( 0, 0, 10000, 0, 'C', "Cocoon");
