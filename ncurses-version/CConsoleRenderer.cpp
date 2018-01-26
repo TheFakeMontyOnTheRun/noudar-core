@@ -7,6 +7,7 @@
 */
 
 #include <string>
+#include <functional>
 #include <map>
 #include <memory>
 #include <ncurses.h>

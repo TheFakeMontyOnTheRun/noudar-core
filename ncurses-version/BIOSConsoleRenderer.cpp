@@ -255,6 +255,10 @@ namespace Knights {
         ch = getch();
     }
 
+    CommandType CConsoleRenderer::peekInput() {
+        return ch;
+    }
+
     CommandType CConsoleRenderer::getInput() {
         char toReturn = ch;
         ch = '.';
