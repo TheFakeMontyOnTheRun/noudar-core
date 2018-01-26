@@ -253,7 +253,7 @@ TEST_F(TestCGame, GameWillInvalidateStoredPlayerForNextSession ) {
 	avatar->addHP(-avatar->getHP() * 2 );
 	ASSERT_FALSE( avatar->isAlive() );
 	mGame->tick();
-	ASSERT_TRUE( mGame->getMap()->getAvatar()->isAlive() );
+	ASSERT_FALSE( mGame->getMap()->getAvatar()->isAlive() );
 	ASSERT_NE( previousHP, mGame->getMap()->getAvatar()->getHP() );
 }
 
