@@ -2,6 +2,7 @@
 #include <sstream>
 #endif
 #include <functional>
+#include <string>
 #include <memory>
 #include <map>
 #include <EASTL/vector.h>
@@ -59,10 +60,7 @@ namespace Knights {
 
     void CGame::tick() {
 
-        if (mMap == nullptr || mMap->getAvatar() == nullptr || !mMap->getAvatar()->isAlive()) {
-	        mPlayerActor = nullptr;
-            playLevel(0);
-        } else {
+        if (!(mMap == nullptr || mMap->getAvatar() == nullptr || !mMap->getAvatar()->isAlive())) {
 
             std::shared_ptr<IGameCommand> command;
 
