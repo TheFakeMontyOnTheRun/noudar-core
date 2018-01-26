@@ -1,6 +1,6 @@
 #include <string>
 #include <memory>
-#include <cmath>
+#include <math.h>
 #include <map>
 #include <functional>
 #include <EASTL/vector.h>
@@ -36,9 +36,9 @@ namespace Knights {
 
 		auto sharedThis = shared_from_this();
 
-		if (std::abs(dx) >= std::abs(dy)) {
+		if (abs(dx) >= abs(dy)) {
 
-			if ( std::abs(dx) == 1) {
+			if ( abs(dx) == 1) {
 				map->attack( sharedThis, {x, y}, false);
 				onMove();
 				return true;
@@ -64,7 +64,7 @@ namespace Knights {
                 return true;
 			}
 		} else {
-			if ( std::abs(dy) == 1) {
+			if ( abs(dy) == 1) {
                 map->attack( sharedThis, {x, y}, false);
                 onMove();
 				return true;
