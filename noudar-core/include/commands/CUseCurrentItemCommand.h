@@ -9,6 +9,7 @@ namespace Knights {
 	class CUseCurrentItemCommand : public IGameCommand {
 
 		std::shared_ptr <CActor> mActor;
+		std::string mItemName = "";
 	public:
 		CUseCurrentItemCommand( std::shared_ptr<CGame> aGame, std::shared_ptr <CActor> aActor );
 

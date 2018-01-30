@@ -36,7 +36,13 @@ Knights::CPickItemCommand::CPickItemCommand(std::shared_ptr<Knights::CGame> aGam
 }
 
 std::string Knights::CPickItemCommand::to_string() const {
-	return "Pick item";
+    if ( mItemName.empty()) {
+        return "";
+    } else {
+        std::string message = "Pick item: ";
+        message.append(mItemName);
+        return message;
+    }
 }
 
 bool Knights::CPickItemCommand::shouldEndTurn() {
@@ -50,6 +56,7 @@ void Knights::CPickItemCommand::execute() {
     bool giveBack = false;
     if (item != nullptr ) {
         giveBack = item->isConsumable();
+        mItemName = item->to_string();
     }
 	map->giveItemAt( map->getActorTargetPosition(mActor), mActor );
 #ifdef USE_ITEMS_INSTANTLY

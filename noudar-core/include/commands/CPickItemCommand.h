@@ -9,6 +9,7 @@ namespace Knights {
 	class CPickItemCommand : public IGameCommand {
 
 		std::shared_ptr<CActor> mActor;
+		std::string mItemName = "";
 	public:
 		CPickItemCommand(std::shared_ptr<CGame> aGame,
 		                 std::shared_ptr<CActor> aActor

@@ -36,7 +36,9 @@ IGameCommand( aGame ), mActor( aActor ) {
 }
 
 std::string Knights::CUseCurrentItemCommand::to_string() const {
-	return "Use current item";
+	std::string message = "Use item: ";
+	message.append(mItemName);
+	return message;
 }
 
 bool Knights::CUseCurrentItemCommand::shouldEndTurn() {
@@ -49,5 +51,6 @@ void Knights::CUseCurrentItemCommand::execute() {
 
 	if ( currentItem != nullptr ) {
 		getGame()->getMap()->useItem( currentItem, mActor );
+		mItemName = currentItem->to_string();
 	}
 }

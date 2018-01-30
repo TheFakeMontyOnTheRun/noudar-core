@@ -254,6 +254,7 @@ namespace Knights {
     std::shared_ptr<CItem> CActor::getItemWithSymbol(ItemView symbol) {
 
 		for ( const auto& item : mInventory ) {
+			auto itemView = item->getView();
 			if ( item->getView() == symbol ) {
 				return item;
 			}

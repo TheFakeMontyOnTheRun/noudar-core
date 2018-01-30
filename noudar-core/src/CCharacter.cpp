@@ -29,7 +29,6 @@ namespace Knights {
 
     void CCharacter::update(std::shared_ptr<CMap> map) {
         CActor::update(map);
-
         mUpdateMethod(shared_from_this(), map );
     }
 

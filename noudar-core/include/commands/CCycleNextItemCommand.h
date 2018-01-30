@@ -9,6 +9,7 @@ namespace Knights {
 	class CCycleNextItemCommand : public IGameCommand {
 
 		std::shared_ptr <CActor> mActor;
+		std::string mItemName = "";
 	public:
 		CCycleNextItemCommand(std::shared_ptr <CGame> aGame, std::shared_ptr <CActor> aActor);
 

@@ -37,7 +37,13 @@ namespace Knights {
 	}
 
 	std::string CCycleNextItemCommand::to_string() const {
-		return "Next item";
+		if ( mItemName.empty()) {
+			return "";
+		} else {
+			std::string message = "Next item: ";
+			message.append(mItemName);
+			return message;
+		}
 	}
 
 	bool CCycleNextItemCommand::shouldEndTurn() {
@@ -45,6 +51,12 @@ namespace Knights {
 	}
 
 	void CCycleNextItemCommand::execute() {
+		auto previousItemSymbol = mActor->getSelectedItem()->getView();
 		mActor->selectNextItem();
+		auto itemSymbol = mActor->getSelectedItem()->getView();
+
+		if ( previousItemSymbol != itemSymbol) {
+			mItemName = mActor->getSelectedItem()->to_string();
+		}
 	}
 }
