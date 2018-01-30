@@ -35,6 +35,7 @@ using eastl::array;
 #include "commands/CUseCurrentItemCommand.h"
 #include "commands/CPickItemCommand.h"
 #include "commands/CDropItemCommand.h"
+#include "commands/CSuggestItemCommand.h"
 
 namespace Knights {
 
@@ -196,6 +197,25 @@ namespace Knights {
 		        std::shared_ptr <CActor> avatar = mMap->getAvatar();
 		        command = std::make_shared<CDropItemCommand>(shared_from_this(), avatar);
 	        }
+
+            if (entry == '1' || entry == '2' || entry == '3') {
+                ElementView itemView = '.';
+
+                switch (entry) {
+                    case '1':
+                        itemView='t';
+                        break;
+                    case '2':
+                        itemView='y';
+                        break;
+                    case '3':
+                        itemView='v';
+                        break;
+                }
+
+                std::shared_ptr <CActor> avatar = mMap->getAvatar();
+                command = std::make_shared<CSuggestItemCommand>(shared_from_this(), avatar, itemView);
+            }
 
             if (command != nullptr) {
                 command->execute();
