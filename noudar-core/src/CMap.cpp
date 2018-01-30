@@ -42,6 +42,7 @@ namespace Knights {
 #endif
 
     void CMap::endOfTurn() {
+
         for (int y = 0; y < kMapSize; ++y) {
             for (int x = 0; x < kMapSize; ++x) {
                 if (mActors[y][x] != nullptr) {
@@ -69,6 +70,8 @@ namespace Knights {
                     if ( shield->getAmount() > 0 ) {
                         aActor->addHP( 1 );
                         shield->add( -1 );
+                    } else {
+                        aActor->setCurrentSay("Shield depleted");
                     }
 
                 }, 0);
@@ -91,6 +94,7 @@ namespace Knights {
                     }
 
                     if ( !crossbowHasAmmo ) {
+                        aMap->getAvatar()->setCurrentSay("Crossbow depleted");
                         return;
                     }
 
@@ -102,7 +106,6 @@ namespace Knights {
                         aMap->attack( aActor, target, false );
 
                         if ( shieldHasAmmo ) {
-
                             aActor->setAttackBonus( kImprovedDamageRatio );
                             aMap->attack( aActor, target, false );
                         }
@@ -115,6 +118,7 @@ namespace Knights {
 
                     if ( shieldHasAmmo ) {
                         shield->add( -( kShieldPowerUsage ) );
+                        aMap->getAvatar()->setCurrentSay("Supercharged shot!");
                     }
 
                 }, 0);
@@ -202,7 +206,9 @@ namespace Knights {
                         actor = mAvatar = std::make_shared<CCharacter>( heroArchetype, friends, getLastestId(), [](std::shared_ptr<CActor> character, std::shared_ptr<CMap> map){
                             auto shield = (CStorageItem*)character->getItemWithSymbol( 'v' ).get();
                             if ( shield != nullptr && map->getElementAt( character->getPosition() ) == '*' ) {
+
                                 if ( shield->getAmount() < 20 ) {
+                                    map->getAvatar()->setCurrentSay("Holy items get charged on holy soil");
                                     shield->add( 1 );
                                 }
                             }
@@ -250,6 +256,7 @@ namespace Knights {
 
                             if ( archetype.getHP() > character->getHP() ) {
                                 auto position = character->getPosition();
+                                map->getAvatar()->setCurrentSay("You hear mechanisms in action");
                                 map->floodFill( position,
                                                 {
                                                         {'#', std::pair<ElementView , CBlockProperties>('~', CBlockProperties())},

@@ -123,7 +123,6 @@ namespace Knights {
 		void suggestCurrentItem( ItemView view );
 
 		void setAttackBonus( int attackBonus );
-	protected:
 
 		void setCurrentSay( std::string newSay );
 	};
