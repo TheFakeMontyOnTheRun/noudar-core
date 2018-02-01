@@ -24,7 +24,6 @@ using eastl::array;
 #include "CMonster.h"
 #include "IRenderer.h"
 #include "IFileLoaderDelegate.h"
-#include "CPlainFileLoader.h"
 #include "CGame.h"
 #include "commands/IGameCommand.h"
 #include "commands/CMoveActorCommand.h"

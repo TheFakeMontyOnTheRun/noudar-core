@@ -12,7 +12,8 @@ namespace Knights {
 	public:
 		explicit CPlainFileLoader();
 		explicit CPlainFileLoader( std::string prefix );
-		vector<char> loadBinaryFileFromPath( const std::string& path ) override;
+		uint8_t* loadBinaryFileFromPath( const std::string& path ) override;
+		size_t sizeOfFile(const std::string& path) override;
 		std::string loadFileFromPath( const std::string& path ) override ;
 		std::string getFilePathPrefix() override;
 		void setFilenameTransformation( std::function<std::string(std::string)> transform );

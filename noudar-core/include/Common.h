@@ -12,7 +12,7 @@ namespace Knights {
 
     std::string readToString(FILE *fileDescriptor);
 
-    vector<char> readToBuffer(FILE *fileDescriptor);
+    uint8_t* readToBuffer(FILE *fileDescriptor);
 
     std::string fileFromString( const std::string& path );
 }

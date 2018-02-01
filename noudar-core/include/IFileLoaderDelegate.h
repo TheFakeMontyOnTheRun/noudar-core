@@ -8,7 +8,8 @@ namespace Knights {
 	class IFileLoaderDelegate {
 	public:
 		virtual std::string loadFileFromPath( const std::string& path ) = 0;
-		virtual vector<char> loadBinaryFileFromPath( const std::string& path ) = 0;
+		virtual uint8_t* loadBinaryFileFromPath( const std::string& path ) = 0;
+        virtual size_t sizeOfFile(const std::string& path) = 0;
 	private:
 		virtual std::string getFilePathPrefix() = 0;
 	};

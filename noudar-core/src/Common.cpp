@@ -40,14 +40,14 @@ namespace Knights {
 
 	}
 
-	vector<char> readToBuffer(FILE *fileDescriptor) {
+	uint8_t* readToBuffer(FILE *fileDescriptor) {
 		const unsigned N = 1024;
 
 		fseek(fileDescriptor, 0, SEEK_END);
 		auto endPos = ftell( fileDescriptor );
 		rewind(fileDescriptor);
-		vector<char> total(endPos);
-		auto writeHead = std::begin( total );
+		auto total = new uint8_t[endPos];
+		auto writeHead = total;
 
 		for ( int c = 0; c < endPos; ++c ) {
 			char buffer[N];

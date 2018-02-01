@@ -27,7 +27,6 @@ using eastl::array;
 #include "CMap.h"
 #include "IRenderer.h"
 #include "IFileLoaderDelegate.h"
-#include "CPlainFileLoader.h"
 #include "CGame.h"
 #include "commands/IGameCommand.h"
 #include "commands/CCycleNextItemCommand.h"

@@ -52,11 +52,14 @@ public:
   }
 };
 
+using byteptr = uint8_t*;
+
 class MockFileLoader : public Knights::IFileLoaderDelegate {
 public:
 
   MOCK_METHOD1( loadFileFromPath, std::string( const std::string& path ) );
-  MOCK_METHOD1( loadBinaryFileFromPath, vector<char>( const std::string& path ) );
+  MOCK_METHOD1( loadBinaryFileFromPath, byteptr( const std::string& path ) );
+    MOCK_METHOD1( sizeOfFile, size_t( const std::string& path ) );
   MOCK_METHOD0( getFilePathPrefix, std::string());
 };
 
