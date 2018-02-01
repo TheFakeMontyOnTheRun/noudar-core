@@ -32,6 +32,7 @@ set(SOURCE_FILES
         noudar-core/include/commands/CDropItemCommand.h
         noudar-core/include/commands/CPickItemCommand.h
         noudar-core/include/commands/IGameCommand.h
+        noudar-core/include/commands/CSuggestItemCommand.h
         noudar-core/include/CPlainFileLoader.h
         noudar-core/include/CActor.h
         noudar-core/include/CMonsterGenerator.h
@@ -55,6 +56,7 @@ set(SOURCE_FILES
         noudar-core/src/commands/CPickItemCommand.cpp
         noudar-core/src/commands/CDropItemCommand.cpp
         noudar-core/src/commands/CCyclePreviousItemCommand.cpp
+        noudar-core/src/commands/CSuggestItemCommand.cpp
         noudar-core/src/commands/CUseCurrentItemCommand.cpp
         noudar-core/src/commands/IGameCommand.cpp
         noudar-core/src/CPlainFileLoader.cpp
