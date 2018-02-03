@@ -33,9 +33,7 @@ namespace Knights {
         array< array<CBlockProperties, kMapSize>, kMapSize> mTileBlockProperties;
         ElementView mElement[ kMapSize ][ kMapSize ];
 	    array< array< std::shared_ptr<CItem>, kMapSize >, kMapSize > mItems;
-
-        vector<std::shared_ptr<CActor>> actors;
-        std::shared_ptr<CActor> mAvatar;
+		std::shared_ptr<CActor> mAvatar;
 		ActorId mCurrentId = 1;
 
 	public:

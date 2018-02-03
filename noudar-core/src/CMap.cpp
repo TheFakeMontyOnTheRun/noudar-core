@@ -51,9 +51,14 @@ namespace Knights {
             }
         }
 
-        actors.erase(std::remove_if(actors.begin(), actors.end(),
-                                    [](std::shared_ptr<CActor> actor) { return !actor->isAlive(); }
-        ), actors.end());
+        for (int y = 0; y < kMapSize; ++y) {
+            for (int x = 0; x < kMapSize; ++x) {
+                auto actor = mActors[y][x];
+                if (actor != nullptr && !actor->isAlive()) {
+                    mActors[y][x] = nullptr;
+                }
+            }
+        }
     }
 
     std::shared_ptr<Knights::CItem> CMap::makeItemWithSymbol(char symbol ) {
@@ -333,7 +338,6 @@ namespace Knights {
                 }
 
                 if (actor != nullptr) {
-                    actors.push_back(actor);
                     mActors[y][x] = actor;
 
                     if (kPlaceEmptySpacesForSpawnPoints && element != '3' && element != 'T' ) {
@@ -481,7 +485,18 @@ namespace Knights {
     }
 
     vector<std::shared_ptr<CActor>> CMap::getActors() {
-        return actors;
+        vector<std::shared_ptr<CActor>> toReturn;
+
+        for (int y = 0; y < kMapSize; ++y) {
+            for (int x = 0; x < kMapSize; ++x) {
+                if (mActors[y][x] != nullptr) {
+                    toReturn.push_back(mActors[y][x]);
+                }
+            }
+        }
+
+
+        return toReturn;
     }
 
     std::shared_ptr<CActor> CMap::getAvatar() {
@@ -611,7 +626,6 @@ namespace Knights {
         }
 
         mElement[ position.y ][ position.x ] = '.';
-        actors.push_back(actor);
         mActors[ position.y][ position.x] = actor;
         actor->setPosition( position );
     }
