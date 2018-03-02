@@ -25,7 +25,8 @@ namespace Knights {
 	const static CommandType kUseCurrentItemInInventoryCommand = '\t';
     const static CommandType kPickItemCommand = '[';
 	const static CommandType kDropItemCommand = ']';
-
+	const static CommandType kStartCommand = 13;
+	const static CommandType kNullCommand = '.';
 
 	class CGame : public std::enable_shared_from_this<CGame> {
       std::shared_ptr<CMap> mMap = nullptr;

@@ -157,7 +157,7 @@ namespace Knights {
     }
 
   Knights::CommandType CConsoleRenderer::peekInput() {
-    return '.';
+    return Knights::kNullCommand;
   }
   
     CommandType CConsoleRenderer::getInput() {

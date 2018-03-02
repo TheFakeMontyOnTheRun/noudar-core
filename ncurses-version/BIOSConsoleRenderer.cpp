@@ -261,7 +261,7 @@ namespace Knights {
 
     CommandType CConsoleRenderer::getInput() {
         char toReturn = ch;
-        ch = '.';
+        ch = Knights::kNullCommand;
         return toReturn;
     }
 }
