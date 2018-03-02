@@ -90,13 +90,38 @@ protected:
         return count;
     }
 
-    void removeAllMonsters() {
-        auto actors = mGame->getMap()->getActors();
-        auto player = mGame->getMap()->getAvatar();
 
-        for (const auto& actor : actors ) {
-            if ( actor != player ) {
-                mGame->getMap()->removeActorFrom( actor->getPosition() );
+    void assertOnlyOneOf( std::shared_ptr<Knights::CActor> candidate ) {
+        auto map = mGame->getMap();
+        int found = 0;
+        for ( int y = 0; y < Knights::kMapSize; ++y ) {
+            for ( int x = 0; x < Knights::kMapSize; ++x ) {
+
+                auto actor = map->getActorAt( { x, y } );
+                if ( actor == candidate ) {
+                    ++found;
+                    assert( y == actor->getPosition().y  );
+                    assert( x == actor->getPosition().x  );
+                    assert( y == candidate->getPosition().y  );
+                    assert( x == candidate->getPosition().x  );
+
+                }
+            }
+        }
+
+        assert( found == 1 );
+    }
+
+    void removeAllMonsters() {
+        auto player = mGame->getMap()->getAvatar();
+        auto map = mGame->getMap();
+
+        for ( int y = 0; y < Knights::kMapSize; ++y ) {
+            for ( int x = 0; x < Knights::kMapSize; ++x ) {
+                auto actor = map->getActorAt( { x, y } );
+                if ( actor != nullptr && actor != player ) {
+                    map->removeActorFrom( actor->getPosition() );
+                }
             }
         }
     }
@@ -115,12 +140,15 @@ protected:
 
     int getTotalHealthInLevel() {
 
-        auto actors = mGame->getMap()->getActors();
         auto cumulatedHealth = 0;
+        auto map = mGame->getMap();
 
-        for (const auto& actor : actors ) {
-            if ( actor->getView() == '@') {
-                cumulatedHealth += actor->getHP();
+        for ( int y = 0; y < Knights::kMapSize; ++y ) {
+            for ( int x = 0; x < Knights::kMapSize; ++x ) {
+                auto actor = map->getActorAt( { x, y } );
+                if ( actor != nullptr && actor->getView() == '@' ) {
+                    cumulatedHealth += actor->getHP();
+                }
             }
         }
 
@@ -1041,4 +1069,16 @@ TEST_F(TestCGame, DeadMonksShouldDropTokensOfFaith ) {
 #else
     ASSERT_GT( actor->getHP(), actorHP);
 #endif
+}
+
+
+TEST_F(TestCGame, MonstersMoveOnlyOneCellPerTurn ) {
+    auto map = mGame->getMap();
+    auto actor = map->getAvatar();
+    mGame->getMap()->moveActor( actor->getPosition(), { actor->getPosition().x, 6}, actor );
+    auto monster = map->getActorAt({actor->getPosition().x, 3});
+    ON_CALL(*mMockRenderer, getInput()).WillByDefault(Return(Knights::kEndTurnCommand));
+    mGame->tick();
+    ASSERT_EQ(monster->getPosition().y, 4 );
+    ASSERT_EQ(monster->getPosition().x, actor->getPosition().x );
 }

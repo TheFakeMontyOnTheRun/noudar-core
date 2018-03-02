@@ -41,7 +41,7 @@ namespace Knights {
             true;
 #endif
 
-    void CMap::endOfTurn() {
+    void CMap::endOfTurn(uint32_t turn) {
 
         for (int y = 0; y < kMapSize; ++y) {
             for (int x = 0; x < kMapSize; ++x) {
@@ -59,6 +59,17 @@ namespace Knights {
                 }
             }
         }
+
+        for (int y = 0; y < kMapSize; ++y) {
+            for (int x = 0; x < kMapSize; ++x) {
+                auto actor = mActors[y][x];
+                if (actor != nullptr && turn > actor->mLastUpdatedTurn) {
+                    actor->mLastUpdatedTurn = turn;
+                    actor->update(shared_from_this());
+                }
+            }
+        }
+
     }
 
     std::shared_ptr<Knights::CItem> CMap::makeItemWithSymbol(char symbol ) {
@@ -482,21 +493,6 @@ namespace Knights {
         }
 
         return mElement[p.y][p.x];
-    }
-
-    vector<std::shared_ptr<CActor>> CMap::getActors() {
-        vector<std::shared_ptr<CActor>> toReturn;
-
-        for (int y = 0; y < kMapSize; ++y) {
-            for (int x = 0; x < kMapSize; ++x) {
-                if (mActors[y][x] != nullptr) {
-                    toReturn.push_back(mActors[y][x]);
-                }
-            }
-        }
-
-
-        return toReturn;
     }
 
     std::shared_ptr<CActor> CMap::getAvatar() {

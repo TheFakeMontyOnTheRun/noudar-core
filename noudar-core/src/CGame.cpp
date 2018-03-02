@@ -40,18 +40,14 @@ namespace Knights {
 
     void CGame::endOfTurn(std::shared_ptr<CMap> map) {
 
-        map->endOfTurn();
-
-        for (auto &actor : map->getActors()) {
-            actor->update(map);
-        }
+        map->endOfTurn(++mTurn);
 
         if (map->isLevelFinished()) {
             proceedToNextLevel();
             return;
         }
 
-        ++mTurn;
+
     }
 
     std::shared_ptr<CMap> CGame::getMap() {

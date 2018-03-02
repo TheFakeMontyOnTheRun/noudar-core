@@ -45,14 +45,13 @@ namespace Knights {
         CMap( const std::string& data, std::shared_ptr<CGameDelegate> aGameDelegate );
 
 		bool move( EDirection d, std::shared_ptr<CActor> a );
-        void endOfTurn();
+        void endOfTurn(uint32_t turn);
 	    bool isLevelFinished();
         Vec2i getActorTargetPosition( std::shared_ptr<CActor> a );
 		Vec2i getTargetProjection( std::shared_ptr<CActor> a );
         ElementView getElementAt( const Vec2i& p );
 		ItemView getItemViewAt( const Vec2i& p );
 		std::shared_ptr<CActor> getAvatar();
-        vector<std::shared_ptr<CActor>> getActors();
         std::shared_ptr<CActor> getActorAt( Vec2i position );
         void setActorAt( Vec2i position, std::shared_ptr<CActor> actor );
 		void removeActorFrom( Vec2i position );

@@ -44,6 +44,8 @@ namespace Knights {
 		std::string mCurrentSay = "";
         std::shared_ptr<CActor> mTarget = nullptr;
 	public:
+		uint32_t mLastUpdatedTurn = 0;
+
 		virtual void performAttack(std::shared_ptr<CActor> other);
 
 		CActor(ActorId aId, int defaultAP);
