@@ -37,7 +37,7 @@ namespace Knights {
 		std::string mLastCommand = "";
       bool mIsPlaying = true;
       int mTurn = 0;
-      int mLevel = 0;
+      int mLevel = -1;
   public:
       CGame( std::shared_ptr<IFileLoaderDelegate> fileLoaderDelegate, std::shared_ptr<IRenderer> aRenderer, std::shared_ptr<CGameDelegate> aGameDelegate );
       void endOfTurn(std::shared_ptr<CMap> map);
