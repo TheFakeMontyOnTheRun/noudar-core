@@ -239,7 +239,9 @@ namespace Knights {
             mRenderer(aRenderer), mGameDelegate(aGameDelegate),
             mFileLoaderDelegate(fileLoaderDelegate) {
         mIsPlaying = true;
+#ifndef DONT_LOAD_LEVEL_UPON_START
         playLevel(0);
+#endif
     }
 
     bool CGame::isPlaying() {
