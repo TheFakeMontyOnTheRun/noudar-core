@@ -12,12 +12,4 @@ namespace Knights {
 	std::string CTeam::to_string() const {
 		return mName;
 	}
-
-#ifdef USE_IOSTREAM
-	std::ostream& operator<<(std::ostream& os, const CTeam& aTeam) {
-		os << aTeam.to_string();
-
-		return os;
-	}
-#endif
 }

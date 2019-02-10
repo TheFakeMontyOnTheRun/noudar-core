@@ -1,10 +1,6 @@
 //
 // Created by monty on 26/09/16.
 //
-#ifdef USE_IOSTREAM
-#include <sstream>
-#endif
-
 #include <functional>
 #include <string>
 #include <iterator>

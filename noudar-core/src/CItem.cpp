@@ -1,9 +1,6 @@
 //
 // Created by monty on 12/02/17.
 //
-#ifdef USE_IOSTREAM
-#include <sstream>
-#endif
 #include <string>
 #include <functional>
 #include <memory>
@@ -31,15 +28,6 @@ Knights::CItem::CItem(std::string aName, ItemView aView, bool aConsumable, bool 
 void Knights::CItem::use(std::shared_ptr<CActor> aActor, std::shared_ptr<CMap> aMap) {
 	mItemAction(aActor, aMap);
 }
-
-#ifdef USE_IOSTREAM
-std::ostream &::Knights::operator<<(std::ostream &os, const Knights::CItem &action) {
-
-	os << action.to_string();
-
-	return os;
-}
-#endif
 
 std::string Knights::to_string(const Knights::CItem &action) {
 	return action.to_string();

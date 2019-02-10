@@ -29,14 +29,6 @@ namespace Knights {
     IGameCommand::IGameCommand(std::shared_ptr<CGame> aGame) : mGame(aGame) {
     }
 
-#ifdef USE_IOSTREAM
-    std::ostream &operator<<(std::ostream &os, const IGameCommand &action) {
-
-        os << to_string(action);
-        return os;
-    }
-#endif
-
     std::shared_ptr<CGame> IGameCommand::getGame() {
         return mGame;
     }

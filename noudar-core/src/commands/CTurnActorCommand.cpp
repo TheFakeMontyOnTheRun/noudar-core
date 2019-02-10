@@ -2,10 +2,6 @@
 // Created by monty on 25/10/16.
 //
 
-#ifdef USE_IOSTREAM
-#include <sstream>
-#endif
-
 #include <string>
 #include <memory>
 #include <map>
@@ -39,17 +35,10 @@ namespace Knights {
     }
 
     std::string CTurnActorCommand::to_string() const {
-#ifdef USE_IOSTREAM
-        std::stringstream ss;
-        ss << "Move actor by ";
-        ss << mDirection;
-        return ss.str();
-#else
         auto directions = "NESW";
         auto direction = directions[static_cast<int>(mDirection)];
 
         return std::string("Turn to ") + direction;
-#endif
     }
 
     bool CTurnActorCommand::shouldEndTurn() {

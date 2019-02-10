@@ -1,16 +1,9 @@
-#ifdef USE_IOSTREAM
-#include <sstream>
-#endif
-
-#include <string>
-#include <memory>
-#include <utility>
-
+#include <stdint.h>
 #include "Vec2i.h"
 
 namespace Knights {
 
-	Vec2i::Vec2i( int16_t aX, int16_t aY ): x( aX ), y( aY ) {
+	Vec2i::Vec2i( int aX, int aY ): x( aX ), y( aY ) {
 	}
 
 	Vec2i::Vec2i() : x( 0 ), y( 0 ) {
@@ -37,48 +30,6 @@ namespace Knights {
 
         return *this;
 	}
-
-#ifdef USE_IOSTREAM
-	std::ostream &operator<<(std::ostream &os, const EDirection &aDirection) {
-		os << to_string(aDirection);
-
-		return os;
-	}
-#endif
-
-	std::string to_string(const EDirection &aDirection) {;
-		switch (aDirection) {
-			case EDirection::kWest:
-				return "West";
-			case EDirection::kSouth:
-				return "South";
-			case EDirection::kEast:
-				return "East";
-			case EDirection::kNorth:
-			default:
-				return "North";
-		}
-	}
-
-#ifdef USE_IOSTREAM
-	std::ostream &operator<<(std::ostream &os, const Vec2i &aVec) {
-
-		os << to_string(aVec);
-
-		return os;
-	}
-#endif
-
-	std::string to_string(const Vec2i &aVec) {
-#ifdef USE_IOSTREAM
-		std::stringstream ss;
-		ss << aVec.x << ", " << aVec.y;
-		return ss.str();
-#else
-        return "";
-#endif
-	}
-
 
 	Vec2i mapOffsetForDirection( EDirection aDirection ) {
 		switch (aDirection) {

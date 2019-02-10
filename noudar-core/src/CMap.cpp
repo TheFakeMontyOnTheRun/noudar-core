@@ -1,6 +1,3 @@
-#ifdef USE_IOSTREAM
-#include <sstream>
-#endif
 #include <string>
 #include <map>
 #include <memory>

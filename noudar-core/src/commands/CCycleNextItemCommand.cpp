@@ -2,10 +2,6 @@
 // Created by monty on 12/02/17.
 //
 
-#ifdef USE_IOSTREAM
-#include <sstream>
-#endif
-
 #include <memory>
 #include <functional>
 #include <string>
