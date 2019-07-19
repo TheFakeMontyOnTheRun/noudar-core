@@ -7,6 +7,6 @@ make CXX='g++' CXXFLAGS='-Inoudar-core/include -Incurses-version -g -c -std=c++0
 
 ./unittests
 #gcov lib/googletest/googlemock/src/gmock_main.gcno
-lcov --capture --compat split_crc=on --directory . --output-file lcov-output.info
+lcov --capture --directory . --output-file lcov-output.info
 genhtml lcov-output.info --output-directory coverage
 rm lcov-output.info
