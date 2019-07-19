@@ -14,6 +14,6 @@ namespace Knights {
 
     uint8_t* readToBuffer(FILE *fileDescriptor);
 
-    std::string fileFromString( const std::string& path );
+    char* fileFromString( const std::string& path );
 }
 #endif //DUNGEONSOFNOUDAR_NDK_COMMON_H

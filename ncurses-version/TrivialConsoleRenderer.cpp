@@ -46,11 +46,14 @@ namespace Knights {
 
         std::cout << "Dungeons Of Noudar" << std::endl;
         std::cout << "Core edition.\n2017 - Daniel Monteiro\n\n" << std::endl;
-        std::cout << Knights::fileFromString("res/intro") << std::endl;
+
+        auto intro = Knights::fileFromString("res/intro");
+        std::cout << intro << std::endl;
         std::cout << "\nControls:\n+ and - cycle thru items in inventory\n";
         std::cout << "i - turn left, o - move forward, p - turn right\n";
         std::cout << "tab - use item, [ - pick item, ] - drop item\nPress ENTER to start" << std::endl;
         getchar();
+        free(intro);
     }
 
     CConsoleRenderer::~CConsoleRenderer() {

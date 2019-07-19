@@ -148,13 +148,16 @@ namespace Knights {
 
         printf("Dungeons Of Noudar\n");
         printf("Core edition.\n2017 - Daniel Monteiro\n\n\n");
-        printf("%s\n", Knights::fileFromString("res/intro").c_str());
+        auto intro = Knights::fileFromString("res/intro");
+        printf("%s\n", intro);
+
         printf("\nControls:\n+ and - cycle thru items in inventory\n");
         printf("i - turn left, o - move forward, p - turn right; q twice - quit\n");
         printf("tab - use item, [ - pick item, ] - drop item\nPress ENTER to start");
 
         getchar();
         clear();
+        free(intro);
     }
 
     CConsoleRenderer::~CConsoleRenderer() {

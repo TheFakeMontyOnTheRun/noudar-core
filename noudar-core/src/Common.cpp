@@ -12,27 +12,24 @@ using std::vector;
 
 namespace Knights {
 
-	std::string fileFromString( const std::string& path ) {
+	char* fileFromString( const std::string& path ) {
 		char * buffer = 0;
-		long length;
+		size_t length;
 		FILE * f = fopen (path.c_str(), "r");
 
-		if (f)
+		assert(f);
+
 		{
 			fseek (f, 0, SEEK_END);
 			length = ftell (f);
 			fseek (f, 0, SEEK_SET);
-			buffer = static_cast<char *>(malloc (length));
-			if (buffer)
-			{
-				fread (buffer, 1, length, f);
-			}
+			buffer = static_cast<char *>(calloc (1, length + 1));
+			assert(buffer);
+			fread (buffer, 1, length, f);
 			fclose (f);
 		}
 
-		std::string toReturn(buffer);
-
-		return toReturn;
+		return buffer;
 
 	}
 

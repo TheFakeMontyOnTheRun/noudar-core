@@ -42,7 +42,9 @@ int main ( int argc, char **argv ) {
     auto onLevelLoaded = [&]() {
         if ( game->getLevelNumber() >= LEVEL_LIMIT ) {
             game->setIsPlaying( false );
-            printf("\n%s\n", Knights::fileFromString("res/outro").c_str());
+            auto outro = Knights::fileFromString("res/outro");
+            printf("\n%s\n", outro);
+            free(outro);
             exit(0);
         }
     };

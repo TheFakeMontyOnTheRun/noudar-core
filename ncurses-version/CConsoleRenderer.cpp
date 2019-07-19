@@ -58,7 +58,9 @@ namespace Knights {
 
         printw( "Dungeons Of Noudar\n");
         printw( "Core edition.\n2017 - Daniel Monteiro\n\n");
-        printw( fileFromString("res/intro").c_str());
+        auto intro = fileFromString("res/intro");
+        printw( intro);
+        free(intro);
         printw( "\n\n\nPress any key to start\n");
     }
 
