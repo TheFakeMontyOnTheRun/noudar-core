@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.6)
 project(noudar_core)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -g -O0 -Wall -fprofile-arcs -ftest-coverage")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")
 
 include_directories(noudar-core/include)
 
