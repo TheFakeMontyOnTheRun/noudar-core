@@ -2,9 +2,9 @@
 // Created by monty on 09/12/16.
 //
 #include <string>
-#include <EASTL/vector.h>
+#include <vector>
 
-using eastl::vector;
+using std::vector;
 
 #include "IFileLoaderDelegate.h"
 

@@ -2,10 +2,10 @@
 // Created by monty on 08/12/16.
 //
 #include <string>
-#include <EASTL/vector.h>
+#include <vector>
 #include <functional>
 
-using eastl::vector;
+using std::vector;
 
 #include "Common.h"
 #include "IFileLoaderDelegate.h"

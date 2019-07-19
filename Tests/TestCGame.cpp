@@ -7,11 +7,11 @@
 #include <cstdlib>
 #include <cmath>
 #include <functional>
-#include <EASTL/vector.h>
-#include <EASTL/array.h>
+#include <vector>
+#include <array>
 
-using eastl::vector;
-using eastl::array;
+using std::vector;
+using std::array;
 
 #include "Vec2i.h"
 #include "CTeam.h"
@@ -29,16 +29,6 @@ using eastl::array;
 #include "CMap.h"
 #include "IRenderer.h"
 #include "CGame.h"
-
-void* operator new[](size_t size, const char* pName, int flags, unsigned debugFlags,
-                     const char* file, int line) {
-    return malloc( size );
-}
-
-void* operator new[](size_t size, size_t alignment, size_t alignmentOffset, const char* pName,
-                     int flags, unsigned debugFlags, const char* file, int line) {
-    return malloc( size );
-}
 
 using ::testing::Return;
 using ::testing::_;

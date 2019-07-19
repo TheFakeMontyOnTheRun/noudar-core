@@ -4,9 +4,9 @@
 #include <functional>
 #include <string>
 #include <iterator>
-#include <EASTL/vector.h>
-
-using eastl::vector;
+#include <vector>
+#include <assert.h>
+using std::vector;
 
 #include "Common.h"
 

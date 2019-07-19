@@ -8,12 +8,9 @@ include_directories(noudar-core/include)
 find_package(Curses REQUIRED)
 
 add_subdirectory(lib/googletest)
-add_subdirectory(EASTL)
 
 include_directories(lib/googletest/googletest/include)
 include_directories(lib/googletest/googlemock/include)
-include_directories(EASTL/include)
-include_directories(EASTL/test/packages/EABase/include/Common)
 
 set(TEST_SOURCE_FILES
         Tests/TestCCharacter.cpp

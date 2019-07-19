@@ -3,9 +3,9 @@
 #include <memory>
 #include <utility>
 #include <algorithm>
-#include <EASTL/vector.h>
+#include <vector>
 
-using eastl::vector;
+using std::vector;
 
 #include "Vec2i.h"
 #include "CTeam.h"

@@ -7,11 +7,11 @@
 #include <functional>
 #include <utility>
 #include <map>
-#include <EASTL/vector.h>
-#include <EASTL/array.h>
+#include <vector>
+#include <array>
 
-using eastl::vector;
-using eastl::array;
+using std::vector;
+using std::array;
 
 #include "Vec2i.h"
 #include "IMapElement.h"

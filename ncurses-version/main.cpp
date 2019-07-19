@@ -11,11 +11,11 @@
 #include <string>
 #include <memory>
 #include <map>
-#include <EASTL/vector.h>
-#include <EASTL/array.h>
+#include <vector>
+#include <array>
 
-using eastl::vector;
-using eastl::array;
+using std::vector;
+using std::array;
 
 #include "Common.h"
 #include "IFileLoaderDelegate.h"
@@ -31,16 +31,6 @@ using eastl::array;
 #include "CConsoleRenderer.h"
 #include "CGame.h"
 #include "commands/IGameCommand.h"
-
-void* operator new[](size_t size, const char* pName, int flags, unsigned debugFlags,
-                     const char* file, int line) {
-    return malloc( size );
-}
-
-void* operator new[](size_t size, size_t alignment, size_t alignmentOffset, const char* pName,
-                     int flags, unsigned debugFlags, const char* file, int line) {
-    return malloc( size );
-}
 
 int main ( int argc, char **argv ) {
     const auto LEVEL_LIMIT = 7;
