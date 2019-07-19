@@ -50,3 +50,6 @@ namespace Knights {
         mActor->setDirection(mDirection);
     }
 }
+
+Knights::CTurnActorCommand::~CTurnActorCommand() {
+}

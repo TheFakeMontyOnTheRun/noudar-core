@@ -60,3 +60,6 @@ void Knights::CPickItemCommand::execute() {
     }
 #endif
 }
+
+Knights::CPickItemCommand::~CPickItemCommand() {
+}

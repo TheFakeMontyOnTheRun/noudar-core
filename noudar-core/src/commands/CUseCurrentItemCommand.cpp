@@ -50,3 +50,6 @@ void Knights::CUseCurrentItemCommand::execute() {
 		mItemName = currentItem->to_string();
 	}
 }
+
+Knights::CUseCurrentItemCommand::~CUseCurrentItemCommand() {
+}

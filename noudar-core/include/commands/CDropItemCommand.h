@@ -19,6 +19,8 @@ namespace Knights {
 		virtual bool shouldEndTurn() override;
 
 		virtual void execute() override;
+
+        virtual ~CDropItemCommand() override;
 	};
 }
 

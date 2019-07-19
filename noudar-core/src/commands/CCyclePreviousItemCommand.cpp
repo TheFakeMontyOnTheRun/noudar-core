@@ -42,4 +42,7 @@ namespace Knights {
 	void CCyclePreviousItemCommand::execute() {
 		mActor->selectNextItem();
 	}
+
+    CCyclePreviousItemCommand::~CCyclePreviousItemCommand() {
+    }
 }

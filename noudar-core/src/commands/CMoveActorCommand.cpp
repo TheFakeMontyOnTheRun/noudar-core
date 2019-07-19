@@ -50,4 +50,7 @@ namespace Knights {
 
         map->move(mDirection, mActor);
     }
+
+    CMoveActorCommand::~CMoveActorCommand() {
+    }
 }

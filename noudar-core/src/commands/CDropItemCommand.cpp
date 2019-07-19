@@ -62,3 +62,6 @@ void Knights::CDropItemCommand::execute() {
 
 	map->putItemAt( mActor->removeItemFromInventory(itemToDrop), target );
 }
+
+Knights::CDropItemCommand::~CDropItemCommand() {
+}

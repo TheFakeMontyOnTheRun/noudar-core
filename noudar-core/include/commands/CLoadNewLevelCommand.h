@@ -13,6 +13,7 @@ namespace Knights {
 		virtual std::string to_string() const override;
 		virtual bool shouldEndTurn() override;
 		virtual void execute() override;
+        virtual ~CLoadNewLevelCommand() override;
 	};
 }
 

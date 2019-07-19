@@ -40,4 +40,7 @@ namespace Knights {
 
     void CEndTurnCommand::execute() {
     }
+
+    CEndTurnCommand::~CEndTurnCommand() {
+    }
 }

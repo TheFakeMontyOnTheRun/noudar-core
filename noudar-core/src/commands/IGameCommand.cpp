@@ -36,4 +36,7 @@ namespace Knights {
     std::string to_string(const IGameCommand &action) {
         return action.to_string();
     }
+
+    IGameCommand::~IGameCommand() {
+    }
 }

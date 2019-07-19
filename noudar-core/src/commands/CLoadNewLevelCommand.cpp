@@ -42,4 +42,7 @@ namespace Knights {
     void CLoadNewLevelCommand::execute() {
         getGame()->playLevel(mMapSlot);
     }
+
+    CLoadNewLevelCommand::~CLoadNewLevelCommand() {
+    }
 }

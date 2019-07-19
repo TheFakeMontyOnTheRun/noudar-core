@@ -13,6 +13,7 @@ namespace Knights {
         virtual bool shouldEndTurn() = 0;
         virtual void execute() = 0;
         virtual std::string to_string() const = 0;
+        virtual ~IGameCommand() = 0;
     };
 
 #ifdef USE_IOSTREAM

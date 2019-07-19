@@ -42,4 +42,7 @@ namespace Knights {
     void CQuitCommand::execute() {
 
     }
+
+    CQuitCommand::~CQuitCommand() {
+    }
 }

@@ -49,3 +49,6 @@ bool Knights::CSuggestItemCommand::shouldEndTurn() {
 void Knights::CSuggestItemCommand::execute() {
 	mActor->suggestCurrentItem(mItemView);
 }
+
+Knights::CSuggestItemCommand::~CSuggestItemCommand() {
+}

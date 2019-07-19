@@ -40,4 +40,7 @@ namespace Knights {
 
     void CNullCommand::execute() {
     }
+
+    CNullCommand::~CNullCommand() {
+    }
 }

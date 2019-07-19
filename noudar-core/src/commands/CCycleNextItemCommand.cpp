@@ -54,4 +54,7 @@ namespace Knights {
 			mItemName = mActor->getSelectedItem()->to_string();
 		}
 	}
+
+    CCycleNextItemCommand::~CCycleNextItemCommand() {
+	}
 }
