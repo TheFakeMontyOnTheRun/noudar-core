@@ -10,7 +10,7 @@ namespace Knights {
 		virtual std::string loadFileFromPath( const std::string& path ) = 0;
 		virtual uint8_t* loadBinaryFileFromPath( const std::string& path ) = 0;
         virtual size_t sizeOfFile(const std::string& path) = 0;
-	private:
+        virtual ~IFileLoaderDelegate() = 0;
 		virtual std::string getFilePathPrefix() = 0;
 	};
 

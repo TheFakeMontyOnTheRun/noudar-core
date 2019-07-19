@@ -19,5 +19,8 @@ namespace Knights {
 
         return input;
     }
+
+    IFileLoaderDelegate::~IFileLoaderDelegate() {
+    }
 }
 

@@ -16,7 +16,7 @@ namespace Knights {
     CPlainFileLoader::CPlainFileLoader() {
     }
 
-    CPlainFileLoader::CPlainFileLoader(std::string prefix) : mPrefix(prefix) {
+    CPlainFileLoader::CPlainFileLoader(const std::string& prefix) : mPrefix(prefix) {
     }
 
     size_t CPlainFileLoader::sizeOfFile(const std::string &path) {
@@ -66,5 +66,8 @@ namespace Knights {
 
     void CPlainFileLoader::setFilenameTransformation(std::function<std::string(std::string)> transform) {
         this->mFilenameTransformation = transform;
+    }
+
+    CPlainFileLoader::~CPlainFileLoader() {
     }
 }
