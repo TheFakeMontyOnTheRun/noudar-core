@@ -302,11 +302,11 @@ namespace Knights {
                             if ( currentHP < defaultHP ) {
                                 character->addHP( -character->getHP() );
                                 auto position = me->getPosition();
-                                auto x = me->getPosition().x;
-                                auto y = me->getPosition().y;
+                                auto px = me->getPosition().x;
+                                auto py = me->getPosition().y;
                                 map->removeActorFrom( position );
 
-                                map->mItems[ y ][ x ] = std::make_shared<CItem>("The holy health", '+', true, true, [](std::shared_ptr<CActor> aActor, std::shared_ptr<CMap> aMap){
+                                map->mItems[ py ][ px ] = std::make_shared<CItem>("The holy health", '+', true, true, [](std::shared_ptr<CActor> aActor, std::shared_ptr<CMap> aMap){
                                     aActor->addHP(20);
                                 });
                             }
