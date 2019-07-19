@@ -46,11 +46,16 @@ bool Knights::CPickItemCommand::shouldEndTurn() {
 
 void Knights::CPickItemCommand::execute() {
 	auto map = getGame()->getMap();
+#ifdef USE_ITEMS_INSTANTLY
 	auto previousItem = mActor->getSelectedItem()->getView();
-    auto item = map->getItemAt(map->getActorTargetPosition(mActor));
     bool giveBack = false;
+#endif
+    auto item = map->getItemAt(map->getActorTargetPosition(mActor));
+
     if (item != nullptr ) {
+#ifdef USE_ITEMS_INSTANTLY
         giveBack = item->isConsumable();
+#endif
         mItemName = item->to_string();
     }
 	map->giveItemAt( map->getActorTargetPosition(mActor), mActor );
