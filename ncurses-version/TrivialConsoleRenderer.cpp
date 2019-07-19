@@ -139,4 +139,8 @@ namespace Knights {
     CommandType CConsoleRenderer::getInput() {
 		return ch;
     }
+
+    CommandType CConsoleRenderer::peekInput() {
+        return ch;
+    }
 }
