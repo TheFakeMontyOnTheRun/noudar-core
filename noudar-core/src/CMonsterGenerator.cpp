@@ -25,7 +25,7 @@ using eastl::array;
 #include "CMap.h"
 #include "CMonsterGenerator.h"
 
-Knights::CMonsterGenerator::CMonsterGenerator(std::shared_ptr<CCharacterArchetype> aArchetypeToBuild, std::shared_ptr<CTeam> aTeam,
+Knights::CMonsterGenerator::CMonsterGenerator(std::shared_ptr<CCharacterArchetype> aArchetypeToBuild, ETeam aTeam,
 ActorId aId, int aliveForTurns) : CActor(aId, 1), mArchetypeToBuild(aArchetypeToBuild), mTeam(aTeam) {
     mHP = aliveForTurns;
 }

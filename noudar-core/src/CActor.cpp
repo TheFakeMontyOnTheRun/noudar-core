@@ -80,7 +80,7 @@ namespace Knights {
 		mPosition = position;
 	}
 
-	std::shared_ptr<CTeam> CActor::getTeam() {
+	ETeam CActor::getTeam() {
 		return mTeam;
 	}
 

@@ -20,14 +20,14 @@ using std::vector;
 
 class MockCharacter : public Knights::CCharacter {
  public:
-  MockCharacter( std::shared_ptr<Knights::CCharacterArchetype> aArchetype, std::shared_ptr<Knights::CTeam> aTeam, int aId) : CCharacter( aArchetype, aTeam, aId ) {
+  MockCharacter( std::shared_ptr<Knights::CCharacterArchetype> aArchetype, Knights::ETeam aTeam, int aId) : CCharacter( aArchetype, aTeam, aId ) {
   }
 
   MOCK_METHOD0( hasEnoughAP, bool() );
 };
 
 TEST(TestCCharacter, TestArchetypeInheritance ) {
-  auto team1 = std::make_shared<Knights::CTeam>("Test");
+  auto team1 = Knights::ETeam::kProps;
   auto archetype1 = std::make_shared<Knights::CCharacterArchetype>( 1, 2, 3, 4, '@', "TestCharacter" );
   int id1 = 0;
   auto actor1 = std::make_shared<Knights::CCharacter>( archetype1, team1, id1 );
@@ -36,7 +36,7 @@ TEST(TestCCharacter, TestArchetypeInheritance ) {
 }
 
 TEST(TestCCharacter, TestCharactersOfSameTeamCantAttackEachOther ) {
-  auto team1 = std::make_shared<Knights::CTeam>("Test");
+  auto team1 = Knights::ETeam::kProps;
   auto archetype1 = std::make_shared<Knights::CCharacterArchetype>( 1, 2, 3, 4, '@', "TestCharacter" );
   auto actor1 = std::make_shared<Knights::CCharacter>( archetype1, team1, 1 );
   auto actor2 = std::make_shared<Knights::CCharacter>( archetype1, team1, 2 );

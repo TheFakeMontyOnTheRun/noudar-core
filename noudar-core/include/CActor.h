@@ -34,7 +34,7 @@ namespace Knights {
 		Vec2i mPosition;
 		ActorView mView;
 		std::string mName;
-		std::shared_ptr<CTeam> mTeam;
+		ETeam mTeam;
 		vector<std::shared_ptr<CItem>> mInventory;
 		std::shared_ptr<CItem> mCurrentItem;
 		std::string mCurrentSay = "";
@@ -86,7 +86,7 @@ namespace Knights {
 
 		void useCurrentItem();
 
-		std::shared_ptr<CTeam> getTeam();
+		ETeam getTeam();
 
 		EDirection getDirection();
 

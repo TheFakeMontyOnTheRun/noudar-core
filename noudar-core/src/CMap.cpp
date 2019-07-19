@@ -161,8 +161,8 @@ namespace Knights {
         auto warthogArchetype = std::make_shared<CCharacterArchetype>( 6, 4, 10, 3, 'J', "Demon Warthog");
         auto weakenedDemonArchetype = std::make_shared<CCharacterArchetype>( 8, 3000, 10, 3, 'd', "Master Demon (premature)");
         auto demonArchetype = std::make_shared<CCharacterArchetype>( 12, 10, 50, 3, 'D', "Master Demon");
-        auto friends = std::make_shared<CTeam>("Heroes");
-        auto foes = std::make_shared<CTeam>("Enemies");
+        auto friends = ETeam::kHeroes;
+        auto foes = ETeam::kMonsters;
         int pos = 0;
         for (int y = 0; y < kMapSize; ++y) {
             for (int x = 0; x < kMapSize; ++x) {

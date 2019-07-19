@@ -6,17 +6,8 @@
 #define NOUDAR_CORE_CTEAM_H
 
 namespace Knights {
-	class CTeam {
-		std::string mName;
-	public:
-		CTeam(std::string aName);
 
-		std::string to_string() const;
-	};
-
-#ifdef USE_IOSTREAM
-	std::ostream& operator<<(std::ostream& os, const CTeam& aTeam);
-#endif
+    enum class ETeam{kHeroes, kMonsters, kProps};
 }
 
 #endif //NOUDAR_CORE_CTEAM_H

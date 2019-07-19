@@ -6,10 +6,4 @@
 #include "CTeam.h"
 
 namespace Knights {
-	CTeam::CTeam(std::string aName) : mName(aName) {
-	}
-
-	std::string CTeam::to_string() const {
-		return mName;
-	}
 }
