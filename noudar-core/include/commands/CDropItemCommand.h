@@ -6,22 +6,22 @@
 #define NOUDAR_CORE_CDROPITEMCOMMAND_H
 
 namespace Knights {
-	class CDropItemCommand : public IGameCommand {
+    class CDropItemCommand : public IGameCommand {
 
-		std::shared_ptr<CActor> mActor;
-	public:
-		CDropItemCommand(std::shared_ptr<CGame> aGame,
-		                 std::shared_ptr<CActor> aActor
-		);
+        std::shared_ptr<CActor> mActor;
+    public:
+        CDropItemCommand(std::shared_ptr<CGame> aGame,
+                         std::shared_ptr<CActor> aActor
+        );
 
-		virtual std::string to_string() const override;
+        virtual std::string to_string() const override;
 
-		virtual bool shouldEndTurn() override;
+        virtual bool shouldEndTurn() override;
 
-		virtual void execute() override;
+        virtual void execute() override;
 
         virtual ~CDropItemCommand() override;
-	};
+    };
 }
 
 #endif //NOUDAR_CORE_CDROPITEMCOMMAND_H

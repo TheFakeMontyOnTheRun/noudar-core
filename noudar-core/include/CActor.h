@@ -6,123 +6,123 @@
 
 namespace Knights {
 
-	enum class EStance {
-		kStanding,
-		kAttacking,
-		kDead
-	};
+    enum class EStance {
+        kStanding,
+        kAttacking,
+        kDead
+    };
 
-	std::string to_string(const EStance &aStance);
+    std::string to_string(const EStance &aStance);
 
-	class CMap;
+    class CMap;
 
-	using ActorId = short;
+    using ActorId = short;
     using ActorView = char;
 
-	class CActor : public std::enable_shared_from_this<CActor>{
-	protected:
-		EStance mStance;
-		EDirection mDirection;
-		ActorId mId;
-		int mMoves;
-		int mDefaultAP;
-		int mRemainingAP;
-		int mAttack;
-		int mDefence;
-		int mHP;
-		int mAttackBonus = 0;
-		Vec2i mPosition;
-		ActorView mView;
-		std::string mName;
-		ETeam mTeam;
-		vector<std::shared_ptr<CItem>> mInventory;
-		std::shared_ptr<CItem> mCurrentItem;
-		std::string mCurrentSay = "";
+    class CActor : public std::enable_shared_from_this<CActor> {
+    protected:
+        EStance mStance;
+        EDirection mDirection;
+        ActorId mId;
+        int mMoves;
+        int mDefaultAP;
+        int mRemainingAP;
+        int mAttack;
+        int mDefence;
+        int mHP;
+        int mAttackBonus = 0;
+        Vec2i mPosition;
+        ActorView mView;
+        std::string mName;
+        ETeam mTeam;
+        vector<std::shared_ptr<CItem>> mInventory;
+        std::shared_ptr<CItem> mCurrentItem;
+        std::string mCurrentSay = "";
         std::shared_ptr<CActor> mTarget = nullptr;
-	public:
-		uint32_t mLastUpdatedTurn = 0;
+    public:
+        uint32_t mLastUpdatedTurn = 0;
 
-		virtual void performAttack(std::shared_ptr<CActor> other);
+        virtual void performAttack(std::shared_ptr<CActor> other);
 
-		CActor(ActorId aId, int defaultAP);
+        CActor(ActorId aId, int defaultAP);
 
-		Vec2i getPosition();
+        Vec2i getPosition();
 
-		void setPosition(Vec2i position);
+        void setPosition(Vec2i position);
 
-		void onMove();
+        void onMove();
 
-		void setTarget(std::shared_ptr<CActor> target );
+        void setTarget(std::shared_ptr<CActor> target);
 
-		void onAttack();
+        void onAttack();
 
-		bool canMove();
+        bool canMove();
 
-		bool canAttack();
+        bool canAttack();
 
-		bool hasEnoughAP();
+        bool hasEnoughAP();
 
-		bool isAlive();
+        bool isAlive();
 
-		void turnLeft();
+        void turnLeft();
 
-		void turnRight();
+        void turnRight();
 
-		ActorView getView();
+        ActorView getView();
 
-		ActorId getId();
+        ActorId getId();
 
-		int getMoves();
+        int getMoves();
 
-		int getHP();
+        int getHP();
 
-		int getAP();
+        int getAP();
 
-		int getDefense();
+        int getDefense();
 
-		int getAttack();
+        int getAttack();
 
-		void addHP(int aHP);
+        void addHP(int aHP);
 
-		void useCurrentItem();
+        void useCurrentItem();
 
-		ETeam getTeam();
+        ETeam getTeam();
 
-		EDirection getDirection();
+        EDirection getDirection();
 
-		EStance getStance();
+        EStance getStance();
 
-		void setDirection(EDirection d);
+        void setDirection(EDirection d);
 
-		virtual void update(std::shared_ptr<CMap> map) {}
+        virtual void update(std::shared_ptr<CMap> map) {}
 
-		virtual void endOfTurn();
+        virtual void endOfTurn();
 
-		std::string getName();
+        std::string getName();
 
-		virtual ~CActor() = default;
+        virtual ~CActor() = default;
 
-		void selectNextItem();
+        void selectNextItem();
 
-		void selectPreviousItem();
+        void selectPreviousItem();
 
-		std::shared_ptr<CItem> getSelectedItem();
+        std::shared_ptr<CItem> getSelectedItem();
 
-		std::shared_ptr<CItem> getItemWithSymbol( ItemView symbol );
+        std::shared_ptr<CItem> getItemWithSymbol(ItemView symbol);
 
-		void giveItem( std::shared_ptr<CItem> aItem );
+        void giveItem(std::shared_ptr<CItem> aItem);
 
-		std::shared_ptr<CItem> removeItemFromInventory( std::shared_ptr<CItem> itemToRemove );
+        std::shared_ptr<CItem> removeItemFromInventory(std::shared_ptr<CItem> itemToRemove);
 
-		std::string getCurrentSay();
+        std::string getCurrentSay();
 
-		void copyStateFrom( std::shared_ptr<CActor> other );
+        void copyStateFrom(std::shared_ptr<CActor> other);
 
-		void suggestCurrentItem( ItemView view );
+        void suggestCurrentItem(ItemView view);
 
-		void setAttackBonus( int attackBonus );
+        void setAttackBonus(int attackBonus);
 
-		void setCurrentSay( std::string newSay );
-	};
+        void setCurrentSay(std::string newSay);
+    };
 }
 #endif

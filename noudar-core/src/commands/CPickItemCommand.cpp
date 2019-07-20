@@ -27,11 +27,12 @@ using std::array;
 #include "commands/CPickItemCommand.h"
 
 Knights::CPickItemCommand::CPickItemCommand(std::shared_ptr<Knights::CGame> aGame,
-                                            std::shared_ptr<Knights::CActor> aActor) : IGameCommand( aGame ), mActor(aActor) {
+                                            std::shared_ptr<Knights::CActor> aActor) : IGameCommand(aGame),
+                                                                                       mActor(aActor) {
 }
 
 std::string Knights::CPickItemCommand::to_string() const {
-    if ( mItemName.empty()) {
+    if (mItemName.empty()) {
         return "";
     } else {
         std::string message = "Pick item: ";
@@ -41,24 +42,24 @@ std::string Knights::CPickItemCommand::to_string() const {
 }
 
 bool Knights::CPickItemCommand::shouldEndTurn() {
-	return true;
+    return true;
 }
 
 void Knights::CPickItemCommand::execute() {
-	auto map = getGame()->getMap();
+    auto map = getGame()->getMap();
 #ifdef USE_ITEMS_INSTANTLY
-	auto previousItem = mActor->getSelectedItem()->getView();
+    auto previousItem = mActor->getSelectedItem()->getView();
     bool giveBack = false;
 #endif
     auto item = map->getItemAt(map->getActorTargetPosition(mActor));
 
-    if (item != nullptr ) {
+    if (item != nullptr) {
 #ifdef USE_ITEMS_INSTANTLY
         giveBack = item->isConsumable();
 #endif
         mItemName = item->to_string();
     }
-	map->giveItemAt( map->getActorTargetPosition(mActor), mActor );
+    map->giveItemAt(map->getActorTargetPosition(mActor), mActor);
 #ifdef USE_ITEMS_INSTANTLY
     if (giveBack) {
         mActor->suggestCurrentItem(previousItem);

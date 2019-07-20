@@ -27,27 +27,28 @@ using std::array;
 #include "commands/CSuggestItemCommand.h"
 
 Knights::CSuggestItemCommand::CSuggestItemCommand(std::shared_ptr<Knights::CGame> aGame,
-                                            std::shared_ptr<Knights::CActor> aActor, ElementView itemView) : IGameCommand( aGame ), mActor( aActor ), mItemView(itemView) {
+                                                  std::shared_ptr<Knights::CActor> aActor, ElementView itemView)
+        : IGameCommand(aGame), mActor(aActor), mItemView(itemView) {
 }
 
 std::string Knights::CSuggestItemCommand::to_string() const {
     std::string message = "Select item: ";
     auto item = mActor->getItemWithSymbol(mItemView);
 
-    if ( item == nullptr ) {
+    if (item == nullptr) {
         return "";
     }
 
-    message.append( item->to_string() );
-	return message;
+    message.append(item->to_string());
+    return message;
 }
 
 bool Knights::CSuggestItemCommand::shouldEndTurn() {
-	return false;
+    return false;
 }
 
 void Knights::CSuggestItemCommand::execute() {
-	mActor->suggestCurrentItem(mItemView);
+    mActor->suggestCurrentItem(mItemView);
 }
 
 Knights::CSuggestItemCommand::~CSuggestItemCommand() {

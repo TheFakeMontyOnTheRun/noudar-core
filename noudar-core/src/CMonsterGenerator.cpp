@@ -26,7 +26,9 @@ using std::array;
 #include "CMonsterGenerator.h"
 
 Knights::CMonsterGenerator::CMonsterGenerator(std::shared_ptr<CCharacterArchetype> aArchetypeToBuild, ETeam aTeam,
-ActorId aId, int aliveForTurns) : CActor(aId, 1), mArchetypeToBuild(aArchetypeToBuild), mTeam(aTeam) {
+                                              ActorId aId, int aliveForTurns) : CActor(aId, 1),
+                                                                                mArchetypeToBuild(aArchetypeToBuild),
+                                                                                mTeam(aTeam) {
     mHP = aliveForTurns;
 }
 
@@ -37,13 +39,13 @@ void Knights::CMonsterGenerator::update(std::shared_ptr<Knights::CMap> map) {
     auto position = getPosition();
     auto id = map->getLastestId();
 
-    if ( map->getActorAt( { position.x, position.y - 1 } ) == nullptr ) {
-        map->addActorAt( std::make_shared<CMonster>( mArchetypeToBuild, mTeam, id, 8), { position.x, position.y - 1 }  );
-    } else if ( map->getActorAt( { position.x, position.y + 1 } ) == nullptr ) {
-        map->addActorAt( std::make_shared<CMonster>( mArchetypeToBuild, mTeam, id, 8), { position.x, position.y + 1 }  );
-    } else if ( map->getActorAt( { position.x - 1, position.y } ) == nullptr ) {
-        map->addActorAt( std::make_shared<CMonster>( mArchetypeToBuild, mTeam, id, 8), { position.x - 1, position.y - 1 }  );
-    } else if ( map->getActorAt( { position.x + 1, position.y } ) == nullptr ) {
-        map->addActorAt( std::make_shared<CMonster>( mArchetypeToBuild, mTeam, id, 8), { position.x + 1, position.y - 1 }  );
+    if (map->getActorAt({position.x, position.y - 1}) == nullptr) {
+        map->addActorAt(std::make_shared<CMonster>(mArchetypeToBuild, mTeam, id, 8), {position.x, position.y - 1});
+    } else if (map->getActorAt({position.x, position.y + 1}) == nullptr) {
+        map->addActorAt(std::make_shared<CMonster>(mArchetypeToBuild, mTeam, id, 8), {position.x, position.y + 1});
+    } else if (map->getActorAt({position.x - 1, position.y}) == nullptr) {
+        map->addActorAt(std::make_shared<CMonster>(mArchetypeToBuild, mTeam, id, 8), {position.x - 1, position.y - 1});
+    } else if (map->getActorAt({position.x + 1, position.y}) == nullptr) {
+        map->addActorAt(std::make_shared<CMonster>(mArchetypeToBuild, mTeam, id, 8), {position.x + 1, position.y - 1});
     }
 }

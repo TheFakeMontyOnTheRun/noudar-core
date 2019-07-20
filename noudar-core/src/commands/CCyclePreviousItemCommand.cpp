@@ -28,20 +28,21 @@ using std::array;
 #include "commands/CCyclePreviousItemCommand.h"
 
 namespace Knights {
-	CCyclePreviousItemCommand::CCyclePreviousItemCommand( std::shared_ptr<CGame> aGame, std::shared_ptr<CActor> aActor ) : IGameCommand( aGame ), mActor(aActor){
-	}
+    CCyclePreviousItemCommand::CCyclePreviousItemCommand(std::shared_ptr<CGame> aGame, std::shared_ptr<CActor> aActor)
+            : IGameCommand(aGame), mActor(aActor) {
+    }
 
-	std::string CCyclePreviousItemCommand::to_string() const {
-		return "Previous item";
-	}
+    std::string CCyclePreviousItemCommand::to_string() const {
+        return "Previous item";
+    }
 
-	bool CCyclePreviousItemCommand::shouldEndTurn() {
-		return false;
-	}
+    bool CCyclePreviousItemCommand::shouldEndTurn() {
+        return false;
+    }
 
-	void CCyclePreviousItemCommand::execute() {
-		mActor->selectNextItem();
-	}
+    void CCyclePreviousItemCommand::execute() {
+        mActor->selectNextItem();
+    }
 
     CCyclePreviousItemCommand::~CCyclePreviousItemCommand() {
     }

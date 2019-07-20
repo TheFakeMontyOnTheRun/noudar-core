@@ -10,10 +10,14 @@ namespace Knights {
         EDirection mDirection;
         std::shared_ptr<CActor> mActor;
     public:
-        CTurnActorCommand( std::shared_ptr<CGame> aGame, EDirection  direction, std::shared_ptr<CActor> aActor );
+        CTurnActorCommand(std::shared_ptr<CGame> aGame, EDirection direction, std::shared_ptr<CActor> aActor);
+
         virtual std::string to_string() const override;
+
         virtual bool shouldEndTurn() override;
+
         virtual void execute() override;
+
         virtual ~CTurnActorCommand() override;
     };
 }

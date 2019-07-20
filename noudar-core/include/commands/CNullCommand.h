@@ -8,7 +8,7 @@
 namespace Knights {
     class CNullCommand : public IGameCommand {
     public:
-        CNullCommand(std::shared_ptr <CGame> aGame);
+        CNullCommand(std::shared_ptr<CGame> aGame);
 
         virtual std::string to_string() const override;
 

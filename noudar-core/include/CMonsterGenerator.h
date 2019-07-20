@@ -6,7 +6,8 @@ namespace Knights {
         std::shared_ptr<CCharacterArchetype> mArchetypeToBuild;
         ETeam mTeam;
     public:
-        CMonsterGenerator(std::shared_ptr<CCharacterArchetype> aAchertypeToBuild, ETeam aTeam, ActorId aId, int aliveForTurns);
+        CMonsterGenerator(std::shared_ptr<CCharacterArchetype> aAchertypeToBuild, ETeam aTeam, ActorId aId,
+                          int aliveForTurns);
 
         void update(std::shared_ptr<CMap> map) override;
     };

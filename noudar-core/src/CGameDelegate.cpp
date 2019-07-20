@@ -8,15 +8,15 @@
 namespace Knights {
 
     CGameDelegate::CGameDelegate() {
-        mOnMonsterDead = [](Knights::Vec2i pos) { };
-        mOnPlayerDead = [](Knights::Vec2i pos) { };
-        mOnPlayerAttack = [](Knights::Vec2i pos) { };
-        mOnMonsterAttack = [](Knights::Vec2i pos) { };
-        mOnMonsterDamaged = [](Knights::Vec2i pos) { };
-        mOnPlayerDamaged = [](Knights::Vec2i pos) { };
-        mOnProjectileHit = [](Knights::Vec2i pos) { };
-        mOnLevelLoaded = []() { };
-        mOnLevelWillLoad = []() { };
+        mOnMonsterDead = [](Knights::Vec2i pos) {};
+        mOnPlayerDead = [](Knights::Vec2i pos) {};
+        mOnPlayerAttack = [](Knights::Vec2i pos) {};
+        mOnMonsterAttack = [](Knights::Vec2i pos) {};
+        mOnMonsterDamaged = [](Knights::Vec2i pos) {};
+        mOnPlayerDamaged = [](Knights::Vec2i pos) {};
+        mOnProjectileHit = [](Knights::Vec2i pos) {};
+        mOnLevelLoaded = []() {};
+        mOnLevelWillLoad = []() {};
     }
 
     void CGameDelegate::setMonsterDiedCallback(std::function<void(Knights::Vec2i)> aCallback) {

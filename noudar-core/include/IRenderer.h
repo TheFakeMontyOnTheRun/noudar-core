@@ -4,13 +4,16 @@ namespace Knights {
 
     using CommandType = char;
 
-  class IRenderer {
-  public:
-    virtual void drawMap( CMap &map, std::shared_ptr<CActor> current ) = 0;
-    virtual CommandType getInput() = 0;
-      virtual CommandType peekInput() = 0;
-      virtual ~IRenderer(){
-      };
-  };
+    class IRenderer {
+    public:
+        virtual void drawMap(CMap &map, std::shared_ptr<CActor> current) = 0;
+
+        virtual CommandType getInput() = 0;
+
+        virtual CommandType peekInput() = 0;
+
+        virtual ~IRenderer() {
+        };
+    };
 }
 #endif

@@ -6,11 +6,14 @@
 #define NOUDAR_CORE_COMMANDS_CENDTURNCOMMAND_H
 
 namespace Knights {
-    class CEndTurnCommand: public IGameCommand {
+    class CEndTurnCommand : public IGameCommand {
     public:
-        CEndTurnCommand( std::shared_ptr<CGame> aGame );
+        CEndTurnCommand(std::shared_ptr<CGame> aGame);
+
         virtual std::string to_string() const override;
+
         virtual bool shouldEndTurn() override;
+
         virtual void execute() override;
 
         virtual ~CEndTurnCommand() override;

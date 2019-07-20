@@ -13,245 +13,245 @@ using std::vector;
 #include "CActor.h"
 
 namespace Knights {
-	CActor::CActor(ActorId aId, int defaultAP) :
-			mStance(EStance::kStanding), mDirection(EDirection::kNorth), mId(aId), mMoves(0), mDefaultAP(defaultAP),
-			mRemainingAP(defaultAP), mAttack(0), mDefence(0), mHP(0) {
-	}
+    CActor::CActor(ActorId aId, int defaultAP) :
+            mStance(EStance::kStanding), mDirection(EDirection::kNorth), mId(aId), mMoves(0), mDefaultAP(defaultAP),
+            mRemainingAP(defaultAP), mAttack(0), mDefence(0), mHP(0) {
+    }
 
-	bool CActor::canMove() {
-		return hasEnoughAP();
-	}
+    bool CActor::canMove() {
+        return hasEnoughAP();
+    }
 
-	bool CActor::canAttack() {
-		return hasEnoughAP();
-	}
+    bool CActor::canAttack() {
+        return hasEnoughAP();
+    }
 
-	bool CActor::hasEnoughAP() {
-		return mRemainingAP > 0;
-	}
+    bool CActor::hasEnoughAP() {
+        return mRemainingAP > 0;
+    }
 
-	void CActor::onMove() {
-		--mRemainingAP;
-		++mMoves;
-		mStance = EStance::kAttacking;
-	}
+    void CActor::onMove() {
+        --mRemainingAP;
+        ++mMoves;
+        mStance = EStance::kAttacking;
+    }
 
-	void CActor::onAttack() {
-		--mRemainingAP;
-	}
+    void CActor::onAttack() {
+        --mRemainingAP;
+    }
 
-	void CActor::turnLeft() {
+    void CActor::turnLeft() {
 
-		if (mDirection == EDirection::kNorth) {
-			mDirection = EDirection::kWest;
-		} else {
-			mDirection = static_cast<EDirection>( static_cast<int>(mDirection) - 1);
-		}
-	}
+        if (mDirection == EDirection::kNorth) {
+            mDirection = EDirection::kWest;
+        } else {
+            mDirection = static_cast<EDirection>( static_cast<int>(mDirection) - 1);
+        }
+    }
 
-	void CActor::turnRight() {
-		if (mDirection == EDirection::kWest) {
-			mDirection = EDirection::kNorth;
-		} else {
-			mDirection = static_cast<EDirection>( static_cast<int>(mDirection) + 1);
-		}
-	}
+    void CActor::turnRight() {
+        if (mDirection == EDirection::kWest) {
+            mDirection = EDirection::kNorth;
+        } else {
+            mDirection = static_cast<EDirection>( static_cast<int>(mDirection) + 1);
+        }
+    }
 
-	void CActor::endOfTurn() {
-		mRemainingAP = mDefaultAP;
-		mStance = EStance::kStanding;
-	}
+    void CActor::endOfTurn() {
+        mRemainingAP = mDefaultAP;
+        mStance = EStance::kStanding;
+    }
 
-	void CActor::performAttack(std::shared_ptr<CActor> other) {
+    void CActor::performAttack(std::shared_ptr<CActor> other) {
 
-		onAttack();
-		int diff = (getAttack() - other->getDefense());
+        onAttack();
+        int diff = (getAttack() - other->getDefense());
 
-		if (diff > 0) {
-            other->addHP(-diff );
-		}
-	}
+        if (diff > 0) {
+            other->addHP(-diff);
+        }
+    }
 
-	Vec2i CActor::getPosition() {
-		return mPosition;
-	}
+    Vec2i CActor::getPosition() {
+        return mPosition;
+    }
 
-	void CActor::setPosition(Vec2i position) {
-		mPosition = position;
-	}
+    void CActor::setPosition(Vec2i position) {
+        mPosition = position;
+    }
 
-	ETeam CActor::getTeam() {
-		return mTeam;
-	}
+    ETeam CActor::getTeam() {
+        return mTeam;
+    }
 
-	bool CActor::isAlive() {
-		return mHP > 0;
-	}
+    bool CActor::isAlive() {
+        return mHP > 0;
+    }
 
-	EDirection CActor::getDirection() {
-		return mDirection;
-	}
+    EDirection CActor::getDirection() {
+        return mDirection;
+    }
 
-	int CActor::getHP() {
-		return mHP;
-	}
+    int CActor::getHP() {
+        return mHP;
+    }
 
-	int CActor::getAP() {
-		return mRemainingAP;
-	}
+    int CActor::getAP() {
+        return mRemainingAP;
+    }
 
-	int CActor::getDefense() {
-		return mDefence;
-	}
+    int CActor::getDefense() {
+        return mDefence;
+    }
 
-	int CActor::getAttack() {
-		return mAttack + mAttackBonus;
-	}
+    int CActor::getAttack() {
+        return mAttack + mAttackBonus;
+    }
 
-	ActorId CActor::getId() {
-		return mId;
-	}
+    ActorId CActor::getId() {
+        return mId;
+    }
 
-	void CActor::setDirection(EDirection d) {
-		mDirection = d;
-	}
+    void CActor::setDirection(EDirection d) {
+        mDirection = d;
+    }
 
-	std::string CActor::getName() {
-		return mName;
-	}
+    std::string CActor::getName() {
+        return mName;
+    }
 
-	ActorView CActor::getView() {
-		return mView;
-	}
+    ActorView CActor::getView() {
+        return mView;
+    }
 
-	int CActor::getMoves() {
-		return mMoves;
-	}
+    int CActor::getMoves() {
+        return mMoves;
+    }
 
-	void CActor::setTarget(std::shared_ptr<CActor> target ) {
-		if (isAlive()) {
-			mTarget = target;
-		}
-	}
+    void CActor::setTarget(std::shared_ptr<CActor> target) {
+        if (isAlive()) {
+            mTarget = target;
+        }
+    }
 
 
-	void CActor::addHP(int aHP) {
-		mHP += aHP;
-	}
+    void CActor::addHP(int aHP) {
+        mHP += aHP;
+    }
 
-	EStance CActor::getStance() {
-		return mStance;
-	}
+    EStance CActor::getStance() {
+        return mStance;
+    }
 
-	std::string to_string(const EStance &aStance) {
-		switch (aStance) {
-			case EStance::kAttacking:
-				return "Attacking";
-			case EStance::kDead:
-				return "Dead";
-			case EStance::kStanding:
-			default:
-				return "Standing";
-		}
-	}
+    std::string to_string(const EStance &aStance) {
+        switch (aStance) {
+            case EStance::kAttacking:
+                return "Attacking";
+            case EStance::kDead:
+                return "Dead";
+            case EStance::kStanding:
+            default:
+                return "Standing";
+        }
+    }
 
-	void CActor::selectNextItem() {
+    void CActor::selectNextItem() {
 
-		if ( mInventory.empty() ) {
-			return;
-		}
+        if (mInventory.empty()) {
+            return;
+        }
 
-		auto it = std::find(std::begin(mInventory), std::end(mInventory), mCurrentItem);
+        auto it = std::find(std::begin(mInventory), std::end(mInventory), mCurrentItem);
 
-		auto nextIt = std::next( it );
-		if ( nextIt != std::end( mInventory ) ) {
-			mCurrentItem = *nextIt;
-		} else {
-			mCurrentItem = *std::begin(mInventory);
-		}
-	}
+        auto nextIt = std::next(it);
+        if (nextIt != std::end(mInventory)) {
+            mCurrentItem = *nextIt;
+        } else {
+            mCurrentItem = *std::begin(mInventory);
+        }
+    }
 
-	void CActor::selectPreviousItem() {
-		auto it = std::find(std::begin(mInventory), std::end(mInventory), mCurrentItem);
-		if (mCurrentItem != *std::begin(mInventory)) {
-			mCurrentItem = *std::prev(it);
-		} else {
-			mCurrentItem = *std::prev(std::end(mInventory));
-		}
-	}
+    void CActor::selectPreviousItem() {
+        auto it = std::find(std::begin(mInventory), std::end(mInventory), mCurrentItem);
+        if (mCurrentItem != *std::begin(mInventory)) {
+            mCurrentItem = *std::prev(it);
+        } else {
+            mCurrentItem = *std::prev(std::end(mInventory));
+        }
+    }
 
-	std::shared_ptr<CItem> CActor::getSelectedItem() {
-		return mCurrentItem;
-	}
+    std::shared_ptr<CItem> CActor::getSelectedItem() {
+        return mCurrentItem;
+    }
 
-	void CActor::useCurrentItem() {
-		this->selectNextItem();
-		mHP++;
-	}
+    void CActor::useCurrentItem() {
+        this->selectNextItem();
+        mHP++;
+    }
 
-	void CActor::giveItem(std::shared_ptr<CItem> aItem) {
+    void CActor::giveItem(std::shared_ptr<CItem> aItem) {
 
-		if ( aItem == nullptr ) {
-			return;
-		}
+        if (aItem == nullptr) {
+            return;
+        }
 
-		mInventory.push_back(aItem);
-		mCurrentItem = aItem;
-	}
+        mInventory.push_back(aItem);
+        mCurrentItem = aItem;
+    }
 
-	std::shared_ptr<CItem> CActor::removeItemFromInventory(std::shared_ptr<CItem> itemToRemove) {
+    std::shared_ptr<CItem> CActor::removeItemFromInventory(std::shared_ptr<CItem> itemToRemove) {
 
-		auto it = std::find(std::begin(mInventory), std::end(mInventory), itemToRemove);
-		mInventory.erase(it);
+        auto it = std::find(std::begin(mInventory), std::end(mInventory), itemToRemove);
+        mInventory.erase(it);
 
-		if (mInventory.empty()) {
-			mCurrentItem = nullptr;
-		} else {
-			mCurrentItem = *std::begin(mInventory);
-		}
+        if (mInventory.empty()) {
+            mCurrentItem = nullptr;
+        } else {
+            mCurrentItem = *std::begin(mInventory);
+        }
 
-		return itemToRemove;
-	}
+        return itemToRemove;
+    }
 
-	std::string CActor::getCurrentSay() {
-		return mCurrentSay;
-	}
+    std::string CActor::getCurrentSay() {
+        return mCurrentSay;
+    }
 
-	void CActor::setCurrentSay(std::string newSay) {
-		mCurrentSay = newSay;
-	}
+    void CActor::setCurrentSay(std::string newSay) {
+        mCurrentSay = newSay;
+    }
 
-	void CActor::copyStateFrom(std::shared_ptr<CActor> other) {
-		this->mName = other->mName;
-		this->mAttack = other->mAttack;
-		this->mCurrentItem = other->mCurrentItem;
-		this->mCurrentSay = other->mCurrentSay;
-		this->mDefaultAP = other->mDefaultAP;
-		this->mView = other->mView;
-		this->mDefence = other->mDefence;
-		this->mStance = other->mStance;
-		this->mTeam = other->mTeam;
-		this->mHP = other->mHP;
-		this->mInventory = other->mInventory;
-	}
+    void CActor::copyStateFrom(std::shared_ptr<CActor> other) {
+        this->mName = other->mName;
+        this->mAttack = other->mAttack;
+        this->mCurrentItem = other->mCurrentItem;
+        this->mCurrentSay = other->mCurrentSay;
+        this->mDefaultAP = other->mDefaultAP;
+        this->mView = other->mView;
+        this->mDefence = other->mDefence;
+        this->mStance = other->mStance;
+        this->mTeam = other->mTeam;
+        this->mHP = other->mHP;
+        this->mInventory = other->mInventory;
+    }
 
-    void CActor::suggestCurrentItem( ItemView view ) {
-        auto item = getItemWithSymbol( view );
+    void CActor::suggestCurrentItem(ItemView view) {
+        auto item = getItemWithSymbol(view);
 
-        if ( item != nullptr ) {
+        if (item != nullptr) {
             mCurrentItem = item;
         }
     }
 
     std::shared_ptr<CItem> CActor::getItemWithSymbol(ItemView symbol) {
 
-		for ( const auto& item : mInventory ) {
-		    if ( item->getView() == symbol ) {
-				return item;
-			}
-		}
+        for (const auto &item : mInventory) {
+            if (item->getView() == symbol) {
+                return item;
+            }
+        }
 
-		return nullptr;
+        return nullptr;
     }
 
     void CActor::setAttackBonus(int attackBonus) {

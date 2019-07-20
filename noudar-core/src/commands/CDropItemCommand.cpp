@@ -27,40 +27,41 @@ using std::array;
 #include "commands/CDropItemCommand.h"
 
 Knights::CDropItemCommand::CDropItemCommand(std::shared_ptr<Knights::CGame> aGame,
-                                            std::shared_ptr<Knights::CActor> aActor) : IGameCommand( aGame ), mActor( aActor ) {
+                                            std::shared_ptr<Knights::CActor> aActor) : IGameCommand(aGame),
+                                                                                       mActor(aActor) {
 }
 
 std::string Knights::CDropItemCommand::to_string() const {
-	return "Drop item";
+    return "Drop item";
 }
 
 bool Knights::CDropItemCommand::shouldEndTurn() {
-	return true;
+    return true;
 }
 
 void Knights::CDropItemCommand::execute() {
-	auto itemToDrop = mActor->getSelectedItem();
+    auto itemToDrop = mActor->getSelectedItem();
 
-	if ( itemToDrop == nullptr ) {
-		return;
-	}
-
-	if ( !itemToDrop->canBeDropped() ) {
+    if (itemToDrop == nullptr) {
         return;
-	}
+    }
 
-	auto map = getGame()->getMap();
-	auto target = map->getActorTargetPosition(mActor);
+    if (!itemToDrop->canBeDropped()) {
+        return;
+    }
 
-	if (map->isBlockMovementAt(target)) {
-		return;
-	}
+    auto map = getGame()->getMap();
+    auto target = map->getActorTargetPosition(mActor);
 
-	if (map->getItemAt( target ) != nullptr ) {
-		return;
-	}
+    if (map->isBlockMovementAt(target)) {
+        return;
+    }
 
-	map->putItemAt( mActor->removeItemFromInventory(itemToDrop), target );
+    if (map->getItemAt(target) != nullptr) {
+        return;
+    }
+
+    map->putItemAt(mActor->removeItemFromInventory(itemToDrop), target);
 }
 
 Knights::CDropItemCommand::~CDropItemCommand() {

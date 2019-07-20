@@ -6,21 +6,21 @@
 #define NOUDAR_CORE_CUSECURRENTITEMCOMMAND_H
 
 namespace Knights {
-	class CUseCurrentItemCommand : public IGameCommand {
+    class CUseCurrentItemCommand : public IGameCommand {
 
-		std::shared_ptr <CActor> mActor;
-		std::string mItemName = "";
-	public:
-		CUseCurrentItemCommand( std::shared_ptr<CGame> aGame, std::shared_ptr <CActor> aActor );
+        std::shared_ptr<CActor> mActor;
+        std::string mItemName = "";
+    public:
+        CUseCurrentItemCommand(std::shared_ptr<CGame> aGame, std::shared_ptr<CActor> aActor);
 
-		virtual std::string to_string() const override;
+        virtual std::string to_string() const override;
 
-		virtual bool shouldEndTurn() override;
+        virtual bool shouldEndTurn() override;
 
-		virtual void execute() override;
+        virtual void execute() override;
 
         virtual ~CUseCurrentItemCommand() override;
-	};
+    };
 }
 
 #endif //NOUDAR_CORE_CUSECURRENTITEMCOMMAND_H

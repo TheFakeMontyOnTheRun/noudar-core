@@ -7,7 +7,9 @@
 
 namespace Knights {
 
-    enum class ETeam{kHeroes, kMonsters, kProps};
+    enum class ETeam {
+        kHeroes, kMonsters, kProps
+    };
 }
 
 #endif //NOUDAR_CORE_CTEAM_H

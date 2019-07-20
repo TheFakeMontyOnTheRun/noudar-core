@@ -16,20 +16,20 @@ namespace Knights {
     CPlainFileLoader::CPlainFileLoader() {
     }
 
-    CPlainFileLoader::CPlainFileLoader(const std::string& prefix) : mPrefix(prefix) {
+    CPlainFileLoader::CPlainFileLoader(const std::string &prefix) : mPrefix(prefix) {
     }
 
     size_t CPlainFileLoader::sizeOfFile(const std::string &path) {
         auto fd = fopen((getFilePathPrefix() + mFilenameTransformation(path)).c_str(), "rb");
 
         fseek(fd, 0, SEEK_END);
-        auto endPos = ftell( fd );
+        auto endPos = ftell(fd);
         fclose(fd);
 
         return endPos;
     }
 
-    uint8_t* CPlainFileLoader::loadBinaryFileFromPath(const std::string &path) {
+    uint8_t *CPlainFileLoader::loadBinaryFileFromPath(const std::string &path) {
 
         FILE *fd;
 
@@ -48,7 +48,7 @@ namespace Knights {
     std::string CPlainFileLoader::loadFileFromPath(const std::string &path) {
         FILE *fd;
 
-        fd = fopen(( getFilePathPrefix() + mFilenameTransformation( path ) ).c_str(), "r");
+        fd = fopen((getFilePathPrefix() + mFilenameTransformation(path)).c_str(), "r");
 
         if (fd == nullptr) {
             exit(0);

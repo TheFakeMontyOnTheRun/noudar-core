@@ -6,24 +6,24 @@
 #define NOUDAR_CORE_CSUGGESTITEMCOMMAND_H
 
 namespace Knights {
-	class CSuggestItemCommand : public IGameCommand {
+    class CSuggestItemCommand : public IGameCommand {
 
-		std::shared_ptr<CActor> mActor;
+        std::shared_ptr<CActor> mActor;
         ElementView mItemView;
-	public:
+    public:
         CSuggestItemCommand(std::shared_ptr<CGame> aGame,
-		                 std::shared_ptr<CActor> aActor,
-						 ElementView itemView
-		);
+                            std::shared_ptr<CActor> aActor,
+                            ElementView itemView
+        );
 
-		virtual std::string to_string() const override;
+        virtual std::string to_string() const override;
 
-		virtual bool shouldEndTurn() override;
+        virtual bool shouldEndTurn() override;
 
-		virtual void execute() override;
+        virtual void execute() override;
 
         virtual ~CSuggestItemCommand() override;
-	};
+    };
 }
 
 #endif //NOUDAR_CORE_CSUGGESTITEMCOMMAND_H

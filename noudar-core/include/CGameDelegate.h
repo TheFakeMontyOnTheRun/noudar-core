@@ -6,67 +6,67 @@
 #define NOUDAR_CORE_CGAMEDELEGATE_H
 
 namespace Knights {
-	class CGameDelegate {
+    class CGameDelegate {
 
-	public:
+    public:
 
-		CGameDelegate();
+        CGameDelegate();
 
-		void setMonsterDiedCallback(std::function<void(Knights::Vec2i)> aCallback);
+        void setMonsterDiedCallback(std::function<void(Knights::Vec2i)> aCallback);
 
-		void setPlayerDiedCallback(std::function<void(Knights::Vec2i)> aCallback);
+        void setPlayerDiedCallback(std::function<void(Knights::Vec2i)> aCallback);
 
-		void setMonsterAttackedCallback(std::function<void(Knights::Vec2i)> aCallback);
+        void setMonsterAttackedCallback(std::function<void(Knights::Vec2i)> aCallback);
 
-		void setPlayerAttackedCallback(std::function<void(Knights::Vec2i)> aCallback);
+        void setPlayerAttackedCallback(std::function<void(Knights::Vec2i)> aCallback);
 
-		void setPlayerDamagedCallback(std::function<void(Knights::Vec2i)> aCallback);
+        void setPlayerDamagedCallback(std::function<void(Knights::Vec2i)> aCallback);
 
-		void setMonsterDamagedCallback(std::function<void(Knights::Vec2i)> aCallback);
+        void setMonsterDamagedCallback(std::function<void(Knights::Vec2i)> aCallback);
 
-		void setProjectileCallback(std::function<void(Knights::Vec2i)> aCallback);
+        void setProjectileCallback(std::function<void(Knights::Vec2i)> aCallback);
 
-		void setOnLevelLoadedCallback( std::function<void(void)> aCallback);
+        void setOnLevelLoadedCallback(std::function<void(void)> aCallback);
 
-		void setOnLevelWillLoadCallback( std::function<void(void)> aCallback);
+        void setOnLevelWillLoadCallback(std::function<void(void)> aCallback);
 
-		void onPlayerAttacked(Knights::Vec2i);
+        void onPlayerAttacked(Knights::Vec2i);
 
-		void onMonsterAttacked(Knights::Vec2i);
+        void onMonsterAttacked(Knights::Vec2i);
 
-		void onPlayerDied(Knights::Vec2i);
+        void onPlayerDied(Knights::Vec2i);
 
-		void onMonsterDied(Knights::Vec2i);
+        void onMonsterDied(Knights::Vec2i);
 
-		void onMonsterDamaged(Knights::Vec2i);
+        void onMonsterDamaged(Knights::Vec2i);
 
-		void onPlayerDamaged(Knights::Vec2i);
+        void onPlayerDamaged(Knights::Vec2i);
 
-		void onProjectileHit(Knights::Vec2i);
+        void onProjectileHit(Knights::Vec2i);
 
-		void onLevelLoaded();
+        void onLevelLoaded();
 
-		void onLevelWillLoad();
+        void onLevelWillLoad();
 
-	private:
-		std::function<void(Knights::Vec2i)> mOnMonsterDead;
+    private:
+        std::function<void(Knights::Vec2i)> mOnMonsterDead;
 
-		std::function<void(Knights::Vec2i)> mOnPlayerDead;
+        std::function<void(Knights::Vec2i)> mOnPlayerDead;
 
-		std::function<void(Knights::Vec2i)> mOnPlayerAttack;
+        std::function<void(Knights::Vec2i)> mOnPlayerAttack;
 
-		std::function<void(Knights::Vec2i)> mOnMonsterAttack;
+        std::function<void(Knights::Vec2i)> mOnMonsterAttack;
 
-		std::function<void(Knights::Vec2i)> mOnMonsterDamaged;
+        std::function<void(Knights::Vec2i)> mOnMonsterDamaged;
 
-		std::function<void(Knights::Vec2i)> mOnPlayerDamaged;
+        std::function<void(Knights::Vec2i)> mOnPlayerDamaged;
 
-		std::function<void(Knights::Vec2i)> mOnProjectileHit;
+        std::function<void(Knights::Vec2i)> mOnProjectileHit;
 
-		std::function<void(void)> mOnLevelLoaded;
+        std::function<void(void)> mOnLevelLoaded;
 
-		std::function<void(void)> mOnLevelWillLoad;
-	};
+        std::function<void(void)> mOnLevelWillLoad;
+    };
 }
 
 #endif //DUNGEONSOFNOUDAR_NDK_CGAMEDELEGATE_H

@@ -107,21 +107,21 @@ namespace Knights {
             if (entry == kMovePlayerBackwardCommand) {
                 std::shared_ptr<CActor> avatar = mMap->getAvatar();
                 command = std::make_shared<CMoveActorCommand>(shared_from_this(),
-                                                              oppositeOf( avatar->getDirection() ), avatar);
+                                                              oppositeOf(avatar->getDirection()), avatar);
             }
 
 
             if (entry == kStrafeLeftCommand) {
-		        std::shared_ptr<CActor> avatar = mMap->getAvatar();
-		        command = std::make_shared<CMoveActorCommand>(shared_from_this(),
-		                                                       leftOf(avatar->getDirection()), avatar);
-	        }
+                std::shared_ptr<CActor> avatar = mMap->getAvatar();
+                command = std::make_shared<CMoveActorCommand>(shared_from_this(),
+                                                              leftOf(avatar->getDirection()), avatar);
+            }
 
-	        if (entry == kStrafeRightCommand) {
-		        std::shared_ptr<CActor> avatar = mMap->getAvatar();
-		        command = std::make_shared<CMoveActorCommand>(shared_from_this(),
-		                                                      rightOf(avatar->getDirection()), avatar);
-	        }
+            if (entry == kStrafeRightCommand) {
+                std::shared_ptr<CActor> avatar = mMap->getAvatar();
+                command = std::make_shared<CMoveActorCommand>(shared_from_this(),
+                                                              rightOf(avatar->getDirection()), avatar);
+            }
 
 
             if (entry == kTurnPlayerRightCommand) {
@@ -165,47 +165,47 @@ namespace Knights {
                 command = std::make_shared<CLoadNewLevelCommand>(shared_from_this(), 0);
             }
 
-	        if (entry == kCycleLeftInventoryCommand) {
-		        std::shared_ptr <CActor> avatar = mMap->getAvatar();
-		        command = std::make_shared<CCyclePreviousItemCommand>(shared_from_this(), avatar);
-	        }
+            if (entry == kCycleLeftInventoryCommand) {
+                std::shared_ptr<CActor> avatar = mMap->getAvatar();
+                command = std::make_shared<CCyclePreviousItemCommand>(shared_from_this(), avatar);
+            }
 
-	        if (entry == kCycleRightInventoryCommand) {
-		        std::shared_ptr <CActor> avatar = mMap->getAvatar();
-		        command = std::make_shared<CCycleNextItemCommand>(shared_from_this(), avatar);
-	        }
+            if (entry == kCycleRightInventoryCommand) {
+                std::shared_ptr<CActor> avatar = mMap->getAvatar();
+                command = std::make_shared<CCycleNextItemCommand>(shared_from_this(), avatar);
+            }
 
-	        if (entry == kUseCurrentItemInInventoryCommand ) {
-		        std::shared_ptr <CActor> avatar = mMap->getAvatar();
-		        command = std::make_shared<CUseCurrentItemCommand>(shared_from_this(), avatar);
-	        }
+            if (entry == kUseCurrentItemInInventoryCommand) {
+                std::shared_ptr<CActor> avatar = mMap->getAvatar();
+                command = std::make_shared<CUseCurrentItemCommand>(shared_from_this(), avatar);
+            }
 
-	        if (entry == kPickItemCommand ) {
-		        std::shared_ptr <CActor> avatar = mMap->getAvatar();
-		        command = std::make_shared<CPickItemCommand>(shared_from_this(), avatar);
-	        }
+            if (entry == kPickItemCommand) {
+                std::shared_ptr<CActor> avatar = mMap->getAvatar();
+                command = std::make_shared<CPickItemCommand>(shared_from_this(), avatar);
+            }
 
-	        if (entry == kDropItemCommand ) {
-		        std::shared_ptr <CActor> avatar = mMap->getAvatar();
-		        command = std::make_shared<CDropItemCommand>(shared_from_this(), avatar);
-	        }
+            if (entry == kDropItemCommand) {
+                std::shared_ptr<CActor> avatar = mMap->getAvatar();
+                command = std::make_shared<CDropItemCommand>(shared_from_this(), avatar);
+            }
 
             if (entry == '1' || entry == '2' || entry == '3') {
                 ElementView itemView = '.';
 
                 switch (entry) {
                     case '1':
-                        itemView='t';
+                        itemView = 't';
                         break;
                     case '2':
-                        itemView='y';
+                        itemView = 'y';
                         break;
                     case '3':
-                        itemView='v';
+                        itemView = 'v';
                         break;
                 }
 
-                std::shared_ptr <CActor> avatar = mMap->getAvatar();
+                std::shared_ptr<CActor> avatar = mMap->getAvatar();
                 command = std::make_shared<CSuggestItemCommand>(shared_from_this(), avatar, itemView);
             }
 
@@ -259,18 +259,18 @@ namespace Knights {
         mLevel = levelNumber;
         mTurn = 0;
 
-	    if ( mMap != nullptr && mMap->getAvatar() != nullptr && mMap->getAvatar()->isAlive()) {
-		    mPlayerActor = mMap->getAvatar();
+        if (mMap != nullptr && mMap->getAvatar() != nullptr && mMap->getAvatar()->isAlive()) {
+            mPlayerActor = mMap->getAvatar();
         }
 
         auto mapData = mFileLoaderDelegate->loadFileFromPath(buffer);
-	    mMap = std::make_shared<CMap>(mapData, mGameDelegate);
+        mMap = std::make_shared<CMap>(mapData, mGameDelegate);
 
-	    if ( mPlayerActor != nullptr ) {
-			mMap->getAvatar()->copyStateFrom( mPlayerActor );
-	    }
+        if (mPlayerActor != nullptr) {
+            mMap->getAvatar()->copyStateFrom(mPlayerActor);
+        }
 
-	    mGameDelegate->onLevelLoaded();
+        mGameDelegate->onLevelLoaded();
     }
 
     void CGame::proceedToNextLevel() {

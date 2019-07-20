@@ -28,27 +28,27 @@ using std::array;
 
 Knights::CUseCurrentItemCommand::CUseCurrentItemCommand(std::shared_ptr<Knights::CGame> aGame,
                                                         std::shared_ptr<Knights::CActor> aActor) :
-IGameCommand( aGame ), mActor( aActor ) {
+        IGameCommand(aGame), mActor(aActor) {
 }
 
 std::string Knights::CUseCurrentItemCommand::to_string() const {
-	std::string message = "Use item: ";
-	message.append(mItemName);
-	return message;
+    std::string message = "Use item: ";
+    message.append(mItemName);
+    return message;
 }
 
 bool Knights::CUseCurrentItemCommand::shouldEndTurn() {
-	return true;
+    return true;
 }
 
 void Knights::CUseCurrentItemCommand::execute() {
 
-	auto currentItem = mActor->getSelectedItem();
+    auto currentItem = mActor->getSelectedItem();
 
-	if ( currentItem != nullptr ) {
-		getGame()->getMap()->useItem( currentItem, mActor );
-		mItemName = currentItem->to_string();
-	}
+    if (currentItem != nullptr) {
+        getGame()->getMap()->useItem(currentItem, mActor);
+        mItemName = currentItem->to_string();
+    }
 }
 
 Knights::CUseCurrentItemCommand::~CUseCurrentItemCommand() {

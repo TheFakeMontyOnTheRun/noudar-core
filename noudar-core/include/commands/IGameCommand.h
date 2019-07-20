@@ -8,11 +8,16 @@ namespace Knights {
     class IGameCommand {
         std::shared_ptr<CGame> mGame;
     public:
-        IGameCommand( std::shared_ptr<CGame> aGame );
+        IGameCommand(std::shared_ptr<CGame> aGame);
+
         std::shared_ptr<CGame> getGame();
+
         virtual bool shouldEndTurn() = 0;
+
         virtual void execute() = 0;
+
         virtual std::string to_string() const = 0;
+
         virtual ~IGameCommand() = 0;
     };
 
@@ -20,6 +25,6 @@ namespace Knights {
     std::ostream& operator<<(std::ostream& os, const IGameCommand& action);
 #endif
 
-    std::string to_string( const IGameCommand& action );
+    std::string to_string(const IGameCommand &action);
 }
 #endif //NOUDAR_CORE_ACTORACTION_H

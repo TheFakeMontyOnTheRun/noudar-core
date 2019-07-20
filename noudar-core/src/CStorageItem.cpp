@@ -8,14 +8,15 @@
 #include "CItem.h"
 #include "CStorageItem.h"
 
-std::string formatName( const std::string& name, int amount ) {
+std::string formatName(const std::string &name, int amount) {
     return name;
 }
 
 
 Knights::CStorageItem::CStorageItem(const std::string &aName, ItemView aView, bool aConsumable, bool aCanBeDropped,
-                                    const Knights::CItemAction &itemAction, int initialAmount )
-        : CItem( formatName( aName, initialAmount ), aView, aConsumable, aCanBeDropped, itemAction), mAmount( initialAmount ), mOriginalName(aName) {
+                                    const Knights::CItemAction &itemAction, int initialAmount)
+        : CItem(formatName(aName, initialAmount), aView, aConsumable, aCanBeDropped, itemAction),
+          mAmount(initialAmount), mOriginalName(aName) {
 }
 
 void Knights::CStorageItem::empty() {
@@ -27,7 +28,7 @@ int Knights::CStorageItem::getAmount() {
 }
 
 int Knights::CStorageItem::add(int amount) {
-    mAmount = std::max( 0, mAmount + amount );
-    mName = formatName( mOriginalName, mAmount );
+    mAmount = std::max(0, mAmount + amount);
+    mName = formatName(mOriginalName, mAmount);
     return mAmount;
 }

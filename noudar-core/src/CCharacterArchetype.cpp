@@ -17,31 +17,32 @@ using std::vector;
 #include "CCharacterArchetype.h"
 
 namespace Knights {
-	CCharacterArchetype::CCharacterArchetype(int aAttack, int aDefense, int aHP, int aAP, ActorView aView, std::string aName ):
-	mAttack(aAttack), mDefense(aDefense), mHP(aHP), mAP(aAP), mView( aView ), mName( aName ) {
-	}
+    CCharacterArchetype::CCharacterArchetype(int aAttack, int aDefense, int aHP, int aAP, ActorView aView,
+                                             std::string aName) :
+            mAttack(aAttack), mDefense(aDefense), mHP(aHP), mAP(aAP), mView(aView), mName(aName) {
+    }
 
-	int CCharacterArchetype::getAttack() {
-		return mAttack;
-	}
+    int CCharacterArchetype::getAttack() {
+        return mAttack;
+    }
 
-	int CCharacterArchetype::getDefense() {
-		return mDefense;
-	}
+    int CCharacterArchetype::getDefense() {
+        return mDefense;
+    }
 
-	int CCharacterArchetype::getHP() {
-		return mHP;
-	}
+    int CCharacterArchetype::getHP() {
+        return mHP;
+    }
 
-	int CCharacterArchetype::getAP() {
-		return mAP;
-	}
+    int CCharacterArchetype::getAP() {
+        return mAP;
+    }
 
-	ActorView CCharacterArchetype::getView() {
-		return mView;
-	}
+    ActorView CCharacterArchetype::getView() {
+        return mView;
+    }
 
-	std::string CCharacterArchetype::getName() {
-		return mName;
-	}
+    std::string CCharacterArchetype::getName() {
+        return mName;
+    }
 }

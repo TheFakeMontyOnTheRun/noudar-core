@@ -6,23 +6,23 @@
 #define NOUDAR_CORE_CPICKITEMCOMMAND_H
 
 namespace Knights {
-	class CPickItemCommand : public IGameCommand {
+    class CPickItemCommand : public IGameCommand {
 
-		std::shared_ptr<CActor> mActor;
-		std::string mItemName = "";
-	public:
-		CPickItemCommand(std::shared_ptr<CGame> aGame,
-		                 std::shared_ptr<CActor> aActor
-		);
+        std::shared_ptr<CActor> mActor;
+        std::string mItemName = "";
+    public:
+        CPickItemCommand(std::shared_ptr<CGame> aGame,
+                         std::shared_ptr<CActor> aActor
+        );
 
-		virtual std::string to_string() const override;
+        virtual std::string to_string() const override;
 
-		virtual bool shouldEndTurn() override;
+        virtual bool shouldEndTurn() override;
 
-		virtual void execute() override;
+        virtual void execute() override;
 
         virtual ~CPickItemCommand() override;
-	};
+    };
 }
 
 #endif //NOUDAR_CORE_CPICKITEMCOMMAND_H

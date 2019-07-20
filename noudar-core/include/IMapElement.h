@@ -3,6 +3,7 @@
 namespace Knights {
     using ElementView = char;
     const ElementView kEmptySpace = '.';
+
     class IMapElement {
     public:
         ElementView mView = kEmptySpace;

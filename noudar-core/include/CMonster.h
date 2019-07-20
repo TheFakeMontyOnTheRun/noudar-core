@@ -4,20 +4,22 @@ namespace Knights {
 
     class CMap;
 
-    using CMonsterUpdateCallback = std::function< void(std::shared_ptr <CMap> map, std::shared_ptr<CActor> me)>;
+    using CMonsterUpdateCallback = std::function<void(std::shared_ptr<CMap> map, std::shared_ptr<CActor> me)>;
 
     class CMonster : public CCharacter {
         CMonsterUpdateCallback mUpdateCallback;
         int mViewRange;
     public:
-        CMonster( std::shared_ptr<CCharacterArchetype> aArchetype, ETeam aTeam, ActorId aId, int viewRange, CMonsterUpdateCallback updateCallback);
-        CMonster( std::shared_ptr<CCharacterArchetype> aArchetype, ETeam aTeam, ActorId aId, int viewRange );
+        CMonster(std::shared_ptr<CCharacterArchetype> aArchetype, ETeam aTeam, ActorId aId, int viewRange,
+                 CMonsterUpdateCallback updateCallback);
 
-        void update(std::shared_ptr <CMap> map) override;
+        CMonster(std::shared_ptr<CCharacterArchetype> aArchetype, ETeam aTeam, ActorId aId, int viewRange);
 
-        bool actOn(int newX, int newY, std::shared_ptr <CMap> map);
+        void update(std::shared_ptr<CMap> map) override;
 
-        bool dealWith( std::shared_ptr<CMap> map, int x, int y );
+        bool actOn(int newX, int newY, std::shared_ptr<CMap> map);
+
+        bool dealWith(std::shared_ptr<CMap> map, int x, int y);
     };
 }
 #endif

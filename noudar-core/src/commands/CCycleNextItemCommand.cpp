@@ -28,33 +28,34 @@ using std::array;
 #include "commands/CCycleNextItemCommand.h"
 
 namespace Knights {
-	CCycleNextItemCommand::CCycleNextItemCommand(std::shared_ptr <CGame> aGame, std::shared_ptr <CActor> aActor	): IGameCommand( aGame ), mActor(aActor) {
-	}
+    CCycleNextItemCommand::CCycleNextItemCommand(std::shared_ptr<CGame> aGame, std::shared_ptr<CActor> aActor)
+            : IGameCommand(aGame), mActor(aActor) {
+    }
 
-	std::string CCycleNextItemCommand::to_string() const {
-		if ( mItemName.empty()) {
-			return "";
-		} else {
-			std::string message = "Next item: ";
-			message.append(mItemName);
-			return message;
-		}
-	}
+    std::string CCycleNextItemCommand::to_string() const {
+        if (mItemName.empty()) {
+            return "";
+        } else {
+            std::string message = "Next item: ";
+            message.append(mItemName);
+            return message;
+        }
+    }
 
-	bool CCycleNextItemCommand::shouldEndTurn() {
-		return false;
-	}
+    bool CCycleNextItemCommand::shouldEndTurn() {
+        return false;
+    }
 
-	void CCycleNextItemCommand::execute() {
-		auto previousItemSymbol = mActor->getSelectedItem()->getView();
-		mActor->selectNextItem();
-		auto itemSymbol = mActor->getSelectedItem()->getView();
+    void CCycleNextItemCommand::execute() {
+        auto previousItemSymbol = mActor->getSelectedItem()->getView();
+        mActor->selectNextItem();
+        auto itemSymbol = mActor->getSelectedItem()->getView();
 
-		if ( previousItemSymbol != itemSymbol) {
-			mItemName = mActor->getSelectedItem()->to_string();
-		}
-	}
+        if (previousItemSymbol != itemSymbol) {
+            mItemName = mActor->getSelectedItem()->to_string();
+        }
+    }
 
     CCycleNextItemCommand::~CCycleNextItemCommand() {
-	}
+    }
 }

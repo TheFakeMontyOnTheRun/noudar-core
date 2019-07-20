@@ -10,11 +10,14 @@ namespace Knights {
         int mAmount = 0;
         std::string mOriginalName;
     public:
-        CStorageItem(const std::string &aName, ItemView aView, bool aConsumable, bool aCanBeDropped, const CItemAction &itemAction, const int initialAmount );
+        CStorageItem(const std::string &aName, ItemView aView, bool aConsumable, bool aCanBeDropped,
+                     const CItemAction &itemAction, const int initialAmount);
 
         void empty();
+
         int getAmount();
-        int add( int amount );
+
+        int add(int amount);
     };
 }
 

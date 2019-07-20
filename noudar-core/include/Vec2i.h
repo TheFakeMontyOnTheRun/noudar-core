@@ -11,13 +11,13 @@ namespace Knights {
         int x = 0;
         int y = 0;
 
-        Vec2i( int aX, int aY );
+        Vec2i(int aX, int aY);
 
         Vec2i();
 
-        Vec2i& operator+=( const Vec2i &other );
+        Vec2i &operator+=(const Vec2i &other);
 
-        Vec2i& operator-=( const Vec2i &other );
+        Vec2i &operator-=(const Vec2i &other);
     };
 
     enum class EDirection {
@@ -27,16 +27,20 @@ namespace Knights {
         kWest
     };
 
-    Vec2i operator+( const Vec2i &lh, const Vec2i &rh );
+    Vec2i operator+(const Vec2i &lh, const Vec2i &rh);
 
-    bool operator==( const Vec2i &lh, const Vec2i &rh );
+    bool operator==(const Vec2i &lh, const Vec2i &rh);
 
-    bool operator!=( const Vec2i &lh, const Vec2i &rh );
+    bool operator!=(const Vec2i &lh, const Vec2i &rh);
 
-    EDirection wrapDirection( EDirection direction, int offset );
-    Vec2i mapOffsetForDirection( EDirection direction );
+    EDirection wrapDirection(EDirection direction, int offset);
+
+    Vec2i mapOffsetForDirection(EDirection direction);
+
     EDirection leftOf(Knights::EDirection d);
+
     EDirection rightOf(Knights::EDirection d);
+
     EDirection oppositeOf(Knights::EDirection d);
 }
 #endif //KNIGHTS_IN_PORTO_VEC2I_H

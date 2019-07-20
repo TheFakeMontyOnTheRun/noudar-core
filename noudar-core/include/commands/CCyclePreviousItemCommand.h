@@ -6,16 +6,20 @@
 #define NOUDAR_CORE_CCYCLEPREVIOUSITEMCOMMAND_H
 
 namespace Knights {
-	class CCyclePreviousItemCommand : public IGameCommand {
+    class CCyclePreviousItemCommand : public IGameCommand {
 
-		std::shared_ptr<CActor> mActor;
-	public:
-		CCyclePreviousItemCommand( std::shared_ptr<CGame> aGame, std::shared_ptr<CActor> aActor );
-		virtual std::string to_string() const override;
-		virtual bool shouldEndTurn() override;
-		virtual void execute() override;
+        std::shared_ptr<CActor> mActor;
+    public:
+        CCyclePreviousItemCommand(std::shared_ptr<CGame> aGame, std::shared_ptr<CActor> aActor);
+
+        virtual std::string to_string() const override;
+
+        virtual bool shouldEndTurn() override;
+
+        virtual void execute() override;
+
         virtual ~CCyclePreviousItemCommand() override;
-	};
+    };
 }
 
 #endif //NOUDAR_CORE_CCYCLEPREVIOUSITEMCOMMAND_H

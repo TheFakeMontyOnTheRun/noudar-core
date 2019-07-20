@@ -17,23 +17,24 @@ using std::vector;
 
 namespace Knights {
 
-	CCharacter::CCharacter(std::shared_ptr<Knights::CCharacterArchetype> aArchetype, ETeam aTeam, ActorId aId, CUpdateMethod aUpdateMethod) :
-	CActor( aId, aArchetype->getAP() ), mUpdateMethod( aUpdateMethod ), mArchetype( *aArchetype ) {
+    CCharacter::CCharacter(std::shared_ptr<Knights::CCharacterArchetype> aArchetype, ETeam aTeam, ActorId aId,
+                           CUpdateMethod aUpdateMethod) :
+            CActor(aId, aArchetype->getAP()), mUpdateMethod(aUpdateMethod), mArchetype(*aArchetype) {
         mView = aArchetype->getView();
         mTeam = aTeam;
         mHP = aArchetype->getHP();
         mAttack = aArchetype->getAttack();
         mDefence = aArchetype->getDefense();
         mName = aArchetype->getName();
-	}
+    }
 
 
-	CCharacter::~CCharacter() {
-	}
+    CCharacter::~CCharacter() {
+    }
 
     void CCharacter::update(std::shared_ptr<CMap> map) {
         CActor::update(map);
-        mUpdateMethod(shared_from_this(), map );
+        mUpdateMethod(shared_from_this(), map);
     }
 
     CCharacterArchetype CCharacter::getArchetype() {
