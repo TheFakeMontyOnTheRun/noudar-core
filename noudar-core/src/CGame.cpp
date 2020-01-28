@@ -266,7 +266,7 @@ namespace Knights {
         auto mapData = mFileLoaderDelegate->loadFileFromPath(buffer);
         mMap = std::make_shared<CMap>(mapData, mGameDelegate);
 
-        if (mPlayerActor != nullptr) {
+        if (mPlayerActor != nullptr && levelNumber != 0) {
             mMap->getAvatar()->copyStateFrom(mPlayerActor);
         }
 
