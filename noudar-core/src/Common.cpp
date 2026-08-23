@@ -1,6 +1,7 @@
 //
 // Created by monty on 26/09/16.
 //
+#include <cstdint>
 #include <functional>
 #include <string>
 #include <iterator>
