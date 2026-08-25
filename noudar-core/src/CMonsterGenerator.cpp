@@ -1,6 +1,7 @@
 //
 // Created by monty on 29-03-2017.
 //
+#include <cstdint>
 #include <string>
 #include <cstdlib>
 #include <memory>

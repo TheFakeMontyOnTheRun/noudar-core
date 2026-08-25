@@ -1,7 +1,7 @@
 //
 // Created by monty on 13/02/17.
 //
-
+#include <cstdint>
 #include <string>
 #include <functional>
 #include <memory>
